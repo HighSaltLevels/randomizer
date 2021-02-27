@@ -1,0 +1,77 @@
+randomize:
+  mix_promotes: false
+  stats:
+    bases:
+      playable:
+        enabled: false
+        range:
+          minimum: 0
+          maximum: 30
+        level: false
+        movement: false
+      boss:
+        enabled: false
+        range:
+          minimum: 0
+          maximum: 30
+        level: false
+        movement: false
+      other:
+        enabled: false
+        range:
+          minimum: 0
+          maximum: 30
+        level: false
+        movement: false
+      class:
+        enabled: false
+        range:
+          minimum: 0
+          maximum: 30
+    growths:
+      playable:
+        enabled: false
+        range:
+          minimum: 0
+          maximum: 255
+      boss:
+        enabled: false
+        range:
+          minimum: 0
+          maximum: 255
+      other:
+        enabled: false
+        range:
+          minimum: 0
+          maximum: 255
+
+    # Mode can be set to:
+    # Combat:           Ensure every unit has offensive capabilities
+    # Combat and Staff: Randomize with combat users and staff users (potential soft lock)
+    # All:              Randomize all classes
+    classes:
+      mode: Combat
+      all_master_seals: true
+
+    # Randomize which characters?
+    characters:
+      playable: true
+      bosses: true
+      other: true
+
+modify:
+  stats:
+    bases:
+      playable:
+        enabled: false
+        modifier: -5
+      boss:
+        enabled: false
+        modifier: +5
+      other:
+        enabled: false
+        modifier: +5
+    growths:
+      playable:
+        enabled: false
+        modifier: -10
