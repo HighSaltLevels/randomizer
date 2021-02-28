@@ -19,7 +19,6 @@ def create_labels(widget):
     etc = QLabel("Etc", widget)
     growths = QLabel("Growths", widget)
     mod_growths = QLabel("Growths", widget)
-    characters = QLabel("Characters", widget)
 
     labels = {
         "playable_bases": QLabel("Playable", widget),
@@ -44,9 +43,6 @@ def create_labels(widget):
         "other_growths": QLabel("Other", widget),
         "og_minimum": QLabel("Minimum", widget),
         "og_maximum": QLabel("Maximum", widget),
-        "p_enabled": QLabel("Playable", widget),
-        "b_enabled": QLabel("Boss", widget),
-        "o_enabled": QLabel("Other", widget),
         "mod_playable_bases": QLabel("Playable", widget),
         "mod_pb": QLabel("Modifier", widget),
         "mod_boss_bases": QLabel("Boss", widget),
@@ -64,7 +60,7 @@ def create_labels(widget):
     for label in labels.values():
         label.setFont(NORMAL_FONT)
 
-    for label in (bases, mod_bases, etc, growths, mod_growths, characters):
+    for label in (bases, mod_bases, etc, growths, mod_growths):
         label.setFont(SUBTITLE_FONT)
 
     for label in (randomize, modify):
@@ -78,7 +74,6 @@ def create_labels(widget):
     labels["etc"] = etc
     labels["growths"] = growths
     labels["mod_growths"] = mod_growths
-    labels["characters"] = characters
 
     for label in labels.values():
         label.setAlignment(Qt.AlignCenter)

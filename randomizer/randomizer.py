@@ -29,38 +29,38 @@ class Randomizer(QWidget):
 
         randomize_button = QPushButton("Randomize!", self)
 
-        top_left_grid = self.create_top_left_grid()
-        top_right_grid = self.create_top_right_grid()
-        bottom_left_grid = self.create_bottom_left_grid()
-        bottom_right_grid = self.create_bottom_right_grid()
+        column1_grid = self.create_column1_grid()
+        column2_grid = self.create_column2_grid()
+        column3_grid = self.create_column3_grid()
+        column4_grid = self.create_column4_grid()
 
-        top_grid = QGridLayout()
-        top_grid.addLayout(top_left_grid, 1, 0)
-        top_grid.addWidget(create_v_sep(self), 1, 1)
-        top_grid.addLayout(top_right_grid, 1, 2)
+        left_grid = QGridLayout()
+        left_grid.addLayout(column1_grid, 1, 0)
+        left_grid.addWidget(create_v_sep(self), 1, 1)
+        left_grid.addLayout(column2_grid, 1, 2)
 
-        bottom_grid = QGridLayout()
-        bottom_grid.addLayout(bottom_left_grid, 0, 0)
-        bottom_grid.addWidget(create_v_sep(self), 0, 1)
-        bottom_grid.addLayout(bottom_right_grid, 0, 2)
+        right_grid = QGridLayout()
+        right_grid.addLayout(column3_grid, 0, 0)
+        right_grid.addWidget(create_v_sep(self), 0, 1)
+        right_grid.addLayout(column4_grid, 0, 2)
 
         main_grid = QGridLayout(self)
 
         main_grid.addWidget(self.labels["randomize"], 0, 0)
-        main_grid.addWidget(create_h_sep(self), 1, 0)
-        main_grid.addLayout(top_grid, 2, 0)
-        main_grid.addWidget(create_h_sep(self), 3, 0)
-        main_grid.addWidget(self.labels["modify"], 4, 0)
-        main_grid.addWidget(create_h_sep(self), 5, 0)
-        main_grid.addLayout(bottom_grid, 6, 0)
-        main_grid.addWidget(randomize_button, 7, 0)
+        main_grid.addWidget(create_v_sep(self), 0, 1)
+        main_grid.addWidget(self.labels["modify"], 0, 2)
+        main_grid.addWidget(create_h_sep(self), 1, 0, 1, 0)
+        main_grid.addLayout(left_grid, 2, 0)
+        main_grid.addWidget(create_v_sep(self), 2, 1)
+        main_grid.addLayout(right_grid, 2, 2)
+        main_grid.addWidget(randomize_button, 3, 0, 1, 0)
 
         self.setLayout(main_grid)
 
         self.config = Config(f"{DEFAULT_CONFIG_PATH}/spec.yml")
 
-    def create_top_left_grid(self):
-        """ Create the left half of the main grid """
+    def create_column1_grid(self):
+        """ Create the left column of the main grid """
         grid = QGridLayout()
         grid.addWidget(self.labels["bases"], 0, 0, 1, 0)
         grid.addWidget(create_h_sep(self), 1, 0, 1, 0)
@@ -97,15 +97,10 @@ class Randomizer(QWidget):
         grid.addWidget(self.spin_boxes["cb_max"], 16, 1)
         grid.addWidget(create_h_sep(self), 17, 0, 1, 0)
 
-        grid.addWidget(self.labels["etc"], 18, 0, 1, 0)
-        grid.addWidget(create_h_sep(self), 19, 0, 1, 0)
-        grid.addWidget(self.labels["force_master_seal"], 20, 0)
-        grid.addWidget(self.check_boxes["master_seal_enabled"], 20, 1)
-
         return grid
 
-    def create_top_right_grid(self):
-        """ Create the right half of the main grid """
+    def create_column2_grid(self):
+        """ Create the middle left column of the main grid """
         grid = QGridLayout()
         grid.addWidget(self.labels["growths"], 0, 0, 1, 0)
         grid.addWidget(create_h_sep(self), 1, 0, 1, 0)
@@ -134,20 +129,15 @@ class Randomizer(QWidget):
         grid.addWidget(self.spin_boxes["og_max"], 12, 1)
         grid.addWidget(create_h_sep(self), 13, 0, 1, 0)
 
-        grid.addWidget(self.labels["characters"], 14, 0, 1, 0)
+        grid.addWidget(self.labels["etc"], 14, 0, 1, 0)
         grid.addWidget(create_h_sep(self), 15, 0, 1, 0)
-
-        grid.addWidget(self.labels["p_enabled"], 16, 0)
-        grid.addWidget(self.check_boxes["p_enabled"], 16, 1)
-        grid.addWidget(self.labels["b_enabled"], 17, 0)
-        grid.addWidget(self.check_boxes["b_enabled"], 17, 1)
-        grid.addWidget(self.labels["o_enabled"], 18, 0)
-        grid.addWidget(self.check_boxes["o_enabled"], 18, 1)
+        grid.addWidget(self.labels["force_master_seal"], 16, 0)
+        grid.addWidget(self.check_boxes["master_seal_enabled"], 16, 1)
 
         return grid
 
-    def create_bottom_left_grid(self):
-        """ Create the bottom left part of the main grid """
+    def create_column3_grid(self):
+        """ Create the middle right part of the main grid """
         grid = QGridLayout()
         grid.addWidget(self.labels["mod_bases"], 0, 0, 1, 0)
         grid.addWidget(create_h_sep(self), 1, 0, 1, 0)
@@ -171,8 +161,8 @@ class Randomizer(QWidget):
 
         return grid
 
-    def create_bottom_right_grid(self):
-        """ Create the bottom right part of the main grid """
+    def create_column4_grid(self):
+        """ Create the right part of the main grid """
         grid = QGridLayout()
         grid.addWidget(self.labels["mod_growths"], 0, 0, 1, 0)
         grid.addWidget(create_h_sep(self), 1, 0, 1, 0)
