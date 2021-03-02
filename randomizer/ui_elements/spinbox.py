@@ -1,7 +1,7 @@
 """ Module for creating all teh spin boxes """
 from PyQt5.QtWidgets import QSpinBox
 
-from constants import NORMAL_FONT
+from constants import Hints, NORMAL_FONT
 
 
 def create_spin_boxes(widget):
@@ -23,9 +23,22 @@ def create_spin_boxes(widget):
         "og_min": QSpinBox(widget),
         "og_max": QSpinBox(widget),
     }
-    for spin_box in min_max_spin_boxes.values():
+    for name, spin_box in min_max_spin_boxes.items():
         spin_box.setFont(NORMAL_FONT)
         spin_box.setRange(0, 255)
+        if "b_max" in name:
+            spin_box.setToolTip(Hints.MAX_BASE_COUNTER)
+            continue
+
+        if "b_min" in name:
+            spin_box.setToolTip(Hints.MIN_BASE_COUNTER)
+            continue
+
+        if "g_max" in name:
+            spin_box.setToolTip(Hints.MAX_GROWTH_COUNTER)
+
+        if "g_min" in name:
+            spin_box.setToolTip(Hints.MIN_GROWTH_COUNTER)
 
     mod_spin_boxes = {
         "pb_mod": QSpinBox(widget),
@@ -39,6 +52,7 @@ def create_spin_boxes(widget):
     for spin_box in mod_spin_boxes.values():
         spin_box.setFont(NORMAL_FONT)
         spin_box.setRange(-100, 100)
+        spin_box.setToolTip(Hints.BASE_MODIFIER)
 
     spin_boxes = min_max_spin_boxes
     spin_boxes.update(mod_spin_boxes)

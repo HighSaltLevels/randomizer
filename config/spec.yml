@@ -53,12 +53,6 @@ randomize:
       mode: Combat
       all_master_seals: true
 
-    # Randomize which characters?
-    characters:
-      playable: true
-      bosses: true
-      other: true
-
 modify:
   stats:
     bases:

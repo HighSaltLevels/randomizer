@@ -3,7 +3,51 @@
 from PyQt5.QtWidgets import QLabel
 from PyQt5.QtCore import Qt
 
-from constants import NORMAL_FONT, SUBTITLE_FONT, TITLE_FONT
+from constants import Hints, NORMAL_FONT, SUBTITLE_FONT, TITLE_FONT
+
+
+def _add_hints(labels):
+    """ Add Tooltip hints to labels """
+    labels["randomize"].setToolTip(Hints.RANDOMIZE)
+    labels["modify"].setToolTip(Hints.MODIFY)
+    labels["playable_bases"].setToolTip(Hints.PLAYABLE_BASES)
+    labels["boss_bases"].setToolTip(Hints.BOSS_BASES)
+    labels["other_bases"].setToolTip(Hints.OTHER_BASES)
+    labels["class_bases"].setToolTip(Hints.CLASS_BASES)
+    labels["playable_growths"].setToolTip(Hints.PLAYABLE_GROWTHS)
+    labels["boss_growths"].setToolTip(Hints.BOSS_GROWTHS)
+    labels["other_growths"].setToolTip(Hints.OTHER_GROWTHS)
+
+    labels["mod_playable_bases"].setToolTip(Hints.MOD_PLAYABLE_BASES)
+    labels["mod_boss_bases"].setToolTip(Hints.MOD_BOSS_BASES)
+    labels["mod_other_bases"].setToolTip(Hints.MOD_OTHER_BASES)
+    labels["mod_playable_growths"].setToolTip(Hints.MOD_PLAYABLE_GROWTHS)
+    labels["mod_boss_growths"].setToolTip(Hints.MOD_BOSS_GROWTHS)
+    labels["mod_other_growths"].setToolTip(Hints.MOD_OTHER_GROWTHS)
+
+    labels["force_master_seal"].setToolTip(Hints.FORCE_MASTER_SEAL)
+    labels["class_mode"].setToolTip(Hints.CLASS_MODE)
+
+    for name, label in labels.items():
+        if label.text().lower() == "minimum":
+            if "_b" in name:
+                label.setToolTip(Hints.MIN_BASE_COUNTER)
+                continue
+
+            label.setToolTip(Hints.MIN_GROWTH_COUNTER)
+            continue
+
+        if label.text().lower() == "maximum":
+            if "_b" in name:
+                label.setToolTip(Hints.MAX_BASE_COUNTER)
+                continue
+
+            label.setToolTip(Hints.MAX_GROWTH_COUNTER)
+            continue
+
+        if label.text().lower() == "modifier":
+            label.setToolTip(Hints.BASE_MODIFIER)
+            continue
 
 
 def create_labels(widget):
@@ -55,6 +99,7 @@ def create_labels(widget):
         "mod_bg": QLabel("Modifier", widget),
         "mod_other_growths": QLabel("Other", widget),
         "mod_og": QLabel("Modifier", widget),
+        "class_mode": QLabel("Class Mode", widget),
     }
 
     for label in labels.values():
@@ -77,5 +122,7 @@ def create_labels(widget):
 
     for label in labels.values():
         label.setAlignment(Qt.AlignCenter)
+
+    _add_hints(labels)
 
     return labels
