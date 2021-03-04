@@ -2,10 +2,10 @@
 
 import sys
 
-from PyQt5.QtWidgets import QWidget, QApplication, QGridLayout, QPushButton
+from PyQt5.QtWidgets import QWidget, QApplication, QGridLayout
 from PyQt5.QtGui import QIcon
 
-from ui_elements import label, spinbox, check_box, combo_box
+from ui_elements import label, spinbox, check_box, combo_box, browse, button
 from ui_elements.separator import create_v_sep, create_h_sep
 from config import Config, DEFAULT_CONFIG_PATH
 
@@ -26,41 +26,40 @@ class Randomizer(QWidget):
         self.check_boxes = check_box.create_check_boxes()
         self.spin_boxes = spinbox.create_spin_boxes(self)
         self.combo_boxes = combo_box.create_combo_boxes()
+        self.buttons = button.create_buttons(self)
+        self.file_browsers = browse.create_file_browsers(self)
 
-        randomize_button = QPushButton("Randomize!", self)
+        left_column = self.create_left_column()
+        middle_column = self.create_middle_column()
+        right_column = self.create_right_column()
 
-        top_left_grid = self.create_top_left_grid()
-        top_right_grid = self.create_top_right_grid()
-        bottom_left_grid = self.create_bottom_left_grid()
-        bottom_right_grid = self.create_bottom_right_grid()
+        left_grid = QGridLayout()
+        left_grid.addLayout(left_column, 1, 0)
+        left_grid.addWidget(create_v_sep(self), 1, 1)
+        left_grid.addLayout(middle_column, 1, 2)
 
-        top_grid = QGridLayout()
-        top_grid.addLayout(top_left_grid, 1, 0)
-        top_grid.addWidget(create_v_sep(self), 1, 1)
-        top_grid.addLayout(top_right_grid, 1, 2)
-
-        bottom_grid = QGridLayout()
-        bottom_grid.addLayout(bottom_left_grid, 0, 0)
-        bottom_grid.addWidget(create_v_sep(self), 0, 1)
-        bottom_grid.addLayout(bottom_right_grid, 0, 2)
+        right_grid = QGridLayout()
+        right_grid.addLayout(right_column, 0, 0)
 
         main_grid = QGridLayout(self)
 
         main_grid.addWidget(self.labels["randomize"], 0, 0)
-        main_grid.addWidget(create_h_sep(self), 1, 0)
-        main_grid.addLayout(top_grid, 2, 0)
-        main_grid.addWidget(create_h_sep(self), 3, 0)
-        main_grid.addWidget(self.labels["modify"], 4, 0)
-        main_grid.addWidget(create_h_sep(self), 5, 0)
-        main_grid.addLayout(bottom_grid, 6, 0)
-        main_grid.addWidget(randomize_button, 7, 0)
+        main_grid.addWidget(create_v_sep(self), 0, 1)
+        main_grid.addWidget(self.labels["modify"], 0, 2)
+        main_grid.addWidget(create_h_sep(self), 1, 0, 1, 0)
+        main_grid.addLayout(left_grid, 2, 0)
+        main_grid.addWidget(create_v_sep(self), 2, 1)
+        main_grid.addLayout(right_grid, 2, 2)
+        main_grid.addWidget(self.buttons["randomize"], 3, 0)
+        main_grid.addWidget(self.buttons["modify"], 3, 2)
+        main_grid.addWidget(self.file_browsers["rom_path"], 4, 0)
 
         self.setLayout(main_grid)
 
         self.config = Config(f"{DEFAULT_CONFIG_PATH}/spec.yml")
 
-    def create_top_left_grid(self):
-        """ Create the left half of the main grid """
+    def create_left_column(self):
+        """ Create the left column of the main grid """
         grid = QGridLayout()
         grid.addWidget(self.labels["bases"], 0, 0, 1, 0)
         grid.addWidget(create_h_sep(self), 1, 0, 1, 0)
@@ -97,15 +96,10 @@ class Randomizer(QWidget):
         grid.addWidget(self.spin_boxes["cb_max"], 16, 1)
         grid.addWidget(create_h_sep(self), 17, 0, 1, 0)
 
-        grid.addWidget(self.labels["etc"], 18, 0, 1, 0)
-        grid.addWidget(create_h_sep(self), 19, 0, 1, 0)
-        grid.addWidget(self.labels["force_master_seal"], 20, 0)
-        grid.addWidget(self.check_boxes["master_seal_enabled"], 20, 1)
-
         return grid
 
-    def create_top_right_grid(self):
-        """ Create the right half of the main grid """
+    def create_middle_column(self):
+        """ Create the middle column of the main grid """
         grid = QGridLayout()
         grid.addWidget(self.labels["growths"], 0, 0, 1, 0)
         grid.addWidget(create_h_sep(self), 1, 0, 1, 0)
@@ -134,20 +128,17 @@ class Randomizer(QWidget):
         grid.addWidget(self.spin_boxes["og_max"], 12, 1)
         grid.addWidget(create_h_sep(self), 13, 0, 1, 0)
 
-        grid.addWidget(self.labels["characters"], 14, 0, 1, 0)
+        grid.addWidget(self.labels["etc"], 14, 0, 1, 0)
         grid.addWidget(create_h_sep(self), 15, 0, 1, 0)
-
-        grid.addWidget(self.labels["p_enabled"], 16, 0)
-        grid.addWidget(self.check_boxes["p_enabled"], 16, 1)
-        grid.addWidget(self.labels["b_enabled"], 17, 0)
-        grid.addWidget(self.check_boxes["b_enabled"], 17, 1)
-        grid.addWidget(self.labels["o_enabled"], 18, 0)
-        grid.addWidget(self.check_boxes["o_enabled"], 18, 1)
+        grid.addWidget(self.labels["force_master_seal"], 16, 0)
+        grid.addWidget(self.check_boxes["master_seal_enabled"], 16, 1)
+        grid.addWidget(self.labels["class_mode"], 17, 0)
+        grid.addWidget(self.combo_boxes["class_mode"], 17, 1)
 
         return grid
 
-    def create_bottom_left_grid(self):
-        """ Create the bottom left part of the main grid """
+    def create_right_column(self):
+        """ Create the right part of the main grid """
         grid = QGridLayout()
         grid.addWidget(self.labels["mod_bases"], 0, 0, 1, 0)
         grid.addWidget(create_h_sep(self), 1, 0, 1, 0)
@@ -159,7 +150,7 @@ class Randomizer(QWidget):
         grid.addWidget(create_h_sep(self), 4, 0, 1, 0)
 
         grid.addWidget(self.labels["mod_boss_bases"], 5, 0)
-        grid.addWidget(self.check_boxes["mpb_enabled"], 5, 1)
+        grid.addWidget(self.check_boxes["mbb_enabled"], 5, 1)
         grid.addWidget(self.labels["mod_bb"], 6, 0)
         grid.addWidget(self.spin_boxes["bb_mod"], 6, 1)
         grid.addWidget(create_h_sep(self), 7, 0, 1, 0)
@@ -169,30 +160,25 @@ class Randomizer(QWidget):
         grid.addWidget(self.labels["mod_ob"], 9, 0)
         grid.addWidget(self.spin_boxes["ob_mod"], 9, 1)
 
-        return grid
+        grid.addWidget(self.labels["mod_growths"], 10, 0, 1, 0)
+        grid.addWidget(create_h_sep(self), 11, 0, 1, 0)
 
-    def create_bottom_right_grid(self):
-        """ Create the bottom right part of the main grid """
-        grid = QGridLayout()
-        grid.addWidget(self.labels["mod_growths"], 0, 0, 1, 0)
-        grid.addWidget(create_h_sep(self), 1, 0, 1, 0)
+        grid.addWidget(self.labels["mod_playable_growths"], 12, 0)
+        grid.addWidget(self.check_boxes["mpg_enabled"], 12, 1)
+        grid.addWidget(self.labels["mod_pg"], 13, 0)
+        grid.addWidget(self.spin_boxes["pg_mod"], 13, 1)
+        grid.addWidget(create_h_sep(self), 14, 0, 1, 0)
 
-        grid.addWidget(self.labels["mod_playable_growths"], 2, 0)
-        grid.addWidget(self.check_boxes["mpg_enabled"], 2, 1)
-        grid.addWidget(self.labels["mod_pg"], 3, 0)
-        grid.addWidget(self.spin_boxes["pg_mod"], 3, 1)
-        grid.addWidget(create_h_sep(self), 4, 0, 1, 0)
+        grid.addWidget(self.labels["mod_boss_growths"], 15, 0)
+        grid.addWidget(self.check_boxes["mbg_enabled"], 15, 1)
+        grid.addWidget(self.labels["mod_bg"], 16, 0)
+        grid.addWidget(self.spin_boxes["bg_mod"], 16, 1)
+        grid.addWidget(create_h_sep(self), 17, 0, 1, 0)
 
-        grid.addWidget(self.labels["mod_boss_growths"], 5, 0)
-        grid.addWidget(self.check_boxes["mbg_enabled"], 5, 1)
-        grid.addWidget(self.labels["mod_bg"], 6, 0)
-        grid.addWidget(self.spin_boxes["bg_mod"], 6, 1)
-        grid.addWidget(create_h_sep(self), 7, 0, 1, 0)
-
-        grid.addWidget(self.labels["mod_other_growths"], 8, 0)
-        grid.addWidget(self.check_boxes["mog_enabled"], 8, 1)
-        grid.addWidget(self.labels["mod_og"], 9, 0)
-        grid.addWidget(self.spin_boxes["og_mod"], 9, 1)
+        grid.addWidget(self.labels["mod_other_growths"], 18, 0)
+        grid.addWidget(self.check_boxes["mog_enabled"], 18, 1)
+        grid.addWidget(self.labels["mod_og"], 19, 0)
+        grid.addWidget(self.spin_boxes["og_mod"], 19, 1)
 
         return grid
 
