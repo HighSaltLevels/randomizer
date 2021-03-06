@@ -23,8 +23,8 @@ class Randomizer(QWidget):
         self.setWindowIcon(QIcon(f"{DEFAULT_CONFIG_PATH}/randomizer.ico"))
 
         self.labels = label.create_labels(self)
-        self.check_boxes = check_box.create_check_boxes()
         self.spin_boxes = spinbox.create_spin_boxes(self)
+        self.check_boxes = check_box.create_check_boxes(self.spin_boxes)
         self.combo_boxes = combo_box.create_combo_boxes()
         self.buttons = button.create_buttons(self)
         self.file_browsers = browse.create_file_browsers(self)

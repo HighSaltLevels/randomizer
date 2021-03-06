@@ -106,6 +106,6 @@ class Hints(str, Enum):
     CLASS_MODE = (
         "Set the mode for randomizing classes.\nCombat - all units guaranteed "
         "to have offensive capabilities\nCombat/Staff - all units are either "
-        "offesnive or staff only wielders\nAll - Re-roll all classes "
+        "offensive or staff only wielders\nAll - Re-roll all classes "
         "(potential soft lock)"
     )
