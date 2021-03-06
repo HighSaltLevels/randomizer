@@ -5,9 +5,9 @@ import sys
 from PyQt5.QtWidgets import QWidget, QApplication, QGridLayout
 from PyQt5.QtGui import QIcon
 
-from ui_elements import label, spinbox, check_box, combo_box, browse, button
+from ui_elements import label, spinbox, check_box, combo_box, button
 from ui_elements.separator import create_v_sep, create_h_sep
-from config import Config, DEFAULT_CONFIG_PATH
+from config import DEFAULT_CONFIG_PATH
 
 APP = QApplication([])
 
@@ -27,7 +27,6 @@ class Randomizer(QWidget):
         self.check_boxes = check_box.create_check_boxes(self.spin_boxes)
         self.combo_boxes = combo_box.create_combo_boxes()
         self.buttons = button.create_buttons(self)
-        self.file_browsers = browse.create_file_browsers(self)
 
         left_column = self.create_left_column()
         middle_column = self.create_middle_column()
@@ -50,13 +49,11 @@ class Randomizer(QWidget):
         main_grid.addLayout(left_grid, 2, 0)
         main_grid.addWidget(create_v_sep(self), 2, 1)
         main_grid.addLayout(right_grid, 2, 2)
-        main_grid.addWidget(self.buttons["randomize"], 3, 0)
-        main_grid.addWidget(self.buttons["modify"], 3, 2)
-        main_grid.addWidget(self.file_browsers["rom_path"], 4, 0)
+        main_grid.addWidget(create_h_sep(self), 3, 0, 1, 0)
+        main_grid.addWidget(self.buttons["randomize"], 4, 0)
+        main_grid.addWidget(self.buttons["modify"], 4, 2)
 
         self.setLayout(main_grid)
-
-        self.config = Config(f"{DEFAULT_CONFIG_PATH}/spec.yml")
 
     def create_left_column(self):
         """ Create the left column of the main grid """
@@ -94,7 +91,6 @@ class Randomizer(QWidget):
         grid.addWidget(self.spin_boxes["cb_min"], 15, 1)
         grid.addWidget(self.labels["cb_maximum"], 16, 0)
         grid.addWidget(self.spin_boxes["cb_max"], 16, 1)
-        grid.addWidget(create_h_sep(self), 17, 0, 1, 0)
 
         return grid
 
@@ -134,6 +130,12 @@ class Randomizer(QWidget):
         grid.addWidget(self.check_boxes["master_seal_enabled"], 16, 1)
         grid.addWidget(self.labels["class_mode"], 17, 0)
         grid.addWidget(self.combo_boxes["class_mode"], 17, 1)
+
+        grid.addWidget(self.check_boxes["playable_class"], 18, 0)
+        grid.addWidget(self.check_boxes["boss_class"], 18, 1)
+        #        grid.addWidget(self.check_boxes["other_class"], 19, 0, 1, 0)
+        grid.addWidget(self.check_boxes["other_class"], 19, 0)
+        grid.addWidget(self.check_boxes["mix_promotes"], 19, 1)
 
         return grid
 

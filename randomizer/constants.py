@@ -17,45 +17,68 @@ TITLE_FONT.setPointSize(16)
 
 DEFAULT_CONFIG = {
     "randomize": {
-        "mix_promotes": False,
+        "mix_promotes": {
+            "enabled": False,
+        },
         "stats": {
             "bases": {
                 "playable": {
                     "enabled": False,
-                    "range": {"minimum": 0, "maximum": 30},
-                    "level": False,
-                    "movement": False,
+                    "minimum": 0,
+                    "maximum": 30,
+                },
+                "boss": {
+                    "enabled": False,
+                    "minimum": 0,
+                    "maximum": 30,
                 },
                 "other": {
                     "enabled": False,
-                    "range": {"minimum": 0, "maximum": 30},
-                    "level": False,
-                    "movement": False,
+                    "minimum": 0,
+                    "maximum": 30,
                 },
-                "class": {"enabled": False, "range": {"minimum": 0, "maximum": 30}},
-                "max": {
-                    "unpromoted": {"enabled": False},
-                    "promoted": {"enabled": False},
-                },
+                "class": {"enabled": False, "minimum": 0, "maximum": 30},
             },
             "growths": {
-                "playable": {"enabled": False, "range": {"minimum": 0, "maximum": 255}},
-                "other": {"enabled": False, "range": {"minimum": 0, "maximum": 255}},
+                "playable": {"enabled": False, "minimum": 0, "maximum": 255},
+                "boss": {"enabled": False, "minimum": 0, "maximum": 255},
+                "other": {"enabled": False, "minimum": 0, "maximum": 255},
             },
-            "classes": {"mode": "Combat", "all_master_seals": True},
-            "characters": {"playable": True, "bosses": True, "other": True},
+        },
+        "classes": {
+            "mode": "Combat",
+            "all_master_seals": {
+                "enabled": True,
+            },
+            "playable": {
+                "enabled": True,
+            },
+            "boss": {
+                "enabled": True,
+            },
+            "other": {
+                "enabled": True,
+            },
         },
     },
     "modify": {
         "stats": {
             "bases": {
                 "playable": {"enabled": False, "modifier": -5},
+                "boss": {"enabled": False, "modifier": 5},
                 "other": {"enabled": False, "modifier": 5},
             },
-            "growths": {"playable": {"enabled": False, "modifier": -10}},
+            "growths": {
+                "playable": {"enabled": False, "modifier": -10},
+                "boss": {"enabled": False, "modifier": 10},
+                "other": {"enabled": False, "modifier": 10},
+            },
         }
     },
 }
+
+
+CLASS_MODE_OPTIONS = ["Combat", "Combat/Staff", "All"]
 
 
 class Hints(str, Enum):
@@ -108,4 +131,12 @@ class Hints(str, Enum):
         "to have offensive capabilities\nCombat/Staff - all units are either "
         "offensive or staff only wielders\nAll - Re-roll all classes "
         "(potential soft lock)"
+    )
+
+    PLAYABLE_CLASSES = "Randomize all playable character classes"
+    BOSS_CLASSES = "Randomize all boss character classes"
+    OTHER_CLASSES = "Randomize all other character classes"
+
+    MIX_PROMOTES = (
+        "Mix unpromoted unit class with pre-premoted unit classes (Potential Soft Lock)"
     )

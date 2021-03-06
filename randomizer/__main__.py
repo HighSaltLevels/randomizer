@@ -2,22 +2,27 @@
 
 import logging
 
+from app import Randomizer
 from config import DEFAULT_CONFIG_PATH
-from randomizer import Randomizer
 
-LOG_PATH = f"{DEFAULT_CONFIG_PATH}/output.log"
+LOG_LEVEL = logging.INFO
+LOG_PATH = f"{DEFAULT_CONFIG_PATH}/randomizer.log"
+
+LOGGER = logging.getLogger(__name__)
+logging.basicConfig(
+    level=LOG_LEVEL, handlers=[logging.FileHandler(LOG_PATH), logging.StreamHandler()]
+)
 
 
 def _main():
-    logging.basicConfig(filename=LOG_PATH, level=logging.DEBUG)
     randomizer = Randomizer()
     try:
         randomizer.start()
 
     except Exception as error:
-        logging.error("Something crashed :(")
-        logging.info("You can check the logs at %s", LOG_PATH)
-        logging.exception(error)
+        LOGGER.error("Something crashed :(")
+        LOGGER.info("You can check the logs at %s", LOG_PATH)
+        LOGGER.exception(error)
         raise
 
 
