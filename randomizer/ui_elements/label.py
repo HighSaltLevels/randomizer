@@ -65,6 +65,7 @@ def create_labels(widget):
     mod_growths = QLabel("Growths", widget)
 
     labels = {
+        "status": QLabel("Status: Initialized", widget),
         "playable_bases": QLabel("Playable", widget),
         "pb_minimum": QLabel("Minimum", widget),
         "pb_maximum": QLabel("Maximum", widget),
@@ -122,6 +123,8 @@ def create_labels(widget):
 
     for label in labels.values():
         label.setAlignment(Qt.AlignCenter)
+
+    labels["status"].setAlignment(Qt.AlignLeft)
 
     _add_hints(labels)
 

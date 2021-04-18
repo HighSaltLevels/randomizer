@@ -113,9 +113,7 @@ def create_check_boxes(spin_boxes):
     mapping["boss_class"] = QCheckBox("Boss Classes")
     mapping["boss_class"].setToolTip(Hints.BOSS_CLASSES)
     mapping["boss_class"].stateChanged.connect(
-        lambda: handler(
-            "randomizer/classes/boss", {"check_box": mapping["boss_class"]}
-        )
+        lambda: handler("randomizer/classes/boss", {"check_box": mapping["boss_class"]})
     )
 
     mapping["other_class"] = QCheckBox("Other Classes")

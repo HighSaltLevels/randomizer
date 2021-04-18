@@ -22,3 +22,13 @@ def combo_box_handler(selection):
     CONFIG.update_combo_box(selection)
     LOGGER.info("Saving configuration")
     CONFIG.write()
+
+
+def browse_handler(file_browser, line_edit):
+    """ Allow the user to browse for a ROM path """
+    if file_browser.exec_():
+        selected_path = file_browser.selectedFiles()[0]
+        line_edit.setText(selected_path)
+        CONFIG["rom_path"] = selected_path
+        LOGGER.info("Saving Rom Path")
+        CONFIG.write()

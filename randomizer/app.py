@@ -5,7 +5,7 @@ import sys
 from PyQt5.QtWidgets import QWidget, QApplication, QGridLayout
 from PyQt5.QtGui import QIcon
 
-from ui_elements import label, spinbox, check_box, combo_box, button
+from ui_elements import label, spinbox, check_box, combo_box, button, line_edit, browse
 from ui_elements.separator import create_v_sep, create_h_sep
 from config import DEFAULT_CONFIG_PATH
 
@@ -22,11 +22,16 @@ class Randomizer(QWidget):
 
         self.setWindowIcon(QIcon(f"{DEFAULT_CONFIG_PATH}/randomizer.ico"))
 
+        file_browser = browse.create_file_browser(self)
+
         self.labels = label.create_labels(self)
         self.spin_boxes = spinbox.create_spin_boxes(self)
         self.check_boxes = check_box.create_check_boxes(self.spin_boxes)
         self.combo_boxes = combo_box.create_combo_boxes()
-        self.buttons = button.create_buttons(self)
+        self.line_edits = line_edit.create_line_edits(self)
+        self.buttons = button.create_buttons(
+            self, file_browser, self.line_edits["rom_edit"]
+        )
 
         left_column = self.create_left_column()
         middle_column = self.create_middle_column()
@@ -50,8 +55,10 @@ class Randomizer(QWidget):
         main_grid.addWidget(create_v_sep(self), 2, 1)
         main_grid.addLayout(right_grid, 2, 2)
         main_grid.addWidget(create_h_sep(self), 3, 0, 1, 0)
-        main_grid.addWidget(self.buttons["randomize"], 4, 0)
-        main_grid.addWidget(self.buttons["modify"], 4, 2)
+        main_grid.addWidget(self.line_edits["rom_edit"], 4, 0)
+        main_grid.addWidget(self.buttons["browse"], 4, 2)
+        main_grid.addWidget(self.buttons["randomize"], 5, 0, 1, 0)
+        main_grid.addWidget(self.labels["status"], 6, 0, 1, 0)
 
         self.setLayout(main_grid)
 
