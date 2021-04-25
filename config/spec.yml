@@ -1,5 +1,6 @@
 randomize:
-  mix_promotes: false
+  mix_promotes:
+      enabled: false
   stats:
     bases:
       playable:
@@ -32,19 +33,15 @@ randomize:
         minimum: 0
         maximum: 255
 
-    # Mode can be set to:
-    # Combat:           Ensure every unit has offensive capabilities
-    # Combat and Staff: Randomize with combat users and staff users (potential soft lock)
-    # All:              Randomize all classes
   classes:
     mode: Combat
     all_master_seals:
       enabled: true
-    playable: true
+    playable:
       enabled: true
-    boss: true
+    boss:
       enabled: true
-    other: true
+    other:
       enabled: true
 
 modify:

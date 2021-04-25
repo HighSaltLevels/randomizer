@@ -78,7 +78,11 @@ DEFAULT_CONFIG = {
 }
 
 
-CLASS_MODE_OPTIONS = ["Combat", "Combat/Staff", "All"]
+CLASS_MODE_COMBAT = "Combat"
+CLASS_MODE_STAFF = "Combat/Staff"
+CLASS_MODE_ALL = "All"
+
+CLASS_MODE_OPTIONS = [CLASS_MODE_COMBAT, CLASS_MODE_STAFF, CLASS_MODE_ALL]
 
 
 class Hints(str, Enum):

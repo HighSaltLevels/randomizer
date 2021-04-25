@@ -22,16 +22,13 @@ class Randomizer(QWidget):
 
         self.setWindowIcon(QIcon(f"{DEFAULT_CONFIG_PATH}/randomizer.ico"))
 
-        file_browser = browse.create_file_browser(self)
-
         self.labels = label.create_labels(self)
+        self.file_browser = browse.create_file_browser(self)
         self.spin_boxes = spinbox.create_spin_boxes(self)
-        self.check_boxes = check_box.create_check_boxes(self.spin_boxes)
+        self.check_boxes = check_box.create_check_boxes(self)
         self.combo_boxes = combo_box.create_combo_boxes()
         self.line_edits = line_edit.create_line_edits(self)
-        self.buttons = button.create_buttons(
-            self, file_browser, self.line_edits["rom_edit"]
-        )
+        self.buttons = button.create_buttons(self)
 
         left_column = self.create_left_column()
         middle_column = self.create_middle_column()

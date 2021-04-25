@@ -8,6 +8,8 @@ import yaml
 from constants import DEFAULT_CONFIG
 
 DEFAULT_CONFIG_PATH = os.path.join(str(Path.home()), ".config/randomizer")
+FE8_CONFIG_PATH = os.path.join(str(Path.home()), ".config/randomizer/FE8.yml")
+
 os.makedirs(DEFAULT_CONFIG_PATH, exist_ok=True)
 
 
