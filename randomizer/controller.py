@@ -67,7 +67,8 @@ def randomizer_handler(app):
     updated_rom = char_editor.randomize()
 
     path, ext = os.path.splitext(input_rom)
-    output_rom = f"{path}-{uuid.uuid4()}{ext}"
+    rand = str(uuid.uuid4()).split("-")[0]
+    output_rom = f"{path}-{rand}{ext}"
 
     with open(output_rom, "wb") as stream:
         stream.write(updated_rom)
