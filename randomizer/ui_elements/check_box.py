@@ -73,7 +73,7 @@ def _set_configs(check_boxes, spin_boxes):
     check_boxes["other_class"].setChecked(class_config["other"]["enabled"])
 
 
-def create_check_boxes(spin_boxes):
+def create_check_boxes(parent):
     """ Init and return a dict of check boxes """
     boxes = [
         "pb_enabled",
@@ -113,9 +113,7 @@ def create_check_boxes(spin_boxes):
     mapping["boss_class"] = QCheckBox("Boss Classes")
     mapping["boss_class"].setToolTip(Hints.BOSS_CLASSES)
     mapping["boss_class"].stateChanged.connect(
-        lambda: handler(
-            "randomizer/classes/boss", {"check_box": mapping["boss_class"]}
-        )
+        lambda: handler("randomizer/classes/boss", {"check_box": mapping["boss_class"]})
     )
 
     mapping["other_class"] = QCheckBox("Other Classes")
@@ -139,7 +137,10 @@ def create_check_boxes(spin_boxes):
         lambda: handler(
             "randomize/stats/bases/playable",
             {
-                "spin_boxes": [spin_boxes["pb_min"], spin_boxes["pb_max"]],
+                "spin_boxes": [
+                    parent.spin_boxes["pb_min"],
+                    parent.spin_boxes["pb_max"],
+                ],
                 "check_box": mapping["pb_enabled"],
             },
         )
@@ -150,7 +151,10 @@ def create_check_boxes(spin_boxes):
         lambda: handler(
             "randomize/stats/bases/boss",
             {
-                "spin_boxes": [spin_boxes["bb_min"], spin_boxes["bb_max"]],
+                "spin_boxes": [
+                    parent.spin_boxes["bb_min"],
+                    parent.spin_boxes["bb_max"],
+                ],
                 "check_box": mapping["bb_enabled"],
             },
         )
@@ -161,7 +165,10 @@ def create_check_boxes(spin_boxes):
         lambda: handler(
             "randomize/stats/bases/other",
             {
-                "spin_boxes": [spin_boxes["ob_min"], spin_boxes["ob_max"]],
+                "spin_boxes": [
+                    parent.spin_boxes["ob_min"],
+                    parent.spin_boxes["ob_max"],
+                ],
                 "check_box": mapping["ob_enabled"],
             },
         )
@@ -172,7 +179,10 @@ def create_check_boxes(spin_boxes):
         lambda: handler(
             "randomize/stats/bases/class",
             {
-                "spin_boxes": [spin_boxes["cb_min"], spin_boxes["cb_max"]],
+                "spin_boxes": [
+                    parent.spin_boxes["cb_min"],
+                    parent.spin_boxes["cb_max"],
+                ],
                 "check_box": mapping["cb_enabled"],
             },
         )
@@ -183,7 +193,10 @@ def create_check_boxes(spin_boxes):
         lambda: handler(
             "randomize/stats/growths/playable",
             {
-                "spin_boxes": [spin_boxes["pg_min"], spin_boxes["pg_max"]],
+                "spin_boxes": [
+                    parent.spin_boxes["pg_min"],
+                    parent.spin_boxes["pg_max"],
+                ],
                 "check_box": mapping["pg_enabled"],
             },
         )
@@ -194,7 +207,10 @@ def create_check_boxes(spin_boxes):
         lambda: handler(
             "randomize/stats/growths/boss",
             {
-                "spin_boxes": [spin_boxes["bg_min"], spin_boxes["bg_max"]],
+                "spin_boxes": [
+                    parent.spin_boxes["bg_min"],
+                    parent.spin_boxes["bg_max"],
+                ],
                 "check_box": mapping["bg_enabled"],
             },
         )
@@ -205,7 +221,10 @@ def create_check_boxes(spin_boxes):
         lambda: handler(
             "randomize/stats/growths/other",
             {
-                "spin_boxes": [spin_boxes["og_min"], spin_boxes["og_max"]],
+                "spin_boxes": [
+                    parent.spin_boxes["og_min"],
+                    parent.spin_boxes["og_max"],
+                ],
                 "check_box": mapping["og_enabled"],
             },
         )
@@ -216,7 +235,7 @@ def create_check_boxes(spin_boxes):
         lambda: handler(
             "modify/stats/bases/playable",
             {
-                "spin_boxes": [spin_boxes["pb_mod"]],
+                "spin_boxes": [parent.spin_boxes["pb_mod"]],
                 "check_box": mapping["mpb_enabled"],
             },
         )
@@ -227,7 +246,7 @@ def create_check_boxes(spin_boxes):
         lambda: handler(
             "modify/stats/bases/boss",
             {
-                "spin_boxes": [spin_boxes["bb_mod"]],
+                "spin_boxes": [parent.spin_boxes["bb_mod"]],
                 "check_box": mapping["mbb_enabled"],
             },
         )
@@ -238,7 +257,7 @@ def create_check_boxes(spin_boxes):
         lambda: handler(
             "modify/stats/bases/other",
             {
-                "spin_boxes": [spin_boxes["ob_mod"]],
+                "spin_boxes": [parent.spin_boxes["ob_mod"]],
                 "check_box": mapping["mob_enabled"],
             },
         )
@@ -249,7 +268,7 @@ def create_check_boxes(spin_boxes):
         lambda: handler(
             "modify/stats/growths/playable",
             {
-                "spin_boxes": [spin_boxes["pg_mod"]],
+                "spin_boxes": [parent.spin_boxes["pg_mod"]],
                 "check_box": mapping["mpg_enabled"],
             },
         )
@@ -260,7 +279,7 @@ def create_check_boxes(spin_boxes):
         lambda: handler(
             "modify/stats/growths/boss",
             {
-                "spin_boxes": [spin_boxes["bg_mod"]],
+                "spin_boxes": [parent.spin_boxes["bg_mod"]],
                 "check_box": mapping["mbg_enabled"],
             },
         )
@@ -271,12 +290,12 @@ def create_check_boxes(spin_boxes):
         lambda: handler(
             "modify/stats/growths/other",
             {
-                "spin_boxes": [spin_boxes["og_mod"]],
+                "spin_boxes": [parent.spin_boxes["og_mod"]],
                 "check_box": mapping["mog_enabled"],
             },
         )
     )
 
-    _set_configs(mapping, spin_boxes)
+    _set_configs(mapping, parent.spin_boxes)
 
     return mapping
