@@ -7,6 +7,7 @@ import uuid
 import yaml
 
 from rom_editors.character_editor import CharacterEditor
+from rom_editors.item_editor import make_all_master_seals
 from config import CONFIG, FE8_CONFIG_PATH
 
 LOGGER = logging.getLogger(__name__)
@@ -42,6 +43,7 @@ def browse_handler(app):
 
 def randomizer_handler(app):
     """ Begin the randomization process """
+
     input_rom = app.line_edits["rom_edit"].text()
     try:
         with open(input_rom, "rb") as stream:
@@ -54,6 +56,27 @@ def randomizer_handler(app):
         app.labels["status"].setText(f"Status: Error! {error}")
         return
 
+    rom_data = _randomize_characters(app, fe8_config, rom_data)
+
+    if CONFIG["randomize"]["classes"]["all_master_seals"]["enabled"]:
+        rom_data = make_all_master_seals(fe8_config, rom_data)
+
+    rom_data = _randomize_stats(app, fe8_config, rom_data)
+    rom_data = _modify_stats(app, fe8_config, rom_data)
+
+    path, ext = os.path.splitext(input_rom)
+    rand = str(uuid.uuid4()).split("-")[0]
+    output_rom = f"{path}-{rand}{ext}"
+
+    with open(output_rom, "wb") as stream:
+        stream.write(rom_data)
+
+    app.labels["status"].setText(f"Status: Successfully wrote {output_rom}")
+
+
+def _randomize_characters(app, fe8_config, rom_data):
+    """ Randomize the characters """
+
     filters = [
         kind
         for kind in {"playable", "boss", "other"}
@@ -65,13 +88,14 @@ def randomizer_handler(app):
 
     char_editor = CharacterEditor(fe8_config, rom_data, class_mode, mix_promotes)
     char_editor.set_filters(filters)
-    updated_rom = char_editor.randomize()
+    return char_editor.randomize()
 
-    path, ext = os.path.splitext(input_rom)
-    rand = str(uuid.uuid4()).split("-")[0]
-    output_rom = f"{path}-{rand}{ext}"
 
-    with open(output_rom, "wb") as stream:
-        stream.write(updated_rom)
+def _randomize_stats(app, fe8_config, rom_data):
+    """ Randomize bases and growths """
+    return rom_data
 
-    app.labels["status"].setText(f"Status: Successfully wrote {output_rom}")
+
+def _modify_stats(app, fe8_config, rom_data):
+    """ Modify bases and growths """
+    return rom_data

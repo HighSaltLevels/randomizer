@@ -107,3 +107,22 @@ class ItemEditor:
             items += self._game_config["items"][level][item_type]
 
         return items
+
+
+def make_all_master_seals(game_config, rom_data):
+    """ Change all promotion items to master seals """
+    offsets = game_config["items"]["offsets"]
+    for prom_item in game_config["items"]["promotional"]:
+        for category in {"name", "description", "use_screen"}:
+            for idx in range(2):
+                location = prom_item + offsets[category]
+                rom_data[location + idx] = game_config["items"]["master_seal"][
+                    category
+                ][idx]
+
+        for category in {"icon", "use"}:
+            rom_data[prom_item + offsets[category]] = game_config["items"][
+                "master_seal"
+            ][category]
+
+    return rom_data

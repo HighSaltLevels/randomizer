@@ -185,6 +185,7 @@ classes:
         - 0x8BE4D5 
         - 0x8BF3D1 
         - 0x8BF345 
+        - 0x8BF359 
         - 0x8C0BF5 
         - 0x8C08F9 
         - 0x8C09D5 
@@ -632,7 +633,7 @@ classes:
       id:
         - 0x4c
       location:
-        - 0x8B6F38
+        - 0x8B7095
       kind: boss
       item_pos:
         - 0x8b70a0
@@ -689,7 +690,7 @@ classes:
       id:
         - 0x0b
       location:
-        - 0x8B898F
+        - 0x8B898D
         - 0x8BA60D
         - 0x8BB9ED
         - 0x8BAF89
@@ -736,7 +737,7 @@ classes:
       id:
         - 0x15
       location:
-        - 0x8B89B7
+        - 0x8B89B5
         - 0x8C5289
         - 0x8B9E35
       kind: playable
@@ -784,6 +785,7 @@ classes:
         - 0x17
       location:
         - 0x8BA5F9
+        - 0x8BA185
         - 0x8C4D85
         - 0x8C72ED
         - 0x8B9F15
@@ -803,7 +805,7 @@ classes:
         - 0x8B96E1
         - 0x8BAED5
         - 0x8C31F5
-        - 0x8C3053
+        - 0x8C3051
       kind: playable
       item_pos:
         - 0x8baee0
@@ -814,7 +816,7 @@ classes:
       id:
         - 0x51
       location:
-        - 0x8BBA83
+        - 0x8BBA81
         - 0x8BAA4D
       kind: boss
       item_pos:
@@ -939,7 +941,7 @@ classes:
       location:
         - 0x8BD685
         - 0x8BD45D
-        - 0x8BD4D6
+        - 0x8BD4D5
         - 0x8BD575
         - 0x8BE589
         - 0x8BE511
@@ -1024,7 +1026,7 @@ classes:
         - 0x8B47E5
         - 0x8B833D
         - 0x8BD8C5
-        - 0x8BD917
+        - 0x8BD915
         - 0x8BD965
         - 0x8BD9A1
         - 0x8C03F9
@@ -1043,7 +1045,6 @@ classes:
       id:
         - 0x41
       location:
-        - 0x804A64
         - 0x8C129D
         - 0x8CAB65
       kind: boss
@@ -1054,7 +1055,6 @@ classes:
       id:
         - 0xbe
       location:
-        - 0x8063C8
         - 0x8C2099
       kind: boss
       item_pos:
@@ -1136,7 +1136,7 @@ classes:
         - 0x8BD699
         - 0x8BD471
         - 0x8BD4AF
-        - 0x8BD54F
+        - 0x8BD54D
         - 0x8BE575
         - 0x8BE4FD
         - 0x8BF40D
@@ -1212,7 +1212,7 @@ classes:
         - 0x2b
         - 0xcb
       location:
-        - 0x8BC10F
+        - 0x8BC10D
         - 0x8BC471
       kind: other
       item_pos: []
@@ -1309,42 +1309,44 @@ classes:
 
 items:
   offsets:
+    name: 0x0
     description: 0x2
     use_screen: 0x4
     icon: 0x1d
     use: 0x1e
   master_seal:
+    name:
+      - 0xf4
+      - 0x3
     description:
-      bytes:
-        - 0xa5
-        - 0x4
+      - 0xa5
+      - 0x4
     use_screen:
-      bytes:
-        - 0xde
-        - 0x4
+      - 0xde
+      - 0x4
     icon: 0xd9
     use: 0x2d
     # Add Ephraim and Eirika to master seal list
     ephraim:
-      # Position: Value
-      0x8ADF92: 0x1
+      location: 0x8ADF92
+      value: 0x1
     eirika:
-      # Position: Value
-      0x8ADF91: 0x2
+      location: 0x8ADF91
+      value: 0x2
       
     eirika_override: 0x8ADF91
   a_weapon_lvl: 181
   flux_weapon_lvl_pos: 0x80A4E0
   dragonstone: 0xaa
   promotional:
-    - Guiding Ring: 0x80A9B0
-    - Elysian Whip: 0x80A98C
-    - Orion's Bolt: 0x80A968
-    - Knight Crest: 0x80A944
-    - Hero Crest: 0x80A920
-    - Ocean Seal: 0x80B04C
-    - Lunar Brace: 0x80B070
-    - Solar Brace: 0x80B094
+    - 0x80A9B0 # Guiding Ring
+    - 0x80A98C # Elysian Whip
+    - 0x80A968 # Orion's Bolt
+    - 0x80A944 # Knight Crest
+    - 0x80A920 # Hero Crest
+    - 0x80B04C # Ocean Seal
+    - 0x80B070 # Lunar Brace
+    - 0x80B094 # Solar Brace
   naglfar: 0x8f
   rapier: 0x6
   reginleif: 0x78
