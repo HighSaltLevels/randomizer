@@ -125,4 +125,9 @@ def make_all_master_seals(game_config, rom_data):
                 "master_seal"
             ][category]
 
+    # Add Ephraim and Eirika's lord classes to the master seal promotions
+    for lord in {"eirika", "ephraim"}:
+        lord_data = game_config["items"]["master_seal"][lord]
+        rom_data[lord_data["location"]] = lord_data["value"]
+
     return rom_data
