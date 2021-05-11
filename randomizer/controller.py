@@ -56,9 +56,10 @@ def randomizer_handler(app):
 
     filters = [
         kind
-        for kind in {"playable", "boss", "other", "class"}
-        if not CONFIG["randomize"]["stats"]["bases"][kind]["enabled"]
+        for kind in {"playable", "boss", "other"}
+        if not CONFIG["randomize"]["classes"][kind]["enabled"]
     ]
+
     class_mode = CONFIG["randomize"]["classes"]["mode"]
     mix_promotes = CONFIG["randomize"]["mix_promotes"]["enabled"]
 
