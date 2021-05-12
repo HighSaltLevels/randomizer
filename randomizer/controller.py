@@ -8,6 +8,7 @@ import yaml
 
 from rom_editors.character_editor import CharacterEditor
 from rom_editors.item_editor import make_all_master_seals
+from rom_editors.stat_editor import StatRandomizer
 from config import CONFIG, FE8_CONFIG_PATH
 
 LOGGER = logging.getLogger(__name__)
@@ -56,13 +57,13 @@ def randomizer_handler(app):
         app.labels["status"].setText(f"Status: Error! {error}")
         return
 
-    rom_data = _randomize_characters(app, fe8_config, rom_data)
+    rom_data = _randomize_characters(fe8_config, rom_data)
 
     if CONFIG["randomize"]["classes"]["all_master_seals"]["enabled"]:
         rom_data = make_all_master_seals(fe8_config, rom_data)
 
-    rom_data = _randomize_stats(app, fe8_config, rom_data)
-    rom_data = _modify_stats(app, fe8_config, rom_data)
+    rom_data = _randomize_stats(fe8_config, rom_data)
+    rom_data = _modify_stats(fe8_config, rom_data)
 
     path, ext = os.path.splitext(input_rom)
     rand = str(uuid.uuid4()).split("-")[0]
@@ -74,7 +75,7 @@ def randomizer_handler(app):
     app.labels["status"].setText(f"Status: Successfully wrote {output_rom}")
 
 
-def _randomize_characters(app, fe8_config, rom_data):
+def _randomize_characters(fe8_config, rom_data):
     """ Randomize the characters """
 
     filters = [
@@ -91,11 +92,25 @@ def _randomize_characters(app, fe8_config, rom_data):
     return char_editor.randomize()
 
 
-def _randomize_stats(app, fe8_config, rom_data):
+def _randomize_stats(fe8_config, rom_data):
     """ Randomize bases and growths """
-    return rom_data
+
+    base_filters = [
+        kind
+        for kind in {"playable", "boss", "other", "class"}
+        if not CONFIG["randomize"]["stats"]["bases"][kind]["enabled"]
+    ]
+    growth_filters = [
+        kind
+        for kind in {"playable", "boss", "other"}
+        if not CONFIG["randomize"]["stats"]["growths"][kind]["enabled"]
+    ]
+
+    stat_randomizer = StatRandomizer(fe8_config, rom_data)
+    stat_randomizer.set_filters(base_filters, growth_filters)
+    return stat_randomizer.randomize()
 
 
-def _modify_stats(app, fe8_config, rom_data):
+def _modify_stats(fe8_config, rom_data):
     """ Modify bases and growths """
     return rom_data
