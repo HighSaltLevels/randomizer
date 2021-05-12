@@ -12,6 +12,8 @@ classes:
     other: [0x4d, 0x51, 0x50, 0x4c, 0x43, 0x62, 0x65, 0x66]
 
     weapon_offset: 0x2c
+    bases_offset: 0xb
+    num_bases: 7
 
     manakete_pos: 0x8084C0
 
@@ -25,11 +27,11 @@ classes:
     weapon_offset: 0x14
 
     # Num bytes from start of character to first base stat
-    base_offset: 0xb
+    bases_offset: 0xb
     num_bases: 9
 
     # Num bytes from start of character to first growth rate
-    growth_offset: 0x1c
+    growths_offset: 0x1c
     num_growths: 7
 
   # Item byte positions for all named characters
@@ -664,7 +666,7 @@ classes:
         - 0x8b7c2d
     Binks:
       id:
-        - 0x43
+        - 0x4e
       location:
         - 0x8B8225
         - 0x8B7CFD
@@ -724,7 +726,7 @@ classes:
         - 0x8c72e4
     Gerik:
       id:
-        - 0x0f
+        - 0x14
       location: 
         - 0x8B89A1
         - 0x8C529D
@@ -833,7 +835,7 @@ classes:
         - 0x8BBFD8
     Rennac:
       id:
-        - 0x1d
+        - 0x1c
       location:
         - 0x8B4CED
         - 0x8B4D8D
