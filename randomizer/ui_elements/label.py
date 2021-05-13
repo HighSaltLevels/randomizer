@@ -15,15 +15,11 @@ def _add_hints(labels):
     labels["other_bases"].setToolTip(Hints.OTHER_BASES)
     labels["class_bases"].setToolTip(Hints.CLASS_BASES)
     labels["playable_growths"].setToolTip(Hints.PLAYABLE_GROWTHS)
-    labels["boss_growths"].setToolTip(Hints.BOSS_GROWTHS)
-    labels["other_growths"].setToolTip(Hints.OTHER_GROWTHS)
 
     labels["mod_playable_bases"].setToolTip(Hints.MOD_PLAYABLE_BASES)
     labels["mod_boss_bases"].setToolTip(Hints.MOD_BOSS_BASES)
     labels["mod_other_bases"].setToolTip(Hints.MOD_OTHER_BASES)
     labels["mod_playable_growths"].setToolTip(Hints.MOD_PLAYABLE_GROWTHS)
-    labels["mod_boss_growths"].setToolTip(Hints.MOD_BOSS_GROWTHS)
-    labels["mod_other_growths"].setToolTip(Hints.MOD_OTHER_GROWTHS)
 
     labels["force_master_seal"].setToolTip(Hints.FORCE_MASTER_SEAL)
     labels["class_mode"].setToolTip(Hints.CLASS_MODE)
@@ -82,12 +78,6 @@ def create_labels(widget):
         "playable_growths": QLabel("Playable", widget),
         "pg_minimum": QLabel("Minimum", widget),
         "pg_maximum": QLabel("Maximum", widget),
-        "boss_growths": QLabel("Boss", widget),
-        "bg_minimum": QLabel("Minimum", widget),
-        "bg_maximum": QLabel("Maximum", widget),
-        "other_growths": QLabel("Other", widget),
-        "og_minimum": QLabel("Minimum", widget),
-        "og_maximum": QLabel("Maximum", widget),
         "mod_playable_bases": QLabel("Playable", widget),
         "mod_pb": QLabel("Modifier", widget),
         "mod_boss_bases": QLabel("Boss", widget),
@@ -96,10 +86,6 @@ def create_labels(widget):
         "mod_ob": QLabel("Modifier", widget),
         "mod_playable_growths": QLabel("Playable", widget),
         "mod_pg": QLabel("Modifier", widget),
-        "mod_boss_growths": QLabel("Boss", widget),
-        "mod_bg": QLabel("Modifier", widget),
-        "mod_other_growths": QLabel("Other", widget),
-        "mod_og": QLabel("Modifier", widget),
         "class_mode": QLabel("Class Mode", widget),
     }
 

@@ -95,40 +95,6 @@ def _set_config(spin_boxes):
         )
     )
 
-    spin_boxes["bg_min"].setValue(growth_configs["boss"]["minimum"])
-    spin_boxes["bg_max"].setValue(growth_configs["boss"]["maximum"])
-    spin_boxes["bg_min"].valueChanged.connect(
-        lambda: handler(
-            "randomize/stats/growths/boss",
-            {"spin_boxes": [spin_boxes["bg_min"], spin_boxes["bg_max"]]},
-            toggle=False,
-        )
-    )
-    spin_boxes["bg_max"].valueChanged.connect(
-        lambda: handler(
-            "randomize/stats/growths/boss",
-            {"spin_boxes": [spin_boxes["bg_min"], spin_boxes["bg_max"]]},
-            toggle=False,
-        )
-    )
-
-    spin_boxes["og_min"].setValue(growth_configs["other"]["minimum"])
-    spin_boxes["og_max"].setValue(growth_configs["other"]["maximum"])
-    spin_boxes["og_min"].valueChanged.connect(
-        lambda: handler(
-            "randomize/stats/growths/other",
-            {"spin_boxes": [spin_boxes["og_min"], spin_boxes["og_max"]]},
-            toggle=False,
-        )
-    )
-    spin_boxes["og_max"].valueChanged.connect(
-        lambda: handler(
-            "randomize/stats/growths/other",
-            {"spin_boxes": [spin_boxes["og_min"], spin_boxes["og_max"]]},
-            toggle=False,
-        )
-    )
-
     mod_configs = CONFIG["modify"]["stats"]
     spin_boxes["pb_mod"].setValue(int(mod_configs["bases"]["playable"]["modifier"]))
     spin_boxes["pb_mod"].valueChanged.connect(
@@ -166,24 +132,6 @@ def _set_config(spin_boxes):
         )
     )
 
-    spin_boxes["bg_mod"].setValue(int(mod_configs["growths"]["boss"]["modifier"]))
-    spin_boxes["bg_mod"].valueChanged.connect(
-        lambda: handler(
-            "modify/stats/growths/boss",
-            {"spin_boxes": [spin_boxes["bg_mod"]]},
-            toggle=False,
-        )
-    )
-
-    spin_boxes["og_mod"].setValue(int(mod_configs["growths"]["other"]["modifier"]))
-    spin_boxes["og_mod"].valueChanged.connect(
-        lambda: handler(
-            "modify/stats/growths/other",
-            {"spin_boxes": [spin_boxes["og_mod"]]},
-            toggle=False,
-        )
-    )
-
 
 def create_spin_boxes(widget):
     """ Init and return a dict of line edits """
@@ -199,10 +147,6 @@ def create_spin_boxes(widget):
         "cb_max": QSpinBox(widget),
         "pg_min": QSpinBox(widget),
         "pg_max": QSpinBox(widget),
-        "bg_min": QSpinBox(widget),
-        "bg_max": QSpinBox(widget),
-        "og_min": QSpinBox(widget),
-        "og_max": QSpinBox(widget),
     }
     for name, spin_box in min_max_spin_boxes.items():
         spin_box.setFont(NORMAL_FONT)
@@ -226,8 +170,6 @@ def create_spin_boxes(widget):
         "bb_mod": QSpinBox(widget),
         "ob_mod": QSpinBox(widget),
         "pg_mod": QSpinBox(widget),
-        "bg_mod": QSpinBox(widget),
-        "og_mod": QSpinBox(widget),
     }
 
     for spin_box in mod_spin_boxes.values():

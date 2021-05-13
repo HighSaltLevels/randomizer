@@ -112,34 +112,16 @@ class Randomizer(QWidget):
         grid.addWidget(self.spin_boxes["pg_max"], 4, 1)
         grid.addWidget(create_h_sep(self), 5, 0, 1, 0)
 
-        grid.addWidget(self.labels["boss_growths"], 6, 0)
-        grid.addWidget(self.check_boxes["bg_enabled"], 6, 1)
-        grid.addWidget(self.labels["bg_minimum"], 7, 0)
-        grid.addWidget(self.spin_boxes["bg_min"], 7, 1)
-        grid.addWidget(self.labels["bg_maximum"], 8, 0)
-        grid.addWidget(self.spin_boxes["bg_max"], 8, 1)
-        grid.addWidget(create_h_sep(self), 9, 0, 1, 0)
-
-        grid.addWidget(self.labels["other_growths"], 10, 0)
-        grid.addWidget(self.check_boxes["og_enabled"], 10, 1)
-        grid.addWidget(self.labels["og_minimum"], 11, 0)
-        grid.addWidget(self.spin_boxes["og_min"], 11, 1)
-        grid.addWidget(self.labels["og_maximum"], 12, 0)
-        grid.addWidget(self.spin_boxes["og_max"], 12, 1)
-        grid.addWidget(create_h_sep(self), 13, 0, 1, 0)
-
-        grid.addWidget(self.labels["etc"], 14, 0, 1, 0)
-        grid.addWidget(create_h_sep(self), 15, 0, 1, 0)
-        grid.addWidget(self.labels["force_master_seal"], 16, 0)
-        grid.addWidget(self.check_boxes["master_seal_enabled"], 16, 1)
-        grid.addWidget(self.labels["class_mode"], 17, 0)
-        grid.addWidget(self.combo_boxes["class_mode"], 17, 1)
-
-        grid.addWidget(self.check_boxes["playable_class"], 18, 0)
-        grid.addWidget(self.check_boxes["boss_class"], 18, 1)
-        #        grid.addWidget(self.check_boxes["other_class"], 19, 0, 1, 0)
-        grid.addWidget(self.check_boxes["other_class"], 19, 0)
-        grid.addWidget(self.check_boxes["mix_promotes"], 19, 1)
+        grid.addWidget(self.labels["etc"], 6, 0, 1, 0)
+        grid.addWidget(create_h_sep(self), 7, 0, 1, 0)
+        grid.addWidget(self.labels["class_mode"], 8, 0)
+        grid.addWidget(self.combo_boxes["class_mode"], 8, 1)
+        grid.addWidget(self.labels["force_master_seal"], 9, 0)
+        grid.addWidget(self.check_boxes["master_seal_enabled"], 9, 1)
+        grid.addWidget(self.check_boxes["playable_class"], 10, 0, 1, 0)
+        grid.addWidget(self.check_boxes["boss_class"], 11, 0, 1, 0)
+        grid.addWidget(self.check_boxes["other_class"], 12, 0, 1, 0)
+        grid.addWidget(self.check_boxes["mix_promotes"], 13, 0, 1, 0)
 
         return grid
 
@@ -174,17 +156,6 @@ class Randomizer(QWidget):
         grid.addWidget(self.labels["mod_pg"], 13, 0)
         grid.addWidget(self.spin_boxes["pg_mod"], 13, 1)
         grid.addWidget(create_h_sep(self), 14, 0, 1, 0)
-
-        grid.addWidget(self.labels["mod_boss_growths"], 15, 0)
-        grid.addWidget(self.check_boxes["mbg_enabled"], 15, 1)
-        grid.addWidget(self.labels["mod_bg"], 16, 0)
-        grid.addWidget(self.spin_boxes["bg_mod"], 16, 1)
-        grid.addWidget(create_h_sep(self), 17, 0, 1, 0)
-
-        grid.addWidget(self.labels["mod_other_growths"], 18, 0)
-        grid.addWidget(self.check_boxes["mog_enabled"], 18, 1)
-        grid.addWidget(self.labels["mod_og"], 19, 0)
-        grid.addWidget(self.spin_boxes["og_mod"], 19, 1)
 
         return grid
 

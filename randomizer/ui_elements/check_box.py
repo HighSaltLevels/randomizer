@@ -31,14 +31,6 @@ def _set_configs(check_boxes, spin_boxes):
     spin_boxes["pg_min"].setDisabled(not growth_configs["playable"]["enabled"])
     spin_boxes["pg_max"].setDisabled(not growth_configs["playable"]["enabled"])
 
-    check_boxes["bg_enabled"].setChecked(growth_configs["boss"]["enabled"])
-    spin_boxes["bg_min"].setDisabled(not growth_configs["boss"]["enabled"])
-    spin_boxes["bg_max"].setDisabled(not growth_configs["boss"]["enabled"])
-
-    check_boxes["og_enabled"].setChecked(growth_configs["other"]["enabled"])
-    spin_boxes["og_min"].setDisabled(not growth_configs["other"]["enabled"])
-    spin_boxes["og_max"].setDisabled(not growth_configs["other"]["enabled"])
-
     base_configs = CONFIG["modify"]["stats"]["bases"]
     check_boxes["mpb_enabled"].setChecked(base_configs["playable"]["enabled"])
     spin_boxes["pb_mod"].setDisabled(not base_configs["playable"]["enabled"])
@@ -52,12 +44,6 @@ def _set_configs(check_boxes, spin_boxes):
     growth_configs = CONFIG["modify"]["stats"]["growths"]
     check_boxes["mpg_enabled"].setChecked(growth_configs["playable"]["enabled"])
     spin_boxes["pg_mod"].setDisabled(not growth_configs["playable"]["enabled"])
-
-    check_boxes["mbg_enabled"].setChecked(growth_configs["boss"]["enabled"])
-    spin_boxes["bg_mod"].setDisabled(not growth_configs["boss"]["enabled"])
-
-    check_boxes["mog_enabled"].setChecked(growth_configs["other"]["enabled"])
-    spin_boxes["og_mod"].setDisabled(not growth_configs["other"]["enabled"])
 
     check_boxes["master_seal_enabled"].setChecked(
         CONFIG["randomize"]["classes"]["all_master_seals"]["enabled"]
@@ -82,14 +68,10 @@ def create_check_boxes(parent):
         "cb_enabled",
         "master_seal_enabled",
         "pg_enabled",
-        "bg_enabled",
-        "og_enabled",
         "mpb_enabled",
         "mbb_enabled",
         "mob_enabled",
         "mpg_enabled",
-        "mbg_enabled",
-        "mog_enabled",
     ]
 
     mapping = {box: QCheckBox("Enabled") for box in boxes}
@@ -202,34 +184,6 @@ def create_check_boxes(parent):
         )
     )
 
-    mapping["bg_enabled"].setToolTip(Hints.BOSS_GROWTHS)
-    mapping["bg_enabled"].stateChanged.connect(
-        lambda: handler(
-            "randomize/stats/growths/boss",
-            {
-                "spin_boxes": [
-                    parent.spin_boxes["bg_min"],
-                    parent.spin_boxes["bg_max"],
-                ],
-                "check_box": mapping["bg_enabled"],
-            },
-        )
-    )
-
-    mapping["og_enabled"].setToolTip(Hints.OTHER_GROWTHS)
-    mapping["og_enabled"].stateChanged.connect(
-        lambda: handler(
-            "randomize/stats/growths/other",
-            {
-                "spin_boxes": [
-                    parent.spin_boxes["og_min"],
-                    parent.spin_boxes["og_max"],
-                ],
-                "check_box": mapping["og_enabled"],
-            },
-        )
-    )
-
     mapping["mpb_enabled"].setToolTip(Hints.MOD_PLAYABLE_BASES)
     mapping["mpb_enabled"].stateChanged.connect(
         lambda: handler(
@@ -270,28 +224,6 @@ def create_check_boxes(parent):
             {
                 "spin_boxes": [parent.spin_boxes["pg_mod"]],
                 "check_box": mapping["mpg_enabled"],
-            },
-        )
-    )
-
-    mapping["mbg_enabled"].setToolTip(Hints.MOD_BOSS_GROWTHS)
-    mapping["mbg_enabled"].stateChanged.connect(
-        lambda: handler(
-            "modify/stats/growths/boss",
-            {
-                "spin_boxes": [parent.spin_boxes["bg_mod"]],
-                "check_box": mapping["mbg_enabled"],
-            },
-        )
-    )
-
-    mapping["mog_enabled"].setToolTip(Hints.MOD_OTHER_GROWTHS)
-    mapping["mog_enabled"].stateChanged.connect(
-        lambda: handler(
-            "modify/stats/growths/other",
-            {
-                "spin_boxes": [parent.spin_boxes["og_mod"]],
-                "check_box": mapping["mog_enabled"],
             },
         )
     )
