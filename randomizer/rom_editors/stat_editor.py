@@ -64,3 +64,50 @@ class StatRandomizer:
             for stat_offset in range(self._class_stats["num_bases"]):
                 rand = randint(min_, max_)
                 self._rom_data[first_stat + stat_offset] = rand
+
+
+class StatModifier:
+    """ Stat randomizer """
+
+    def __init__(self, game_config, rom_data):
+        self._game_config = game_config
+        self._rom_data = rom_data
+        self._character_stats = game_config["classes"]["character_stats"]
+
+        self._filters = None
+
+    def set_filters(self, base_filters, growth_filters):
+        """ Modify bases and growths"""
+        self._filters = {
+            "bases": base_filters,
+            "growths": growth_filters,
+        }
+
+    def modify(self):
+        """ Modify bases and growths """
+        for stat_type in {"bases", "growths"}:
+            self._modify_character_stats(stat_type)
+
+        return self._rom_data
+
+    def _modify_character_stats(self, stat_type):
+        """ Use CONFIG values to modify bases and growths """
+        characters = self._game_config["classes"]["characters"]
+        for character in characters:
+            kind = characters[character]["kind"]
+            if kind not in self._filters[stat_type]:
+                for char_id in characters[character]["id"]:
+                    first_stat = (
+                        self._character_stats["first"]
+                        + (char_id * self._character_stats["total_bytes"])
+                        + self._character_stats[f"{stat_type}_offset"]
+                    )
+                    for stat_offset in range(self._character_stats[f"num_{stat_type}"]):
+                        stat = (
+                            self._rom_data[first_stat + stat_offset]
+                            + CONFIG["modify"]["stats"][stat_type][kind]["modifier"]
+                        )
+                        stat = 0 if stat < 0 else stat
+                        stat = 255 if stat > 255 else stat
+
+                        self._rom_data[first_stat + stat_offset] = stat

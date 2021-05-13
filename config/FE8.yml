@@ -27,8 +27,8 @@ classes:
     weapon_offset: 0x14
 
     # Num bytes from start of character to first base stat
-    bases_offset: 0xb
-    num_bases: 9
+    bases_offset: 0xc
+    num_bases: 8
 
     # Num bytes from start of character to first growth rate
     growths_offset: 0x1c
