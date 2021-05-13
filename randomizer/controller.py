@@ -4,14 +4,17 @@ import logging
 import os
 import uuid
 
+from PyQt5.QtWidgets import QMessageBox
 import yaml
 
 from rom_editors.character_editor import CharacterEditor
 from rom_editors.item_editor import make_all_master_seals
-from rom_editors.stat_editor import StatRandomizer
+from rom_editors.stat_editor import StatRandomizer, StatModifier, InvalidConfigError
 from config import CONFIG, FE8_CONFIG_PATH
 
 LOGGER = logging.getLogger(__name__)
+ALL_KINDS = {"playable", "boss", "other", "class"}
+CHARACTER_KINDS = {"playable", "boss", "other"}
 
 
 def handler(path, elements, toggle=True):
@@ -62,7 +65,20 @@ def randomizer_handler(app):
     if CONFIG["randomize"]["classes"]["all_master_seals"]["enabled"]:
         rom_data = make_all_master_seals(fe8_config, rom_data)
 
-    rom_data = _randomize_stats(fe8_config, rom_data)
+    try:
+        rom_data = _randomize_stats(fe8_config, rom_data)
+    except InvalidConfigError:
+        msg_box = QMessageBox()
+        msg_box.setText(
+            "You cannot have a randomize range where the maximum is greater than minimum"
+        )
+        msg_box.setWindowTitle("Error: Invalid Configuration")
+        msg_box.setIcon(QMessageBox.Warning)
+        app.labels["status"].setText("Error: Invalid Configuration")
+
+        msg_box.exec_()
+        return
+
     rom_data = _modify_stats(fe8_config, rom_data)
 
     path, ext = os.path.splitext(input_rom)
@@ -78,11 +94,7 @@ def randomizer_handler(app):
 def _randomize_characters(fe8_config, rom_data):
     """ Randomize the characters """
 
-    filters = [
-        kind
-        for kind in {"playable", "boss", "other"}
-        if not CONFIG["randomize"]["classes"][kind]["enabled"]
-    ]
+    filters = _get_filters(CONFIG["randomize"]["classes"], CHARACTER_KINDS)
 
     class_mode = CONFIG["randomize"]["classes"]["mode"]
     mix_promotes = CONFIG["randomize"]["mix_promotes"]["enabled"]
@@ -95,16 +107,10 @@ def _randomize_characters(fe8_config, rom_data):
 def _randomize_stats(fe8_config, rom_data):
     """ Randomize bases and growths """
 
-    base_filters = [
-        kind
-        for kind in {"playable", "boss", "other", "class"}
-        if not CONFIG["randomize"]["stats"]["bases"][kind]["enabled"]
-    ]
-    growth_filters = [
-        kind
-        for kind in {"playable", "boss", "other"}
-        if not CONFIG["randomize"]["stats"]["growths"][kind]["enabled"]
-    ]
+    base_filters = _get_filters(CONFIG["randomize"]["stats"]["bases"], ALL_KINDS)
+    growth_filters = _get_filters(
+        CONFIG["randomize"]["stats"]["growths"], CHARACTER_KINDS
+    )
 
     stat_randomizer = StatRandomizer(fe8_config, rom_data)
     stat_randomizer.set_filters(base_filters, growth_filters)
@@ -113,4 +119,14 @@ def _randomize_stats(fe8_config, rom_data):
 
 def _modify_stats(fe8_config, rom_data):
     """ Modify bases and growths """
-    return rom_data
+    base_filters = _get_filters(CONFIG["modify"]["stats"]["bases"], CHARACTER_KINDS)
+    growth_filters = _get_filters(CONFIG["modify"]["stats"]["growths"], CHARACTER_KINDS)
+
+    stat_modifier = StatModifier(fe8_config, rom_data)
+    stat_modifier.set_filters(base_filters, growth_filters)
+    return stat_modifier.modify()
+
+
+def _get_filters(config, kinds):
+    """ Look up filters based on config path """
+    return [kind for kind in kinds if not config[kind]["enabled"]]
