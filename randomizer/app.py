@@ -34,30 +34,21 @@ class Randomizer(QWidget):
         middle_column = self.create_middle_column()
         right_column = self.create_right_column()
 
-        left_grid = QGridLayout()
-        left_grid.addLayout(left_column, 1, 0)
-        left_grid.addWidget(create_v_sep(self), 1, 1)
-        left_grid.addLayout(middle_column, 1, 2)
-
-        right_grid = QGridLayout()
-        right_grid.addLayout(right_column, 0, 0)
-
-        main_grid = QGridLayout(self)
-
-        main_grid.addWidget(self.labels["randomize"], 0, 0)
-        main_grid.addWidget(create_v_sep(self), 0, 1)
-        main_grid.addWidget(self.labels["modify"], 0, 2)
-        main_grid.addWidget(create_h_sep(self), 1, 0, 1, 0)
-        main_grid.addLayout(left_grid, 2, 0)
-        main_grid.addWidget(create_v_sep(self), 2, 1)
-        main_grid.addLayout(right_grid, 2, 2)
-        main_grid.addWidget(create_h_sep(self), 3, 0, 1, 0)
-        main_grid.addWidget(self.line_edits["rom_edit"], 4, 0)
-        main_grid.addWidget(self.buttons["browse"], 4, 2)
-        main_grid.addWidget(self.buttons["randomize"], 5, 0, 1, 0)
-        main_grid.addWidget(self.labels["status"], 6, 0, 1, 0)
-
+        main_grid = QGridLayout()
         self.setLayout(main_grid)
+        main_grid.addWidget(self.labels["randomize"], 0, 0, 1, 5)
+        main_grid.addWidget(create_h_sep(self), 1, 0, 1, 5)
+
+        main_grid.addLayout(left_column, 2, 0)
+        main_grid.addWidget(create_v_sep(self), 2, 1)
+        main_grid.addLayout(middle_column, 2, 2)
+        main_grid.addWidget(create_v_sep(self), 2, 3)
+        main_grid.addLayout(right_column, 2, 4)
+        main_grid.addWidget(create_h_sep(self), 3, 0, 1, 5)
+        main_grid.addWidget(self.line_edits["rom_edit"], 4, 0, 1, 4)
+        main_grid.addWidget(self.buttons["browse"], 4, 4)
+        main_grid.addWidget(self.buttons["randomize"], 5, 0, 1, 5)
+        main_grid.addWidget(self.labels["status"], 6, 0, 1, 5)
 
     def create_left_column(self):
         """ Create the left column of the main grid """
@@ -155,7 +146,6 @@ class Randomizer(QWidget):
         grid.addWidget(self.check_boxes["mpg_enabled"], 12, 1)
         grid.addWidget(self.labels["mod_pg"], 13, 0)
         grid.addWidget(self.spin_boxes["pg_mod"], 13, 1)
-        grid.addWidget(create_h_sep(self), 14, 0, 1, 0)
 
         return grid
 

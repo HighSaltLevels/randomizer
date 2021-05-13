@@ -89,7 +89,6 @@ class Hints(str, Enum):
     """ ToolTip enumeration class """
 
     RANDOMIZE = "Configurations for Randomizing character stats and growths"
-    MODIFY = "Configurations for modifying character base stats and growths"
     PLAYABLE_BASES = "Enable randomizing of playable character base stats"
     BOSS_BASES = "Enable randomizing of boss character base stats"
     OTHER_BASES = "Enable randomzing of all other npc character base stats"

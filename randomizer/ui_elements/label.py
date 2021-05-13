@@ -55,10 +55,10 @@ def create_labels(widget):
 
     # Subtitles
     bases = QLabel("Bases", widget)
-    mod_bases = QLabel("Bases", widget)
+    mod_bases = QLabel("Modify Bases", widget)
     etc = QLabel("Etc", widget)
     growths = QLabel("Growths", widget)
-    mod_growths = QLabel("Growths", widget)
+    mod_growths = QLabel("Modify Growths", widget)
 
     labels = {
         "status": QLabel("Status: Initialized", widget),
