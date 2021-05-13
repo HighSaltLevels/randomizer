@@ -4,11 +4,12 @@ import logging
 import os
 import uuid
 
+from PyQt5.QtWidgets import QMessageBox
 import yaml
 
 from rom_editors.character_editor import CharacterEditor
 from rom_editors.item_editor import make_all_master_seals
-from rom_editors.stat_editor import StatRandomizer, StatModifier
+from rom_editors.stat_editor import StatRandomizer, StatModifier, InvalidConfigError
 from config import CONFIG, FE8_CONFIG_PATH
 
 LOGGER = logging.getLogger(__name__)
@@ -64,7 +65,20 @@ def randomizer_handler(app):
     if CONFIG["randomize"]["classes"]["all_master_seals"]["enabled"]:
         rom_data = make_all_master_seals(fe8_config, rom_data)
 
-    rom_data = _randomize_stats(fe8_config, rom_data)
+    try:
+        rom_data = _randomize_stats(fe8_config, rom_data)
+    except InvalidConfigError:
+        msg_box = QMessageBox()
+        msg_box.setText(
+            "You cannot have a randomize range where the maximum is greater than minimum"
+        )
+        msg_box.setWindowTitle("Error: Invalid Configuration")
+        msg_box.setIcon(QMessageBox.Warning)
+        app.labels["status"].setText("Error: Invalid Configuration")
+
+        msg_box.exec_()
+        return
+
     rom_data = _modify_stats(fe8_config, rom_data)
 
     path, ext = os.path.splitext(input_rom)

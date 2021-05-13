@@ -5,6 +5,10 @@ from random import randint
 from config import CONFIG
 
 
+class InvalidConfigError(Exception):
+    """ raised when configuration values are invalid """
+
+
 class StatRandomizer:
     """ Stat randomizer """
 
@@ -48,7 +52,10 @@ class StatRandomizer:
                     min_ = CONFIG["randomize"]["stats"][stat_type][kind]["minimum"]
                     max_ = CONFIG["randomize"]["stats"][stat_type][kind]["maximum"]
                     for stat_offset in range(self._character_stats[f"num_{stat_type}"]):
-                        rand = randint(min_, max_)
+                        try:
+                            rand = randint(min_, max_)
+                        except ValueError:
+                            raise InvalidConfigError from ValueError
                         self._rom_data[first_stat + stat_offset] = rand
 
     def _randomize_class_stats(self):
