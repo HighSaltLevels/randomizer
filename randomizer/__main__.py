@@ -15,14 +15,14 @@ logging.basicConfig(
 
 
 def _main():
-    randomizer = Randomizer()
     try:
+        randomizer = Randomizer()
         randomizer.start()
 
-    except Exception as error:
+    except Exception:
         LOGGER.error("Something crashed :(")
-        LOGGER.info("You can check the logs at %s", LOG_PATH)
-        LOGGER.exception(error)
+        LOGGER.info("You can try reinstalling the randomizer")
+        LOGGER.info("Or you can check the logs at %s", LOG_PATH)
         raise
 
 

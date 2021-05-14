@@ -58,6 +58,11 @@ def _set_configs(check_boxes, spin_boxes):
     check_boxes["boss_class"].setChecked(class_config["boss"]["enabled"])
     check_boxes["other_class"].setChecked(class_config["other"]["enabled"])
 
+    palette_config = CONFIG["randomize"]["characters"]["palettes"]
+    check_boxes["p_palette"].setChecked(palette_config["playable"]["enabled"])
+    check_boxes["b_palette"].setChecked(palette_config["boss"]["enabled"])
+    check_boxes["o_palette"].setChecked(palette_config["other"]["enabled"])
+
 
 def create_check_boxes(parent):
     """ Init and return a dict of check boxes """
@@ -72,6 +77,9 @@ def create_check_boxes(parent):
         "mbb_enabled",
         "mob_enabled",
         "mpg_enabled",
+        "p_palette",
+        "b_palette",
+        "o_palette",
     ]
 
     mapping = {box: QCheckBox("Enabled") for box in boxes}
@@ -224,6 +232,36 @@ def create_check_boxes(parent):
             {
                 "spin_boxes": [parent.spin_boxes["pg_mod"]],
                 "check_box": mapping["mpg_enabled"],
+            },
+        )
+    )
+
+    mapping["p_palette"].setToolTip(Hints.PLAYABLE_PALETTE)
+    mapping["p_palette"].stateChanged.connect(
+        lambda: handler(
+            "randomize/characters/palettes/playable",
+            {
+                "check_box": mapping["p_palette"],
+            },
+        )
+    )
+
+    mapping["b_palette"].setToolTip(Hints.BOSS_PALETTE)
+    mapping["b_palette"].stateChanged.connect(
+        lambda: handler(
+            "randomize/characters/palettes/boss",
+            {
+                "check_box": mapping["b_palette"],
+            },
+        )
+    )
+
+    mapping["o_palette"].setToolTip(Hints.OTHER_PALETTE)
+    mapping["o_palette"].stateChanged.connect(
+        lambda: handler(
+            "randomize/characters/palettes/other",
+            {
+                "check_box": mapping["o_palette"],
             },
         )
     )

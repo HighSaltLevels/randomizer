@@ -45,6 +45,13 @@ DEFAULT_CONFIG = {
                 "other": {"enabled": False, "minimum": 0, "maximum": 255},
             },
         },
+        "characters": {
+            "palettes": {
+                "playable": {"enabled": True},
+                "boss": {"enabled": True},
+                "other": {"enabled": True},
+            }
+        },
         "classes": {
             "mode": "Combat",
             "all_master_seals": {
@@ -143,3 +150,7 @@ class Hints(str, Enum):
     MIX_PROMOTES = (
         "Mix unpromoted unit class with pre-premoted unit classes (Potential Soft Lock)"
     )
+
+    PLAYABLE_PALETTE = "Randomize the color palette of Playable characters"
+    BOSS_PALETTE = "Randomize the color palette of Boss characters"
+    OTHER_PALETTE = "Randomize the color palette of Other characters"

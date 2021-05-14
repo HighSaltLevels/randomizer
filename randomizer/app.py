@@ -109,10 +109,16 @@ class Randomizer(QWidget):
         grid.addWidget(self.combo_boxes["class_mode"], 8, 1)
         grid.addWidget(self.labels["force_master_seal"], 9, 0)
         grid.addWidget(self.check_boxes["master_seal_enabled"], 9, 1)
-        grid.addWidget(self.check_boxes["playable_class"], 10, 0, 1, 0)
-        grid.addWidget(self.check_boxes["boss_class"], 11, 0, 1, 0)
-        grid.addWidget(self.check_boxes["other_class"], 12, 0, 1, 0)
-        grid.addWidget(self.check_boxes["mix_promotes"], 13, 0, 1, 0)
+        grid.addWidget(self.labels["p_palette"], 10, 0)
+        grid.addWidget(self.check_boxes["p_palette"], 10, 1)
+        grid.addWidget(self.labels["b_palette"], 11, 0)
+        grid.addWidget(self.check_boxes["b_palette"], 11, 1)
+        grid.addWidget(self.labels["o_palette"], 12, 0)
+        grid.addWidget(self.check_boxes["o_palette"], 12, 1)
+        grid.addWidget(self.check_boxes["playable_class"], 13, 0, 1, 0)
+        grid.addWidget(self.check_boxes["boss_class"], 14, 0, 1, 0)
+        grid.addWidget(self.check_boxes["other_class"], 15, 0, 1, 0)
+        grid.addWidget(self.check_boxes["mix_promotes"], 16, 0, 1, 0)
 
         return grid
 

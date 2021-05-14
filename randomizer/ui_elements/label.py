@@ -9,7 +9,6 @@ from constants import Hints, NORMAL_FONT, SUBTITLE_FONT, TITLE_FONT
 def _add_hints(labels):
     """ Add Tooltip hints to labels """
     labels["randomize"].setToolTip(Hints.RANDOMIZE)
-    labels["modify"].setToolTip(Hints.MODIFY)
     labels["playable_bases"].setToolTip(Hints.PLAYABLE_BASES)
     labels["boss_bases"].setToolTip(Hints.BOSS_BASES)
     labels["other_bases"].setToolTip(Hints.OTHER_BASES)
@@ -23,6 +22,9 @@ def _add_hints(labels):
 
     labels["force_master_seal"].setToolTip(Hints.FORCE_MASTER_SEAL)
     labels["class_mode"].setToolTip(Hints.CLASS_MODE)
+    labels["p_palette"].setToolTip(Hints.PLAYABLE_PALETTE)
+    labels["b_palette"].setToolTip(Hints.BOSS_PALETTE)
+    labels["o_palette"].setToolTip(Hints.OTHER_PALETTE)
 
     for name, label in labels.items():
         if label.text().lower() == "minimum":
@@ -51,7 +53,6 @@ def create_labels(widget):
 
     # Titles
     randomize = QLabel("Randomize", widget)
-    modify = QLabel("Modify", widget)
 
     # Subtitles
     bases = QLabel("Bases", widget)
@@ -87,6 +88,9 @@ def create_labels(widget):
         "mod_playable_growths": QLabel("Playable", widget),
         "mod_pg": QLabel("Modifier", widget),
         "class_mode": QLabel("Class Mode", widget),
+        "p_palette": QLabel("Playable Color Palette", widget),
+        "b_palette": QLabel("Boss Color Palette", widget),
+        "o_palette": QLabel("Other Color Palette", widget),
     }
 
     for label in labels.values():
@@ -95,11 +99,9 @@ def create_labels(widget):
     for label in (bases, mod_bases, etc, growths, mod_growths):
         label.setFont(SUBTITLE_FONT)
 
-    for label in (randomize, modify):
-        label.setFont(TITLE_FONT)
+    randomize.setFont(TITLE_FONT)
 
     labels["randomize"] = randomize
-    labels["modify"] = modify
 
     labels["bases"] = bases
     labels["mod_bases"] = mod_bases
