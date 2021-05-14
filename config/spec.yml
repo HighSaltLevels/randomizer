@@ -32,7 +32,14 @@ randomize:
         enabled: false
         minimum: 0
         maximum: 255
-
+  characters:
+    palettes:
+      playable:
+        enabled: true
+      boss:
+        enabled: true
+      other:
+        enabled: true
   classes:
     mode: Combat
     all_master_seals:

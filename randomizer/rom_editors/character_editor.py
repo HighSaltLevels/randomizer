@@ -162,3 +162,17 @@ class CharacterEditor:
             class_ptr += self._class_stats["total_bytes"]
 
         return promoted, unpromoted
+
+def randomize_palettes(game_config, rom_data, filters):
+    """ Randomize the character palettes based on filters """
+    characters = game_config["classes"]["characters"]
+    palette_stats = game_config["classes"]["palette_stats"]
+    for character in characters:
+        if characters[character]["kind"] not in filters:
+            for _id in characters[character]["id"]:
+                pos = palette_stats["first"] + (palette_stats["total_bytes"] * _id) + palette_stats["palette_offset"]
+                for idx in range(palette_stats["num_palettes"]):
+                    rand = randint(0, palette_stats["available_palettes"])
+                    rom_data[pos + idx] = rand
+
+    return rom_data

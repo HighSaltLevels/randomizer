@@ -66,6 +66,9 @@ class Config(dict):
             elif "growths" in path:
                 location = location["growths"]
 
+            elif "palettes" in path:
+                location = self["randomize"]["characters"]["palettes"]
+
             else:
                 location = self._get_other_location(path)
                 location["enabled"] = elements["check_box"].isChecked()
@@ -74,8 +77,10 @@ class Config(dict):
             location = self._get_location(path, curr_location=location)
             if elements.get("check_box"):
                 location["enabled"] = elements["check_box"].isChecked()
-            location["minimum"] = elements["spin_boxes"][0].value()
-            location["maximum"] = elements["spin_boxes"][1].value()
+
+            if elements.get("spin_boxes"):
+                location["minimum"] = elements["spin_boxes"][0].value()
+                location["maximum"] = elements["spin_boxes"][1].value()
 
         else:
             location = self["modify"]["stats"]

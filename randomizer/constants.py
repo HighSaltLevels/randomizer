@@ -45,6 +45,13 @@ DEFAULT_CONFIG = {
                 "other": {"enabled": False, "minimum": 0, "maximum": 255},
             },
         },
+        "characters": {
+            "palettes": {
+                "playable": {"enabled": True},
+                "boss": {"enabled": True},
+                "other": {"enabled": True},
+            }
+        },
         "classes": {
             "mode": "Combat",
             "all_master_seals": {
@@ -89,7 +96,6 @@ class Hints(str, Enum):
     """ ToolTip enumeration class """
 
     RANDOMIZE = "Configurations for Randomizing character stats and growths"
-    MODIFY = "Configurations for modifying character base stats and growths"
     PLAYABLE_BASES = "Enable randomizing of playable character base stats"
     BOSS_BASES = "Enable randomizing of boss character base stats"
     OTHER_BASES = "Enable randomzing of all other npc character base stats"
@@ -144,3 +150,7 @@ class Hints(str, Enum):
     MIX_PROMOTES = (
         "Mix unpromoted unit class with pre-premoted unit classes (Potential Soft Lock)"
     )
+
+    PLAYABLE_PALETTE = "Randomize the color palette of Playable characters"
+    BOSS_PALETTE = "Randomize the color palette of Boss characters"
+    OTHER_PALETTE = "Randomize the color palette of Other characters"
