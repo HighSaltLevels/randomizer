@@ -34,6 +34,16 @@ classes:
     growths_offset: 0x1c
     num_growths: 7
 
+  palette_stats:
+    first: 0x95EE9d
+
+    palette_offset: 0
+    num_palettes: 7
+
+    available_palettes: 0x6c
+
+    total_bytes: 7
+
   # Item byte positions for all named characters
   characters:
     # Name
