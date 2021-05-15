@@ -3,3 +3,4 @@
 from .character_editor import *
 from .item_editor import *
 from .stat_editor import *
+from .promotion_editor import *

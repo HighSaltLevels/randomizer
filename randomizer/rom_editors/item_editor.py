@@ -107,27 +107,3 @@ class ItemEditor:
             items += self._game_config["items"][level][item_type]
 
         return items
-
-
-def make_all_master_seals(game_config, rom_data):
-    """ Change all promotion items to master seals """
-    offsets = game_config["items"]["offsets"]
-    for prom_item in game_config["items"]["promotional"]:
-        for category in {"name", "description", "use_screen"}:
-            for idx in range(2):
-                location = prom_item + offsets[category]
-                rom_data[location + idx] = game_config["items"]["master_seal"][
-                    category
-                ][idx]
-
-        for category in {"icon", "use"}:
-            rom_data[prom_item + offsets[category]] = game_config["items"][
-                "master_seal"
-            ][category]
-
-    # Add Ephraim and Eirika's lord classes to the master seal promotions
-    for lord in {"eirika", "ephraim"}:
-        lord_data = game_config["items"]["master_seal"][lord]
-        rom_data[lord_data["location"]] = lord_data["value"]
-
-    return rom_data

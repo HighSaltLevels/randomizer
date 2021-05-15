@@ -8,7 +8,7 @@ from PyQt5.QtWidgets import QMessageBox
 import yaml
 
 from rom_editors.character_editor import CharacterEditor, randomize_palettes
-from rom_editors.item_editor import make_all_master_seals
+from rom_editors.promotion_editor import make_all_master_seals
 from rom_editors.stat_editor import StatRandomizer, StatModifier, InvalidConfigError
 from config import CONFIG, FE8_CONFIG_PATH
 
@@ -108,7 +108,9 @@ def _randomize_characters(fe8_config, rom_data):
 def _randomize_palettes(fe8_config, rom_data):
     """ Randomize color palettes of sprites """
 
-    filters = _get_filters(CONFIG["randomize"]["characters"]["palettes"], CHARACTER_KINDS)
+    filters = _get_filters(
+        CONFIG["randomize"]["characters"]["palettes"], CHARACTER_KINDS
+    )
     return randomize_palettes(fe8_config, rom_data, filters)
 
 
