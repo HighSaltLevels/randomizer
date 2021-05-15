@@ -434,13 +434,6 @@ classes:
       id:
         - 0x48
       location:
-      kind: playable
-      item_pos:
-        - 0x8b4724
-    Bazba:
-      id:
-        - 0x48
-      location:
         - 0x8B44AD
         - 0x8B463D
       kind: boss
