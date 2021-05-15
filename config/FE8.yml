@@ -414,7 +414,7 @@ classes:
       id:
         - 0x09
       location:
-        - 0x8B471B
+        - 0x8B4719
         - 0x8B4941
         - 0x8B49F5
         - 0x8B5659
@@ -430,13 +430,6 @@ classes:
         - 0x8B6498
         - 0x8B6EFC
         - 0x8B7334
-    Bazba:
-      id:
-        - 0x48
-      location:
-      kind: playable
-      item_pos:
-        - 0x8b4724
     Bazba:
       id:
         - 0x48
