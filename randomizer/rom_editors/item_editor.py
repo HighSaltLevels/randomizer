@@ -35,6 +35,8 @@ class ItemEditor:
         self._item_pos = None
         self._weapon = None
 
+        self._class_stats = game_config["classes"]["class_stats"]
+
         # Set flux to E rank
         rom_data[game_config["items"]["flux_weapon_lvl_pos"]] = 1
 
@@ -51,16 +53,25 @@ class ItemEditor:
             if item == 0:
                 item = 1
 
-            if (
-                self._class_pos
-                == self._game_config["classes"]["class_stats"]["manakete_pos"]
-            ):
+            if self._class_pos == self._class_stats["manakete_pos"]:
                 self._rom_data[item_pos] = self._game_config["items"]["dragonstone"]
 
             else:
                 item_type = self._get_item_type(item)
                 item_lvl = self._get_item_lvl(item, item_type)
-                weapon_list = self._game_config["items"][item_lvl][self._weapon]
+
+                # This list gets modified. Make sure we copy it first
+                weapon_list = list(self._game_config["items"][item_lvl][self._weapon])
+
+                # If not ranged monster, take out ranged monster items
+                if (
+                    self._rom_data[self._class_pos + self._class_stats["id_offset"]]
+                    not in self._class_stats["ranged_monster"]
+                ):
+                    for weapon in list(weapon_list):
+                        if weapon in self._game_config["items"]["ranged_monster"]:
+                            weapon_list.remove(weapon)
+
                 rand = randint(0, len(weapon_list) - 1)
                 self._rom_data[item_pos] = weapon_list[rand]
 
