@@ -38,16 +38,22 @@ classes:
     num_growths: 7
 
   palette_stats:
-    first: 0x95EE9d
+    first_palette: 0x95ee9d
+    first_class: 0x95e09d
 
-    palette_offset: 0
-    num_palettes: 7
+    base_class_offset: 1
+    promoted_class_offset: 3
 
-    available_palettes: 0x6c
+    num_promoted_classes: 2
+
+    num_palettes: 0x6c
 
     total_bytes: 7
 
-  # Item byte positions for all named characters
+  promotion_stats:
+    first: 0x95DFA4
+    total_bytes: 2
+
   characters:
     # Name
       # Character Identifier
