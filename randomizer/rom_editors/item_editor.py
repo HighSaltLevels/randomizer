@@ -31,6 +31,7 @@ class ItemEditor:
         self._rom_data = rom_data
         self._game_config = game_config
 
+        self._new_class = None
         self._class_pos = None
         self._item_pos = None
         self._weapon = None
@@ -53,7 +54,7 @@ class ItemEditor:
             if item == 0:
                 item = 1
 
-            if self._class_pos == self._class_stats["manakete_pos"]:
+            if self._new_class == self._class_stats["manakete"]:
                 self._rom_data[item_pos] = self._game_config["items"]["dragonstone"]
 
             else:
@@ -78,11 +79,10 @@ class ItemEditor:
     def load(self, item_pos, class_, weapon):
         """ Load the new character's items """
         class_stats = self._game_config["classes"]["class_stats"]
-        self._class_pos = self._rom_data[
-            class_stats["first"] + (class_ * class_stats["total_bytes"])
-        ]
+        self._class_pos = class_stats["first"] + (class_ * class_stats["total_bytes"])
         self._item_pos = item_pos
         self._weapon = weapon
+        self._new_class = class_
 
     def _get_item_lvl(self, item, item_type):
         """ Return the lvl this weapon is (e, d, c ... etc) """
