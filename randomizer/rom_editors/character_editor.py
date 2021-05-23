@@ -168,16 +168,43 @@ def randomize_palettes(game_config, rom_data, filters):
     """ Randomize the character palettes based on filters """
     characters = game_config["classes"]["characters"]
     palette_stats = game_config["classes"]["palette_stats"]
+    prom_stats = game_config["classes"]["promotion_stats"]
     for character in characters:
         if characters[character]["kind"] not in filters:
             for _id in characters[character]["id"]:
-                pos = (
-                    palette_stats["first"]
-                    + (palette_stats["total_bytes"] * _id)
-                    + palette_stats["palette_offset"]
+                # Randomize all palettes
+                pos = palette_stats["first_palette"] + (
+                    palette_stats["total_bytes"] * _id
                 )
-                for idx in range(palette_stats["num_palettes"]):
-                    rand = randint(0, palette_stats["available_palettes"])
+                for idx in range(palette_stats["total_bytes"]):
+                    rand = randint(0, palette_stats["num_palettes"])
                     rom_data[pos + idx] = rand
+
+                # Set palette classes to newly randomized classes
+                # Use both promotion 1 and promotion 2. If unit does not promote,
+                # Both values also get set to 0
+
+                # Use the first character location to get the new class
+                new_class = rom_data[characters[character]["location"][0]]
+
+                # Set base class first
+                pos = (
+                    palette_stats["first_class"]
+                    + (palette_stats["total_bytes"] * _id)
+                    + palette_stats["base_class_offset"]
+                )
+                rom_data[pos] = new_class
+
+                # Set the 2 promotion classes
+                pos = (
+                    palette_stats["first_class"]
+                    + (palette_stats["total_bytes"] * _id)
+                    + palette_stats["promoted_class_offset"]
+                )
+                new_prom_class = prom_stats["first"] + (
+                    prom_stats["total_bytes"] * new_class
+                )
+                for idx in range(palette_stats["num_promoted_classes"]):
+                    rom_data[pos + idx] = rom_data[new_prom_class + idx]
 
     return rom_data

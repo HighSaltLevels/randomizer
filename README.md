@@ -5,7 +5,7 @@ Randomizer for specific Roms I want to hack
 This randomizer supports both 64 bit Windows and Linux distrobutions. Unfortunately, I'm too poor and stubborn to afford a Mac, so I cannot compile for OS X. If you do want to build for MAC, you can try runnign the steps from the `DEVELOPING` section below. Since I use `pyinstaller` and `python`, it should be platform independent for the most part.
 
 ### Installing on Windows
-1. [Download the source code](https://github.com/HighSaltLevels/Randomizer/archive/refs/tags/0.0.1.zip) and unzip it into any working directory that you want to use.
+1. [Download the source code](https://github.com/HighSaltLevels/Randomizer/archive/refs/tags/0.2.1.zip) and unzip it into any working directory that you want to use.
 
 1. Open up a file explorer and navigate to the unzipped folder.
 
