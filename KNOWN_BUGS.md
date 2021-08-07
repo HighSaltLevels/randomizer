@@ -1,4 +1,5 @@
 # Known Bugs
+ - At the beginning of Chapter 5x Valter was not randomized
  - Game froze when Selena left on chapter 10 (Ephraim)
  - At the beginning of chapter 11 (Ephraim), Selena's class was not randomized
  - Dozla was an unpromoted class
@@ -9,3 +10,5 @@
  - At the end of chapter 18 (Ephraim), Lyon's class was not randomized
  - The Demon King randomized into a revenant
  - Game freezes after killing Demon King
+ - Game froze at beginning of chapter 9 (Eirika)
+ - Game froze at end of chapter 10 (Eirika) (Valter probably needs to be a flying unit)

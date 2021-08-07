@@ -7,10 +7,12 @@ import uuid
 from PyQt5.QtWidgets import QMessageBox
 import yaml
 
+import dialogs
 from rom_editors.character_editor import CharacterEditor, randomize_palettes
 from rom_editors.promotion_editor import make_all_master_seals
 from rom_editors.stat_editor import StatRandomizer, StatModifier, InvalidConfigError
-from config import CONFIG, FE8_CONFIG_PATH
+from versions import FEVersions, get_fe_version
+from config import CONFIG
 
 LOGGER = logging.getLogger(__name__)
 ALL_KINDS = {"playable", "boss", "other", "class"}
@@ -53,21 +55,30 @@ def randomizer_handler(app):
         with open(input_rom, "rb") as stream:
             rom_data = bytearray(stream.read())
 
-        with open(FE8_CONFIG_PATH) as stream:
-            fe8_config = yaml.safe_load(stream)
+        version = get_fe_version(rom_data)
+        app.labels["status"].setText(f"{version} detected")
+        # Prompt for a version if not correctly detected
+        if version == FEVersions.UNKNOWN:
+            dialogs.VersionPrompt(app).exec_()
+            version = CONFIG["fe_version"]
+
+        config_path = CONFIG.get_path(version)
+
+        with open(config_path) as stream:
+            game_config = yaml.safe_load(stream)
 
     except IOError as error:
         app.labels["status"].setText(f"Status: Error! {error}")
         return
 
-    rom_data = _randomize_characters(fe8_config, rom_data)
-    rom_data = _randomize_palettes(fe8_config, rom_data)
+    rom_data = _randomize_characters(game_config, rom_data)
+    rom_data = _randomize_palettes(game_config, rom_data)
 
     if CONFIG["randomize"]["classes"]["all_master_seals"]["enabled"]:
-        rom_data = make_all_master_seals(fe8_config, rom_data)
+        rom_data = make_all_master_seals(game_config, rom_data)
 
     try:
-        rom_data = _randomize_stats(fe8_config, rom_data)
+        rom_data = _randomize_stats(game_config, rom_data)
     except InvalidConfigError:
         msg_box = QMessageBox()
         msg_box.setText(
@@ -80,7 +91,7 @@ def randomizer_handler(app):
         msg_box.exec_()
         return
 
-    rom_data = _modify_stats(fe8_config, rom_data)
+    rom_data = _modify_stats(game_config, rom_data)
 
     path, ext = os.path.splitext(input_rom)
     rand = str(uuid.uuid4()).split("-")[0]
@@ -92,7 +103,7 @@ def randomizer_handler(app):
     app.labels["status"].setText(f"Status: Successfully wrote {output_rom}")
 
 
-def _randomize_characters(fe8_config, rom_data):
+def _randomize_characters(game_config, rom_data):
     """ Randomize the characters """
 
     filters = _get_filters(CONFIG["randomize"]["classes"], CHARACTER_KINDS)
@@ -100,21 +111,21 @@ def _randomize_characters(fe8_config, rom_data):
     class_mode = CONFIG["randomize"]["classes"]["mode"]
     mix_promotes = CONFIG["randomize"]["mix_promotes"]["enabled"]
 
-    char_editor = CharacterEditor(fe8_config, rom_data, class_mode, mix_promotes)
+    char_editor = CharacterEditor(game_config, rom_data, class_mode, mix_promotes)
     char_editor.set_filters(filters)
     return char_editor.randomize()
 
 
-def _randomize_palettes(fe8_config, rom_data):
+def _randomize_palettes(game_config, rom_data):
     """ Randomize color palettes of sprites """
 
     filters = _get_filters(
         CONFIG["randomize"]["characters"]["palettes"], CHARACTER_KINDS
     )
-    return randomize_palettes(fe8_config, rom_data, filters)
+    return randomize_palettes(game_config, rom_data, filters)
 
 
-def _randomize_stats(fe8_config, rom_data):
+def _randomize_stats(game_config, rom_data):
     """ Randomize bases and growths """
 
     base_filters = _get_filters(CONFIG["randomize"]["stats"]["bases"], ALL_KINDS)
@@ -122,17 +133,17 @@ def _randomize_stats(fe8_config, rom_data):
         CONFIG["randomize"]["stats"]["growths"], CHARACTER_KINDS
     )
 
-    stat_randomizer = StatRandomizer(fe8_config, rom_data)
+    stat_randomizer = StatRandomizer(game_config, rom_data)
     stat_randomizer.set_filters(base_filters, growth_filters)
     return stat_randomizer.randomize()
 
 
-def _modify_stats(fe8_config, rom_data):
+def _modify_stats(game_config, rom_data):
     """ Modify bases and growths """
     base_filters = _get_filters(CONFIG["modify"]["stats"]["bases"], CHARACTER_KINDS)
     growth_filters = _get_filters(CONFIG["modify"]["stats"]["growths"], CHARACTER_KINDS)
 
-    stat_modifier = StatModifier(fe8_config, rom_data)
+    stat_modifier = StatModifier(game_config, rom_data)
     stat_modifier.set_filters(base_filters, growth_filters)
     return stat_modifier.modify()
 

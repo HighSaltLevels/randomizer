@@ -5,12 +5,18 @@ from pathlib import Path
 
 import yaml
 
-from constants import DEFAULT_CONFIG
+from constants import DEFAULT_CONFIG, FEVersions
 
 DEFAULT_CONFIG_PATH = os.path.join(str(Path.home()), ".config/randomizer")
-FE8_CONFIG_PATH = os.path.join(str(Path.home()), ".config/randomizer/FE8.yml")
+CONFIG_PATH = os.path.join(str(Path.home()), ".config/randomizer")
 
 os.makedirs(DEFAULT_CONFIG_PATH, exist_ok=True)
+
+CONFIG_MAP = {
+    FEVersions.FE6: f"{CONFIG_PATH}/FE6.yml",
+    FEVersions.FE7: f"{CONFIG_PATH}/FE7.yml",
+    FEVersions.FE8: f"{CONFIG_PATH}/FE8.yml",
+}
 
 
 class ConfigError(Exception):
@@ -42,6 +48,11 @@ class Config(dict):
         else:
             logging.warning("Configuration file not found! Using defaults.")
             self.set_default()
+
+    @staticmethod
+    def get_path(version):
+        """ Get the version path by version """
+        return CONFIG_MAP[version]
 
     def write(self):
         """ Write the config back to disk """
