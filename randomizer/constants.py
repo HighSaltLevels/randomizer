@@ -92,6 +92,15 @@ CLASS_MODE_ALL = "All"
 CLASS_MODE_OPTIONS = [CLASS_MODE_COMBAT, CLASS_MODE_STAFF, CLASS_MODE_ALL]
 
 
+class FEVersions(str, Enum):
+    """ Fire Emblem Versions """
+
+    FE6 = "Fire Emblem Binding Blade"
+    FE7 = "Fire Emblem Blazing Blade"
+    FE8 = "Fire Emblem Sacred Stones"
+    UNKNOWN = "Unknown"
+
+
 class Hints(str, Enum):
     """ ToolTip enumeration class """
 

@@ -38,10 +38,14 @@ class CharacterEditor:
                 if self._mix_promotes:
                     class_list = promoted + unpromoted
                 else:
+                    # Note we should check the unpromoted list instead of promoted.
+                    # Logic gets short-circuited here when a character who's class
+                    # is in the blacklist (the Demon King) needs to be reclassed into
+                    # a different promoted class
                     class_list = (
-                        promoted
-                        if self._rom_data[character_data["location"][0]] in promoted
-                        else unpromoted
+                        unpromoted
+                        if self._rom_data[character_data["location"][0]] in unpromoted
+                        else promoted
                     )
 
                 new_class = class_list[randint(0, len(class_list) - 1)]

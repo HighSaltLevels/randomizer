@@ -1,11 +1,6 @@
 # Known Bugs
+ - At the beginning of Chapter 5x Valter was not randomized
  - Game froze when Selena left on chapter 10 (Ephraim)
- - At the beginning of chapter 11 (Ephraim), Selena's class was not randomized
- - Dozla was an unpromoted class
- - On chapter 12 (Ephraim), Riev did not appear as his new class
- - Lyon's appearance on scorched sand at the beginning was not randomized
- - Orson had C weapon level but A weapons
- - At the end of chapter 17 (Ephraim), Lyon's class was not randomized
- - At the end of chapter 18 (Ephraim), Lyon's class was not randomized
- - The Demon King randomized into a revenant
+ - (Not sure if still exists) Orson had C weapon level but A weapons
  - Game freezes after killing Demon King
+ - Game froze at beginning of chapter 9 (Eirika)

@@ -22,15 +22,30 @@ def _main(rom_1, rom_2):
     with open(rom_2, "rb") as stream:
         rom_2_data = bytearray(stream.read())
 
+    length1 = len(rom_1_data)
+    length2 = len(rom_2_data)
+    length = length1 if length1 > length2 else length2
+
     print("Locating Differences")
     different_bytes = {}
-    length = len(rom_1_data) or len(rom_2_data)
     for idx in range(length):
-        if rom_1_data[idx] != rom_2_data[idx]:
-            different_bytes[str(hex(idx))] = {
-                "rom1": hex(rom_1_data[idx]),
-                "rom2": hex(rom_2_data[idx]),
-            }
+        try:
+            if rom_1_data[idx] != rom_2_data[idx]:
+                different_bytes[str(hex(idx))] = {
+                    "rom1": hex(rom_1_data[idx]),
+                    "rom2": hex(rom_2_data[idx]),
+                }
+        except IndexError:
+            if length == length1:
+                different_bytes[str(hex(idx))] = {
+                    "rom1": hex(rom_1_data[idx]),
+                    "rom2": "out of bounds",
+                }
+            else:
+                different_bytes[str(hex(idx))] = {
+                    "rom1": "out of bounds",
+                    "rom2": hex(rom_2_data[idx]),
+                }
 
     print(f"Differences:\n{json.dumps(different_bytes, indent=2)}")
     print(f"Total number of differences: {len(different_bytes)}")
