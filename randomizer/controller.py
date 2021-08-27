@@ -2,6 +2,7 @@
 
 import logging
 import os
+import shutil
 import uuid
 
 from PyQt5.QtWidgets import QMessageBox
@@ -16,7 +17,7 @@ from rom_editors import (
 )
 from rom_editors.stat_editor import InvalidConfigError
 from versions import FEVersions, get_fe_version
-from config import CONFIG
+from config import CONFIG, CONFIG_MAP
 
 LOGGER = logging.getLogger(__name__)
 ALL_KINDS = {"playable", "boss", "other", "class"}
@@ -100,6 +101,13 @@ class RandomizerHandler:
         with open(output_rom, "wb") as stream:
             stream.write(self._rom_data)
 
+        # If this is FE7, include save data to bypass tutorial
+        # and the several soft locking opportunities that come
+        # with it.
+        if self._version == FEVersions.FE7:
+            output_sav = f"{path}-{rand}.sav"
+            shutil.copy(CONFIG_MAP[self._version].replace(".yml", ".sav"), output_sav)
+
         self._app.labels["status"].setText(f"Status: Successfully wrote {output_rom}")
 
     def _randomize_all(self):
@@ -108,7 +116,7 @@ class RandomizerHandler:
         self._randomize_characters()
 
         if CONFIG["randomize"]["classes"]["all_master_seals"]["enabled"]:
-            self._make_all_master_seals()
+            self._edit_promotions()
 
         try:
             self._randomize_stats()
@@ -174,12 +182,13 @@ class RandomizerHandler:
         stat_modifier.modify()
         self._rom_data = stat_modifier.rom_data
 
-    def _make_all_master_seals(self):
+    def _edit_promotions(self):
         """ Make all promotion items master seals """
         prom_editor = create_prom_editor(
             self._game_config, self._rom_data, self._version
         )
         prom_editor.make_all_master_seals()
+        prom_editor.add_classes_to_promotion()
         self._rom_data = prom_editor.rom_data
 
 
