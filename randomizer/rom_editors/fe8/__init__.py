@@ -1,3 +1,4 @@
 """ Import all in this directory """
 
-from .promotion_editor import *
+from .character_editor import *
+from .item_editor import *

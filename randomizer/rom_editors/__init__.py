@@ -1,19 +1,20 @@
 """ Import everything from this directory """
 
 from versions import FEVersions
-from .fe8.promotion_editor import *
+from .fe7.character_editor import *
+from .fe8.character_editor import *
 
 from .character_editor import CharacterEditor
 from .stat_editor import StatRandomizer, StatModifier
 from .promotion_editor import PromotionEditor
 
-# FE6 and FE7 are close enough taht they can share editors.
+# FE6 and FE7 are close enough that they can share editors.
 # FE8 changed a lot with the new promotion system
 VERSION_MAP = {
     "character": {
         FEVersions.FE6: CharacterEditor,
-        FEVersions.FE7: CharacterEditor,
-        FEVersions.FE8: CharacterEditor,
+        FEVersions.FE7: FE7CharacterEditor,
+        FEVersions.FE8: FE8CharacterEditor,
     },
     "stat_rand": {
         FEVersions.FE6: StatRandomizer,
@@ -28,7 +29,7 @@ VERSION_MAP = {
     "prom_edit": {
         FEVersions.FE6: PromotionEditor,
         FEVersions.FE7: PromotionEditor,
-        FEVersions.FE8: FE8PromotionEditor,
+        FEVersions.FE8: PromotionEditor,
     },
 }
 
