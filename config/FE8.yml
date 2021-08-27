@@ -37,6 +37,10 @@ classes:
     growths_offset: 0x1c
     num_growths: 7
 
+    # Classes who are in the ban list but need reclassing to a
+    # promoted class
+    promotion_overrides: [0xbe, 0x41]
+
   palette_stats:
     first_palette: 0x95ee9d
     first_class: 0x95e09d

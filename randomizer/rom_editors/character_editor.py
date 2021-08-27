@@ -28,34 +28,36 @@ class CharacterEditor:
     def randomize(self):
         """ Randomize based on the current status of the CONFIG """
         promoted, unpromoted = self._get_class_list()
+        characters = self._game_config["classes"]["characters"]
+        banned_promotes = self._character_stats["promotion_overrides"]
         class_list = []
 
         item_editor = ItemEditor(self._rom_data, self._game_config)
-        for character in self._game_config["classes"]["characters"]:
-            character_data = self._game_config["classes"]["characters"][character]
+        for character in characters:
+            character_data = characters[character]
             if character_data["kind"] not in self._filters:
-
                 if self._mix_promotes:
                     class_list = promoted + unpromoted
+
+                elif any(
+                    characters[character]["id"][idx]
+                    for idx, _id in enumerate(characters[character]["id"])
+                    if _id in banned_promotes
+                ):
+                    class_list = promoted
                 else:
-                    # Note we should check the unpromoted list instead of promoted.
-                    # Logic gets short-circuited here when a character who's class
-                    # is in the blacklist (the Demon King) needs to be reclassed into
-                    # a different promoted class
                     class_list = (
-                        unpromoted
-                        if self._rom_data[character_data["location"][0]] in unpromoted
-                        else promoted
+                        promoted
+                        if self._rom_data[character_data["location"][0]] in promoted
+                        else unpromoted
                     )
 
                 new_class = class_list[randint(0, len(class_list) - 1)]
-                char_classes = character_data["location"]
-
                 self._update_weapon_type(new_class, character_data["id"])
                 weapon = self._get_weapon_for_class(new_class)
 
                 # Randomize the class
-                for char_class in char_classes:
+                for char_class in character_data["location"]:
                     self._rom_data[char_class] = new_class
 
                 item_editor.load(character_data["item_pos"], new_class, weapon)
