@@ -76,6 +76,11 @@ class ItemEditor:
                 rand = randint(0, len(weapon_list) - 1)
                 self._rom_data[item_pos] = weapon_list[rand]
 
+    @property
+    def rom_data(self):
+        """ Make rom_data read only. Should only modify things one at a time """
+        return self._rom_data
+
     def load(self, item_pos, class_, weapon):
         """ Load the new character's items """
         class_stats = self._game_config["classes"]["class_stats"]

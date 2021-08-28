@@ -1,14 +1,13 @@
-""" Module for editing characters """
+""" Base class for editing characters """
 
 from random import randint
 
 from constants import CLASS_MODE_STAFF, CLASS_MODE_ALL
-
 from rom_editors.item_editor import ItemEditor, WEAPON_MAP
 
 
 class CharacterEditor:
-    """ CharacterEditor class """
+    """ CharacterEditor base class """
 
     def __init__(self, game_config, rom_data, class_mode, mix_promotes):
         self._game_config = game_config
@@ -24,6 +23,11 @@ class CharacterEditor:
     def set_filters(self, filters):
         """ Set the filters for randomization """
         self._filters = filters
+
+    @property
+    def rom_data(self):
+        """ Make rom_data read only. Should only modify things one at a time """
+        return self._rom_data
 
     def randomize(self):
         """ Randomize based on the current status of the CONFIG """
@@ -63,6 +67,8 @@ class CharacterEditor:
                 item_editor.load(character_data["item_pos"], new_class, weapon)
                 item_editor.randomize()
 
+        self._randomize_palettes()
+
         return self._rom_data
 
     def _get_weapon_for_class(self, new_class):
@@ -89,47 +95,49 @@ class CharacterEditor:
 
         return weapon
 
-    def _update_weapon_type(self, new_class, ids):
-        """ Get the character by their IDs. Use that to get their current weapon lvl """
-        for id_ in ids:
-            highest = 0
-            character_pos = self._character_stats["first"] + (
-                self._character_stats["total_bytes"] * id_
-            )
+    def _randomize_palettes(self):
+        """ Randomize the character palettes based on filters """
+        # Need to override the method because FE8 treats palettes differently
+        characters = self._game_config["classes"]["characters"]
+        palette_stats = self._game_config["classes"]["palette_stats"]
+        prom_stats = self._game_config["classes"]["promotion_stats"]
+        for character in characters:
+            if characters[character]["kind"] not in self._filters:
+                for _id in characters[character]["id"]:
+                    # Randomize all palettes
+                    pos = palette_stats["first_palette"] + (
+                        palette_stats["total_bytes"] * _id
+                    )
+                    for idx in range(palette_stats["total_bytes"]):
+                        rand = randint(0, palette_stats["num_palettes"])
+                        self._rom_data[pos + idx] = rand
 
-            for weapon_idx in range(8):
-                weapon_lvl = self._rom_data[
-                    character_pos + self._character_stats["weapon_offset"] + weapon_idx
-                ]
-                if weapon_lvl > highest:
-                    highest = weapon_lvl
+                    # Set palette classes to newly randomized classes
+                    # Use both promotion 1 and promotion 2. If unit does not promote,
+                    # Both values also get set to 0
 
-                # Zero out the weapon lvl
-                self._rom_data[
-                    character_pos + self._character_stats["weapon_offset"] + weapon_idx
-                ] = 0
+                    # Use the first character location to get the new class
+                    new_class = self._rom_data[characters[character]["location"][0]]
 
-            if highest == 0:
-                highest = self._game_config["items"]["a_weapon_lvl"]
+                    # Set base class first
+                    pos = (
+                        palette_stats["first_class"]
+                        + (palette_stats["total_bytes"] * _id)
+                        + palette_stats["base_class_offset"]
+                    )
+                    self._rom_data[pos] = new_class
 
-            self._set_weapon_levels_for_class(highest, character_pos, new_class)
-
-    def _set_weapon_levels_for_class(self, weapon_lvl, character_pos, new_class):
-        # Get position of class to determine what weapons apply to this class
-        class_pos = self._class_stats["first"] + (
-            self._class_stats["total_bytes"] * new_class
-        )
-        offsets = [
-            idx
-            for idx in range(8)
-            if self._rom_data[class_pos + self._class_stats["weapon_offset"] + idx] != 0
-        ]
-
-        # Set offsets for character based on class
-        for offset in offsets:
-            self._rom_data[
-                character_pos + self._character_stats["weapon_offset"] + offset
-            ] = weapon_lvl
+                    # Set the 2 promotion classes
+                    pos = (
+                        palette_stats["first_class"]
+                        + (palette_stats["total_bytes"] * _id)
+                        + palette_stats["promoted_class_offset"]
+                    )
+                    new_prom_class = prom_stats["first"] + (
+                        prom_stats["total_bytes"] * new_class
+                    )
+                    for idx in range(palette_stats["num_promoted_classes"]):
+                        self._rom_data[pos + idx] = self._rom_data[new_prom_class + idx]
 
     def _get_class_list(self):
         promoted = []
@@ -169,48 +177,43 @@ class CharacterEditor:
 
         return promoted, unpromoted
 
+    def _update_weapon_type(self, new_class, ids):
+        """ Get the character by their IDs. Use that to get their current weapon lvl """
+        for id_ in ids:
+            highest = 0
+            character_pos = self._character_stats["first"] + (
+                self._character_stats["total_bytes"] * id_
+            )
 
-def randomize_palettes(game_config, rom_data, filters):
-    """ Randomize the character palettes based on filters """
-    characters = game_config["classes"]["characters"]
-    palette_stats = game_config["classes"]["palette_stats"]
-    prom_stats = game_config["classes"]["promotion_stats"]
-    for character in characters:
-        if characters[character]["kind"] not in filters:
-            for _id in characters[character]["id"]:
-                # Randomize all palettes
-                pos = palette_stats["first_palette"] + (
-                    palette_stats["total_bytes"] * _id
-                )
-                for idx in range(palette_stats["total_bytes"]):
-                    rand = randint(0, palette_stats["num_palettes"])
-                    rom_data[pos + idx] = rand
+            for weapon_idx in range(8):
+                weapon_lvl = self._rom_data[
+                    character_pos + self._character_stats["weapon_offset"] + weapon_idx
+                ]
+                if weapon_lvl > highest:
+                    highest = weapon_lvl
 
-                # Set palette classes to newly randomized classes
-                # Use both promotion 1 and promotion 2. If unit does not promote,
-                # Both values also get set to 0
+                # Zero out the weapon lvl
+                self._rom_data[
+                    character_pos + self._character_stats["weapon_offset"] + weapon_idx
+                ] = 0
+            if highest == 0:
+                highest = self._game_config["items"]["a_weapon_lvl"]
 
-                # Use the first character location to get the new class
-                new_class = rom_data[characters[character]["location"][0]]
+            self._set_weapon_levels_for_class(highest, character_pos, new_class)
 
-                # Set base class first
-                pos = (
-                    palette_stats["first_class"]
-                    + (palette_stats["total_bytes"] * _id)
-                    + palette_stats["base_class_offset"]
-                )
-                rom_data[pos] = new_class
+    def _set_weapon_levels_for_class(self, weapon_lvl, character_pos, new_class):
+        # Get position of class to determine what weapons apply to this class
+        class_pos = self._class_stats["first"] + (
+            self._class_stats["total_bytes"] * new_class
+        )
+        offsets = [
+            idx
+            for idx in range(8)
+            if self._rom_data[class_pos + self._class_stats["weapon_offset"] + idx] != 0
+        ]
 
-                # Set the 2 promotion classes
-                pos = (
-                    palette_stats["first_class"]
-                    + (palette_stats["total_bytes"] * _id)
-                    + palette_stats["promoted_class_offset"]
-                )
-                new_prom_class = prom_stats["first"] + (
-                    prom_stats["total_bytes"] * new_class
-                )
-                for idx in range(palette_stats["num_promoted_classes"]):
-                    rom_data[pos + idx] = rom_data[new_prom_class + idx]
-
-    return rom_data
+        # Set offsets for character based on class
+        for offset in offsets:
+            self._rom_data[
+                character_pos + self._character_stats["weapon_offset"] + offset
+            ] = weapon_lvl

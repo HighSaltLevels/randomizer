@@ -2,7 +2,7 @@
 
 from PyQt5.QtWidgets import QPushButton
 
-from controller import browse_handler, randomizer_handler
+from controller import browse_handler, RandomizerHandler
 
 
 def create_buttons(parent):
@@ -14,6 +14,6 @@ def create_buttons(parent):
     }
 
     buttons["browse"].clicked.connect(lambda: browse_handler(parent))
-    buttons["randomize"].clicked.connect(lambda: randomizer_handler(parent))
+    buttons["randomize"].clicked.connect(lambda: RandomizerHandler(parent).randomize())
 
     return buttons

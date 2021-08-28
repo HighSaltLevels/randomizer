@@ -1,6 +1,5 @@
 .venv
-randomizer/__pycache__
-randomizer/*/__pycache__
+**/__pycache__/**
 build/
 dist/
 randomizer.spec
