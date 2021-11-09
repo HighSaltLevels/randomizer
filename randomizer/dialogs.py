@@ -20,7 +20,7 @@ class VersionPrompt(QDialog):
         self.setWindowTitle(title)
         self.setWindowIcon(QIcon(f"{DEFAULT_CONFIG_PATH}/randomizer.ico"))
 
-        self.combox_box = None
+        self.combo_box = None
 
         self.build_ui()
 
