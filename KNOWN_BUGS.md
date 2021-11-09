@@ -3,9 +3,6 @@
 ## FE7
  - Chapter 6, Rath's battle animation in the opening could not continue:
     - Workaround: Once starting the chapter, skip the entire opening
- - The Mani Katti was still assigned to the myrmidon class
- - Matthew should start with a door key and chest so that you can proceed through chapter 6
-    - Workaround: There's enough door keys obtainable in the chapter to proceed, but you must not use one of them on the door hiding the chest
 
 ## FE8
  - At the beginning of Chapter 5x Valter was not randomized
