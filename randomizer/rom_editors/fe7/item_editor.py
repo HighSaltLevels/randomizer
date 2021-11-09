@@ -6,12 +6,18 @@ from rom_editors.item_editor import ItemEditor
 class FE7ItemEditor(ItemEditor):
     """ FE8 Item Editor """
 
-    def handle_prf(self, item):
+    def handle_prf(self, item_idx):
         """
         Swap prf weapon for equivalent rank weapon.
         Also, zero out item locks
         """
-        self._rom_data[self._game_config["items"]["offsets"]["ability3"] + item] = 0
+        first_item = self._game_config["items"]["first"]
+        total_bytes = self._game_config["items"]["total_bytes"]
+        self._rom_data[
+            self._game_config["items"]["offsets"]["ability3"]
+            + (item_idx * total_bytes)
+            + first_item
+        ] = 0
         item_eq_dict = {
             self._game_config["items"]["rapier"]: 1,  # E rank sword
             self._game_config["items"]["mani_katti"]: 1,  # E rank sword
@@ -30,4 +36,4 @@ class FE7ItemEditor(ItemEditor):
             self._game_config["items"]["gespenst"]: 48,  # A rank dark
         }
 
-        return item_eq_dict[item]
+        return item_eq_dict[item_idx]

@@ -1,7 +1,7 @@
 @ECHO off
 
-ECHO "Fetching Release 0.3.0"
-curl.exe -L https://github.com/HighSaltLevels/Randomizer/releases/download/0.3.0/randomizer-Win-x86_64.exe -o randomizer.exe >NUL 2>&1 
+ECHO "Fetching Release 0.3.1"
+curl.exe -L https://github.com/HighSaltLevels/Randomizer/releases/download/0.3.1/randomizer-Win-x86_64.exe -o randomizer.exe >NUL 2>&1 
 
 ECHO "Fetching and setting configuration files"
 MKDIR "%userprofile%\.config\randomizer" >NUL 2>&1
