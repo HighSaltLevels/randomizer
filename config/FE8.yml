@@ -6,6 +6,7 @@ classes:
     promotion:
       offset: 0x29
       bit_mask: 1
+      overrides: {} # Nothing to override in this game
 
     blacklist: [0x7b, 0x7a, 0x79, 0x78, 0x77, 0x76, 0x75, 0x74, 0x73, 0x72, 0x71, 0x70, 0x6f, 0x6e, 0x6d, 0x6c, 0x6b, 0x6a, 0x69, 0x68, 0x67, 0x4e, 0xe, 0x34, 0x47, 0x3d, 0x3e, 0x0]
     staff_only: [0x4b, 0x4a, 0x45]
@@ -36,6 +37,10 @@ classes:
     # Num bytes from start of character to first growth rate
     growths_offset: 0x1c
     num_growths: 7
+
+    # Classes who are in the ban list but need reclassing to a
+    # promoted class
+    promotion_overrides: [0xbe, 0x41]
 
   palette_stats:
     first_palette: 0x95ee9d
@@ -182,7 +187,7 @@ classes:
         - 0x8B710D
         - 0x8B7301
         - 0x8B7711
-        - 0x8B8263
+        - 0x8B8261
         - 0x8B8395
         - 0x8B815D
         - 0x8B81E9
@@ -1579,14 +1584,3 @@ items:
     dragonstone/monster:
       - 0xb0
       - 0x90
-  promotion:
-    master_seal: 0x80ae30
-    icon_offset: 0x1d
-    usage_offset: 0x1e
-    others:
-      - 0x80a920 # Hero Crest
-      - 0x80a944 # Knight Crest
-      - 0x80a968 # Orion's Bolt
-      - 0x80a98c # Elysian Whip
-      - 0x80a9b0 # Guiding Ring
-      - 0x80b04c # Ocean Seal

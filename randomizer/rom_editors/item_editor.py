@@ -45,36 +45,48 @@ class ItemEditor:
         """ Randomize all items in {item_pos} """
         prf_weapons = self._game_config["items"]["prf"]
         for item_pos in self._item_pos:
-            item = self._rom_data[item_pos]
+            self.randomize_item(item_pos, prf_weapons)
 
-            if item in prf_weapons:
-                item = self._swap_prf(item)
+    def randomize_item(self, item_pos, prf_weapons):
+        """ Randomize the specific item """
+        if self._new_class == self._class_stats["manakete"]:
+            self._rom_data[item_pos] = self._game_config["items"]["dragonstone"]
+            return
 
-            # Handle case where we want to auto assign an iron sword
-            if item == 0:
-                item = 1
+        item = self._rom_data[item_pos]
+        if item in prf_weapons:
+            item = self.handle_prf(item)
 
-            if self._new_class == self._class_stats["manakete"]:
-                self._rom_data[item_pos] = self._game_config["items"]["dragonstone"]
+        # Handle case where we want to auto assign an iron sword
+        if item == 0:
+            item = 1
 
-            else:
-                item_type = self._get_item_type(item)
-                item_lvl = self._get_item_lvl(item, item_type)
+        item_type = self._get_item_type(item)
+        item_lvl = self._get_item_lvl(item, item_type)
 
-                # This list gets modified. Make sure we copy it first
-                weapon_list = list(self._game_config["items"][item_lvl][self._weapon])
+        # This list gets modified. Make sure we copy it first
+        weapon_list = list(self._game_config["items"][item_lvl][self._weapon])
 
-                # If not ranged monster, take out ranged monster items
-                if (
-                    self._rom_data[self._class_pos + self._class_stats["id_offset"]]
-                    not in self._class_stats["ranged_monster"]
-                ):
-                    for weapon in list(weapon_list):
-                        if weapon in self._game_config["items"]["ranged_monster"]:
-                            weapon_list.remove(weapon)
+        # If not ranged monster, take out ranged monster items
+        if (
+            self._rom_data[self._class_pos + self._class_stats["id_offset"]]
+            not in self._class_stats["ranged_monster"]
+        ):
+            for weapon in list(weapon_list):
+                if weapon in self._game_config["items"]["ranged_monster"]:
+                    weapon_list.remove(weapon)
 
-                rand = randint(0, len(weapon_list) - 1)
-                self._rom_data[item_pos] = weapon_list[rand]
+        rand = randint(0, len(weapon_list) - 1)
+        self._rom_data[item_pos] = weapon_list[rand]
+
+    def handle_prf(self, item):
+        """ Wipe the locks to characters on this item """
+        raise NotImplementedError("Classes must override this method")
+
+    @property
+    def rom_data(self):
+        """ Make rom_data read only. Should only modify things one at a time """
+        return self._rom_data
 
     def load(self, item_pos, class_, weapon):
         """ Load the new character's items """
@@ -99,17 +111,7 @@ class ItemEditor:
             if item in self._get_items(_type):
                 return _type
 
-        raise ItemNotFoundException(f"No known item {item}")
-
-    def _swap_prf(self, item):
-        """ Swap prf weapon for equivalent rank weapon """
-        item_eq_dict = {
-            self._game_config["items"]["rapier"]: 1,  # E rank sword
-            self._game_config["items"]["reginleif"]: 22,  # D rank lance
-            self._game_config["items"]["naglfar"]: 73,  # A rank dark
-        }
-
-        return item_eq_dict[item]
+        raise ItemNotFoundException(f"No known item {hex(item)}")
 
     def _get_items(self, item_type):
         """ Return all items of that type """
