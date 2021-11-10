@@ -24,6 +24,14 @@ classes:
     # Use Fire Dragon in this game
     manakete: 0x46
 
+    classes:
+      f_thief:
+        promotion_id: 0x3e
+        promotion_pos: 0xBE1565
+      soldier:
+        promotion_id: 0x7
+        promotion_pos: 0xBE13C1
+
   character_stats:
     first: 0xBDCE18
 
@@ -44,9 +52,9 @@ classes:
     growths_offset: 0x1c
     num_growths: 7
 
-    # Classes who are in the ban list but need reclassing to a
+    # Character IDs whose classes are in the ban list but need reclassing to a
     # promoted class
-    promotion_overrides: [0x43, 0x46, 0x4a, 0x5a]
+    promotion_overrides: [0x3a, 0x3b, 0x86, 0x44]
 
   palette_stats:
     base_offset: 0x23
@@ -491,7 +499,9 @@ classes:
         - 0xCC8154
         - 0xCC8054
         - 0xCC8434
-      extra_item_pos: 0xCC67BA
+      extra_item_pos:
+        - 0xCC67BA
+        - 0xCC8156
     Jaffar:
       id:
         - 0x24
@@ -565,14 +575,6 @@ classes:
       kind: playable
       item_pos:
         - 0xCDC7BC
-    Merlinus:
-      id:
-        - 0x28
-      location:
-        - 0xCC9055
-        - 0xCC9075
-      kind: playable
-      item_pos: []
     Uther:
       id:
         - 0x2a
@@ -752,7 +754,7 @@ classes:
         - 0xCC8E0C
     Nergal:
       id:
-        - 0x43
+        - 0x44
       location:
         - 0xCCEA91
         - 0xCCEBC1
@@ -1050,7 +1052,7 @@ classes:
         - 0xCD7295
         - 0xCD72B5
         - 0xCE0645
-        - 0xCE0117
+        - 0xCE0115
       kind: boss
       item_pos:
         - 0xCD651C
@@ -1672,7 +1674,7 @@ items:
 
   ranged_monster: [] # None in this game
   promotional:
-    classes_to_add: [0xa, 0xb, 0xe, 0xf, 0x12, 0x39, 0x28, 0x29, 0x14, 0x15, 0x18, 0x19, 0x2e, 0x2f, 0x32, 0x34, 0x35, 0x1c, 0x1d, 0x20, 0x21, 0x24, 0x25, 0x2c, 0x1, 0x2, 0x3, 0x38, 0x3a, 0x3c, 0x50]
+    classes_to_add: [0xa, 0xb, 0xe, 0xf, 0x12, 0x39, 0x28, 0x29, 0x14, 0x15, 0x18, 0x19, 0x2e, 0x2f, 0x32, 0x34, 0x35, 0x1c, 0x1d, 0x20, 0x21, 0x24, 0x25, 0x2c, 0x1, 0x2, 0x3, 0x38, 0x3a, 0x3c, 0x3d, 0x50]
     items:
       Hero Crest:
         pointers:
@@ -1789,7 +1791,6 @@ items:
     lance:
       - 0x16
       - 0x1b
-      - 0x77
       - 0x94
     axe:
       - 0x22
@@ -1851,6 +1852,7 @@ items:
     lance:
       - 0x19
       - 0x1d
+      - 0x77
     axe:
       - 0x23
     bow:

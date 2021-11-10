@@ -14,6 +14,20 @@ class FE7CharacterEditor(CharacterEditor):
         # Override the item editor
         self._item_editor = FE7ItemEditor(self._rom_data, self._game_config)
 
+    def handle_promotion_targets(self):
+        """
+        Make a few exceptions for certain classes to allow more variety
+          - Allow female theives to class change. Not sure why this isn't default
+          - Make Knight Lord the target promotion class of soldiers
+        """
+        classes = self._game_config["classes"]["class_stats"]["classes"]
+        for _class in classes:
+            self._rom_data[classes[_class]["promotion_pos"]] = classes[_class][
+                "promotion_id"
+            ]
+
+    def handle_overrides(self):
+        """ Set the matthew and serra overrides """
         self._handle_serra_override()
         self._handle_matthew_override()
 
@@ -38,10 +52,10 @@ class FE7CharacterEditor(CharacterEditor):
         with an additional door key and chest key will allow the player to get
         all loot
         """
-        extra_item_pos = self._game_config["classes"]["characters"]["Matthew"][
-            "extra_item_pos"
-        ]
         chest_key_id = self._game_config["items"]["chest_key_id"]
         door_key_id = self._game_config["items"]["door_key_id"]
-        self._rom_data[extra_item_pos] = chest_key_id
-        self._rom_data[extra_item_pos + 1] = door_key_id
+        for item_pos in self._game_config["classes"]["characters"]["Matthew"][
+            "extra_item_pos"
+        ]:
+            self._rom_data[item_pos] = chest_key_id
+            self._rom_data[item_pos + 1] = door_key_id
