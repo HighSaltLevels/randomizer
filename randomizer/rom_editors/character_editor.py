@@ -53,6 +53,7 @@ class CharacterEditor:
                 self._item_editor.load(character_data["item_pos"], new_class, weapon)
                 self._item_editor.randomize()
 
+        self._item_editor.handle_game_specific_configs()
         self.randomize_palettes()
         self.add_promotions()
 

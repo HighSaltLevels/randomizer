@@ -56,13 +56,25 @@ classes:
     # promoted class
     promotion_overrides: [0x3a, 0x3b, 0x86, 0x44]
 
+    # Used to assign s rank weapons
+    final_bosses:
+      - Nergal
+      - Kenneth
+      - Lloyd
+      - Linus
+      - Brendan
+      - Darin
+      - Ursula
+      - Uhai
+      - Jerme
+      - Dragon
+
   palette_stats:
     base_offset: 0x23
     promo_offset: 0x24
 
     num_palettes: 0x7e
 
-# TODO On final chapter, use S rank weapons for characters
   characters:
     # Name
       # Character Identifier
@@ -570,6 +582,7 @@ classes:
       id:
         - 0x27
       location:
+        - 0xCDC204
         - 0xCDC7B5
         - 0xCE0505
       kind: playable
@@ -768,8 +781,16 @@ classes:
         - 0xCE0025
       kind: boss
       item_pos:
+        - 0xCDC284
         - 0xCDDDF4
         - 0xCDF388
+        - 0xCE054C
+        - 0xCE002C
+        - 0xCDC284
+        - 0xCE054C
+        - 0xCE002C
+      s_rank_locations:
+        - 0xCDC284
         - 0xCE054C
         - 0xCE002C
     Erik:
@@ -886,6 +907,9 @@ classes:
         - 0xCCD4FE
         - 0xCE05EC
         - 0xCE010C
+      s_rank_locations:
+        - 0xCE05EC
+        - 0xCE010C
     Aion:
       id:
         - 0x4c
@@ -925,6 +949,9 @@ classes:
         - 0xCCF1D4
         - 0xCCF054
         - 0xCCF3F4
+        - 0xCE05AC
+        - 0xCE00DC
+      s_rank_locations:
         - 0xCE05AC
         - 0xCE00DC
     Cameron:
@@ -1008,6 +1035,9 @@ classes:
         - 0xCD91A1
         - 0xCE056C
         - 0xCE00EC
+      s_rank_locations:
+        - 0xCE056C
+        - 0xCE00EC
     Paul:
       id:
         - 0x53
@@ -1063,6 +1093,9 @@ classes:
         - 0xCD72BC
         - 0xCE064C
         - 0xCE011C
+      s_rank_locations:
+        - 0xCE064C
+        - 0xCE011C
     Pascal:
       id:
         - 0x57
@@ -1094,6 +1127,9 @@ classes:
         - 0xCD7B5D
         - 0xCD816C
         - 0xCD81CC
+        - 0xCE058C
+        - 0xCE006C
+      s_rank_locations:
         - 0xCE058C
         - 0xCE006C
     Maxime:
@@ -1222,6 +1258,9 @@ classes:
         - 0xCDB3D0
         - 0xCE062C
         - 0xCE008C
+      s_rank_locations:
+        - 0xCE062C
+        - 0xCE008C
     Linus:
       id:
         - 0x64
@@ -1257,6 +1296,11 @@ classes:
         - 0xCE060D
         - 0xCE009C
         - 0xCE009D
+      s_rank_locations:
+        - 0xCE060C
+        - 0xCE060D
+        - 0xCE009C
+        - 0xCE009D
     Zephiel:
       id:
         - 0x7a
@@ -1288,6 +1332,9 @@ classes:
         - 0xCD148D
         - 0xCD812C
         - 0xCD812D
+        - 0xCE05CC
+        - 0xCE00BC
+      s_rank_locations:
         - 0xCE05CC
         - 0xCE00BC
     Limstella:
@@ -1327,6 +1374,9 @@ classes:
         - 0xCE0B99
       kind: boss
       item_pos:
+        - 0xCE0B80
+        - 0xCE0BA0
+      s_rank_locations:
         - 0xCE0B80
         - 0xCE0BA0
     Batta:
@@ -1650,6 +1700,7 @@ items:
     name: 0x0
     description: 0x2
     use_screen: 0x4
+    type: 0x7
     icon: 0x1d
     use: 0x1e
     ability3: 0xa # The ability that contains locks
@@ -1667,6 +1718,7 @@ items:
     use: 0x2e
 
   a_weapon_lvl: 181
+  s_weapon_lvl: 251
   flux_weapon_lvl_pos: 0xBE2BD8
 
   chest_key_id: 0x68
@@ -1728,6 +1780,7 @@ items:
   forblaze: 0x3c
   durandal: 0x84
   armads: 0x85
+  aureola: 0x86
   sol_katti: 0x8c
   wolf_beil: 0x8d
   ereshkigal: 0x8e

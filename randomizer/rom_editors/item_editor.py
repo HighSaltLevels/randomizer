@@ -83,6 +83,9 @@ class ItemEditor:
         """ Wipe the locks to characters on this item """
         raise NotImplementedError("Classes must override this method")
 
+    def handle_game_specific_configs(self):
+        """ Subclasses can perform game-specific changes by overriding this method """
+
     @property
     def rom_data(self):
         """ Make rom_data read only. Should only modify things one at a time """

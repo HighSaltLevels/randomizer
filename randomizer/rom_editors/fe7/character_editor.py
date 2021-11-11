@@ -30,6 +30,7 @@ class FE7CharacterEditor(CharacterEditor):
         """ Set the matthew and serra overrides """
         self._handle_serra_override()
         self._handle_matthew_override()
+        self._give_final_bosses_s_ranks()
 
     def _handle_serra_override(self):
         """
@@ -59,3 +60,23 @@ class FE7CharacterEditor(CharacterEditor):
         ]:
             self._rom_data[item_pos] = chest_key_id
             self._rom_data[item_pos + 1] = door_key_id
+
+    def _give_final_bosses_s_ranks(self):
+        """
+        Now that final bosses have s rank weapons, we need to go in and give them
+        the proper weapon lvls for those s ranks
+        """
+        character_stats = self._game_config["classes"]["character_stats"]
+        for boss in character_stats["final_bosses"]:
+            weapon_id = self._rom_data[self._game_config["classes"]["characters"][boss]["s_rank_locations"][0]]
+
+            first = self._game_config["items"]["first"]
+            total_bytes = self._game_config["items"]["total_bytes"]
+            type_offset = self._game_config["items"]["offsets"]["type"]
+            weapon_type = self._rom_data[first + (weapon_id * total_bytes) + type_offset]
+
+            for char_id in self._game_config["classes"]["characters"][boss]["id"]:
+                first = character_stats["first"]
+                total_bytes = character_stats["total_bytes"]
+                weapon_offset = character_stats["weapon_offset"]
+                self._rom_data[first + (char_id * total_bytes) + weapon_offset + weapon_type] = self._game_config["items"]["s_weapon_lvl"]
