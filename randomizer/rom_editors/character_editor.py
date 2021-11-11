@@ -30,6 +30,12 @@ class CharacterEditor:
         """ Make rom_data read only. Should only modify things one at a time """
         return self._rom_data
 
+    def handle_overrides(self):
+        """ Sub-classes can perform overrides after randomization """
+
+    def handle_promotion_targets(self):
+        """ Sub-classes can change promotion targets for the class """
+
     def randomize(self):
         """ Randomize based on the current status of the CONFIG """
         promoted, unpromoted = self._get_class_list()
@@ -47,8 +53,12 @@ class CharacterEditor:
                 self._item_editor.load(character_data["item_pos"], new_class, weapon)
                 self._item_editor.randomize()
 
+        self._item_editor.handle_game_specific_configs()
         self.randomize_palettes()
         self.add_promotions()
+
+        self.handle_overrides()
+        self.handle_promotion_targets()
 
         return self._rom_data
 
@@ -59,8 +69,8 @@ class CharacterEditor:
             class_list = promoted + unpromoted
         elif any(
             character_data["id"][idx]
-            for idx, _id in enumerate(character_data["id"])
-            if _id in character_stats["promotion_overrides"]
+            for idx, class_id in enumerate(character_data["id"])
+            if class_id in character_stats["promotion_overrides"]
         ):
             class_list = promoted
         else:

@@ -24,6 +24,14 @@ classes:
     # Use Fire Dragon in this game
     manakete: 0x46
 
+    classes:
+      f_thief:
+        promotion_id: 0x3e
+        promotion_pos: 0xBE1565
+      soldier:
+        promotion_id: 0x7
+        promotion_pos: 0xBE13C1
+
   character_stats:
     first: 0xBDCE18
 
@@ -44,9 +52,22 @@ classes:
     growths_offset: 0x1c
     num_growths: 7
 
-    # Classes who are in the ban list but need reclassing to a
+    # Character IDs whose classes are in the ban list but need reclassing to a
     # promoted class
-    promotion_overrides: [0x43, 0x46, 0x4a, 0x5a]
+    promotion_overrides: [0x3a, 0x3b, 0x86, 0x44]
+
+    # Used to assign s rank weapons
+    final_bosses:
+      - Nergal
+      - Kenneth
+      - Lloyd
+      - Linus
+      - Brendan
+      - Darin
+      - Ursula
+      - Uhai
+      - Jerme
+      - Dragon
 
   palette_stats:
     base_offset: 0x23
@@ -54,7 +75,6 @@ classes:
 
     num_palettes: 0x7e
 
-# TODO On final chapter, use S rank weapons for characters
   characters:
     # Name
       # Character Identifier
@@ -491,7 +511,9 @@ classes:
         - 0xCC8154
         - 0xCC8054
         - 0xCC8434
-      extra_item_pos: 0xCC67BA
+      extra_item_pos:
+        - 0xCC67BA
+        - 0xCC8156
     Jaffar:
       id:
         - 0x24
@@ -560,19 +582,12 @@ classes:
       id:
         - 0x27
       location:
+        - 0xCDC204
         - 0xCDC7B5
         - 0xCE0505
       kind: playable
       item_pos:
         - 0xCDC7BC
-    Merlinus:
-      id:
-        - 0x28
-      location:
-        - 0xCC9055
-        - 0xCC9075
-      kind: playable
-      item_pos: []
     Uther:
       id:
         - 0x2a
@@ -752,7 +767,7 @@ classes:
         - 0xCC8E0C
     Nergal:
       id:
-        - 0x43
+        - 0x44
       location:
         - 0xCCEA91
         - 0xCCEBC1
@@ -766,8 +781,16 @@ classes:
         - 0xCE0025
       kind: boss
       item_pos:
+        - 0xCDC284
         - 0xCDDDF4
         - 0xCDF388
+        - 0xCE054C
+        - 0xCE002C
+        - 0xCDC284
+        - 0xCE054C
+        - 0xCE002C
+      s_rank_locations:
+        - 0xCDC284
         - 0xCE054C
         - 0xCE002C
     Erik:
@@ -884,6 +907,9 @@ classes:
         - 0xCCD4FE
         - 0xCE05EC
         - 0xCE010C
+      s_rank_locations:
+        - 0xCE05EC
+        - 0xCE010C
     Aion:
       id:
         - 0x4c
@@ -923,6 +949,9 @@ classes:
         - 0xCCF1D4
         - 0xCCF054
         - 0xCCF3F4
+        - 0xCE05AC
+        - 0xCE00DC
+      s_rank_locations:
         - 0xCE05AC
         - 0xCE00DC
     Cameron:
@@ -1006,6 +1035,9 @@ classes:
         - 0xCD91A1
         - 0xCE056C
         - 0xCE00EC
+      s_rank_locations:
+        - 0xCE056C
+        - 0xCE00EC
     Paul:
       id:
         - 0x53
@@ -1050,7 +1082,7 @@ classes:
         - 0xCD7295
         - 0xCD72B5
         - 0xCE0645
-        - 0xCE0117
+        - 0xCE0115
       kind: boss
       item_pos:
         - 0xCD651C
@@ -1059,6 +1091,9 @@ classes:
         - 0xCD6CEC
         - 0xCD729C
         - 0xCD72BC
+        - 0xCE064C
+        - 0xCE011C
+      s_rank_locations:
         - 0xCE064C
         - 0xCE011C
     Pascal:
@@ -1092,6 +1127,9 @@ classes:
         - 0xCD7B5D
         - 0xCD816C
         - 0xCD81CC
+        - 0xCE058C
+        - 0xCE006C
+      s_rank_locations:
         - 0xCE058C
         - 0xCE006C
     Maxime:
@@ -1220,6 +1258,9 @@ classes:
         - 0xCDB3D0
         - 0xCE062C
         - 0xCE008C
+      s_rank_locations:
+        - 0xCE062C
+        - 0xCE008C
     Linus:
       id:
         - 0x64
@@ -1255,6 +1296,11 @@ classes:
         - 0xCE060D
         - 0xCE009C
         - 0xCE009D
+      s_rank_locations:
+        - 0xCE060C
+        - 0xCE060D
+        - 0xCE009C
+        - 0xCE009D
     Zephiel:
       id:
         - 0x7a
@@ -1286,6 +1332,9 @@ classes:
         - 0xCD148D
         - 0xCD812C
         - 0xCD812D
+        - 0xCE05CC
+        - 0xCE00BC
+      s_rank_locations:
         - 0xCE05CC
         - 0xCE00BC
     Limstella:
@@ -1325,6 +1374,9 @@ classes:
         - 0xCE0B99
       kind: boss
       item_pos:
+        - 0xCE0B80
+        - 0xCE0BA0
+      s_rank_locations:
         - 0xCE0B80
         - 0xCE0BA0
     Batta:
@@ -1648,6 +1700,7 @@ items:
     name: 0x0
     description: 0x2
     use_screen: 0x4
+    type: 0x7
     icon: 0x1d
     use: 0x1e
     ability3: 0xa # The ability that contains locks
@@ -1665,6 +1718,7 @@ items:
     use: 0x2e
 
   a_weapon_lvl: 181
+  s_weapon_lvl: 251
   flux_weapon_lvl_pos: 0xBE2BD8
 
   chest_key_id: 0x68
@@ -1672,7 +1726,7 @@ items:
 
   ranged_monster: [] # None in this game
   promotional:
-    classes_to_add: [0xa, 0xb, 0xe, 0xf, 0x12, 0x39, 0x28, 0x29, 0x14, 0x15, 0x18, 0x19, 0x2e, 0x2f, 0x32, 0x34, 0x35, 0x1c, 0x1d, 0x20, 0x21, 0x24, 0x25, 0x2c, 0x1, 0x2, 0x3, 0x38, 0x3a, 0x3c, 0x50]
+    classes_to_add: [0xa, 0xb, 0xe, 0xf, 0x12, 0x39, 0x28, 0x29, 0x14, 0x15, 0x18, 0x19, 0x2e, 0x2f, 0x32, 0x34, 0x35, 0x1c, 0x1d, 0x20, 0x21, 0x24, 0x25, 0x2c, 0x1, 0x2, 0x3, 0x38, 0x3a, 0x3c, 0x3d, 0x50]
     items:
       Hero Crest:
         pointers:
@@ -1726,6 +1780,7 @@ items:
   forblaze: 0x3c
   durandal: 0x84
   armads: 0x85
+  aureola: 0x86
   sol_katti: 0x8c
   wolf_beil: 0x8d
   ereshkigal: 0x8e
@@ -1789,7 +1844,6 @@ items:
     lance:
       - 0x16
       - 0x1b
-      - 0x77
       - 0x94
     axe:
       - 0x22
@@ -1851,6 +1905,7 @@ items:
     lance:
       - 0x19
       - 0x1d
+      - 0x77
     axe:
       - 0x23
     bow:
