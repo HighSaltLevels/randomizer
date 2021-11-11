@@ -68,15 +68,21 @@ class FE7CharacterEditor(CharacterEditor):
         """
         character_stats = self._game_config["classes"]["character_stats"]
         for boss in character_stats["final_bosses"]:
-            weapon_id = self._rom_data[self._game_config["classes"]["characters"][boss]["s_rank_locations"][0]]
+            weapon_id = self._rom_data[
+                self._game_config["classes"]["characters"][boss]["s_rank_locations"][0]
+            ]
 
             first = self._game_config["items"]["first"]
             total_bytes = self._game_config["items"]["total_bytes"]
             type_offset = self._game_config["items"]["offsets"]["type"]
-            weapon_type = self._rom_data[first + (weapon_id * total_bytes) + type_offset]
+            weapon_type = self._rom_data[
+                first + (weapon_id * total_bytes) + type_offset
+            ]
 
             for char_id in self._game_config["classes"]["characters"][boss]["id"]:
                 first = character_stats["first"]
                 total_bytes = character_stats["total_bytes"]
                 weapon_offset = character_stats["weapon_offset"]
-                self._rom_data[first + (char_id * total_bytes) + weapon_offset + weapon_type] = self._game_config["items"]["s_weapon_lvl"]
+                self._rom_data[
+                    first + (char_id * total_bytes) + weapon_offset + weapon_type
+                ] = self._game_config["items"]["s_weapon_lvl"]
