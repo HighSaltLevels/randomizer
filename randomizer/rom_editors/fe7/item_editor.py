@@ -61,7 +61,7 @@ class FE7ItemEditor(ItemEditor):
             "bow": [
                 self._game_config["items"]["rienfleche"],
             ],
-            "staff": [0x4e], # Just give them a Fortify staff
+            "staff": [0x4E],  # Just give them a Fortify staff
             "anima": [
                 self._game_config["items"]["forblaze"],
                 self._game_config["items"]["excalibur"],
@@ -73,10 +73,12 @@ class FE7ItemEditor(ItemEditor):
             "dark": [
                 self._game_config["items"]["ereshkigal"],
                 self._game_config["items"]["gespenst"],
-            ]
+            ],
         }
         for boss in self._game_config["classes"]["character_stats"]["final_bosses"]:
-            for item_loc in self._game_config["classes"]["characters"][boss]["s_rank_locations"]:
+            for item_loc in self._game_config["classes"]["characters"][boss][
+                "s_rank_locations"
+            ]:
                 item = self._rom_data[item_loc]
                 item_type = self._get_s_item_type(item)
                 rand = randint(0, len(item_eq_dict[item_type]) - 1)
@@ -87,7 +89,8 @@ class FE7ItemEditor(ItemEditor):
         first_item = self._game_config["items"]["first"]
         type_offset = self._game_config["items"]["offsets"]["type"]
         total_bytes = self._game_config["items"]["total_bytes"]
-        current_item_type = self._rom_data[first_item + (item_idx * total_bytes) + type_offset]
+        current_item_type = self._rom_data[
+            first_item + (item_idx * total_bytes) + type_offset
+        ]
 
         return self._game_config["items"]["types"][current_item_type]
-        
