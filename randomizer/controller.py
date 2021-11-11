@@ -91,22 +91,36 @@ class RandomizerHandler:
             self._app.labels["status"].setText(f"Status: Error! {error}")
             return
 
-        # Perform all requested randomization
-        self._randomize_all()
+        try:
+            # Perform all requested randomization
+            self._randomize_all()
+        # Disable broad except because the last thing I want is for the GUI to crash with
+        # no helpful error message (especially for windows users
+        # pylint: disable=broad-except
+        except Exception as error:
+            self._app.labels["status"].setText(f"Status: Error! {error}")
+            return
 
-        # Write out the final ROM giving it a piece of UUID
-        path, ext = os.path.splitext(input_rom)
-        rand = str(uuid.uuid4()).split("-")[0]
-        output_rom = f"{path}-{rand}{ext}"
-        with open(output_rom, "wb") as stream:
-            stream.write(self._rom_data)
+        try:
+            # Write out the final ROM giving it a piece of UUID
+            path, ext = os.path.splitext(input_rom)
+            rand = str(uuid.uuid4()).split("-")[0]
+            output_rom = f"{path}-{rand}{ext}"
+            with open(output_rom, "wb") as stream:
+                stream.write(self._rom_data)
 
-        # If this is FE7, include save data to bypass tutorial
-        # and the several soft locking opportunities that come
-        # with it.
-        if self._version == FEVersions.FE7:
-            output_sav = f"{path}-{rand}.sav"
-            shutil.copy(CONFIG_MAP[self._version].replace(".yml", ".sav"), output_sav)
+            # If this is FE7, include save data to bypass tutorial
+            # and the several soft locking opportunities that come
+            # with it.
+            if self._version == FEVersions.FE7:
+                output_sav = f"{path}-{rand}.sav"
+                shutil.copy(
+                    CONFIG_MAP[self._version].replace(".yml", ".sav"), output_sav
+                )
+
+        except IOError as error:
+            self._app.labels["status"].setText(f"Status: Error! {error}")
+            return
 
         self._app.labels["status"].setText(f"Status: Successfully wrote {output_rom}")
 
