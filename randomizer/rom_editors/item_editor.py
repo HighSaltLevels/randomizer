@@ -43,23 +43,23 @@ class ItemEditor:
 
     def randomize(self):
         """ Randomize all items in {item_pos} """
-        prf_weapons = self._game_config["items"]["prf"]
         for item_pos in self._item_pos:
-            self.randomize_item(item_pos, prf_weapons)
+            self.randomize_item(item_pos)
 
-    def randomize_item(self, item_pos, prf_weapons):
+    def randomize_item(self, item_pos):
         """ Randomize the specific item """
         if self._new_class == self._class_stats["manakete"]:
             self._rom_data[item_pos] = self._game_config["items"]["dragonstone"]
             return
 
         item = self._rom_data[item_pos]
-        if item in prf_weapons:
-            item = self.handle_prf(item)
 
         # Handle case where we want to auto assign an iron sword
         if item == 0:
             item = 1
+
+        if item in self._game_config["items"]["prf"]:
+            item = self._game_config["items"]["prf"][item]
 
         item_type = self._get_item_type(item)
         item_lvl = self._get_item_lvl(item, item_type)
@@ -79,12 +79,11 @@ class ItemEditor:
         rand = randint(0, len(weapon_list) - 1)
         self._rom_data[item_pos] = weapon_list[rand]
 
-    def handle_prf(self, item):
-        """ Wipe the locks to characters on this item """
-        raise NotImplementedError("Classes must override this method")
+    def handle_prf(self):
+        """ Sub-classes can optionally do extra operations on prf weapons """
 
-    def handle_game_specific_configs(self):
-        """ Subclasses can perform game-specific changes by overriding this method """
+    def handle_s_rank(self):
+        """ Sub-classes can optionally do extra operations on s rank weapons """
 
     @property
     def rom_data(self):
@@ -101,7 +100,7 @@ class ItemEditor:
 
     def _get_item_lvl(self, item, item_type):
         """ Return the lvl this weapon is (e, d, c ... etc) """
-        for level in {"e", "d", "c", "b", "a"}:
+        for level in {"e", "d", "c", "b", "a", "s"}:
             if item in self._game_config["items"][level][item_type]:
                 return level
 
@@ -109,7 +108,6 @@ class ItemEditor:
 
     def _get_item_type(self, item):
         """ Return the item type """
-
         for _type in self._game_config["items"]["types"].values():
             if item in self._get_items(_type):
                 return _type
@@ -119,7 +117,7 @@ class ItemEditor:
     def _get_items(self, item_type):
         """ Return all items of that type """
         items = []
-        for level in {"e", "d", "c", "b", "a"}:
+        for level in {"e", "d", "c", "b", "a", "s"}:
             items += self._game_config["items"][level][item_type]
 
         return items

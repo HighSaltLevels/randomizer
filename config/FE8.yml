@@ -1408,13 +1408,10 @@ items:
           - 0x29214
         new_location: 0xb88800
         item_location: 0x80B094
-  naglfar: 0x8f
-  rapier: 0x6
-  reginleif: 0x78
   prf:
-    - 0x6 # Rapier
-    - 0x78 # Reginleif
-    - 0x8f # Naglfar
+    6: 0x1    # Rapier    -> E rank sword
+    120: 0x16 # Reginleif -> D rank lance
+    143: 0x49 # Naglfar   -> A rank dark
   types:
     0x0: sword
     0x1: lance
@@ -1584,3 +1581,13 @@ items:
     dragonstone/monster:
       - 0xb0
       - 0x90
+  s:
+    sword: []
+    lance: []
+    axe: []
+    bow: []
+    staff: []
+    anima: []
+    light: []
+    dark: []
+    dragonstone/monster: []

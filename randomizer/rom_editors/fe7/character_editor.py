@@ -30,7 +30,10 @@ class FE7CharacterEditor(CharacterEditor):
         """ Set the matthew and serra overrides """
         self._handle_serra_override()
         self._handle_matthew_override()
+        self._handle_flyer_overrides()
+        self._handle_teodor_override()
         self._give_final_bosses_s_ranks()
+        self._make_weapons_dropable()
 
     def _handle_serra_override(self):
         """
@@ -61,6 +64,29 @@ class FE7CharacterEditor(CharacterEditor):
             self._rom_data[item_pos] = chest_key_id
             self._rom_data[item_pos + 1] = door_key_id
 
+    def _handle_teodor_override(self):
+        """
+        Replace the generic Druid that's holding Gespenst with the character
+        Teodor.
+        """
+        teodor_id = self._game_config["classes"]["characters"]["Teodor"]["id"][0]
+        generic_druid_pos = self._game_config["classes"]["character_stats"][
+            "overrides"
+        ]["generic_druid_pos"]
+        self._rom_data[generic_druid_pos] = teodor_id
+
+    def _handle_flyer_overrides(self):
+        """
+        When certain units who were flying get randomized into ground units, it can
+        break the game if the cutscene calls for flying over mountains or water. These
+        tweaks start the unit into terrain tiles that will allow safe navigation to
+        their destination.
+        """
+        for address, byte in self._game_config["classes"]["character_stats"][
+            "overrides"
+        ]["flyers"].items():
+            self._rom_data[address] = byte
+
     def _give_final_bosses_s_ranks(self):
         """
         Now that final bosses have s rank weapons, we need to go in and give them
@@ -86,3 +112,19 @@ class FE7CharacterEditor(CharacterEditor):
                 self._rom_data[
                     first + (char_id * total_bytes) + weapon_offset + weapon_type
                 ] = self._game_config["items"]["s_weapon_lvl"]
+
+    def _make_weapons_dropable(self):
+        """
+        Make Nergal's, Morph Linus's, and Morph Jerme's weapons dropable.
+        It's done through changing a bit on ability 4 on the character.
+        """
+        character_stats = self._game_config["classes"]["character_stats"]
+        for _id in character_stats["dropable_weapon_characters"]:
+            first = character_stats["first"]
+            offset = (character_stats["total_bytes"] * _id) + character_stats[
+                "offsets"
+            ]["ability4"]
+            self._rom_data[first + offset] = (
+                self._rom_data[first + offset]
+                | character_stats["offsets"]["dropable_bitmask"]
+            )

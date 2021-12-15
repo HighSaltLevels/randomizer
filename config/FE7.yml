@@ -10,9 +10,13 @@ classes:
         # ID of class: ID of promotion class
         0x38: 0x16
 
-    blacklist: [0x0, 0xb, 0x3f, 0x43, 0x44, 0x47, 0x48, 0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f, 0x51, 0x52, 0x53, 0x54, 0x55, 0x56, 0x57, 0x58, 0x59, 0x5a]
+    blacklist: [0x0, 0xb, 0x15, 0x3f, 0x43, 0x44, 0x47, 0x48, 0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f, 0x51, 0x52, 0x53, 0x54, 0x55, 0x56, 0x57, 0x58, 0x59, 0x5a]
     staff_only: [0x1d, 0x2c]
-    other: [0x4, 0x5, 0x6, 0x40, 0x41, 0x46] # Knight Lord? Blade Lord? KnightLord? Dancer, Bard, Fire Dragon
+
+    # I added Knight, Blade, and Great Lords because these were broken copies and are unused data.
+    # I added Archsage and Dark Druid because of the sheer base stat increase these classes add
+    # Knight Lord? Blade Lord? Great Lord? Dancer, Bard, Archsage, Dark Druid, Fire Dragon
+    other: [0x4, 0x5, 0x6, 0x40, 0x41, 0x42, 0x45, 0x46]
     ranged_monster: [] # None in this game
 
     weapon_offset: 0x2c
@@ -52,9 +56,29 @@ classes:
     growths_offset: 0x1c
     num_growths: 7
 
+    # Characters who's weapons should be made dropable
+    dropable_weapon_characters: [0x44, 0x56, 0x5c, 0xf5]
+    offsets:
+      ability4: 0x2b # Ability4 is used for making items dropable
+      dropable_bitmask: 0x8
+
     # Character IDs whose classes are in the ban list but need reclassing to a
     # promoted class
-    promotion_overrides: [0x3a, 0x3b, 0x86, 0x44]
+    promotion_overrides: [0x27, 0x3a, 0x3b, 0x86, 0x44]
+
+    overrides:
+      # Change starting locations for flying characters to avoid traversing
+      # water and mountain tiles
+      flyers:
+        # Fiora
+        0xCCD739: 2
+        0xCCD759: 2
+        # Farina
+        0xCD5028: 18
+        0xCD502A: 18
+
+      # Position of generic Druid holding Gespenst. Used to replace with Teodor
+      generic_druid_pos: 0xCE0054
 
     # Used to assign s rank weapons
     final_bosses:
@@ -73,7 +97,7 @@ classes:
     base_offset: 0x23
     promo_offset: 0x24
 
-    num_palettes: 0x7e
+    num_palettes: 0x78
 
   characters:
     # Name
@@ -251,6 +275,8 @@ classes:
         - 0xCD46D5
         - 0xCD5D1D
         - 0xCD5D4D
+        - 0xCD24ED
+        - 0xCD256D
       kind: playable
       item_pos:
         - 0xCD5D24
@@ -309,7 +335,7 @@ classes:
       location:
         - 0xCD4725
         - 0xCD8115
-        - 0xCD907B
+        - 0xCD9079
         - 0xCD9279
         - 0xCD9169
       kind: playable
@@ -327,6 +353,8 @@ classes:
         - 0xCD46C5
         - 0xCD5D2D
         - 0xCD5D5D
+        - 0xCD24DD
+        - 0xCD255D
       kind: playable
       item_pos:
         - 0xCD2304
@@ -335,6 +363,8 @@ classes:
         - 0xCD2325
         - 0xCD5D34
         - 0xCD5D35
+        - 0xCD5D64
+        - 0xCD5D65
     Canas:
       id:
         - 0x16
@@ -560,6 +590,11 @@ classes:
         - 0xCCF8BD
         - 0xCD06AD
         - 0xCDC1BD
+        - 0xCCE2F1
+        - 0xCCEB31
+        - 0xCD1535
+        - 0xCD613D
+        - 0xCD602D
       kind: playable
       item_pos:
         - 0xCD06B0
@@ -571,8 +606,13 @@ classes:
         - 0xCC6BF1
         - 0xCC69C1
         - 0xCCF94D
+        - 0xCD066D
         - 0xCD06CD
         - 0xCDD84D
+        - 0xCD1515
+        - 0xCD247D
+        - 0xCD614D
+        - 0xCD603D
       kind: playable
       item_pos:
         - 0xCC6BF9
@@ -585,6 +625,8 @@ classes:
         - 0xCDC204
         - 0xCDC7B5
         - 0xCE0505
+        - 0xCD24FD
+        - 0xCD257D
       kind: playable
       item_pos:
         - 0xCDC7BC
@@ -984,6 +1026,7 @@ classes:
         - 0xCCFF15
         - 0xCD0154
         - 0xCD0155
+        - 0xCD0044
         - 0xCD0045
         - 0xCD0304
         - 0xCD0305
@@ -1014,7 +1057,7 @@ classes:
         - 0xCD8A39
         - 0xCD8809
         - 0xCD8C69
-        - 0xCD919C
+        - 0xCD9199
         - 0xCE0565
         - 0xCE00E5
       kind: boss
@@ -1185,6 +1228,7 @@ classes:
         - 0xCCE751
         - 0xCCE8D1
         - 0xCCEB51
+        - 0xCE0055 # Final chapter generic druid
       kind: boss
       item_pos:
         - 0xCCE5E8
@@ -1195,6 +1239,7 @@ classes:
         - 0xCCE8D9
         - 0xCCEB58
         - 0xCCEB59
+        - 0xCE005C # Final chapther generic druid
     Georg:
       id:
         - 0x5d
@@ -1314,6 +1359,7 @@ classes:
         - 0x7b
       location:
         - 0xCCF8CD
+        - 0xCCFAED
       kind: other
       item_pos: []
     Brendan:
@@ -1679,6 +1725,20 @@ classes:
         - 0xCDA421 
       kind: other
       item_pos: []
+    Child1:
+      id:
+        - 0x57
+      location:
+        - 0xCCEAB1
+      kind: other
+      item_pos: []
+    Child2:
+      id:
+        - 0x58
+      location:
+        - 0xCCEAC1
+      kind: other
+      item_pos: []
     Mark:
       id:
         - 0x51
@@ -1720,6 +1780,8 @@ items:
   a_weapon_lvl: 181
   s_weapon_lvl: 251
   flux_weapon_lvl_pos: 0xBE2BD8
+
+  dragonstone: 0x8f
 
   chest_key_id: 0x68
   door_key_id: 0x69
@@ -1774,23 +1836,15 @@ items:
           - 0x27544
         new_location: 0xb8d900
         item_location: 0xBE3570
-  prf: [0x9, 0xa, 0x3c, 0x84, 0x85, 0x8c, 0x8d, 0x8e, 0x90, 0x91, 0x92, 0x93, 0x3d, 0x43, 0x49]
-  rapier: 0x9
-  mani_katti: 0xa
-  forblaze: 0x3c
-  durandal: 0x84
-  armads: 0x85
-  aureola: 0x86
-  sol_katti: 0x8c
-  wolf_beil: 0x8d
-  ereshkigal: 0x8e
-  regal_blade: 0x90
-  rex_hasta: 0x91
-  basilikos: 0x92
-  rienfleche: 0x93
-  excalibur: 0x3d
-  luce: 0x43
-  gespenst: 0x49
+  prf:
+    9: 0x1    # Rapier     -> E rank sword
+    10: 0x2   # Mani Katti -> E rank sword
+    60: 0x3b  # Forblaze   -> A rank anima
+    141: 0x1f # Wolf Beil  -> E rank axe
+    132: 0x4  # Durandal   -> A rank sword
+    133: 0x21 # Armads     -> A rank axe
+    140: 0x4  # Sol Katti  -> A rank sword
+
   types:
     0x0: sword
     0x1: lance
@@ -1948,3 +2002,13 @@ items:
       - 0x8e
     dragonstone/monster:
       - 0x8f
+  s:
+    sword: [0x84, 0x8c, 0x90] # Durandal, Sol Katti, Regal Blade
+    lance: [0x91] # Rex Hasta
+    axe: [0x85, 0x92] # Armads, Basilikos
+    bow: [0x93] # Rienfleche
+    staff: [0x4e] # Just use a Fortify staff
+    anima: [0x3c, 0x3d] # Forblaze, Excalibur
+    light: [0x43, 0x86] # Luce, Aureola
+    dark: [0x8e, 0x49] # Ereshkigal, Gespenst
+    dragonstone/monster: [0x8f] # Flametongue
