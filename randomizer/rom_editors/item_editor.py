@@ -54,7 +54,7 @@ class ItemEditor:
 
         item = self._rom_data[item_pos]
 
-        # Handle case where we want to auto assign an iron sword
+        # Handle case where we want to auto assign an iron weapon
         if item == 0:
             item = 1
 
