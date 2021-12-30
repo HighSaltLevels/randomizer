@@ -28,7 +28,7 @@ def _add_hints(labels):
 
     for name, label in labels.items():
         if label.text().lower() == "minimum":
-            if "_b" in name:
+            if "b_" in name:
                 label.setToolTip(Hints.MIN_BASE_COUNTER)
                 continue
 
@@ -36,7 +36,7 @@ def _add_hints(labels):
             continue
 
         if label.text().lower() == "maximum":
-            if "_b" in name:
+            if "b_" in name:
                 label.setToolTip(Hints.MAX_BASE_COUNTER)
                 continue
 
