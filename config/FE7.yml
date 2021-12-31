@@ -1272,6 +1272,7 @@ classes:
       kind: boss
       item_pos:
         - 0xCDCAB4
+        - 0xCDCAB5
         - 0xCDCE44
         - 0xCDCE45
         - 0xCDCC84
