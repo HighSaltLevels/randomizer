@@ -18,10 +18,13 @@ def create_char_editor(game_config, rom_data):
         "class1": {"promotion_pos": 0, "promotion_id": 15}
     }
     game_config["classes"]["characters"] = {
-        "Serra": {"id": [0]},
-        "Matthew": {"extra_item_pos": [1]},
-        "Teodor": {"id": [150]},
-        "boss1": {"s_rank_locations": [1], "id": [6]},
+        "Serra": {"id": [0], "kind": "playable"},
+        "Matthew": {"id": [0], "extra_item_pos": [1], "kind": "playable"},
+        "Teodor": {
+            "id": [0],
+            "kind": "boss",
+        },
+        "boss1": {"id": [0], "s_rank_locations": [1], "kind": "boss"},
     }
     game_config["classes"]["character_stats"]["overrides"] = {
         "generic_druid_pos": 3,
@@ -32,6 +35,7 @@ def create_char_editor(game_config, rom_data):
     game_config["classes"]["character_stats"]["offsets"] = {
         "ability4": 9,
         "dropable_bitmask": 16,
+        "animation": 19,
     }
     game_config["items"]["chest_key_id"] = 100
     game_config["items"]["door_key_id"] = 101
@@ -61,7 +65,7 @@ def test_handle_matthew_override(char_editor):
 def test_handle_teodor_override(char_editor):
     """ Test the handl_ teodor_override_method """
     char_editor._handle_teodor_override()
-    assert char_editor.rom_data[3] == 150
+    assert char_editor.rom_data[3] == 0
 
 
 def test_handle_flyer_overrides(char_editor):
@@ -81,13 +85,20 @@ def test_give_final_bosses_s_ranks(char_editor):
     ] = 5
     char_editor._rom_data[14] = 1
     char_editor._give_final_bosses_s_ranks()
-    assert char_editor.rom_data[8] == 255
+    assert char_editor.rom_data[2] == 255
 
 
 def test_make_weapons_dropable(char_editor):
     """ Test the make_weapons_dropable method """
     char_editor._make_weapons_dropable()
     assert char_editor.rom_data[18] == 121
+
+
+def test_remove_hardcoded_animations(char_editor):
+    """ Test the _remove_hardcoded_animations method """
+    char_editor._remove_hardcoded_animations()
+    assert char_editor.rom_data[19] == 0
+    assert char_editor.rom_data[20] == 0
 
 
 def test_handle_overrides(char_editor):
@@ -100,6 +111,8 @@ def test_handle_overrides(char_editor):
     assert char_editor.rom_data[17] == 0
     assert char_editor.rom_data[1] == 100
     assert char_editor.rom_data[2] == 101
-    assert char_editor.rom_data[3] == 150
+    assert char_editor.rom_data[3] == 0
     assert char_editor.rom_data[4] == 200
     assert char_editor.rom_data[18] == 121
+    assert char_editor.rom_data[19] == 0
+    assert char_editor.rom_data[20] == 0

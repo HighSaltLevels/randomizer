@@ -61,6 +61,7 @@ classes:
     offsets:
       ability4: 0x2b # Ability4 is used for making items dropable
       dropable_bitmask: 0x8
+      animation: 0x25
 
     # Character IDs whose classes are in the ban list but need reclassing to a
     # promoted class

@@ -34,6 +34,7 @@ class FE7CharacterEditor(CharacterEditor):
         self._handle_teodor_override()
         self._give_final_bosses_s_ranks()
         self._make_weapons_dropable()
+        self._remove_hardcoded_animations()
 
     def _handle_serra_override(self):
         """
@@ -128,3 +129,18 @@ class FE7CharacterEditor(CharacterEditor):
                 self._rom_data[first + offset]
                 | character_stats["offsets"]["dropable_bitmask"]
             )
+
+    def _remove_hardcoded_animations(self):
+        """
+        Some characters are given hardcoded animations. Let's remove them
+        """
+        characters = self._game_config["classes"]["characters"]
+        first = self._game_config["classes"]["character_stats"]["first"]
+        total_bytes = self._game_config["classes"]["character_stats"]["total_bytes"]
+        offset = self._game_config["classes"]["character_stats"]["offsets"]["animation"]
+        for character in characters:
+            if characters[character]["kind"] not in self._filters:
+                for _id in characters[character]["id"]:
+                    location = first + (_id * total_bytes) + offset
+                    self._rom_data[location] = 0
+                    self._rom_data[location + 1] = 0
