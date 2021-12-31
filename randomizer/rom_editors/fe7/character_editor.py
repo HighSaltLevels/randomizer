@@ -27,9 +27,9 @@ class FE7CharacterEditor(CharacterEditor):
             ]
 
     def handle_overrides(self):
-        """ Set the matthew and serra overrides """
+        """ Do all FE7-specific overrides """
         self._handle_serra_override()
-        self._handle_matthew_override()
+        self._handle_thief_override()
         self._handle_flyer_overrides()
         self._handle_teodor_override()
         self._give_final_bosses_s_ranks()
@@ -51,11 +51,14 @@ class FE7CharacterEditor(CharacterEditor):
             serra_res_pos = first_class + (serra_id * total_bytes) + res_offset
             self._rom_data[serra_res_pos] = 0
 
-    def _handle_matthew_override(self):
+    def _handle_thief_override(self):
         """
         Although a thief is not required to complete chapter 6, starting Matthew
         with an additional door key and chest key will allow the player to get
-        all loot
+        all loot.
+
+        Additionally, if Legault does not have chest keys, he will immediately leave
+        the Dragon's Gate chapter. So we should give him chest keys as well
         """
         chest_key_id = self._game_config["items"]["chest_key_id"]
         door_key_id = self._game_config["items"]["door_key_id"]
@@ -64,6 +67,11 @@ class FE7CharacterEditor(CharacterEditor):
         ]:
             self._rom_data[item_pos] = chest_key_id
             self._rom_data[item_pos + 1] = door_key_id
+
+        for item_pos in self._game_config["classes"]["characters"]["Legault"][
+            "extra_item_pos"
+        ]:
+            self._rom_data[item_pos] = chest_key_id
 
     def _handle_teodor_override(self):
         """

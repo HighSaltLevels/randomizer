@@ -715,6 +715,8 @@ classes:
       item_pos:
         - 0xCCF784
         - 0xCCF7A4
+      extra_item_pos:
+        - 0xCCF787
     Karla:
       id:
         - 0x37

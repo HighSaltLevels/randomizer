@@ -20,6 +20,7 @@ def create_char_editor(game_config, rom_data):
     game_config["classes"]["characters"] = {
         "Serra": {"id": [0], "kind": "playable"},
         "Matthew": {"id": [0], "extra_item_pos": [1], "kind": "playable"},
+        "Legault": {"id": [0], "extra_item_pos": [3], "kind": "playable"},
         "Teodor": {
             "id": [0],
             "kind": "boss",
@@ -55,11 +56,12 @@ def test_handle_serra_override(char_editor):
     assert char_editor.rom_data[17] == 0
 
 
-def test_handle_matthew_override(char_editor):
-    """ Test the handle_matthew_override method """
-    char_editor._handle_matthew_override()
+def test_handle_thief_override(char_editor):
+    """ Test the handle_thief_override method """
+    char_editor._handle_thief_override()
     assert char_editor.rom_data[1] == 100
     assert char_editor.rom_data[2] == 101
+    assert char_editor.rom_data[3] == 100
 
 
 def test_handle_teodor_override(char_editor):
