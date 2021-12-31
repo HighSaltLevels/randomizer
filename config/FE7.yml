@@ -560,6 +560,7 @@ classes:
         - 0xCDA011
         - 0xCDA361
         - 0xCDA451
+        - 0xCDB869
       kind: playable
       item_pos:
         - 0xCD141C
@@ -596,6 +597,9 @@ classes:
         - 0xCD1535
         - 0xCD613D
         - 0xCD602D
+        - 0xCD7255
+        - 0xCDB939
+        - 0xCD60CD
       kind: playable
       item_pos:
         - 0xCD06B0
@@ -614,6 +618,10 @@ classes:
         - 0xCD247D
         - 0xCD614D
         - 0xCD603D
+        - 0xCD7265
+        - 0xCDB949
+        - 0xCDB969
+        - 0xCD60DD
       kind: playable
       item_pos:
         - 0xCC6BF9
@@ -628,6 +636,7 @@ classes:
         - 0xCE0505
         - 0xCD24FD
         - 0xCD257D
+        - 0xCDB9C9
       kind: playable
       item_pos:
         - 0xCDC7BC

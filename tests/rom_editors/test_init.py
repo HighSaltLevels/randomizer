@@ -3,8 +3,8 @@
 from constants import FEVersions
 from rom_editors import (
     create_character_editor,
-    create_stat_randomizer,
     create_stat_modifier,
+    create_stat_randomizer,
     create_prom_editor,
     VERSION_MAP,
 )
