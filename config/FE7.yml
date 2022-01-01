@@ -78,6 +78,15 @@ classes:
         0xCD5028: 18
         0xCD502A: 18
 
+      # Locations of branch statements to overwrite
+      noops:
+        - 0x7d9f6
+        - 0x7d9f7
+        - 0x7d9fe
+        - 0x7d9ff
+        - 0x7da06
+        - 0x7da07
+
       # Position of generic Druid holding Gespenst. Used to replace with Teodor
       generic_druid_pos: 0xCE0054
 

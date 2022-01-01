@@ -30,6 +30,7 @@ def create_char_editor(game_config, rom_data):
     game_config["classes"]["character_stats"]["overrides"] = {
         "generic_druid_pos": 3,
         "flyers": {4: 200},
+        "noops": [21],
     }
     game_config["classes"]["character_stats"]["final_bosses"] = ["boss1"]
     game_config["classes"]["character_stats"]["dropable_weapon_characters"] = [9]
@@ -65,9 +66,15 @@ def test_handle_thief_override(char_editor):
 
 
 def test_handle_teodor_override(char_editor):
-    """ Test the handl_ teodor_override_method """
+    """ Test the handle_teodor_override_method """
     char_editor._handle_teodor_override()
     assert char_editor.rom_data[3] == 0
+
+
+def test_handle_karla_override(char_editor):
+    """ Test the _handle_karla_override method """
+    char_editor._handle_karla_override()
+    assert char_editor.rom_data[21] == 0
 
 
 def test_handle_flyer_overrides(char_editor):
@@ -118,3 +125,4 @@ def test_handle_overrides(char_editor):
     assert char_editor.rom_data[18] == 121
     assert char_editor.rom_data[19] == 0
     assert char_editor.rom_data[20] == 0
+    assert char_editor.rom_data[21] == 0

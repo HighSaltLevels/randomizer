@@ -71,4 +71,4 @@ def test_modify_character_stats(stat_mod):
         stat_mod.modify_character_stats(stat_type)
 
     assert stat_mod.rom_data[3] == 46
-    assert stat_mod.rom_data[4] == 62
+    assert stat_mod.rom_data[4] == 152

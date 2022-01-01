@@ -32,6 +32,7 @@ class FE7CharacterEditor(CharacterEditor):
         self._handle_thief_override()
         self._handle_flyer_overrides()
         self._handle_teodor_override()
+        self._handle_karla_override()
         self._give_final_bosses_s_ranks()
         self._make_weapons_dropable()
         self._remove_hardcoded_animations()
@@ -83,6 +84,18 @@ class FE7CharacterEditor(CharacterEditor):
             "overrides"
         ]["generic_druid_pos"]
         self._rom_data[generic_druid_pos] = teodor_id
+
+    def _handle_karla_override(self):
+        """
+        Karla only appears on Hector mode if Bartre is a level 5 Warrior. If Bartre
+        is randomized to any other class than fighter, then it is impossible for
+        Karla to even appear. So let's overwrite the branch statments that will skip
+        loading Karla in with NO-OP statements so that she always spawns in.
+        """
+        for address in self._game_config["classes"]["character_stats"]["overrides"][
+            "noops"
+        ]:
+            self._rom_data[address] = 0
 
     def _handle_flyer_overrides(self):
         """
