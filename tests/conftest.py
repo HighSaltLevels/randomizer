@@ -97,4 +97,4 @@ def create_game_config(character_data):
 @pytest.fixture(name="rom_data")
 def create_rom_data():
     """ Create fake rom_data for testing """
-    return bytearray(b"0123456789abcdefghijklmnop")
+    return bytearray(b"0123456789abcdefghijklmnopqrstuvwxyz")

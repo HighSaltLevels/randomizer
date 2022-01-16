@@ -61,6 +61,7 @@ classes:
     offsets:
       ability4: 0x2b # Ability4 is used for making items dropable
       dropable_bitmask: 0x8
+      animation: 0x25
 
     # Character IDs whose classes are in the ban list but need reclassing to a
     # promoted class
@@ -76,6 +77,15 @@ classes:
         # Farina
         0xCD5028: 18
         0xCD502A: 18
+
+      # Locations of branch statements to overwrite
+      noops:
+        - 0x7d9f6
+        - 0x7d9f7
+        - 0x7d9fe
+        - 0x7d9ff
+        - 0x7da06
+        - 0x7da07
 
       # Position of generic Druid holding Gespenst. Used to replace with Teodor
       generic_druid_pos: 0xCE0054
@@ -559,6 +569,7 @@ classes:
         - 0xCDA011
         - 0xCDA361
         - 0xCDA451
+        - 0xCDB869
       kind: playable
       item_pos:
         - 0xCD141C
@@ -595,6 +606,9 @@ classes:
         - 0xCD1535
         - 0xCD613D
         - 0xCD602D
+        - 0xCD7255
+        - 0xCDB939
+        - 0xCD60CD
       kind: playable
       item_pos:
         - 0xCD06B0
@@ -613,6 +627,10 @@ classes:
         - 0xCD247D
         - 0xCD614D
         - 0xCD603D
+        - 0xCD7265
+        - 0xCDB949
+        - 0xCDB969
+        - 0xCD60DD
       kind: playable
       item_pos:
         - 0xCC6BF9
@@ -627,6 +645,7 @@ classes:
         - 0xCE0505
         - 0xCD24FD
         - 0xCD257D
+        - 0xCDB9C9
       kind: playable
       item_pos:
         - 0xCDC7BC
@@ -705,6 +724,8 @@ classes:
       item_pos:
         - 0xCCF784
         - 0xCCF7A4
+      extra_item_pos:
+        - 0xCCF787
     Karla:
       id:
         - 0x37
@@ -1271,6 +1292,7 @@ classes:
       kind: boss
       item_pos:
         - 0xCDCAB4
+        - 0xCDCAB5
         - 0xCDCE44
         - 0xCDCE45
         - 0xCDCC84
@@ -1761,6 +1783,7 @@ items:
     description: 0x2
     use_screen: 0x4
     type: 0x7
+    rank: 0x1c
     icon: 0x1d
     use: 0x1e
     ability3: 0xa # The ability that contains locks
@@ -1837,13 +1860,16 @@ items:
         new_location: 0xb8d900
         item_location: 0xBE3570
   prf:
-    9: 0x1    # Rapier     -> E rank sword
-    10: 0x2   # Mani Katti -> E rank sword
-    60: 0x3b  # Forblaze   -> A rank anima
-    141: 0x1f # Wolf Beil  -> E rank axe
-    132: 0x4  # Durandal   -> A rank sword
-    133: 0x21 # Armads     -> A rank axe
-    140: 0x4  # Sol Katti  -> A rank sword
+    e:
+      - 9    # Rapier     -> E rank sword
+      - 10   # Mani Katti -> E rank sword
+      - 141 # Wolr Beil  -> E rank axe
+    s:
+      - 60  # Forblaze   -> A rank anima
+      - 132  # Durandal   -> A rank sword
+      - 133 # Armads     -> A rank axe
+      - 140  # Sol Katti  -> A rank sword
+      - 142  # Ereshkigal -> A rank dark
 
   types:
     0x0: sword
@@ -1927,9 +1953,9 @@ items:
       - 0xf
       - 0x10
       - 0x12
-      - 0x1e
     lance:
       - 0x1a
+      - 0x1e
       - 0x95
     axe:
       - 0x24
