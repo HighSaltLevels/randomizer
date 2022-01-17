@@ -33,9 +33,6 @@ class CharacterEditor:
     def handle_overrides(self):
         """ Sub-classes can perform overrides after randomization """
 
-    def handle_promotion_targets(self):
-        """ Sub-classes can change promotion targets for the class """
-
     def randomize(self):
         """ Randomize based on the current status of the CONFIG """
         promoted, unpromoted = self._get_class_list()
@@ -53,14 +50,11 @@ class CharacterEditor:
                 self._item_editor.load(character_data["item_pos"], new_class, weapon)
                 self._item_editor.randomize()
 
-        self._item_editor.handle_prf()
-        self._item_editor.handle_s_rank()
-
         self.randomize_palettes()
         self.add_promotions()
+        self.fix_flyers()
 
         self.handle_overrides()
-        self.handle_promotion_targets()
 
         return self._rom_data
 
@@ -78,7 +72,7 @@ class CharacterEditor:
         else:
             class_list = (
                 promoted
-                if self._rom_data[character_data["location"][0]] in promoted
+                if self._get_current_class(character_data["id"][0]) in promoted
                 else unpromoted
             )
 
@@ -108,6 +102,14 @@ class CharacterEditor:
                 weapon = WEAPON_MAP[weapon_idx]
 
         return weapon
+
+    def _get_current_class(self, char_id):
+        """ Get the current class of {char_id} """
+        char_stats = self._game_config["classes"]["character_stats"]
+        first = char_stats["first"]
+        offset = char_stats["class_offset"]
+        location = first + (char_stats["total_bytes"] * char_id) + offset
+        return self._rom_data[location]
 
     def _get_class_list(self):
         promoted = []
@@ -215,3 +217,15 @@ class CharacterEditor:
                 + (_id * self._class_stats["total_bytes"])
                 + self._game_config["classes"]["character_stats"]["class_offset"]
             ] = _class
+
+    def fix_flyers(self):
+        """
+        When certain units who were flying get randomized into ground units, it can
+        break the game if the cutscene calls for flying over mountains or water. These
+        tweaks start the unit into terrain tiles that will allow safe navigation to
+        their destination.
+        """
+        for address, byte in self._game_config["classes"]["character_stats"][
+            "overrides"
+        ]["flyers"].items():
+            self._rom_data[address] = byte

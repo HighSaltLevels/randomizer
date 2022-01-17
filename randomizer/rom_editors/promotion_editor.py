@@ -13,6 +13,9 @@ class PromotionEditor:
         """ Make rom_data read only. Should only modify things one at a time """
         return self._rom_data
 
+    def handle_overrides(self):
+        """ Sub-classes can override this method to perform game-specific overrides """
+
     def make_all_master_seals(self):
         """ Change the appearance of all promotion items to master seals """
         offsets = self._game_config["items"]["offsets"]
@@ -32,14 +35,14 @@ class PromotionEditor:
             new_loc = prom_items[item]["new_location"]
             # Set the pointers to the new location
             for pointer in prom_items[item]["pointers"]:
-                loc_bytes = parse_pointer(new_loc)
+                loc_bytes = self._parse_pointer(new_loc)
 
                 for idx, _ in enumerate(loc_bytes):
                     self._rom_data[pointer + idx] = loc_bytes[idx]
 
             # Set classes in new location
-            for idx, _ in enumerate(classes_to_add):
-                self._rom_data[new_loc + idx] = classes_to_add[idx]
+            for idx, _class in enumerate(classes_to_add):
+                self._rom_data[new_loc + idx] = _class
 
             # Write a zero at the ned to signal end of class list
             self._rom_data[new_loc + len(classes_to_add)] = 0
@@ -59,11 +62,11 @@ class PromotionEditor:
                 "master_seal"
             ][category]
 
-
-def parse_pointer(pointer):
-    """ Return the 3 bytes that make up the pointer in reversed order (little endian) """
-    str_repr = str(hex(pointer)).split("x")[1]
-    assert (
-        len(str_repr) == 6
-    ), f"New location should only be 3 bytes. Was actually {str_repr}"
-    return int(str_repr[-2:], 16), int(str_repr[2:4], 16), int(str_repr[:2], 16)
+    @staticmethod
+    def _parse_pointer(pointer):
+        """ Return the 3 bytes that make up the pointer in reversed order (little endian) """
+        str_repr = str(hex(pointer)).split("x")[1]
+        assert (
+            len(str_repr) == 6
+        ), f"New location should be exactly 3 bytes. Was actually {len(str_repr)}"
+        return int(str_repr[-2:], 16), int(str_repr[2:4], 16), int(str_repr[:2], 16)

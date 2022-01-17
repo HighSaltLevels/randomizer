@@ -52,6 +52,11 @@ class ItemEditor:
             self._rom_data[item_pos] = self._game_config["items"]["dragonstone"]
             return
 
+        # For FE6 only. Check if it's Fae's class
+        if self._new_class == self._class_stats.get("manakete_f"):
+            self._rom_data[item_pos] = self._game_config["items"]["divinestone"]
+            return
+
         item = self._rom_data[item_pos]
 
         # Handle case where we want to auto assign an iron weapon
@@ -79,11 +84,8 @@ class ItemEditor:
         rand = randint(0, len(weapon_list) - 1)
         self._rom_data[item_pos] = weapon_list[rand]
 
-    def handle_prf(self):
-        """ Sub-classes can optionally do extra operations on prf weapons """
-
-    def handle_s_rank(self):
-        """ Sub-classes can optionally do extra operations on s rank weapons """
+    def handle_overrides(self):
+        """ Sub-classes can optionally do extra operations on items """
 
     @property
     def rom_data(self):

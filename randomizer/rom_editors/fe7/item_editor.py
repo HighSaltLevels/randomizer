@@ -8,7 +8,12 @@ from rom_editors.item_editor import ItemEditor
 class FE7ItemEditor(ItemEditor):
     """ FE7 Item Editor """
 
-    def handle_prf(self):
+    def handle_overrides(self):
+        """ Run all FE7 overrides """
+        self._handle_prf()
+        self._handle_s_rank()
+
+    def _handle_prf(self):
         """
         Zero out item locks and set them to appropriate ranks
         """
@@ -21,7 +26,7 @@ class FE7ItemEditor(ItemEditor):
             rank = self._get_rank(equivalent_loc)
             self._set_rank(item_loc, rank)
 
-    def handle_s_rank(self):
+    def _handle_s_rank(self):
         """ Give all bosses in final chapter s rank weapons """
         s_ranks = self._game_config["items"]["s"]
         for boss in self._game_config["classes"]["character_stats"]["final_bosses"]:
