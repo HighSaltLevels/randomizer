@@ -1860,16 +1860,14 @@ items:
         new_location: 0xb8d900
         item_location: 0xBE3570
   prf:
-    e:
-      - 9    # Rapier     -> E rank sword
-      - 10   # Mani Katti -> E rank sword
-      - 141 # Wolr Beil  -> E rank axe
-    s:
-      - 60  # Forblaze   -> A rank anima
-      - 132  # Durandal   -> A rank sword
-      - 133 # Armads     -> A rank axe
-      - 140  # Sol Katti  -> A rank sword
-      - 142  # Ereshkigal -> A rank dark
+    9: 0x1    # Rapier     -> E rank sword
+    10: 0x1   # Mani Katti -> E rank sword
+    141: 0x1f # Wolf Beil  -> E rank axe
+    60: 0x3b  # Forblaze   -> A rank anima
+    132: 0x4  # Durandal   -> A rank sword
+    133: 0x21 # Armads     -> A rank axe
+    140: 0x4  # Sol Katti  -> A rank sword
+    142: 0x48 # Ereshkigal -> A rank dark
 
   types:
     0x0: sword

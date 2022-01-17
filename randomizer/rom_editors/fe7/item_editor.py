@@ -10,16 +10,16 @@ class FE7ItemEditor(ItemEditor):
 
     def handle_prf(self):
         """
-        Zero out item locks and set them to E or S rank
+        Zero out item locks and set them to appropriate ranks
         """
-        for rank in {"e", "s"}:
-            rank_value = 1 if rank == "e" else 251
-            for item in self._game_config["items"]["prf"][rank]:
-                first_item = self._game_config["items"]["first"]
-                total_bytes = self._game_config["items"]["total_bytes"]
-                item_loc = (item * total_bytes) + first_item
-                self._zero_out_locks(item_loc)
-                self._set_rank(item_loc, rank_value)
+        for item, equivalent in self._game_config["items"]["prf"].items():
+            item_loc = self._get_item_loc(item)
+            equivalent_loc = self._get_item_loc(equivalent)
+
+            self._zero_out_locks(item_loc)
+
+            rank = self._get_rank(equivalent_loc)
+            self._set_rank(item_loc, rank)
 
     def handle_s_rank(self):
         """ Give all bosses in final chapter s rank weapons """
@@ -39,7 +39,19 @@ class FE7ItemEditor(ItemEditor):
         offset = self._game_config["items"]["offsets"]["ability3"]
         self._rom_data[item_loc + offset] = 0
 
+    def _get_rank(self, item_loc):
+        """ Get the rank of the item """
+        offset = self._game_config["items"]["offsets"]["rank"]
+        return self._rom_data[item_loc + offset]
+
     def _set_rank(self, item_loc, rank_value):
         """ Set rank of the item """
         offset = self._game_config["items"]["offsets"]["rank"]
         self._rom_data[item_loc + offset] = rank_value
+
+    def _get_item_loc(self, item):
+        """ Get the address of the requested {item} """
+        first_item = self._game_config["items"]["first"]
+        total_bytes = self._game_config["items"]["total_bytes"]
+
+        return (item * total_bytes) + first_item
