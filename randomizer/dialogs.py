@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QDialog, QGridLayout, QPushButton, QComboBox, QLabel
 from PyQt5.QtGui import QIcon
 
 from versions import FEVersions
-from config import DEFAULT_CONFIG_PATH, CONFIG
+from config import CONFIG_PATH, CONFIG
 
 
 class VersionPrompt(QDialog):
@@ -18,7 +18,7 @@ class VersionPrompt(QDialog):
     def __init__(self, parent=None, title="Unsupported Version"):
         super().__init__(parent)
         self.setWindowTitle(title)
-        self.setWindowIcon(QIcon(f"{DEFAULT_CONFIG_PATH}/randomizer.ico"))
+        self.setWindowIcon(QIcon(f"{CONFIG_PATH}/randomizer.ico"))
 
         self.combo_box = None
 

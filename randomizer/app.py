@@ -7,7 +7,7 @@ from PyQt5.QtGui import QIcon
 
 from ui_elements import label, spinbox, check_box, combo_box, button, line_edit, browse
 from ui_elements.separator import create_v_sep, create_h_sep
-from config import DEFAULT_CONFIG_PATH
+from config import CONFIG_PATH
 
 APP = QApplication([])
 
@@ -20,7 +20,7 @@ class Randomizer(QWidget):
 
         self.setWindowTitle(title)
 
-        self.setWindowIcon(QIcon(f"{DEFAULT_CONFIG_PATH}/randomizer.ico"))
+        self.setWindowIcon(QIcon(f"{CONFIG_PATH}/randomizer.ico"))
 
         self.labels = label.create_labels(self)
         self.file_browser = browse.create_file_browser(self)

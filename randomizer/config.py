@@ -7,10 +7,9 @@ import yaml
 
 from constants import DEFAULT_CONFIG, FEVersions
 
-DEFAULT_CONFIG_PATH = os.path.join(str(Path.home()), ".config/randomizer")
 CONFIG_PATH = os.path.join(str(Path.home()), ".config/randomizer")
 
-os.makedirs(DEFAULT_CONFIG_PATH, exist_ok=True)
+os.makedirs(CONFIG_PATH, exist_ok=True)
 
 CONFIG_MAP = {
     FEVersions.FE6: f"{CONFIG_PATH}/FE6.yml",
@@ -132,4 +131,4 @@ class Config(dict):
         return self["randomize"]["classes"]["all_master_seals"]
 
 
-CONFIG = Config(f"{DEFAULT_CONFIG_PATH}/spec.yml")
+CONFIG = Config(f"{CONFIG_PATH}/spec.yml")

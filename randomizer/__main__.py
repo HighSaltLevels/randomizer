@@ -3,10 +3,10 @@
 import logging
 
 from app import Randomizer
-from config import DEFAULT_CONFIG_PATH
+from config import CONFIG_PATH
 
 LOG_LEVEL = logging.INFO
-LOG_PATH = f"{DEFAULT_CONFIG_PATH}/randomizer.log"
+LOG_PATH = f"{CONFIG_PATH}/randomizer.log"
 
 LOGGER = logging.getLogger(__name__)
 logging.basicConfig(
