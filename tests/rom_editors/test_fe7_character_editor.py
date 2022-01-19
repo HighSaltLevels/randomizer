@@ -45,12 +45,6 @@ def create_char_editor(game_config, rom_data):
     return FE7CharacterEditor(game_config, rom_data, None, False)
 
 
-def test_handle_promotion_targets(char_editor):
-    """ Test the handle_promotion_targets method """
-    char_editor.handle_promotion_targets()
-    assert char_editor.rom_data[0] == 15
-
-
 def test_handle_serra_override(char_editor):
     """ Test the handle_serra_override method """
     char_editor._handle_serra_override()
@@ -75,12 +69,6 @@ def test_handle_karla_override(char_editor):
     """ Test the _handle_karla_override method """
     char_editor._handle_karla_override()
     assert char_editor.rom_data[21] == 0
-
-
-def test_handle_flyer_overrides(char_editor):
-    """ Test the handle_flyer_overrides method """
-    char_editor._handle_flyer_overrides()
-    assert char_editor.rom_data[4] == 200
 
 
 def test_give_final_bosses_s_ranks(char_editor):
@@ -117,11 +105,11 @@ def test_handle_overrides(char_editor):
     with mock.patch.object(char_editor, "_give_final_bosses_s_ranks") as m_give:
         char_editor.handle_overrides()
         m_give.assert_called_once()
-    assert char_editor.rom_data[17] == 0
     assert char_editor.rom_data[1] == 100
     assert char_editor.rom_data[2] == 101
     assert char_editor.rom_data[3] == 0
-    assert char_editor.rom_data[4] == 200
+    assert char_editor.rom_data[4] == 52
+    assert char_editor.rom_data[17] == 0
     assert char_editor.rom_data[18] == 121
     assert char_editor.rom_data[19] == 0
     assert char_editor.rom_data[20] == 0

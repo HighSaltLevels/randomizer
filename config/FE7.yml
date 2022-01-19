@@ -8,7 +8,8 @@ classes:
       bit_mask: 1
       overrides:
         # ID of class: ID of promotion class
-        0x38: 0x16
+        0x38: 0x7
+        0x3d: 0x3e
 
     blacklist: [0x0, 0xb, 0x15, 0x3f, 0x43, 0x44, 0x47, 0x48, 0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f, 0x51, 0x52, 0x53, 0x54, 0x55, 0x56, 0x57, 0x58, 0x59, 0x5a]
     staff_only: [0x1d, 0x2c]
@@ -27,14 +28,6 @@ classes:
 
     # Use Fire Dragon in this game
     manakete: 0x46
-
-    classes:
-      f_thief:
-        promotion_id: 0x3e
-        promotion_pos: 0xBE1565
-      soldier:
-        promotion_id: 0x7
-        promotion_pos: 0xBE13C1
 
   character_stats:
     first: 0xBDCE18
@@ -1860,16 +1853,14 @@ items:
         new_location: 0xb8d900
         item_location: 0xBE3570
   prf:
-    e:
-      - 9    # Rapier     -> E rank sword
-      - 10   # Mani Katti -> E rank sword
-      - 141 # Wolr Beil  -> E rank axe
-    s:
-      - 60  # Forblaze   -> A rank anima
-      - 132  # Durandal   -> A rank sword
-      - 133 # Armads     -> A rank axe
-      - 140  # Sol Katti  -> A rank sword
-      - 142  # Ereshkigal -> A rank dark
+    9: 0x1    # Rapier     -> E rank sword
+    10: 0x1   # Mani Katti -> E rank sword
+    141: 0x1f # Wolf Beil  -> E rank axe
+    60: 0x3b  # Forblaze   -> A rank anima
+    132: 0x4  # Durandal   -> A rank sword
+    133: 0x21 # Armads     -> A rank axe
+    140: 0x4  # Sol Katti  -> A rank sword
+    142: 0x48 # Ereshkigal -> A rank dark
 
   types:
     0x0: sword

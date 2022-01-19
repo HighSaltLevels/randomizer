@@ -4,7 +4,7 @@ from unittest import mock
 
 import pytest
 
-from rom_editors.promotion_editor import PromotionEditor, parse_pointer
+from rom_editors.promotion_editor import PromotionEditor
 
 # Some tests can only work by using protected attributes and methods.
 # pylint: disable=protected-access
@@ -25,18 +25,6 @@ def test_make_all_master_seals(m_single, m_multi, prom_edit):
     m_multi.assert_called_once_with(prom_edit._game_config["items"]["offsets"], 2)
 
 
-def test_add_classes_to_promotion(prom_edit):
-    """ Test the add_classes_to_promotion method """
-    with mock.patch(
-        "rom_editors.promotion_editor.parse_pointer", return_value=(1, 2, 3)
-    ):
-        prom_edit.add_classes_to_promotion()
-
-    assert prom_edit.rom_data[0] == 1
-    assert prom_edit.rom_data[1] == 0
-    assert prom_edit.rom_data[2] == 0
-
-
 def test_do_single_byte_categories(prom_edit):
     """ Test the _do_single_byte_categories method """
     offsets = prom_edit._game_config["items"]["offsets"]
@@ -52,11 +40,3 @@ def test_do_multi_bytes_categories(prom_edit):
     assert prom_edit.rom_data[5] == 0
     assert prom_edit.rom_data[6] == 2
     assert prom_edit.rom_data[7] == 1
-
-
-def test_parse_pointer():
-    """ Test the parse_pointer function """
-    byte1, byte2, byte3 = parse_pointer(0x123456)
-    assert byte1 == 86
-    assert byte2 == 52
-    assert byte3 == 18

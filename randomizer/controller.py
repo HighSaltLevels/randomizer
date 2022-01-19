@@ -6,7 +6,6 @@ import shutil
 import uuid
 
 from PyQt5.QtWidgets import QMessageBox
-import yaml
 
 import dialogs
 from rom_editors import (
@@ -17,7 +16,7 @@ from rom_editors import (
 )
 from rom_editors.stat_editor import InvalidConfigError
 from versions import FEVersions, get_fe_version
-from config import CONFIG, CONFIG_MAP
+from config import CONFIG, CONFIG_PATH
 
 LOGGER = logging.getLogger(__name__)
 ALL_KINDS = {"playable", "boss", "other", "class"}
@@ -75,21 +74,19 @@ class RandomizerHandler:
             with open(input_rom, "rb") as stream:
                 self._rom_data = bytearray(stream.read())
 
-            self._version = get_fe_version(self._rom_data)
-            self._app.labels["status"].setText(f"{self._version} detected")
-
-            # Prompt for a version if not correctly detected
-            if self._version == FEVersions.UNKNOWN:
-                dialogs.VersionPrompt(self._app).exec_()
-                self._version = CONFIG["fe_version"]
-
-            config_path = CONFIG.get_path(self._version)
-            with open(config_path) as stream:
-                self._game_config = yaml.safe_load(stream)
-
         except IOError as error:
             self._app.labels["status"].setText(f"Status: Error! {error}")
             return
+
+        self._version = get_fe_version(self._rom_data)
+        self._app.labels["status"].setText(f"{self._version} detected")
+
+        # Prompt for a version if not correctly detected
+        if self._version == FEVersions.UNKNOWN:
+            dialogs.VersionPrompt(self._app).exec_()
+            self._version = CONFIG["fe_version"]
+
+        self._game_config = CONFIG.get_game_config(self._version)
 
         try:
             # Perform all requested randomization
@@ -114,9 +111,7 @@ class RandomizerHandler:
             # with it.
             if self._version == FEVersions.FE7:
                 output_sav = f"{path}-{rand}.sav"
-                shutil.copy(
-                    CONFIG_MAP[self._version].replace(".yml", ".sav"), output_sav
-                )
+                shutil.copy(f"{CONFIG_PATH}/FE7.sav", output_sav)
 
         except IOError as error:
             self._app.labels["status"].setText(f"Status: Error! {error}")
@@ -203,6 +198,7 @@ class RandomizerHandler:
         )
         prom_editor.make_all_master_seals()
         prom_editor.add_classes_to_promotion()
+        prom_editor.handle_overrides()
         self._rom_data = prom_editor.rom_data
 
 

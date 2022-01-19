@@ -27,6 +27,9 @@ classes:
     # Total bytes of memory a character takes up
     total_bytes: 0x34
 
+    # Num bytes from start of character to their class ID
+    class_offset: 0x5
+
     # Num bytes from start of character to first weapon lvl
     weapon_offset: 0x14
 
@@ -41,6 +44,9 @@ classes:
     # Classes who are in the ban list but need reclassing to a
     # promoted class
     promotion_overrides: [0xbe, 0x41]
+
+    overrides:
+      flyers: {}
 
   palette_stats:
     first_palette: 0x95ee9d

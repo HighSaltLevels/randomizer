@@ -1,0 +1,1379 @@
+classes:
+  class_stats:
+    first: 0x60A0E8
+    num_classes: 0x43
+    total_bytes: 0x48
+    promotion:
+      offset: 0x25
+      bit_mask: 1
+      overrides:
+        # ID of class: ID of promotion class
+        0x30: 0x2e
+
+    blacklist: [0x0, 0x21, 0x23, 0x3a, 0x3b, 0x3e, 0x3f, 0x40, 0x41, 0x42]
+    staff_only: [0x14, 0x15, 0x24]
+
+    # Bard, Dancer, Manakete(M), Manakete(F), Demon Dragon
+    other: [0x36, 0x37, 0x38, 0x39, 0x3c]
+    ranged_monster: [] # None in this game
+
+    weapon_offset: 0x28
+    bases_offset: 0xb
+    num_bases: 7
+
+    id_offset: 4
+
+    manakete: 0x38
+    manakete_f: 0x39 # This is what I'm calling Fae's class
+
+    
+
+  character_stats:
+    first: 0x6076A0
+
+    # Total bytes of memory a character takes up
+    total_bytes: 0x30
+
+    # Num bytes from start of character to their class ID
+    class_offset: 0x5
+
+    # Num bytes from start of character to first weapon lvl
+    weapon_offset: 0x14
+
+    # Num bytes from start of character to first base stat
+    bases_offset: 0xc
+    num_bases: 8
+
+    # Num bytes from start of character to first growth rate
+    growths_offset: 0x1c
+    num_growths: 7
+
+    # Character IDs whose classes are in the ban list but need reclassing to a
+    # promoted class
+    promotion_overrides: [0x3c]
+
+    overrides:
+      # Change starting locations for flying characters to avoid traversing
+      # water and mountain tiles
+      flyers:
+        # Tate
+        0x682440: 21
+        0x682320: 16
+        0x682322: 16
+        # Gale
+        0x67D311: 5
+        0x67D313: 6
+        0x682420: 16
+        0x682422: 19
+        0x682423: 3
+        # Milady
+        0x67D331: 4
+        0x67D333: 5
+        0x682400: 22
+        0x682401: 4
+        0x682402: 20
+        0x682403: 3
+      # Fix the broken pieces of the female mercenary character
+      f_mercenary:
+        0x60A1C0: 0xaa # Name
+        0x60A1C1: 0x7
+        0x60A1F0: 0x38 # Animation Pointer
+        0x60A1F1: 0x28
+        0x60A1F2: 0x66
+        0x60A1F3: 0x08
+        
+
+  palette_stats:
+    base_offset: 0x23
+    promo_offset: 0x24
+
+    num_palettes: 0x66
+
+  characters:
+    # Name
+      # Character Identifier
+      # Character Kind
+      # List of character starting locations
+        # Location of Item: Item ID
+    Roy:
+      id:
+        - 0x1
+      location:
+        - 0x679975
+        - 0x679B41
+      kind: playable
+      item_pos:
+        - 0x67997D
+        - 0x679B4A # Give him an iron sword equivalent
+    Clarine:
+      id:
+        - 0x2
+      location:
+        - 0x67A9BD
+      kind: playable
+      item_pos:
+        - 0x67A9C4
+    Fae:
+      id:
+        - 0x3
+      location:
+        - 0x67EAF1
+      kind: playable
+      item_pos:
+        - 0x67EAF9
+    Shin:
+      id:
+        - 0x4
+      location:
+        - 0x67C6F5
+      kind: playable
+      item_pos:
+        - 0x67C6FC
+    Sue:
+      id:
+        - 0x5
+      location:
+        - 0x67B241
+      kind: playable
+      item_pos: []
+    Dayan:
+      id:
+        - 0x6
+        - 0x7
+      location:
+        - 0x683ED5
+      kind: playable
+      item_pos:
+        - 0x683EDC
+        - 0x683EDD
+    Barth:
+      id:
+        - 0x8
+      location:
+        - 0x67BFAD
+      kind: playable
+      item_pos:
+        - 0x67BFB4
+    Bors:
+      id:
+        - 0x9
+        - 0xd0
+      location:
+        - 0x6799E5
+        - 0x679B81
+      kind: playable
+      item_pos:
+        - 0x6799EC
+        - 0x679B88
+    Wendy:
+      id:
+        - 0xa
+      location:
+        - 0x67BF9D
+      kind: playable
+      item_pos:
+        - 0x67BFA4
+        - 0x67BFA5
+    Douglas:
+      id:
+        - 0xb
+        - 0xc
+      location:
+        - 0x67EE75
+        - 0x685075
+      kind: playable
+      item_pos:
+        - 0x67EE7C
+        - 0x68507C
+        - 0x68507D
+    Wolt:
+      id:
+        - 0xd
+      location:
+        - 0x679995
+        - 0x679B91
+      kind: playable
+      item_pos:
+        - 0x67999C
+        - 0x679B98
+    Dorothy:
+      id:
+        - 0xe
+      location:
+        - 0x67AEA9
+        - 0x67B061
+      kind: playable
+      item_pos:
+        - 0x67B068
+    Klain:
+      id:
+        - 0xf
+      location:
+        - 0x67D20D
+        - 0x6822AD
+      kind: playable
+      item_pos:
+        - 0x67D214
+        - 0x6822B4
+      kind: playable
+    Saul:
+      id:
+        - 0x10
+      location:
+        - 0x67AE99
+        - 0x67B051
+      kind: playable
+      item_pos:
+        - 0x67B058
+    Elen:
+      id:
+        - 0x11
+      location:
+        - 0x67A0AD
+      kind: playable
+      item_pos:
+        - 0x67A0B4
+    Yoder:
+      id:
+        - 0x12
+        - 0x13
+      location:
+        - 0x67F4E5
+        - 0x680765
+        - 0x680745
+        - 0x682FF1
+      kind: playable
+      item_pos:
+        - 0x68076C
+        - 0x68076D
+        - 0x68074C
+        - 0x68074D
+    Chad:
+      id:
+        - 0x14
+      location:
+        - 0x67A37D
+      kind: playable
+      item_pos:
+        - 0x67A384
+    Karel:
+      id:
+        - 0x15
+      location:
+        - 0x681881
+      kind: playable
+      item_pos: []
+    Fir:
+      id:
+        - 0x16
+      location:
+        - 0x67BA81
+        - 0x67C6E5
+      kind: playable
+      item_pos:
+        - 0x67BA88
+        - 0x67BA89
+        - 0x67C6EC
+    Rutger:
+      id:
+        - 0x17
+      location:
+        - 0x67AA0D
+      kind: playable
+      item_pos:
+        - 0x67AA14
+    Deke:
+      id:
+        - 0x18
+      location:
+        - 0x67A01D
+      kind: playable
+      item_pos:
+        - 0x67A024
+        - 0x67A025
+    Ogier:
+      id:
+        - 0x19
+      location:
+        - 0x67BFBD
+      kind: playable
+      item_pos:
+        - 0x67BFC4
+        - 0x67BFC5
+    Garrett:
+      id:
+        - 0x1a
+      location:
+        - 0x67EAB1
+      kind: playable
+      item_pos:
+        - 0x67EAB8
+        - 0x67EAB9
+    Allen:
+      id:
+        - 0x1b
+      location:
+        - 0x679B71
+      kind: playable
+      item_pos:
+        - 0x679B78
+        - 0x679B79
+    Lance:
+      id:
+        - 0x1c
+      location:
+        - 0x679BB1
+      kind: playable
+      item_pos:
+        - 0x679BB8
+        - 0x679BB9
+    Perceval:
+      id:
+        - 0x1d
+      location:
+        - 0x67C07D
+        - 0x67DD05
+        - 0x67E9F1
+        - 0x68459D
+      kind: playable
+      item_pos:
+        - 0x67DD0C
+        - 0x67E9F8
+        - 0x67E9F9
+    Igrene:
+      id:
+        - 0x1e
+      location:
+        - 0x67E7E1
+      kind: playable
+      item_pos:
+        - 0x67E7E8
+    Marcus:
+      id:
+        - 0x1f
+      location:
+        - 0x679B51
+      kind: playable
+      item_pos:
+        - 0x679B58
+        - 0x679B59
+    Astore:
+      id:
+        - 0x20
+      location:
+        - 0x67BC2D
+      kind: playable
+      item_pos:
+        - 0x67BC34
+    Wade:
+      id:
+        - 0x21
+      location:
+        - 0x679FED
+      kind: playable
+      item_pos:
+        - 0x679FF4
+        - 0x679FF5
+    Lot:
+      id:
+        - 0x22
+      location:
+        - 0x679FFD
+      kind: playable
+      item_pos:
+        - 0x67A004
+        - 0x67A005
+        - 0x67A006
+    Bartre:
+      id:
+        - 0x23
+        - 0x24
+      location:
+        - 0x6828B5
+      kind: playable
+      item_pos:
+        - 0x6828BC
+    Lugh:
+      id:
+        - 0x25
+      location:
+        - 0x67A5BD
+      kind: playable
+      item_pos:
+        - 0x67A5C4
+    Lilina:
+      id:
+        - 0x26
+      location:
+        - 0x6799B5
+        - 0x67A61D
+        - 0x67BF7D
+      kind: playable
+      item_pos:
+        - 0x6799BC
+    Hugh:
+      id:
+        - 0x27
+      location:
+        - 0x67EEA5
+      kind: playable
+      item_pos:
+        - 0x67EEAC
+    Niime:
+      id:
+        - 0x28
+        - 0x29
+      location:
+        - 0x67FB39
+        - 0x683E85
+      kind: playable
+      item_pos:
+        - 0x67FB40
+        - 0x67FB41
+        - 0x67FB42
+        - 0x67FB43
+        - 0x683E8C
+        - 0x683E8D
+        - 0x683E8E
+        - 0x683E8F
+    Raigh:
+      id:
+        - 0x2a
+      location:
+        - 0x67A60D
+        - 0x67D6A9
+      kind: playable
+      item_pos:
+        - 0x67D6B0
+    Lalum:
+      id:
+        - 0x2b
+      location:
+        - 0x67CE7D
+      kind: playable
+      item_pos:
+        - 0x67CE85
+    Juno:
+      id:
+        - 0x2c
+        - 0x2d
+      location:
+        - 0x680175
+      kind: playable
+      item_pos: []
+    Tate:
+      id:
+        - 0x2e
+        - 0x2f
+        - 0x30
+      location:
+        - 0x67D34D
+        - 0x67D27D
+        - 0x68243D
+        - 0x68231D
+      kind: playable
+      item_pos:
+        - 0x67D284
+        - 0x67D285
+        - 0x682444
+        - 0x682324
+        - 0x682325
+    Shanna:
+      id:
+        - 0x31
+      location:
+        - 0x67A02D
+      kind: playable
+      item_pos:
+        - 0x67A034
+        - 0x67A035
+    Zeiss:
+      id:
+        - 0x32
+      location:
+        - 0x67EFA5
+      kind: playable
+      item_pos:
+        - 0x67EFAC
+        - 0x67EFAD
+    Gale:
+      id:
+        - 0x33
+      location:
+        - 0x67D30D
+        - 0x67EFC5
+        - 0x67F505
+        - 0x680785
+        - 0x68241D
+      kind: boss
+      item_pos:
+        - 0x67F50C
+        - 0x68078C
+    Elphin:
+      id:
+        - 0x34
+      location:
+        - 0x67D36D
+        - 0x68245D
+      kind: playable
+      item_pos:
+        - 0x6826AF
+    Cath:
+      id:
+        - 0x35
+      location:
+        - 0x67A5FD
+        - 0x67B3D1
+        - 0x67BE3D
+        - 0x67D8C9
+        - 0x67EF75
+        - 0x680255
+        - 0x6811C1
+        - 0x684115
+      kind: playable
+      item_pos:
+        - 0x67B3D8
+        - 0x67BE44
+        - 0x67D8D0
+        - 0x67EF7C
+        - 0x68025C
+        - 0x6811C8
+        - 0x68411C
+    Sophia:
+      id:
+        - 0x36
+      location:
+        - 0x67E20D
+      kind: playable
+      item_pos:
+        - 0x67E214
+    Milady:
+      id:
+        - 0x37
+      location:
+        - 0x67A04D
+        - 0x67D2ED
+        - 0x67D32D
+        - 0x67DEC5 
+        - 0x6823FD 
+      kind: playable
+      item_pos:
+        - 0x67A054
+        - 0x67A055
+    Gonzales:
+      id:
+        - 0x38
+        - 0x39
+      location:
+        - 0x67CBB9
+        - 0x68221D
+      kind: playable
+      item_pos:
+        - 0x67CBC0
+        - 0x682224
+    Noah:
+      id:
+        - 0x3a
+      location:
+        - 0x67B961
+      kind: playable
+      item_pos:
+        - 0x67B968
+        - 0x67B969
+    Treck:
+      id:
+        - 0x3b
+      location:
+        - 0x67B941
+      kind: playable
+      item_pos:
+        - 0x67B948
+        - 0x67B949
+    Jerrot:
+      id:
+        - 0x3c
+      location:
+        - 0x67B931
+      kind: playable
+      item_pos:
+        - 0x67B938
+        - 0x67B939
+        - 0x67B93a
+    Echidna:
+      id:
+        - 0x3d
+        - 0x3e
+      location:
+        - 0x67D11D
+      kind: playable
+      item_pos:
+        - 0x67D124
+    Cecilia:
+      id:
+        - 0x3f
+      location:
+        - 0x67C09D
+        - 0x67C715
+        - 0x67DB05
+        - 0x67E1FD
+        - 0x6845BD
+      kind: playable
+      item_pos:
+        - 0x67DB0C
+        - 0x67E204
+    Geese:
+      id:
+        - 0x40
+        - 0x41
+      location:
+        - 0x67CBD9
+        - 0x6829F5
+      kind: playable
+      item_pos:
+        - 0x67CBE0
+        - 0x6829FC
+        - 0x6829FD
+    Guinivere:
+      id:
+        - 0x44
+      location:
+        - 0x67C725
+        - 0x67DFB5
+      kind: other
+      item_pos: []
+    Damas:
+      id:
+        - 0x4a
+      location:
+        - 0x679BF1
+      kind: boss
+      item_pos:
+        - 0x679BF8
+    Ruud:
+      id:
+        - 0x4b
+      location:
+        - 0x67A06D
+      kind: boss
+      item_pos:
+        - 0x67A074
+    Slater:
+      id:
+        - 0x4c
+      location:
+        - 0x67A4FD
+      kind: boss
+      item_pos:
+        - 0x67A504
+        - 0x67A505
+    Erik:
+      id:
+        - 0x4d
+      location:
+        - 0x67A82D
+      kind: boss
+      item_pos:
+        - 0x67A834
+        - 0x67A835
+    Dory:
+      id:
+        - 0x4e
+      location:
+        - 0x67AC59
+      kind: boss
+      item_pos:
+        - 0x67AC60
+        - 0x67AC61
+    Wagner:
+      id:
+        - 0x4f
+      location:
+        - 0x67B081
+      kind: boss
+      item_pos:
+        - 0x67B088
+    Debias:
+      id:
+        - 0x50
+      location:
+        - 0x67B761
+      kind: boss
+      item_pos:
+        - 0x67B768
+    Legance:
+      id:
+        - 0x51
+      location:
+        - 0x67BA61
+        - 0x67BC4D
+      kind: boss
+      item_pos:
+        - 0x67BC54
+        - 0x67BC55
+    Scott:
+      id:
+        - 0x52
+      location:
+        - 0x67C485
+      kind: boss
+      item_pos:
+        - 0x67C48C
+        - 0x67C48D
+    Nord:
+      id:
+        - 0x53
+      location:
+        - 0x67C969
+      kind: boss
+      item_pos:
+        - 0x67C970
+    Flaer:
+      id:
+        - 0x55
+      location:
+        - 0x67D939
+        - 0x67DB15
+      kind: boss
+      item_pos:
+        - 0x67D940
+        - 0x67DB1C
+    Orlo:
+      id:
+        - 0x56
+      location:
+        - 0x67A5DD
+        - 0x67D00D
+        - 0x67CE9D
+      kind: boss
+      item_pos:
+        - 0x67D014
+        - 0x67CEA4
+    Roberts:
+      id:
+        - 0x57
+      location:
+        - 0x67D17D
+      kind: boss
+      item_pos:
+        - 0x67D184
+    Ein:
+      id:
+        - 0x58
+      location:
+        - 0x67D919
+      kind: boss
+      item_pos:
+        - 0x67D920
+    Narcian:
+      id:
+        - 0x59
+      location:
+        - 0x67A4ED
+        - 0x67A81D
+        - 0x67A7FD
+        - 0x67BFFD
+        - 0x67DFD5
+        - 0x67DF25
+        - 0x67EC95
+        - 0x68451D
+      kind: boss
+      item_pos:
+        - 0x67A4F4
+        - 0x67A824
+        - 0x67A825
+        - 0x67A804
+        - 0x67A805
+        - 0x67C004
+        - 0x67DFDC
+        - 0x67DF2C
+        - 0x67EC9C
+    Randy:
+      id:
+        - 0x5a
+      location:
+        - 0x67E22D
+      kind: boss
+      item_pos:
+        - 0x67E234
+    Rose:
+      id:
+        - 0x5b
+      location:
+        - 0x67E42D
+      kind: boss
+      item_pos:
+        - 0x67E434
+    Maggie:
+      id:
+        - 0x5c
+      location:
+        - 0x67E49D
+      kind: boss
+      item_pos:
+        - 0x67E4A4
+    Raith:
+      id:
+        - 0x5d
+      location:
+        - 0x67E801
+      kind: boss
+      item_pos:
+        - 0x67E808
+    Arcardo:
+      id:
+        - 0x5e
+      location:
+        - 0x67D619
+        - 0x67EE95
+        - 0x67F535
+        - 0x67F1D5
+        - 0x682AF5
+        - 0x682D61
+      kind: boss
+      item_pos:
+        - 0x67D620
+        - 0x67EE9C
+        - 0x67F53C
+        - 0x67F53D
+        - 0x67F1DC
+        - 0x67F1DD
+        - 0x682AFC
+        - 0x682AFD
+        - 0x682AFE
+        - 0x682D68
+        - 0x682D69
+    Martel:
+      id:
+        - 0x5f
+      location:
+        - 0x67F74D
+      kind: boss
+      item_pos:
+        - 0x67F754
+        - 0x67F755
+    Sigune:
+      id:
+        - 0x60
+      location:
+        - 0x67FB59
+      kind: boss
+      item_pos:
+        - 0x67FB60
+    Roartz:
+      id:
+        - 0x61
+      location:
+        - 0x67EE85
+        - 0x67F4C5
+        - 0x67FF75
+        - 0x683EF5
+      kind: boss
+      item_pos:
+        - 0x67EE8C
+        - 0x67FF7C
+        - 0x683EFC
+    Murdock:
+      id:
+        - 0x62
+      location:
+        - 0x67EFF5
+        - 0x67F515
+        - 0x680455
+      kind: boss
+      item_pos:
+        - 0x68045C
+    Brunja:
+      id:
+        - 0x63
+      location:
+        - 0x6815C1
+      kind: boss
+      item_pos:
+        - 0x6815C8
+        - 0x6815C9
+    Zephiel:
+      id:
+        - 0x64
+      location:
+        - 0x67A4CD
+        - 0x67DF45
+        - 0x67DF75
+        - 0x680F51
+      kind: boss
+      item_pos:
+        - 0x67A4D4
+        - 0x67A4D5
+        - 0x67DF4C
+        - 0x67DF7C
+        - 0x680F58
+    Idun:
+      id:
+        - 0x65
+        - 0x66
+      location:
+        - 0x67A4DD
+        - 0x67DF55
+        - 0x67DF95
+        - 0x681DF5
+        - 0x681DB5
+      kind: boss
+      item_pos:
+        - 0x67A4E4
+        - 0x681DFC
+        - 0x681DBC
+    Jahn:
+      id:
+        - 0x67
+      location:
+        - 0x6819A9
+      kind: boss
+      item_pos:
+        - 0x6819B0
+    Zinque:
+      id:
+        - 0x68
+      location:
+        - 0x68202D
+      kind: boss
+      item_pos:
+        - 0x682034
+        - 0x682035
+    Monke:
+      id:
+        - 0x69
+      location:
+        - 0x6831B9
+      kind: boss
+      item_pos:
+        - 0x6831C0
+        - 0x6831C1
+    Kel:
+      id:
+        - 0x6a
+      location:
+        - 0x6838F1
+      kind: boss
+      item_pos:
+        - 0x6838F8
+    Henning:
+      id:
+        - 0xb5
+      location:
+        - 0x6842FD
+      kind: boss
+      item_pos:
+        - 0x684304
+        - 0x684305
+    Scollan:
+      id:
+        - 0xb6
+      location:
+        - 0x68220D
+      kind: boss
+      item_pos:
+        - 0x682214
+    Guerrero:
+      id:
+        - 0xb8
+      location:
+        - 0x6848B5
+      kind: boss
+      item_pos:
+        - 0x6848BC
+        - 0x6848BD
+    Oates:
+      id:
+        - 0xb9
+      location:
+        - 0x684B45
+      kind: boss
+      item_pos:
+        - 0x684B4C
+        - 0x684B4D
+    Tick:
+      id:
+        - 0xba
+      location:
+        - 0x6851E1
+      kind: boss
+      item_pos:
+        - 0x6851E8
+        - 0x6851E9
+    Thoril:
+      id:
+        - 0xbe
+      location:
+        - 0x684155
+        - 0x685591
+      kind: boss
+      item_pos:
+        - 0x68415C
+        - 0x685598
+        - 0x685599
+    Brakul:
+      id:
+        - 0xbf
+      location:
+        - 0x684165
+        - 0x6855A1
+      kind: boss
+      item_pos:
+        - 0x68416C
+        - 0x6855A8
+        - 0x6855A9
+    Kudoka:
+      id:
+        - 0xc0
+      location:
+        - 0x684175
+        - 0x6855B1
+      kind: boss
+      item_pos:
+        - 0x68417C
+        - 0x6855B8
+        - 0x6855B9
+    Marral:
+      id:
+        - 0xc1
+      location:
+        - 0x684185
+        - 0x6855C1
+      kind: boss
+      item_pos:
+        - 0x68418C
+        - 0x6855C8
+        - 0x6855C9
+    Kabul:
+      id:
+        - 0xc2
+      location:
+        - 0x6855D1
+      kind: boss
+      item_pos:
+        - 0x6855D8
+        - 0x6855D9
+    Chan:
+      id:
+        - 0xc3
+      location:
+        - 0x6855E1
+      kind: boss
+      item_pos:
+        - 0x6855E8
+        - 0x6855E9
+    Peres:
+      id:
+        - 0xc4
+      location:
+        - 0x680AC5
+        - 0x685C71
+      kind: boss
+      item_pos:
+        - 0x680ACC
+        - 0x685C78
+    Windham:
+      id:
+        - 0xc6
+      location:
+        - 0x684E35
+      kind: boss
+      item_pos:
+        - 0x684E3C
+        - 0x684E3D
+    Morgan:
+      id:
+        - 0xc8
+      location:
+        - 0x682AD5
+        - 0x6826C5
+      kind: boss
+      item_pos:
+        - 0x682ADC
+        - 0x682ADD
+        - 0x682ADE
+        - 0x6826CC
+        - 0x6826CD
+        - 0x6826CE
+    Citizen1:
+      id:
+        - 0x9d
+      location:
+        - 680185
+      kind: other
+      item_pos: []
+    Citizen2:
+      id:
+        - 0xce
+      location:
+        - 0x680195
+      kind: other
+      item_pos: []
+    Citizen3:
+      id:
+        - 0x9d
+      location:
+        - 0x6801A5
+      kind: other
+      item_pos: []
+    Citizen4:
+      id:
+        - 0xce
+      location:
+        - 0x6801B5
+      kind: other
+      item_pos: []
+    Citizen5:
+      id:
+        - 0x9d
+      location:
+        - 0x6801C5
+      kind: other
+      item_pos: []
+
+items:
+  first: 0x60B668
+  total_bytes: 0x20
+  offsets:
+    name: 0x0
+    description: 0x2
+    use_screen: 0x4
+    type: 0x7
+    rank: 0x1c
+    icon: 0x1d
+    use: 0x1e
+    ability3: 0xa
+
+  master_seal:
+    name:
+      - 0x89
+      - 0x7
+    description:
+      - 0xe
+      - 0x6
+    use_screen:
+      - 0x8b
+      - 0x6
+    icon: 0x5d
+    use: 0x1b
+
+  a_weapon_lvl: 181
+  s_weapon_lvl: 251
+  flux_weapon_lvl_pos: 0x60BE44
+
+  dragonstone: 0x53
+  divinestone: 0x54
+
+  chest_key_id: 0x64
+  door_key_id: 0x65
+
+  ranged_monster: [] # None in this game
+  promotional:
+    # Since we're crafting our own master seal, we need to add all classes
+    classes_to_add: [0x1, 0x2, 0x6, 0x7, 0xa, 0xc, 0xd, 0x10, 0x11, 0x14, 0x15, 0x18, 0x19, 0x1c, 0x1d, 0x20, 0x24, 0x26, 0x27, 0x2a, 0x2c, 0x2d, 0x30, 0x31, 0x32]
+    items:
+      Hero Crest:
+        pointers:
+          - 0x237b0
+        new_location: 0x923000
+        item_location: 0x60C228
+      Knight Crest:
+        pointers:
+          - 0x237b8
+        new_location: 0x924000
+        item_location: 0x60C248
+      Orion's Bolt:
+        pointers:
+          - 0x237c0
+        new_location: 0x925000
+        item_location: 0x60C268
+      Elysian Whip:
+        pointers:
+          - 0x237c8
+        new_location: 0x926000
+        item_location: 0x60C288
+      Guiding Ring:
+        pointers:
+          - 0x237f0
+        new_location: 0x927000
+        item_location: 0x60C2A8
+    overrides:
+      name:
+        pointer: 0xf8180
+        new_location: 0x920000
+        # Using the text table, this spells "Master Seal"
+        bytes: [0x82, 0xb7, 0x82, 0xd0, 0x82, 0xf0, 0x82, 0xf1, 0x82, 0xdc, 0x82, 0xed, 0x82, 0xb8, 0x82, 0xc4, 0x82, 0xdc, 0x82, 0xd0, 0x82, 0xe6]
+      description:
+        pointer: 0xf7b94
+        new_location: 0x921000
+        # Using the text table, this spells:
+        # "Use this item to promote any
+        #  unpromoted class Lv. 10 and up."
+        bytes: [0x82, 0xc8, 0x82, 0xf0, 0x82, 0xdc, 0x82, 0xb8, 0x82, 0xf1, 0x82, 0xdf, 0x82, 0xe0, 0x82, 0xf0, 0x82, 0xb8, 0x82, 0xe0, 0x82, 0xf1, 0x82, 0xdc, 0x82, 0xe7, 0x82, 0xb8, 0x82, 0xf1, 0x82, 0xe9, 0x82, 0xb8, 0x82, 0xea, 0x82, 0xed, 0x82, 0xe9, 0x82, 0xe7, 0x82, 0xe9, 0x82, 0xf1, 0x82, 0xdc, 0x82, 0xb8, 0x82, 0xd0, 0x82, 0xe8, 0x82, 0xb2, 0x1, 0x82, 0xaa, 0x82, 0xe8, 0x82, 0xea, 0x82, 0xed, 0x82, 0xe9, 0x82, 0xe7, 0x82, 0xe9, 0x82, 0xf1, 0x82, 0xdc, 0x82, 0xd9, 0x82, 0xb8, 0x82, 0xd6, 0x82, 0xe6, 0x82, 0xd0, 0x82, 0xf0, 0x82, 0xf0, 0x82, 0xb8, 0x82, 0xb5, 0x82, 0xac, 0x82, 0xd2, 0x82, 0xb8, 0x82, 0xdb, 0x82, 0xd8, 0x82, 0xb8, 0x82, 0xd0, 0x82, 0xe8, 0x82, 0xd9, 0x82, 0xb8, 0x82, 0xaa, 0x82, 0xea, 0x82, 0xd2]
+
+  prf:
+    11: 0x1  # Rapier      -> E rank sword
+    112: 0x4 # Dark breath -> A rank sword
+    113: 0x4 # Eckesachs   -> A rank sword
+
+  types:
+    0x0: sword
+    0x1: lance
+    0x2: axe
+    0x3: bow
+    0x4: staff
+    0x5: anima
+    0x6: light
+    0x7: dark
+    0xb: dragonstone/monster
+  e:
+    sword:
+      - 0x1
+      - 0x5
+    lance:
+      - 0x10
+      - 0x13
+      - 0x14
+      - 0x16
+    axe:
+      - 0x1b
+      - 0x1c
+      - 0x20
+      - 0x25
+    bow:
+      - 0x27
+    staff:
+      - 0x43
+      - 0x76
+    anima:
+      - 0x33
+    light:
+      - 0x3b
+    dark: # Also make Flux able to be wielded at e
+      - 0x3f
+    # Add Flametongue to all categories of dragonstone/monster
+    dragonstone/monster:
+      - 0x53
+      - 0x54
+  d:
+    sword:
+      - 0x2
+      - 0x3
+      - 0x6
+      - 0xa
+      - 0xe
+      - 0x74
+    lance:
+      - 0x11
+      - 0x18
+      - 0x75
+    axe:
+      - 0x1e
+      - 0x22
+      - 0x26
+    bow:
+      - 0x28
+      - 0x2a
+      - 0x2e
+    staff:
+      - 0x44
+      - 0x4d
+      - 0x51
+    anima:
+      - 0x34
+    light:
+      - 0x3b # Add lightning to D-rank because there are no D-rank light times
+    dark:
+      - 0x3f
+    dragonstone/monster:
+      - 0x53
+      - 0x54
+  c:
+    sword:
+      - 0x8
+      - 0xc
+      - 0xd
+      - 0x72
+      - 0x78
+    lance:
+      - 0x19
+      - 0x1a
+    axe:
+      - 0x23
+      - 0x24
+    bow:
+      - 0x2b
+      - 0x2d
+    staff:
+      - 0x45
+      - 0x4a
+      - 0x4e
+      - 0x52
+    anima:
+      - 0x36
+    light:
+      - 0x3c
+    dark:
+      - 0x40
+    dragonstone/monster:
+      - 0x53
+      - 0x54
+  b:
+    sword:
+      - 0x7
+    lance:
+      - 0x15
+      - 0x7e
+    axe:
+      - 0x1f
+    bow:
+      - 0x2c
+    staff:
+      - 0x46
+      - 0x49
+      - 0x4b
+      - 0x4c
+      - 0x50
+    anima:
+      - 0x37
+    light:
+      - 0x3c # Add Divine to B-rank since there is no B-rank light
+    dark:
+      - 0x41
+    dragonstone/monster:
+      - 0x53
+      - 0x54
+  a:
+    sword:
+      - 0x4
+      - 0x73
+      - 0x7d
+    lance:
+      - 0x12
+    axe:
+      - 0x1d
+      - 0x7f
+    bow:
+      - 0x29
+    staff:
+      - 0x47
+      - 0x48
+    anima:
+      - 0x35
+      - 0x39
+    light:
+      - 0x3d
+    dark:
+      - 0x38
+    dragonstone/monster:
+      - 0x53
+      - 0x54
+  s:
+    sword: []
+    lance: []
+    axe: []
+    bow: []
+    staff: []
+    anima: []
+    light: []
+    dark: []
+    dragonstone/monster: []

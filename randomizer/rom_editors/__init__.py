@@ -1,6 +1,8 @@
 """ Import everything from this directory """
 
 from versions import FEVersions
+from .fe6.promotion_editor import *
+from .fe6.character_editor import *
 from .fe7.character_editor import *
 from .fe8.character_editor import *
 
@@ -12,7 +14,7 @@ from .promotion_editor import PromotionEditor
 # FE8 changed a lot with the new promotion system
 VERSION_MAP = {
     "character": {
-        FEVersions.FE6: CharacterEditor,
+        FEVersions.FE6: FE6CharacterEditor,
         FEVersions.FE7: FE7CharacterEditor,
         FEVersions.FE8: FE8CharacterEditor,
     },
@@ -27,7 +29,7 @@ VERSION_MAP = {
         FEVersions.FE8: StatModifier,
     },
     "prom_edit": {
-        FEVersions.FE6: PromotionEditor,
+        FEVersions.FE6: FE6PromotionEditor,
         FEVersions.FE7: PromotionEditor,
         FEVersions.FE8: PromotionEditor,
     },

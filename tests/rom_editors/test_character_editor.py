@@ -57,15 +57,6 @@ def test_properties(m_char_editor, rom_data):
     assert m_char_editor.rom_data == rom_data
 
 
-def test_randomize(m_char_editor):
-    """ Test the randomize method """
-    m_char_editor.randomize()
-    assert m_char_editor.rom_data[0] == 48
-    assert m_char_editor.rom_data[1] == 100
-    assert m_char_editor.rom_data[2] == 50
-    assert m_char_editor.rom_data[3] == 51
-
-
 def test_get_new_class(char_editor, character_data):
     """ Test the get_new_class method """
     # Test with mix_promotes
