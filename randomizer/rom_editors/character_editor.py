@@ -214,7 +214,7 @@ class CharacterEditor:
         for _id, _class in self._class_stats["promotion"]["overrides"].items():
             self._rom_data[
                 self._class_stats["first"]
-                + (_id * self._class_stats["total_bytes"])
+                + (int(_id) * self._class_stats["total_bytes"])
                 + self._game_config["classes"]["character_stats"]["class_offset"]
             ] = _class
 
@@ -228,4 +228,4 @@ class CharacterEditor:
         for address, byte in self._game_config["classes"]["character_stats"][
             "overrides"
         ]["flyers"].items():
-            self._rom_data[address] = byte
+            self._rom_data[int(address)] = byte

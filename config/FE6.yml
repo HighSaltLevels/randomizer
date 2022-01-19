@@ -1141,6 +1141,7 @@ items:
     rank: 0x1c
     icon: 0x1d
     use: 0x1e
+    ability3: 0xa
 
   master_seal:
     name:

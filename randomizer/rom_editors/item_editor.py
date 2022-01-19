@@ -63,8 +63,11 @@ class ItemEditor:
         if item == 0:
             item = 1
 
-        if item in self._game_config["items"]["prf"]:
-            item = self._game_config["items"]["prf"][item]
+        # It's a key value pair of addresses to addresses
+        # The spec generator makes keys into strings tho
+        # so we have to compare as strings
+        if str(item) in self._game_config["items"]["prf"]:
+            item = self._game_config["items"]["prf"][str(item)]
 
         item_type = self._get_item_type(item)
         item_lvl = self._get_item_lvl(item, item_type)

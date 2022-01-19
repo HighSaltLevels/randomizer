@@ -19,4 +19,4 @@ class FE6CharacterEditor(CharacterEditor):
         for mem_loc, byte in self._game_config["classes"]["character_stats"][
             "overrides"
         ]["f_mercenary"].items():
-            self._rom_data[mem_loc] = byte
+            self._rom_data[int(mem_loc)] = byte

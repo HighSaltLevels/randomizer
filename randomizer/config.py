@@ -6,16 +6,11 @@ from pathlib import Path
 import yaml
 
 from constants import DEFAULT_CONFIG, FEVersions
+from spec import Spec
 
 CONFIG_PATH = os.path.join(str(Path.home()), ".config/randomizer")
 
 os.makedirs(CONFIG_PATH, exist_ok=True)
-
-CONFIG_MAP = {
-    FEVersions.FE6: f"{CONFIG_PATH}/FE6.yml",
-    FEVersions.FE7: f"{CONFIG_PATH}/FE7.yml",
-    FEVersions.FE8: f"{CONFIG_PATH}/FE8.yml",
-}
 
 
 class ConfigError(Exception):
@@ -49,9 +44,15 @@ class Config(dict):
             self.set_default()
 
     @staticmethod
-    def get_path(version):
+    def get_game_config(version):
         """ Get the version path by version """
-        return CONFIG_MAP[version]
+        if version == FEVersions.FE6:
+            return Spec.FE6
+
+        if version == FEVersions.FE7:
+            return Spec.FE7
+
+        return Spec.FE8
 
     def write(self):
         """ Write the config back to disk """
@@ -131,4 +132,4 @@ class Config(dict):
         return self["randomize"]["classes"]["all_master_seals"]
 
 
-CONFIG = Config(f"{CONFIG_PATH}/spec.yml")
+CONFIG = Config(f"{CONFIG_PATH}/config.yml")
