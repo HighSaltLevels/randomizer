@@ -15,8 +15,6 @@ class StatRandomizer:
     def __init__(self, game_config, rom_data):
         self._game_config = game_config
         self._rom_data = rom_data
-        self._character_stats = game_config["classes"]["character_stats"]
-        self._class_stats = self._game_config["classes"]["class_stats"]
 
         self._filters = None
 
@@ -34,48 +32,67 @@ class StatRandomizer:
 
     def randomize(self):
         """ Randomize the stats """
-        for stat_type in {"bases", "growths"}:
-            self.randomize_character_stats(stat_type)
+        self.randomize_character_stats()
 
         if "class" not in self._filters["bases"]:
             self.randomize_class_stats()
 
         return self._rom_data
 
+    def randomize_character_stats(self):
+        """ Randomize character stats that are not filtered out """
+        for character in self._game_config.characters:
+            for stat_type in {"bases", "growths"}:
+                if character.kind not in self._filters[stat_type]:
+                    if stat_type == "bases":
+                        self._randomize_character_stat(
+                            character,
+                            CONFIG["randomize"]["stats"]["bases"][character.kind][
+                                "minimum"
+                            ],
+                            CONFIG["randomize"]["stats"]["bases"][character.kind][
+                                "maximum"
+                            ],
+                            self._game_config.char_stats.totals.bases,
+                            self._game_config.char_stats.offsets.bases,
+                        )
+                    else:
+                        self._randomize_character_stat(
+                            character,
+                            CONFIG["randomize"]["stats"]["growths"][character.kind][
+                                "minimum"
+                            ],
+                            CONFIG["randomize"]["stats"]["growths"][character.kind][
+                                "maximum"
+                            ],
+                            self._game_config.char_stats.totals.growths,
+                            self._game_config.char_stats.offsets.growths,
+                        )
+
+    # pylint: disable=too-many-arguments
+    def _randomize_character_stat(self, character, min_, max_, num_stats, offset):
+        """ Write a random number between {min_} and {max} to the character stats """
+        for _id in character.id:
+            first_stat = (
+                self._game_config.char_stats.first
+                + (_id * self._game_config.sizes.character)
+                + offset
+            )
+            for idx in range(num_stats):
+                self._rom_data[first_stat + idx] = get_rand(min_, max_)
+
     def randomize_class_stats(self):
         """ Use CONFIG values to randomize bases of classes """
-        for class_idx in range(self._class_stats["num_classes"]):
+        min_ = CONFIG["randomize"]["stats"]["bases"]["class"]["minimum"]
+        max_ = CONFIG["randomize"]["stats"]["bases"]["class"]["maximum"]
+        for class_idx in range(self._game_config.totals.class_):
             first_stat = (
-                self._class_stats["first"]
-                + (class_idx * self._class_stats["total_bytes"])
-                + self._class_stats["bases_offset"]
+                self._game_config.class_stats.first
+                + (class_idx * self._game_config.sizes.class_)
+                + self._game_config.class_stats.offsets.bases
             )
-            min_ = CONFIG["randomize"]["stats"]["bases"]["class"]["minimum"]
-            max_ = CONFIG["randomize"]["stats"]["bases"]["class"]["maximum"]
-            for stat_offset in range(self._class_stats["num_bases"]):
-                rand = randint(min_, max_)
-                self._rom_data[first_stat + stat_offset] = rand
-
-    def randomize_character_stats(self, stat_type):
-        """ Use CONFIG values to randomize bases and growths """
-        characters = self._game_config["classes"]["characters"]
-        for character in characters:
-            kind = characters[character]["kind"]
-            if kind not in self._filters[stat_type]:
-                for char_id in characters[character]["id"]:
-                    first_stat = (
-                        self._character_stats["first"]
-                        + (char_id * self._character_stats["total_bytes"])
-                        + self._character_stats[f"{stat_type}_offset"]
-                    )
-                    min_ = CONFIG["randomize"]["stats"][stat_type][kind]["minimum"]
-                    max_ = CONFIG["randomize"]["stats"][stat_type][kind]["maximum"]
-                    for stat_offset in range(self._character_stats[f"num_{stat_type}"]):
-                        try:
-                            rand = randint(min_, max_)
-                        except ValueError:
-                            raise InvalidConfigError from ValueError
-                        self._rom_data[first_stat + stat_offset] = rand
+            for idx in range(self._game_config.class_stats.totals.bases):
+                self._rom_data[first_stat + idx] = get_rand(min_, max_)
 
 
 class StatModifier:
@@ -84,7 +101,6 @@ class StatModifier:
     def __init__(self, game_config, rom_data):
         self._game_config = game_config
         self._rom_data = rom_data
-        self._character_stats = game_config["classes"]["character_stats"]
 
         self._filters = None
 
@@ -102,33 +118,46 @@ class StatModifier:
 
     def modify(self):
         """ Modify bases and growths """
-        for stat_type in {"bases", "growths"}:
-            self.modify_character_stats(stat_type)
+        for character in self._game_config.characters:
+            for stat_type in {"bases", "growths"}:
+                if character.kind not in self._filters[stat_type]:
+                    self._modify_character_stat(character, stat_type)
 
         return self._rom_data
 
-    def modify_character_stats(self, stat_type):
-        """ Use CONFIG values to modify bases and growths """
-        characters = self._game_config["classes"]["characters"]
-        for character in characters:
-            self.modify_character_stat(stat_type, characters, character)
-
-    def modify_character_stat(self, stat_type, characters, character):
+    def _modify_character_stat(self, character, stat_type):
         """ Use CONFIG values to modify the character """
-        kind = characters[character]["kind"]
-        if kind not in self._filters[stat_type]:
-            for char_id in characters[character]["id"]:
-                first_stat = (
-                    self._character_stats["first"]
-                    + (char_id * self._character_stats["total_bytes"])
-                    + self._character_stats[f"{stat_type}_offset"]
+        num_stats = (
+            self._game_config.char_stats.totals.bases
+            if stat_type == "bases"
+            else self._game_config.char_stats.totals.growths
+        )
+        offset = (
+            self._game_config.char_stats.offsets.bases
+            if stat_type == "bases"
+            else self._game_config.char_stats.offsets.growths
+        )
+        for char_id in character.id:
+            first_stat = (
+                self._game_config.char_stats.first
+                + (char_id * self._game_config.sizes.character)
+                + offset
+            )
+            for idx in range(num_stats):
+                stat = (
+                    self._rom_data[first_stat + idx]
+                    + CONFIG["modify"]["stats"][stat_type][character.kind]["modifier"]
                 )
-                for stat_offset in range(self._character_stats[f"num_{stat_type}"]):
-                    stat = (
-                        self._rom_data[first_stat + stat_offset]
-                        + CONFIG["modify"]["stats"][stat_type][kind]["modifier"]
-                    )
-                    stat = 0 if stat < 0 else stat
-                    stat = 255 if stat > 255 else stat
+                # Floor at 0 and ceiling at 255
+                stat = 0 if stat < 0 else stat
+                stat = 255 if stat > 255 else stat
 
-                    self._rom_data[first_stat + stat_offset] = stat
+                self._rom_data[first_stat + idx] = stat
+
+
+def get_rand(minimum, maximum):
+    """ Generate a random number between {minimum} and {maximum} """
+    try:
+        return randint(minimum, maximum)
+    except ValueError:
+        raise InvalidConfigError from ValueError

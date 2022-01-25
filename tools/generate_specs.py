@@ -6,6 +6,7 @@ binary.
 """
 import os
 import json
+import sys
 import yaml
 
 
@@ -21,17 +22,20 @@ def read_file(file_):
     with open(file_) as reader:
         return reader.read()
 
+
 def write_file(file_, contents):
     """ Write {contents} to the {file_} """
     print(f"Writing {file_}...")
     with open(file_, "w") as writer:
         writer.write(contents)
 
+
 def run_black():
     """ Run the black formatter to clean it up """
     # Doesn't matter if it fails or not
     print("Attempting to run the black formatter")
     os.system("black randomizer/spec.py")
+
 
 def _main():
     """ Convert the yaml to consumable python """
@@ -41,7 +45,15 @@ def _main():
         template = template.replace(f"{version}PLACEHOLDER", json.dumps(config))
 
     write_file("randomizer/spec.py", template)
+    try:
+        if sys.argv[1] == "--no-black":
+            print("Skipping black formatter")
+            return
+    except IndexError:
+        pass
+
     run_black()
+
 
 if __name__ == "__main__":
     _main()

@@ -197,7 +197,6 @@ class RandomizerHandler:
             self._game_config, self._rom_data, self._version
         )
         prom_editor.make_all_master_seals()
-        prom_editor.add_classes_to_promotion()
         prom_editor.handle_overrides()
         self._rom_data = prom_editor.rom_data
 

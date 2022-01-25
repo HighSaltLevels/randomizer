@@ -16,7 +16,5 @@ class FE6CharacterEditor(CharacterEditor):
         missing a valid Name and Animation Pointer. Let's just use the
         same ones as the male mercenary
         """
-        for mem_loc, byte in self._game_config["classes"]["character_stats"][
-            "overrides"
-        ]["f_mercenary"].items():
-            self._rom_data[int(mem_loc)] = byte
+        for override in self._game_config.char_stats.overrides.f_mercenary:
+            self._rom_data[override.address] = override.byte
