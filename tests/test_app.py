@@ -5,7 +5,6 @@ from unittest import mock
 from app import Randomizer
 
 
-@mock.patch("app.APP")
 def test_init(m_app):
     """ Test the init since the other tests use a mocked version """
     rand = Randomizer()

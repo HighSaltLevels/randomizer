@@ -66,6 +66,8 @@ class FE7ItemEditor(ItemEditor):
             if character.name == name:
                 return character
 
+        raise ValueError(f"No known character {name}")
+
     def _get_s_ranks(self):
         """ Fetch all of the S rank weapons and form them into a dict """
         s_ranks = {type_: [] for type_ in WEAPON_MAP.values()}

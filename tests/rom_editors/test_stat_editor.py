@@ -1,74 +1,122 @@
 """ Test Suite for the StatRandomizer and StatModifier classes """
 
-import copy
 from unittest import mock
 
 import pytest
 
-from rom_editors.stat_editor import StatRandomizer, StatModifier, InvalidConfigError
+from rom_editors.stat_editor import (
+    StatRandomizer,
+    StatModifier,
+    InvalidConfigError,
+    get_rand,
+)
+
+
+# Some tests can only work by using protected attributes and methods.
+# pylint: disable=protected-access
 
 
 @pytest.fixture(name="stat_rand")
-def create_stat_randomizer(game_config, rom_data):
+def create_stat_randomizer(rom_data):
     """ Create a StatRandomizer for testing """
-    stat_rand = StatRandomizer(game_config, rom_data)
+    stat_rand = StatRandomizer(mock.MagicMock(), rom_data)
     stat_rand.set_filters([], [])
     return stat_rand
 
 
 @pytest.fixture(name="stat_mod")
-def create_stat_mod(game_config, rom_data):
+def create_stat_mod(rom_data):
     """ Create a StatModifier for testing """
-    stat_mod = StatModifier(game_config, rom_data)
+    stat_mod = StatModifier(mock.MagicMock(), rom_data)
     stat_mod.set_filters([], [])
     return stat_mod
 
 
 def test_randomize(stat_rand):
     """ Test the randomize method """
-    with mock.patch.object(stat_rand, "randomize_character_stats") as rand_stat:
-        with mock.patch.object(stat_rand, "randomize_class_stats"):
+    with mock.patch.object(stat_rand, "randomize_character_stats") as m_char:
+        with mock.patch.object(stat_rand, "randomize_class_stats") as m_class:
             stat_rand.randomize()
-            rand_stat.assert_any_call("bases")
-            rand_stat.assert_any_call("growths")
-
-
-def test_randomize_class_stats(stat_rand):
-    """ Test the randomize_class_stats method """
-    old_data = copy.deepcopy(stat_rand.rom_data)
-    stat_rand.randomize_class_stats()
-    # The likelihood that the 4 changed bytes would be the same is low
-    # But can happen. If this test fails. Try again ¯\_(ツ)_/¯
-    assert stat_rand.rom_data != old_data
+            m_char.assert_called_once()
+            m_class.assert_called_once()
 
 
 def test_randomize_character_stats(stat_rand):
     """ Test the randomize_character_stats method """
-    old_data = copy.deepcopy(stat_rand.rom_data)
-    for stat_type in {"growths", "bases"}:
-        stat_rand.randomize_character_stats(stat_type)
-        # The likelihood that the 4 changed bytes would be the same is low
-        # But can happen. If this test fails. Try again ¯\_(ツ)_/¯
-        assert stat_rand.rom_data != old_data
+    m_char = mock.MagicMock()
+    m_char.kind = "boss"
+    stat_rand._game_config.characters = [m_char]
 
-    # Test the invalid config error due to poor min and max values
-    with mock.patch("rom_editors.stat_editor.randint", side_effect=ValueError):
-        with pytest.raises(InvalidConfigError):
-            stat_rand.randomize_character_stats("bases")
+    with mock.patch.object(stat_rand, "_randomize_character_stat") as m_rand:
+        stat_rand.randomize_character_stats()
+        m_rand.assert_called()
+
+
+def test_randomize_character_stat(stat_rand):
+    """ Test the _randomize_character_stat method """
+    m_char = mock.MagicMock()
+    m_char.id = [0]
+    stat_rand._game_config.char_stats.first = 0
+    stat_rand._game_config.sizes.character = 5
+
+    with mock.patch("rom_editors.stat_editor.get_rand"):
+        stat_rand._randomize_character_stat(m_char, 0, 1, 2, 10)
+
+    expected_values = bytearray(byte for byte in range(64))
+    expected_values[10] = 1
+    expected_values[11] = 1
+    assert stat_rand.rom_data == expected_values
+
+
+def test_randomize_class_stats(stat_rand):
+    """ Test the _randomize_class_stats method """
+    stat_rand._game_config.totals.class_ = 1
+    stat_rand._game_config.class_stats.first = 0
+    stat_rand._game_config.class_stats.offsets.bases = 5
+    stat_rand._game_config.class_stats.totals.bases = 2
+
+    with mock.patch("rom_editors.stat_editor.get_rand"):
+        stat_rand.randomize_class_stats()
+
+    expected_values = bytearray(byte for byte in range(64))
+    expected_values[1] = 1
+    assert stat_rand.rom_data == expected_values
 
 
 def test_modify(stat_mod):
     """ Test the modify method """
-    with mock.patch.object(stat_mod, "modify_character_stats") as mod_stat:
+    stat_mod._game_config.characters = [mock.MagicMock()]
+    with mock.patch.object(stat_mod, "_modify_character_stat") as m_mod:
         stat_mod.modify()
-        mod_stat.assert_any_call("bases")
-        mod_stat.assert_any_call("growths")
+        m_mod.assert_called()
 
 
-def test_modify_character_stats(stat_mod):
-    """ Test the modify_character_stats method """
-    for stat_type in {"bases", "growths"}:
-        stat_mod.modify_character_stats(stat_type)
+def test_modify_character_stat(stat_mod):
+    """ Test the _modify_character_stat method """
+    m_char = mock.MagicMock()
+    m_char.id = [0]
+    m_char.kind = "boss"
 
-    assert stat_mod.rom_data[3] == 46
-    assert stat_mod.rom_data[4] == 152
+    stat_mod._game_config.char_stats.totals.bases = 1
+    stat_mod._game_config.char_stats.totals.growths = 1
+    stat_mod._game_config.char_stats.offsets.bases = 3
+    stat_mod._game_config.char_stats.offsets.growths = 6
+    stat_mod._game_config.char_stats.first = 0
+    stat_mod._game_config.sizes.character = 10
+
+    stat_mod._modify_character_stat(m_char, "bases")
+    stat_mod._modify_character_stat(m_char, "growths")
+    expected_values = bytearray(byte for byte in range(64))
+    expected_values[3] = 8
+    expected_values[6] = 11
+    assert stat_mod.rom_data == expected_values
+
+
+def test_get_rand():
+    """ Test the get_rand function """
+    # Test with valid configurations
+    assert get_rand(0, 50) in range(50)
+
+    # Test with invalid configurations
+    with pytest.raises(InvalidConfigError):
+        get_rand(0, -50)
