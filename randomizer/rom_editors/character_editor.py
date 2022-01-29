@@ -45,6 +45,7 @@ class CharacterEditor:
                 weapon_type = self.get_weapon_type_for_class(new_class)
                 self._item_editor.load(character.item_pos, new_class, weapon_type)
                 self._item_editor.randomize()
+                self._item_editor.handle_overrides()
 
         self.randomize_palettes()
         self.add_promotions()
