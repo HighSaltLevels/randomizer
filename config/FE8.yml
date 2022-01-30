@@ -1,1344 +1,1340 @@
-classes:
-  class_stats:
-    first: 0x807110
-    num_classes: 0x80
-    total_bytes: 0x54
-    promotion:
-      offset: 0x29
-      bit_mask: 1
-      overrides: {} # Nothing to override in this game
+sizes: # Sizes in bytes
+  class_: 0x54
+  character: 0x34
+  item: 0x24
+  palette: 0x7
+  promotion: 0x2
 
-    blacklist: [0x7b, 0x7a, 0x79, 0x78, 0x77, 0x76, 0x75, 0x74, 0x73, 0x72, 0x71, 0x70, 0x6f, 0x6e, 0x6d, 0x6c, 0x6b, 0x6a, 0x69, 0x68, 0x67, 0x4e, 0xe, 0x34, 0x47, 0x3d, 0x3e, 0x0]
-    staff_only: [0x4b, 0x4a, 0x45]
-    other: [0x4d, 0x51, 0x50, 0x4c, 0x62, 0x65, 0x66, 0x46, 0x3c]
-    ranged_monster: [0x5f, 0x60, 0x61, 0x65]
+totals:
+  class_: 0x80
+  palettes: 0x6c
+  promotion_classes: 0x2
 
-    weapon_offset: 0x2c
-    bases_offset: 0xb
-    num_bases: 7
+class_stats:
+  first: 0x807110
+  promotion:
+    bit_mask: 1
+    overrides: [] # Nothing to override in this game
 
-    id_offset: 4
+  blacklist: [0x7b, 0x7a, 0x79, 0x78, 0x77, 0x76, 0x75, 0x74, 0x73, 0x72, 0x71, 0x70, 0x6f, 0x6e, 0x6d, 0x6c, 0x6b, 0x6a, 0x69, 0x68, 0x67, 0x4e, 0xe, 0x34, 0x47, 0x3d, 0x3e, 0x0]
+  staff_only: [0x4b, 0x4a, 0x45]
+  other: [0x4d, 0x51, 0x50, 0x4c, 0x62, 0x65, 0x66, 0x46, 0x3c]
+  ranged_monster: [0x5f, 0x60, 0x61, 0x65]
 
-    manakete: 0x3c
+  offsets:
+    weapon: 0x2c
+    bases: 0xb
+    id: 0x4
+    promotion: 0x29
 
-  character_stats:
-    first: 0x803D30
+  totals:
+   bases: 7
 
-    # Total bytes of memory a character takes up
-    total_bytes: 0x34
+  manakete: 0x3c
+  manakete_f: 0xFF # Unused in this game
 
-    # Num bytes from start of character to their class ID
-    class_offset: 0x5
+char_stats:
+  first: 0x803D30
 
-    # Num bytes from start of character to first weapon lvl
-    weapon_offset: 0x14
+  offsets:
+    class_: 0x5
+    weapon: 0x14
+    bases: 0xc
+    growths: 0x1c
 
-    # Num bytes from start of character to first base stat
-    bases_offset: 0xc
-    num_bases: 8
+  totals:
+    bases: 8
+    growths: 7
 
-    # Num bytes from start of character to first growth rate
-    growths_offset: 0x1c
-    num_growths: 7
+  # Classes who are in the ban list but need reclassing to a
+  # promoted class
+  promotion_overrides: [0xbe, 0x41]
 
-    # Classes who are in the ban list but need reclassing to a
-    # promoted class
-    promotion_overrides: [0xbe, 0x41]
+  overrides:
+    flyers: []
 
-    overrides:
-      flyers: {}
+palette_stats:
+  first_palette: 0x95ee9d
+  first_class: 0x95e09d
 
-  palette_stats:
-    first_palette: 0x95ee9d
-    first_class: 0x95e09d
+  offsets:
+    base_class: 0x1
+    promoted_class: 0x3
 
-    base_class_offset: 1
-    promoted_class_offset: 3
+  totals:
+    promoted_class: 0x2
 
-    num_promoted_classes: 2
+promotion_stats:
+  first: 0x95DFA4
 
-    num_palettes: 0x6c
-
-    total_bytes: 7
-
-  promotion_stats:
-    first: 0x95DFA4
-    total_bytes: 2
-
-  characters:
-    # Name
-      # Character Identifier
-      # Character Location
-      # Character Kind
-      # List of character starting locations
-        # Location of Item: Item ID
-    O'Neill:
-      id:
-        - 0x68
-      location:
-        - 0x8B3C51
-      kind: boss
-      item_pos:
-        - 0x8b3c5c
-    Seth:
-      id:
-        - 0x02
-      location:
-        - 0x8B3C15
-        - 0x8B3D41
-        - 0x8B3F69
-        - 0x8B40B5
-        - 0x8B42E1
-        - 0x8B4601
-        - 0x8B4D3D
-        - 0x8B4991
-        - 0x8B4A45
-        - 0x8B56BD
-        - 0x8B5A05
-        - 0x8B63ED
-        - 0x8B64B5
-        - 0x8B6EDD
-        - 0x8B7121
-        - 0x8B7725
-        - 0x8B824D
-        - 0x8B83A9
-        - 0x8B8185
-        - 0x8B81FD
-        - 0x8B8B59
-        - 0x8BA635
-        - 0x8BB9D9
-        - 0x8BAF9D
-        - 0x8BC365
-        - 0x8BC4E9
-        - 0x8BD671
-        - 0x8BDA09
-        - 0x8BDA45
-        - 0x8BD3F9
-        - 0x8BDB21
-        - 0x8BD449
-        - 0x8BDC4D
-        - 0x8BDC89
-        - 0x8BDCB1
-        - 0x8BDCD9
-        - 0x8BD525
-        - 0x8BD5B1
-        - 0x8BF435
-        - 0x8BF435
-        - 0x8BF3A9
-        - 0x8C09FD
-        - 0x8C1685
-        - 0x8C1F95
-        - 0x8C28E1
-        - 0x8C33C1
-        - 0x8C3D91
-        - 0x8C3259
-        - 0x8C4DD5
-        - 0x8C4D0D
-        - 0x8C53B5
-        - 0x8C66B1
-        - 0x8C69FD
-        - 0x8C6A9D
-        - 0x8C6B01
-        - 0x8C6B65
-        - 0x8C6CCD
-        - 0x8C74E1
-        - 0x8C8E85
-        - 0x8C8EC1
-        - 0x8B9F3D
-        - 0x8B9E71
-        - 0x8C4301
-      kind: playable
-      item_pos:
-        - 0x8B3F74
-        - 0x8b3c20
-        - 0x8b3c21
-        - 0x8B40C0
-        - 0x8B40C1
-        - 0x8B42EC
-        - 0x8B42ED
-        - 0x8B460C
-        - 0x8B460D
-        - 0x8B499C
-        - 0x8B499D
-        - 0x8B4A50
-        - 0x8B4A51
-        - 0x8B56C8
-        - 0x8B56C9
-        - 0x8B5A10
-        - 0x8B5A11
-        - 0x8B63F8
-        - 0x8B63F9
-        - 0x8B6EE8
-        - 0x8B6EE9
-    Eirika:
-      id:
-        - 0x01
-      location:
-        - 0x8B3C29
-        - 0x8B3D2D
-        - 0x8B3F91
-        - 0x8B4575
-        - 0x8B4D29
-        - 0x8B40A1
-        - 0x8B42CD
-        - 0x8B4905
-        - 0x8B49CD
-        - 0x8B5631
-        - 0x8B783D
-        - 0x8B788D
-        - 0x8B59F1
-        - 0x8B63D9
-        - 0x8B64C9
-        - 0x8B6E79
-        - 0x8B710D
-        - 0x8B7301
-        - 0x8B7711
-        - 0x8B8261
-        - 0x8B8395
-        - 0x8B815D
-        - 0x8B81E9
-        - 0x8B8B45
-        - 0x8BA649
-        - 0x8BB9C5
-        - 0x8BB9C5
-        - 0x8BC351
-        - 0x8BC225
-        - 0x8BC289
-        - 0x8BC4D5
-        - 0x8BD65D
-        - 0x8BDA6D
-        - 0x8BD3D1
-        - 0x8BDB0D 
-        - 0x8BD435 
-        - 0x8BDC39 
-        - 0x8BD511 
-        - 0x8BD59D 
-        - 0x8BE54D 
-        - 0x8BE4D5 
-        - 0x8BF3D1 
-        - 0x8BF345 
-        - 0x8BF359 
-        - 0x8C0BF5 
-        - 0x8C08F9 
-        - 0x8C09D5 
-        - 0x8C165D 
-        - 0x8C1E5D 
-        - 0x8C1DD1 
-        - 0x8C1F59 
-        - 0x8C72C5 
-        - 0x8C8E21 
-        - 0x8C8EAD 
-        - 0x8C0A89 
-        - 0x8CB629 
-        - 0x8B9F65 
-        - 0x8B9E49 
-      kind: playable
-      item_pos:
-        - 0x8B3C35
-        - 0x8B40AC
-        - 0x8B42D8
-        - 0x8c72d0
-        - 0x8c72d1
-        - 0x8B4910
-        - 0x8B4580
-        - 0x8B49D8
-        - 0x8B563C
-        - 0x8B59FC
-        - 0x8B4910
-        - 0x8B63E4
-        - 0x8B6E84
-        - 0x8B730C
-    Franz:
-      id:
-        - 0x04
-      location:
-        - 0x8B3DA5
-        - 0x8B3F7D
-        - 0x8B417D
-        - 0x8B42F5
-        - 0x8B45D9
-        - 0x8B5695
-        - 0x8B6415
-        - 0x8B6F19
-        - 0x8B7365
-        - 0x8B83D1
-        - 0x8BD6E9
-        - 0x8BDB85
-      kind: playable
-      item_pos:
-        - 0x8b4188
-        - 0x8b4189
-        - 0x8B4300
-        - 0x8B45E4
-        - 0x8B45E5
-        - 0x8B56A0
-        - 0x8B56A1
-        - 0x8B6420
-        - 0x8B6421
-        - 0x8B6F24
-        - 0x8B6F25
-        - 0x8B7370
-        - 0x8B7371
-    Gilliam:
-      id:
-        - 0x03
-      location:
-        - 0x8B4191
-        - 0x8B4309
-        - 0x8B45C5
-        - 0x8B4969
-        - 0x8B4A1D
-        - 0x8B5681
-        - 0x8B6401
-        - 0x8B6E8D
-        - 0x8B7351
-        - 0x8B83BD
-      kind: playable
-      item_pos:
-        - 0x8b419c
-        - 0x8B4314
-        - 0x8B45D0
-        - 0x8B4974
-        - 0x8B4A28
-        - 0x8B568C
-        - 0x8B640C
-        - 0x8B640D
-        - 0x8B6E98
-        - 0x8B735C
-    Breguet:
-      id:
-        - 0x46
-      location:
-        - 0x8B40DD
-      kind: boss
-      item_pos:
-        - 0x8b40e8
-    Moulder:
-      id:
-        - 0x05
-      location:
-        - 0x8B431D
-        - 0x8B4589
-        - 0x8B492D
-        - 0x8B49E1
-        - 0x8B6429
-        - 0x8B6EB5
-        - 0x8B7315
-        - 0x8B83E5
-        - 0x8B43E5
-      kind: playable
-      item_pos:
-        - 0x8b4328
-        - 0x8B4594
-        - 0x8B4938
-        - 0x8B49EC
-        - 0x8B6434
-        - 0x8B6435
-        - 0x8B6EC0
-        - 0x8B7320
-        - 0x8B43F0
-    Bone:
-      id:
-        - 0x47
-      location:
-        - 0x8B436D
-      kind: boss
-      item_pos:
-        - 0x8b4378
-    Vanessa:
-      id:
-        - 0x06
-      location:
-        - 0x8B440D
-        - 0x8B45B1
-        - 0x8B4955
-        - 0x8B4A09
-        - 0x8B566D
-        - 0x8B643D
-        - 0x8B6F05
-        - 0x8B733D
-        - 0x8B840D
-        - 0x8B43D1
-      kind: playable
-      item_pos:
-        - 0x8b4418
-        - 0x8b4419
-        - 0x8B45BC
-        - 0x8B4960
-        - 0x8B4A14
-        - 0x8B5678
-        - 0x8B6448
-        - 0x8B6449
-        - 0x8B6F10
-        - 0x8B7348
-        - 0x8B43DC
-        - 0x8B43DD
-    Ross:
-      id:
-        - 0x07
-      location:
-        - 0x8B4435
-        - 0x8B459D
-        - 0x8B49A5
-        - 0x8B4A59
-        - 0x8B6465
-        - 0x8B7379
-      kind: playable
-      item_pos:
-        - 0x8b4440
-        - 0x8B45A8
-        - 0x8B49B0
-        - 0x8B4A64
-        - 0x8B6470
-        - 0x8B6471
-        - 0x8B7384
-    Garcia:
-      id:
-        - 0x0a
-      location:
-        - 0x8B4449
-        - 0x8B4615
-        - 0x8B6479
-        - 0x8B6EC9
-        - 0x8B738D
-      kind: playable
-      item_pos:
-        - 0x8b4454
-        - 0x8b4455
-        - 0x8B4620
-        - 0x8B6484
-        - 0x8B6485
-        - 0x8B6ED4
-        - 0x8B6ED5
-        - 0x8B7398
-    Neimi:
-      id:
-        - 0x08
-      location:
-        - 0x8B45ED
-        - 0x8B497D
-        - 0x8B4A31
-        - 0x8B56A9
-        - 0x8B6451
-        - 0x8B6EA1
-      kind: playable
-      item_pos:
-        - 0x8b45f8
-        - 0x8B4988
-        - 0x8B4A3C
-        - 0x8B56B4
-        - 0x8B645C
-        - 0x8B645D
-        - 0x8B6EAC
-    Colm:
-      id:
-        - 0x09
-      location:
-        - 0x8B4719
-        - 0x8B4941
-        - 0x8B49F5
-        - 0x8B5659
-        - 0x8B648D
-        - 0x8B6EF1
-        - 0x8B7329
-      kind: playable
-      item_pos:
-        - 0x8b4724
-        - 0x8B494C
-        - 0x8B4A00
-        - 0x8B5664
-        - 0x8B6498
-        - 0x8B6EFC
-        - 0x8B7334
-    Bazba:
-      id:
-        - 0x48
-      location:
-        - 0x8B44AD
-        - 0x8B463D
-      kind: boss
-      item_pos:
-        - 0x8B44B8
-        - 0x8b4648
-        - 0x8b4649
-    Lute:
-      id:
-        - 0x0c
-      location:
-        - 0x8B4BFD
-      kind: playable
-      item_pos:
-        - 0x8B4C08
-    Artur:
-      id:
-        - 0x13
-      location:
-        - 0x8B4919
-        - 0x8B4BD5
-        - 0x8B56D1
-        - 0x8B6F2C
-        - 0x8B73A1
-      kind: playable
-      item_pos:
-        - 0x8b4924
-        - 0x8B4BE0
-        - 0x8B56DC
-        - 0x8B6F38
-        - 0x8B73AC
-    Ephraim:
-      id:
-        - 0x0f
-      location:
-        - 0x8B5A65
-        - 0x8B5DFD
-        - 0x8B5E95
-        - 0x8B5D49
-        - 0x8B5F7D
-        - 0x8B7851
-        - 0x8B75F9
-        - 0x8BCAE9
-        - 0x8BD649
-        - 0x8BDA59
-        - 0x8BD3E5
-        - 0x8BDAF9
-        - 0x8BD421
-        - 0x8BDC25
-        - 0x8BD4FD
-        - 0x8BD589
-        - 0x8BE539
-        - 0x8BE4E9
-        - 0x8BF3E5
-        - 0x8BF45D
-        - 0x8BF345
-        - 0x8C0BE1
-        - 0x8C090D
-        - 0x8C09E9
-        - 0x8C1671
-        - 0x8C1E71
-        - 0x8C1DE5
-        - 0x8C1F45
-        - 0x8C28CD
-        - 0x8C33AD
-        - 0x8C3D7D
-        - 0x8C3245
-        - 0x8C4DC1
-        - 0x8C4D21
-        - 0x8C54CD
-        - 0x8C53A1
-        - 0x8C6C05
-        - 0x8C69E9
-        - 0x8C6A89
-        - 0x8C6AED
-        - 0x8C6B51
-        - 0x8C6CB9
-        - 0x8C66D9
-        - 0x8C74F5
-        - 0x8C8E35
-        - 0x8C0A9D
-        - 0x8CB63D
-        - 0x8C42C5
-      kind: playable
-      item_pos:
-        - 0x8b5a70
-        - 0x8b5a71
-        - 0x8bcaf4
-        - 0x8bcaf5
-        - 0x8B7604
-        - 0x8B7605
-    Forde:
-      id:
-        - 0x10
-      location:
-        - 0x8B5A79
-        - 0x8B5E11
-        - 0x8B5EA9
-        - 0x8B5D71
-        - 0x8B5F91
-        - 0x8B760D
-        - 0x8BD6C1
-        - 0x8BDB5D
-      kind: playable
-      item_pos:
-        - 0x8b5a84
-        - 0x8b5a85
-        - 0x8B7618
-        - 0x8B7619
-    Kyle:
-      id:
-        - 0x11
-      location:
-        - 0x8B5A8D
-        - 0x8B5E25
-        - 0x8B5EBD
-        - 0x8B5D5D
-        - 0x8B5FA5
-        - 0x8B7621
-        - 0x8B83F9
-        - 0x8BD6D5
-        - 0x8BDB71
-      kind: playable
-      item_pos:
-        - 0x8b5a98
-        - 0x8b5a99
-        - 0x8B762C
-        - 0x8B762D
-    Orson:
-      id:
-        - 0x24
-        - 0x42
-        - 0x6d
-      location:
-        - 0x8B5AA1
-        - 0x8B5ED1
-        - 0x8B7149
-        - 0x8B76FD
-        - 0x8BD84D
-        - 0x8BD875
-        - 0x8BCF5D
-        - 0x8C774D
-      kind: boss
-      item_pos:
-        - 0x8b5aac
-        - 0x8b5aad
-        - 0x8b5aac
-        - 0x8b5aad
-        - 0x8bcf68
-        - 0x8bcf69
-        - 0x8c7758
-        - 0x8c7759
-    Zonta:
-      id:
-        - 0x6a
-      location:
-        - 0x8B5B05
-      kind: boss
-      item_pos:
-        - 0x8b5b10
-    Natasha:
-      id:
-        - 0x0d
-      location:
-        - 0x8B5645
-        - 0x8B5951
-        - 0x8B59C9
-      kind: playable
-      item_pos:
-        - 0x8B5650
-        - 0x8B595C
-        - 0x8B59D4
-    Saar:
-      id:
-        - 0x4a
-      location:
-        - 0x8B5979
-        - 0x8B56F9
-      kind: boss
-      item_pos:
-        - 0x8b5704
-    Joshua:
-      id:
-        - 0x20
-      location:
-        - 0x8B593D
-        - 0x8B5915
-        - 0x8BC2C5
-        - 0x8BC525
-      kind: playable
-      item_pos:
-        - 0x8b5920
-    Novala:
-      id:
-        - 0x4b
-      location:
-        - 0x8B62FD
-      kind: boss
-      item_pos:
-        - 0x8b6308
-    Murray:
-      id:
-        - 0x4c
-      location:
-        - 0x8B7095
-      kind: boss
-      item_pos:
-        - 0x8b70a0
-        - 0x8b70a1
-    Tirado:
-      id:
-        - 0x4d
-      location:
-        - 0x8B5DAD
-        - 0x8B774D
-        - 0x8B73C9
-      kind: boss
-      item_pos:
-        - 0x8b73d4
-        - 0x8b73d5
-    Tana:
-      id:
-        - 0x22
-      location:
-        - 0x8B7C21
-        - 0x8B8449
-        - 0x8B8171
-        - 0x8C282D
-        - 0x8C26D9
-      kind: playable
-      item_pos:
-        - 0x8b7c2c
-        - 0x8b7c2d
-    Binks:
-      id:
-        - 0x4e
-      location:
-        - 0x8B8225
-        - 0x8B7CFD
-      kind: boss
-      item_pos:
-        - 0x8b7d08
-        - 0x8b7d09
-    Amelia:
-      id:
-        - 0x12
-      location:
-        - 0x8B80F9
-        - 0x8BAF11
-        - 0x8C2891
-        - 0x8C26B1
-      kind: playable
-      item_pos:
-        - 0x8B8104
-        - 0x8BAF1C
-        - 0x8C26BC
-        - 0x8C289C
-    Innes:
-      id:
-        - 0x0b
-      location:
-        - 0x8B898D
-        - 0x8BA60D
-        - 0x8BB9ED
-        - 0x8BAF89
-        - 0x8BC38D
-        - 0x8BC211
-        - 0x8BC2D9
-        - 0x8BC511
-        - 0x8BD6AD
-        - 0x8BD485
-        - 0x8BD4C1
-        - 0x8BD561
-        - 0x8BE4C1
-        - 0x8BF3F9
-        - 0x8BF485
-        - 0x8BF381
-        - 0x8C0C1D
-        - 0x8C0935
-        - 0x8C16AD
-        - 0x8C1E85
-        - 0x8C1DF9
-        - 0x8C72D9
-        - 0x8C8E49
-        - 0x8C8ED5
-        - 0x8C0AB1
-        - 0x8CB651
-        - 0x8B9F51
-        - 0x8B9E5D
-      kind: playable
-      item_pos:
-        - 0x8b8998
-        - 0x8c72e4
-    Gerik:
-      id:
-        - 0x14
-      location: 
-        - 0x8B89A1
-        - 0x8C529D
-        - 0x8B9E85
-      kind: playable
-      item_pos:
-        - 0x8b89ac
-        - 0x8c52a8
-    Tethys:
-      id:
-        - 0x15
-      location:
-        - 0x8B89B5
-        - 0x8C5289
-        - 0x8B9E35
-      kind: playable
-      item_pos:
-        - 0x8b89c3
-        - 0x8c5296
-    Pablo:
-      id:
-        - 0x4f
-        - 0x54
-      location:
-        - 0x8B8645
-        - 0x8BACA5
-      kind: boss
-      item_pos:
-        - 0x8b8650
-        - 0x8BACB0
-        - 0x8BACB1
-    Marisa:
-      id:
-        - 0x16
-      location:
-        - 0x8B8825
-        - 0x8C48AD
-      kind: playable
-      item_pos:
-        - 0x8b8830
-        - 0x8c48b8
-    Ewan:
-      id:
-        - 0x18
-      location:
-        - 0x8BA5D1
-        - 0x8BA671
-        - 0x8C4AB5
-        - 0x8C4D99
-        - 0x8BA019
-        - 0x8B9E21
-      kind: playable
-      item_pos:
-        - 0x8ba5dc
-        - 0x8c4ac0
-    Saleh:
-      id:
-        - 0x17
-      location:
-        - 0x8BA5F9
-        - 0x8BA185
-        - 0x8C4D85
-        - 0x8C72ED
-        - 0x8B9F15
-      kind: playable
-      item_pos:
-        - 0x8BA604
-        - 0x8BA605
-        - 0x8ba190
-        - 0x8ba191
-        - 0x8c72f8
-        - 0x8c72f9
-    Cormag:
-      id:
-        - 0x0e
-      location:
-        - 0x8B59A1
-        - 0x8B96E1
-        - 0x8BAED5
-        - 0x8C31F5
-        - 0x8C3051
-      kind: playable
-      item_pos:
-        - 0x8baee0
-        - 0x8baee1
-        - 0x8c305c
-        - 0x8c305d
-    Aias:
-      id:
-        - 0x51
-      location:
-        - 0x8BBA81
-        - 0x8BAA4D
-      kind: boss
-      item_pos:
-        - 0x8baa58
-        - 0x8baa59
-        - 0x8baa5a
-    Carlyle:
-      id:
-        - 0x52
-      location:
-        - 0x8BBFCD
-      kind: boss
-      item_pos:
-        - 0x8BBFD8
-    Rennac:
-      id:
-        - 0x1c
-      location:
-        - 0x8B4CED
-        - 0x8B4D8D
-        - 0x8B81D5
-        - 0x8BBF91
-        - 0x8C33FD
-        - 0x8C646D
-      kind: playable
-      item_pos:
-        - 0x8B4CF8
-        - 0x8B4D98
-        - 0x8bbf9c
-        - 0x8c6478
-    Knoll:
-      id:
-        - 0x1f
-      location:
-        - 0x8BCAD5
-        - 0x8C6B29
-        - 0x8C6BDD
-        - 0x8C6C55
-        - 0x8C6445
-        - 0x8C6CA5
-      kind: playable
-      item_pos:
-        - 0x8bcae0
-        - 0x8bcae1
-        - 0x8c6450
-        - 0x8c6451
-    Duessel:
-      id:
-        - 0x1d
-      location:
-        - 0x8B4795
-        - 0x8B8351
-        - 0x8BCAFD
-        - 0x8B8351
-        - 0x8C29A9
-        - 0x8C2FB1
-      kind: playable
-      item_pos:
-        - 0x8bcb08
-        - 0x8bcb09
-        - 0x8c2fbc
-        - 0x8c2fbd
-    Valter:
-      id:
-        - 0x27
-        - 0x43
-        - 0x45
-      location:
-        - 0x8B3FB9
-        - 0x8B480D
-        - 0x8B6121
-        - 0x8B8315
-        - 0x8B9745
-        - 0x8BC715
-        - 0x8B8315
-        - 0x8C3335
-        - 0x8C3385
-        - 0x8C6F19
-        - 0x8B9FC9
-      kind: boss
-      item_pos:
-        - 0x8B3FC4
-        - 0x8BC720
-        - 0x8BC721
-        - 0x8C6F24
-        - 0x8C6F25
-        - 0x8B9FD4
-    Caellach:
-      id:
-        - 0x29
-        - 0x53
-      location:
-        - 0x8B47F9
-        - 0x8B8329
-        - 0x8BBA59
-        - 0x8BAF39
-        - 0x8BC135
-        - 0x8BC45D
-        - 0x8BC8E1
-        - 0x8B8329
-        - 0x8C47BD
-        - 0x8C7211
-        - 0x8C75D1
-        - 0x8B7965
-        - 0x8B7A55
-      kind: boss
-      item_pos:
-        - 0x8bc8ec
-        - 0x8bc8ed
-        - 0x8c47c8
-        - 0x8c47c9
-        - 0x8c721c
-        - 0x8c721d
-        - 0x8BBA64
-        - 0x8BC468
-        - 0x8B7970
-        - 0x8B7A60
-    Myrrh:
-      id:
-        - 0x1e
-      location:
-        - 0x8BD685
-        - 0x8BD45D
-        - 0x8BD4D5
-        - 0x8BD575
-        - 0x8BE589
-        - 0x8BE511
-        - 0x8BF421
-        - 0x8BF4AD
-        - 0x8BF36D
-        - 0x8C0C09
-        - 0x8C0921
-        - 0x8C1699
-        - 0x8C16E9
-        - 0x8C1EAD
-        - 0x8C1E21
-        - 0x8C4DFD
-        - 0x8C4D35
-        - 0x8C54E1
-        - 0x8C5379
-        - 0x8C54A5
-        - 0x8C7711
-        - 0x8C8E71
-        - 0x8C8EE9
-        - 0x8C0AC5
-        - 0x8CB679
-        - 0x8C42B1
-        - 0x8C42ED
-      kind: playable
-      item_pos:
-        - 0x8bcea0
-        - 0x8c771c
-    Lyon:
-      id:
-        - 0x23
-        - 0x40
-        - 0x6c
-      location:
-        - 0x8B3E09
-        - 0x8B4781
-        - 0x8B82ED
-        - 0x8B9655
-        - 0x8BC149
-        - 0x8BC485
-        - 0x8BD8B1
-        - 0x8BD929
-        - 0x8BD951
-        - 0x8BD98D
-        - 0x8BE115
-        - 0x8C1635
-        - 0x8C172D
-        - 0x8C1921
-        - 0x8B82ED
-        - 0x8C2995
-        - 0x8C2A15
-        - 0x8C60D5
-        - 0x8C6A25
-        - 0x8C6C19
-        - 0x8C6C41
-        - 0x8C6C7D
-        - 0x8C7F59
-        - 0x8CB165
-        - 0x8C4531
-        # Be cautious. I found the one below with the scrape tool
-        # and I couldn't verify it with FEBuilder
-        - 0x8caead
-      kind: boss
-      item_pos:
-        - 0x8BE120
-        - 0x8BE121
-        - 0x8c7f64
-        - 0x8c7f65
-        - 0x8c192c
-        - 0x8cb170
-    Syrene:
-      id:
-        - 0x21
-      location:
-        - 0x8BE165
-      kind: playable
-      item_pos:
-        - 0x8be170
-        - 0x8be171
-    Riev:
-      id:
-        - 0x28
-        - 0x57
-      location:
-        - 0x8B47E5
-        - 0x8B833D
-        - 0x8BD8C5
-        - 0x8BD915
-        - 0x8BD965
-        - 0x8BD9A1
-        - 0x8C03F9
-        - 0x8C0985
-        - 0x8C0985
-        - 0x8B833D
-        - 0x8C9E19
-        - 0x8CA7B9
-        # Be cautious. I found the one below with the scrape tool
-        # and I couldn't verify it with FEBuilder
-        - 0x8c0ef0
-      kind: boss
-      item_pos:
-        - 0x8c0404
-        - 0x8c0efc
-        - 0x8c9e24
-        - 0x8ca7c4
-    Morva:
-      id:
-        - 0x41
-      location:
-        - 0x8C129D
-        - 0x8CAB65
-      kind: boss
-      item_pos:
-        - 0x8c12a8
-        - 0x8cab70
-    Fomortiis:
-      id:
-        - 0xbe
-      location:
-        - 0x8C2099
-      kind: boss
-      item_pos:
-        - 0x8c20a4
-        - 0x8c20a5
-        - 0x8c20a6
-    Gheb:
-      id:
-        - 0x5a
-      location:
-        - 0x8C23B9
-      kind: boss
-      item_pos:
-        - 0x8c23c4
-        - 0x8c23c5
-    Beran:
-      id:
-        - 0x5b
-      location:
-        - 0x8C2DF9
-      kind: boss
-      item_pos:
-        - 0x8c2e04
-        - 0x8c2e05
-        - 0x8c2e06
-    Selena:
-      id:
-        - 0x26
-        - 0x44
-      location:
-        - 0x8B47BD
-        - 0x8B8365
-        - 0x8B8351
-        - 0x8C2A3D
-        - 0x8C31CD
-        - 0x8C2D45
-        - 0x8C4FA5
-        - 0x8B7A69
-        - 0x8C2A3D
-      kind: boss
-      item_pos:
-        - 0x8c2d50
-        - 0x8c2d51
-        - 0x8c4fb0
-        - 0x8c4fb1
-    Vigarde:
-      id:
-        - 0x6b
-      location:
-        - 0x8B3DF5
-        - 0x8B476D
-        - 0x8B82D9
-        - 0x8B9641
-        - 0x8B82D9
-        - 0x8C2981
-        - 0x8C2A01
-        - 0x8C60C1
-        - 0x8C6689
-        - 0x8C6C05
-        - 0x8C451D
-      kind: boss
-      item_pos:
-        - 0x8c60cc
-    L'Arachel:
-      id:
-        - 0x19
-      location:
-        - 0x8B4CD9
-        - 0x8B4D65
-        - 0x8B81AD
-        - 0x8BA621
-        - 0x8BBA01
-        - 0x8BAF75
-        - 0x8BC379
-        - 0x8BC1FD
-        - 0x8BC24D
-        - 0x8BC275
-        - 0x8BC2ED
-        - 0x8BC4FD
-        - 0x8BD699
-        - 0x8BD471
-        - 0x8BD4AF
-        - 0x8BD54D
-        - 0x8BE575
-        - 0x8BE4FD
-        - 0x8BF40D
-        - 0x8BF499
-        - 0x8BF395
-        - 0x8C0B91
-        - 0x8C0BCD
-        - 0x8C0C45
-        - 0x8C08E5
-        - 0x8C09C1
-        - 0x8C16C1
-        - 0x8C1E99
-        - 0x8C1E0D
-        - 0x8C1F81
-        - 0x8C33D5
-        - 0x8C53C9
-        - 0x8C8E5D
-        - 0x8C8EFD
-        - 0x8C0A75
-        - 0x8CB665
-        - 0x8B9F29
-        - 0x8B9CCD
-        - 0x8C4031
-      kind: playable
-      item_pos:
-        - 0x8B4CE4
-        - 0x8b9cd8
-        - 0x8b9cda
-        - 0x8c403c
-        - 0x8B4D70
-    Dozla:
-      id:
-        - 0x1a
-      location:
-        - 0x8B4D01
-        - 0x8B4D79
-        - 0x8B81C1
-        - 0x8BBC71
-        - 0x8C33E9
-        - 0x8C401D
-      kind: playable
-      item_pos:
-        - 0x8B4D0C
-        - 0x8B4D84
-        - 0x8b9cec
-        - 0x8c4028
-        - 0x8BBC7C
-    Glen:
-      id:
-        - 0x25
-        - 0x69
-      location:
-        - 0x8B47A9
-        - 0x8B598D
-        - 0x8B8301
-        - 0x8B96B9
-        - 0x8B96F5
-        - 0x8B971D
-        - 0x8BB971
-        - 0x8B8301
-        - 0x8B9F79
-      kind: boss
-      item_pos:
-        - 0x8B9F84
-    Fado:
-      id:
-        - 0x2a
-        - 0xc5
-      location:
-        - 0x8B3D19
-      kind: other
-      item_pos: []
-    Ismaire:
-      id:
-        - 0x2b
-        - 0xcb
-      location:
-        - 0x8BC10D
-        - 0x8BC471
-      kind: other
-      item_pos: []
-    Mansel:
-      id:
-        - 0xc8
-      location:
-        - 0x8C0AED
-        - 0x8C0601
-        - 0x8CA215
-      kind: other
-      item_pos: []
-    Renais Citizen 1:
-      id:
-        - 0xf9
-      location:
-        - 0x8B6325
-      kind: other
-      item_pos: []
-    Renais Citizen 2:
-      id:
-        - 0x71
-      location:
-        - 0x8B6339
-      kind: other
-      item_pos: []
-    Renais Citizen 3:
-      id:
-        - 0xfb
-      location:
-        - 0x8B634D
-      kind: other
-      item_pos: []
-    Orson's Wife:
-      id:
-        - 0x72
-      location:
-        - 0x8BD889
-        - 0x8BDA81
-      kind: other
-      item_pos: []
-    River Folk 1:
-      id:
-        - 0x70
-      location:
-        - 0x8BE179
-      kind: other
-      item_pos: []
-    River Folk 2:
-      id:
-        - 0x6f
-      location:
-        - 0x8BE18D
-      kind: other
-      item_pos: []
-    River Folk 3:
-      id:
-        - 0x6e
-      location:
-        - 0x8BE1A1
-      kind: other
-      item_pos: []
-    River Folk 4:
-      id:
-        - 0x6d
-      location:
-        - 0x8BE1B5
-      kind: other
-      item_pos: []
-    Duessel's Knight 1:
-      id:
-        - 0x89
-      location:
-        - 0x8C2FC5
-      kind: other
-      item_pos:
-        - 0x8C2FD0
-    Duessel's Knight 2:
-      id:
-        - 0x8a
-      location:
-        - 0x8C2FD9
-      kind: other
-      item_pos:
-        - 0x8C2FE4
-    Duessel's Knight 3:
-      id:
-        - 0x8b
-      location:
-        - 0x8C2FED
-      kind: other
-      item_pos:
-        - 0x8C2FF8
+characters:
+- name: O'Neill
+  id:
+    - 0x68
+  location:
+    - 0x8B3C51
+  kind: boss
+  item_pos:
+    - 0x8b3c5c
+- name: Seth
+  id:
+    - 0x02
+  location:
+    - 0x8B3C15
+    - 0x8B3D41
+    - 0x8B3F69
+    - 0x8B40B5
+    - 0x8B42E1
+    - 0x8B4601
+    - 0x8B4D3D
+    - 0x8B4991
+    - 0x8B4A45
+    - 0x8B56BD
+    - 0x8B5A05
+    - 0x8B63ED
+    - 0x8B64B5
+    - 0x8B6EDD
+    - 0x8B7121
+    - 0x8B7725
+    - 0x8B824D
+    - 0x8B83A9
+    - 0x8B8185
+    - 0x8B81FD
+    - 0x8B8B59
+    - 0x8BA635
+    - 0x8BB9D9
+    - 0x8BAF9D
+    - 0x8BC365
+    - 0x8BC4E9
+    - 0x8BD671
+    - 0x8BDA09
+    - 0x8BDA45
+    - 0x8BD3F9
+    - 0x8BDB21
+    - 0x8BD449
+    - 0x8BDC4D
+    - 0x8BDC89
+    - 0x8BDCB1
+    - 0x8BDCD9
+    - 0x8BD525
+    - 0x8BD5B1
+    - 0x8BF435
+    - 0x8BF435
+    - 0x8BF3A9
+    - 0x8C09FD
+    - 0x8C1685
+    - 0x8C1F95
+    - 0x8C28E1
+    - 0x8C33C1
+    - 0x8C3D91
+    - 0x8C3259
+    - 0x8C4DD5
+    - 0x8C4D0D
+    - 0x8C53B5
+    - 0x8C66B1
+    - 0x8C69FD
+    - 0x8C6A9D
+    - 0x8C6B01
+    - 0x8C6B65
+    - 0x8C6CCD
+    - 0x8C74E1
+    - 0x8C8E85
+    - 0x8C8EC1
+    - 0x8B9F3D
+    - 0x8B9E71
+    - 0x8C4301
+  kind: playable
+  item_pos:
+    - 0x8B3F74
+    - 0x8b3c20
+    - 0x8b3c21
+    - 0x8B40C0
+    - 0x8B40C1
+    - 0x8B42EC
+    - 0x8B42ED
+    - 0x8B460C
+    - 0x8B460D
+    - 0x8B499C
+    - 0x8B499D
+    - 0x8B4A50
+    - 0x8B4A51
+    - 0x8B56C8
+    - 0x8B56C9
+    - 0x8B5A10
+    - 0x8B5A11
+    - 0x8B63F8
+    - 0x8B63F9
+    - 0x8B6EE8
+    - 0x8B6EE9
+- name: Eirika
+  id:
+    - 0x01
+  location:
+    - 0x8B3C29
+    - 0x8B3D2D
+    - 0x8B3F91
+    - 0x8B4575
+    - 0x8B4D29
+    - 0x8B40A1
+    - 0x8B42CD
+    - 0x8B4905
+    - 0x8B49CD
+    - 0x8B5631
+    - 0x8B783D
+    - 0x8B788D
+    - 0x8B59F1
+    - 0x8B63D9
+    - 0x8B64C9
+    - 0x8B6E79
+    - 0x8B710D
+    - 0x8B7301
+    - 0x8B7711
+    - 0x8B8261
+    - 0x8B8395
+    - 0x8B815D
+    - 0x8B81E9
+    - 0x8B8B45
+    - 0x8BA649
+    - 0x8BB9C5
+    - 0x8BB9C5
+    - 0x8BC351
+    - 0x8BC225
+    - 0x8BC289
+    - 0x8BC4D5
+    - 0x8BD65D
+    - 0x8BDA6D
+    - 0x8BD3D1
+    - 0x8BDB0D 
+    - 0x8BD435 
+    - 0x8BDC39 
+    - 0x8BD511 
+    - 0x8BD59D 
+    - 0x8BE54D 
+    - 0x8BE4D5 
+    - 0x8BF3D1 
+    - 0x8BF345 
+    - 0x8BF359 
+    - 0x8C0BF5 
+    - 0x8C08F9 
+    - 0x8C09D5 
+    - 0x8C165D 
+    - 0x8C1E5D 
+    - 0x8C1DD1 
+    - 0x8C1F59 
+    - 0x8C72C5 
+    - 0x8C8E21 
+    - 0x8C8EAD 
+    - 0x8C0A89 
+    - 0x8CB629 
+    - 0x8B9F65 
+    - 0x8B9E49 
+  kind: playable
+  item_pos:
+    - 0x8B3C35
+    - 0x8B40AC
+    - 0x8B42D8
+    - 0x8c72d0
+    - 0x8c72d1
+    - 0x8B4910
+    - 0x8B4580
+    - 0x8B49D8
+    - 0x8B563C
+    - 0x8B59FC
+    - 0x8B4910
+    - 0x8B63E4
+    - 0x8B6E84
+    - 0x8B730C
+- name: Franz
+  id:
+    - 0x04
+  location:
+    - 0x8B3DA5
+    - 0x8B3F7D
+    - 0x8B417D
+    - 0x8B42F5
+    - 0x8B45D9
+    - 0x8B5695
+    - 0x8B6415
+    - 0x8B6F19
+    - 0x8B7365
+    - 0x8B83D1
+    - 0x8BD6E9
+    - 0x8BDB85
+  kind: playable
+  item_pos:
+    - 0x8b4188
+    - 0x8b4189
+    - 0x8B4300
+    - 0x8B45E4
+    - 0x8B45E5
+    - 0x8B56A0
+    - 0x8B56A1
+    - 0x8B6420
+    - 0x8B6421
+    - 0x8B6F24
+    - 0x8B6F25
+    - 0x8B7370
+    - 0x8B7371
+- name: Gilliam
+  id:
+    - 0x03
+  location:
+    - 0x8B4191
+    - 0x8B4309
+    - 0x8B45C5
+    - 0x8B4969
+    - 0x8B4A1D
+    - 0x8B5681
+    - 0x8B6401
+    - 0x8B6E8D
+    - 0x8B7351
+    - 0x8B83BD
+  kind: playable
+  item_pos:
+    - 0x8b419c
+    - 0x8B4314
+    - 0x8B45D0
+    - 0x8B4974
+    - 0x8B4A28
+    - 0x8B568C
+    - 0x8B640C
+    - 0x8B640D
+    - 0x8B6E98
+    - 0x8B735C
+- name: Breguet
+  id:
+    - 0x46
+  location:
+    - 0x8B40DD
+  kind: boss
+  item_pos:
+    - 0x8b40e8
+- name: Moulder
+  id:
+    - 0x05
+  location:
+    - 0x8B431D
+    - 0x8B4589
+    - 0x8B492D
+    - 0x8B49E1
+    - 0x8B6429
+    - 0x8B6EB5
+    - 0x8B7315
+    - 0x8B83E5
+    - 0x8B43E5
+  kind: playable
+  item_pos:
+    - 0x8b4328
+    - 0x8B4594
+    - 0x8B4938
+    - 0x8B49EC
+    - 0x8B6434
+    - 0x8B6435
+    - 0x8B6EC0
+    - 0x8B7320
+    - 0x8B43F0
+- name: Bone
+  id:
+    - 0x47
+  location:
+    - 0x8B436D
+  kind: boss
+  item_pos:
+    - 0x8b4378
+- name: Vanessa
+  id:
+    - 0x06
+  location:
+    - 0x8B440D
+    - 0x8B45B1
+    - 0x8B4955
+    - 0x8B4A09
+    - 0x8B566D
+    - 0x8B643D
+    - 0x8B6F05
+    - 0x8B733D
+    - 0x8B840D
+    - 0x8B43D1
+  kind: playable
+  item_pos:
+    - 0x8b4418
+    - 0x8b4419
+    - 0x8B45BC
+    - 0x8B4960
+    - 0x8B4A14
+    - 0x8B5678
+    - 0x8B6448
+    - 0x8B6449
+    - 0x8B6F10
+    - 0x8B7348
+    - 0x8B43DC
+    - 0x8B43DD
+- name: Ross
+  id:
+    - 0x07
+  location:
+    - 0x8B4435
+    - 0x8B459D
+    - 0x8B49A5
+    - 0x8B4A59
+    - 0x8B6465
+    - 0x8B7379
+  kind: playable
+  item_pos:
+    - 0x8b4440
+    - 0x8B45A8
+    - 0x8B49B0
+    - 0x8B4A64
+    - 0x8B6470
+    - 0x8B6471
+    - 0x8B7384
+- name: Garcia
+  id:
+    - 0x0a
+  location:
+    - 0x8B4449
+    - 0x8B4615
+    - 0x8B6479
+    - 0x8B6EC9
+    - 0x8B738D
+  kind: playable
+  item_pos:
+    - 0x8b4454
+    - 0x8b4455
+    - 0x8B4620
+    - 0x8B6484
+    - 0x8B6485
+    - 0x8B6ED4
+    - 0x8B6ED5
+    - 0x8B7398
+- name: Neimi
+  id:
+    - 0x08
+  location:
+    - 0x8B45ED
+    - 0x8B497D
+    - 0x8B4A31
+    - 0x8B56A9
+    - 0x8B6451
+    - 0x8B6EA1
+  kind: playable
+  item_pos:
+    - 0x8b45f8
+    - 0x8B4988
+    - 0x8B4A3C
+    - 0x8B56B4
+    - 0x8B645C
+    - 0x8B645D
+    - 0x8B6EAC
+- name: Colm
+  id:
+    - 0x09
+  location:
+    - 0x8B4719
+    - 0x8B4941
+    - 0x8B49F5
+    - 0x8B5659
+    - 0x8B648D
+    - 0x8B6EF1
+    - 0x8B7329
+  kind: playable
+  item_pos:
+    - 0x8b4724
+    - 0x8B494C
+    - 0x8B4A00
+    - 0x8B5664
+    - 0x8B6498
+    - 0x8B6EFC
+    - 0x8B7334
+- name: Bazba
+  id:
+    - 0x48
+  location:
+    - 0x8B44AD
+    - 0x8B463D
+  kind: boss
+  item_pos:
+    - 0x8B44B8
+    - 0x8b4648
+    - 0x8b4649
+- name: Lute
+  id:
+    - 0x0c
+  location:
+    - 0x8B4BFD
+  kind: playable
+  item_pos:
+    - 0x8B4C08
+- name: Artur
+  id:
+    - 0x13
+  location:
+    - 0x8B4919
+    - 0x8B4BD5
+    - 0x8B56D1
+    - 0x8B6F2C
+    - 0x8B73A1
+  kind: playable
+  item_pos:
+    - 0x8b4924
+    - 0x8B4BE0
+    - 0x8B56DC
+    - 0x8B6F38
+    - 0x8B73AC
+- name: Ephraim
+  id:
+    - 0x0f
+  location:
+    - 0x8B5A65
+    - 0x8B5DFD
+    - 0x8B5E95
+    - 0x8B5D49
+    - 0x8B5F7D
+    - 0x8B7851
+    - 0x8B75F9
+    - 0x8BCAE9
+    - 0x8BD649
+    - 0x8BDA59
+    - 0x8BD3E5
+    - 0x8BDAF9
+    - 0x8BD421
+    - 0x8BDC25
+    - 0x8BD4FD
+    - 0x8BD589
+    - 0x8BE539
+    - 0x8BE4E9
+    - 0x8BF3E5
+    - 0x8BF45D
+    - 0x8BF345
+    - 0x8C0BE1
+    - 0x8C090D
+    - 0x8C09E9
+    - 0x8C1671
+    - 0x8C1E71
+    - 0x8C1DE5
+    - 0x8C1F45
+    - 0x8C28CD
+    - 0x8C33AD
+    - 0x8C3D7D
+    - 0x8C3245
+    - 0x8C4DC1
+    - 0x8C4D21
+    - 0x8C54CD
+    - 0x8C53A1
+    - 0x8C6C05
+    - 0x8C69E9
+    - 0x8C6A89
+    - 0x8C6AED
+    - 0x8C6B51
+    - 0x8C6CB9
+    - 0x8C66D9
+    - 0x8C74F5
+    - 0x8C8E35
+    - 0x8C0A9D
+    - 0x8CB63D
+    - 0x8C42C5
+  kind: playable
+  item_pos:
+    - 0x8b5a70
+    - 0x8b5a71
+    - 0x8bcaf4
+    - 0x8bcaf5
+    - 0x8B7604
+    - 0x8B7605
+- name: Forde
+  id:
+    - 0x10
+  location:
+    - 0x8B5A79
+    - 0x8B5E11
+    - 0x8B5EA9
+    - 0x8B5D71
+    - 0x8B5F91
+    - 0x8B760D
+    - 0x8BD6C1
+    - 0x8BDB5D
+  kind: playable
+  item_pos:
+    - 0x8b5a84
+    - 0x8b5a85
+    - 0x8B7618
+    - 0x8B7619
+- name: Kyle
+  id:
+    - 0x11
+  location:
+    - 0x8B5A8D
+    - 0x8B5E25
+    - 0x8B5EBD
+    - 0x8B5D5D
+    - 0x8B5FA5
+    - 0x8B7621
+    - 0x8B83F9
+    - 0x8BD6D5
+    - 0x8BDB71
+  kind: playable
+  item_pos:
+    - 0x8b5a98
+    - 0x8b5a99
+    - 0x8B762C
+    - 0x8B762D
+- name: Orson
+  id:
+    - 0x24
+    - 0x42
+    - 0x6d
+  location:
+    - 0x8B5AA1
+    - 0x8B5ED1
+    - 0x8B7149
+    - 0x8B76FD
+    - 0x8BD84D
+    - 0x8BD875
+    - 0x8BCF5D
+    - 0x8C774D
+  kind: boss
+  item_pos:
+    - 0x8b5aac
+    - 0x8b5aad
+    - 0x8b5aac
+    - 0x8b5aad
+    - 0x8bcf68
+    - 0x8bcf69
+    - 0x8c7758
+    - 0x8c7759
+- name: Zonta
+  id:
+    - 0x6a
+  location:
+    - 0x8B5B05
+  kind: boss
+  item_pos:
+    - 0x8b5b10
+- name: Natasha
+  id:
+    - 0x0d
+  location:
+    - 0x8B5645
+    - 0x8B5951
+    - 0x8B59C9
+  kind: playable
+  item_pos:
+    - 0x8B5650
+    - 0x8B595C
+    - 0x8B59D4
+- name: Saar
+  id:
+    - 0x4a
+  location:
+    - 0x8B5979
+    - 0x8B56F9
+  kind: boss
+  item_pos:
+    - 0x8b5704
+- name: Joshua
+  id:
+    - 0x20
+  location:
+    - 0x8B593D
+    - 0x8B5915
+    - 0x8BC2C5
+    - 0x8BC525
+  kind: playable
+  item_pos:
+    - 0x8b5920
+- name: Novala
+  id:
+    - 0x4b
+  location:
+    - 0x8B62FD
+  kind: boss
+  item_pos:
+    - 0x8b6308
+- name: Murray
+  id:
+    - 0x4c
+  location:
+    - 0x8B7095
+  kind: boss
+  item_pos:
+    - 0x8b70a0
+    - 0x8b70a1
+- name: Tirado
+  id:
+    - 0x4d
+  location:
+    - 0x8B5DAD
+    - 0x8B774D
+    - 0x8B73C9
+  kind: boss
+  item_pos:
+    - 0x8b73d4
+    - 0x8b73d5
+- name: Tana
+  id:
+    - 0x22
+  location:
+    - 0x8B7C21
+    - 0x8B8449
+    - 0x8B8171
+    - 0x8C282D
+    - 0x8C26D9
+  kind: playable
+  item_pos:
+    - 0x8b7c2c
+    - 0x8b7c2d
+- name: Binks
+  id:
+    - 0x4e
+  location:
+    - 0x8B8225
+    - 0x8B7CFD
+  kind: boss
+  item_pos:
+    - 0x8b7d08
+    - 0x8b7d09
+- name: Amelia
+  id:
+    - 0x12
+  location:
+    - 0x8B80F9
+    - 0x8BAF11
+    - 0x8C2891
+    - 0x8C26B1
+  kind: playable
+  item_pos:
+    - 0x8B8104
+    - 0x8BAF1C
+    - 0x8C26BC
+    - 0x8C289C
+- name: Innes
+  id:
+    - 0x0b
+  location:
+    - 0x8B898D
+    - 0x8BA60D
+    - 0x8BB9ED
+    - 0x8BAF89
+    - 0x8BC38D
+    - 0x8BC211
+    - 0x8BC2D9
+    - 0x8BC511
+    - 0x8BD6AD
+    - 0x8BD485
+    - 0x8BD4C1
+    - 0x8BD561
+    - 0x8BE4C1
+    - 0x8BF3F9
+    - 0x8BF485
+    - 0x8BF381
+    - 0x8C0C1D
+    - 0x8C0935
+    - 0x8C16AD
+    - 0x8C1E85
+    - 0x8C1DF9
+    - 0x8C72D9
+    - 0x8C8E49
+    - 0x8C8ED5
+    - 0x8C0AB1
+    - 0x8CB651
+    - 0x8B9F51
+    - 0x8B9E5D
+  kind: playable
+  item_pos:
+    - 0x8b8998
+    - 0x8c72e4
+- name: Gerik
+  id:
+    - 0x14
+  location: 
+    - 0x8B89A1
+    - 0x8C529D
+    - 0x8B9E85
+  kind: playable
+  item_pos:
+    - 0x8b89ac
+    - 0x8c52a8
+- name: Tethys
+  id:
+    - 0x15
+  location:
+    - 0x8B89B5
+    - 0x8C5289
+    - 0x8B9E35
+  kind: playable
+  item_pos:
+    - 0x8b89c3
+    - 0x8c5296
+- name: Pablo
+  id:
+    - 0x4f
+    - 0x54
+  location:
+    - 0x8B8645
+    - 0x8BACA5
+  kind: boss
+  item_pos:
+    - 0x8b8650
+    - 0x8BACB0
+    - 0x8BACB1
+- name: Marisa
+  id:
+    - 0x16
+  location:
+    - 0x8B8825
+    - 0x8C48AD
+  kind: playable
+  item_pos:
+    - 0x8b8830
+    - 0x8c48b8
+- name: Ewan
+  id:
+    - 0x18
+  location:
+    - 0x8BA5D1
+    - 0x8BA671
+    - 0x8C4AB5
+    - 0x8C4D99
+    - 0x8BA019
+    - 0x8B9E21
+  kind: playable
+  item_pos:
+    - 0x8ba5dc
+    - 0x8c4ac0
+- name: Saleh
+  id:
+    - 0x17
+  location:
+    - 0x8BA5F9
+    - 0x8BA185
+    - 0x8C4D85
+    - 0x8C72ED
+    - 0x8B9F15
+  kind: playable
+  item_pos:
+    - 0x8BA604
+    - 0x8BA605
+    - 0x8ba190
+    - 0x8ba191
+    - 0x8c72f8
+    - 0x8c72f9
+- name: Cormag
+  id:
+    - 0x0e
+  location:
+    - 0x8B59A1
+    - 0x8B96E1
+    - 0x8BAED5
+    - 0x8C31F5
+    - 0x8C3051
+  kind: playable
+  item_pos:
+    - 0x8baee0
+    - 0x8baee1
+    - 0x8c305c
+    - 0x8c305d
+- name: Aias
+  id:
+    - 0x51
+  location:
+    - 0x8BBA81
+    - 0x8BAA4D
+  kind: boss
+  item_pos:
+    - 0x8baa58
+    - 0x8baa59
+    - 0x8baa5a
+- name: Carlyle
+  id:
+    - 0x52
+  location:
+    - 0x8BBFCD
+  kind: boss
+  item_pos:
+    - 0x8BBFD8
+- name: Rennac
+  id:
+    - 0x1c
+  location:
+    - 0x8B4CED
+    - 0x8B4D8D
+    - 0x8B81D5
+    - 0x8BBF91
+    - 0x8C33FD
+    - 0x8C646D
+  kind: playable
+  item_pos:
+    - 0x8B4CF8
+    - 0x8B4D98
+    - 0x8bbf9c
+    - 0x8c6478
+- name: Knoll
+  id:
+    - 0x1f
+  location:
+    - 0x8BCAD5
+    - 0x8C6B29
+    - 0x8C6BDD
+    - 0x8C6C55
+    - 0x8C6445
+    - 0x8C6CA5
+  kind: playable
+  item_pos:
+    - 0x8bcae0
+    - 0x8bcae1
+    - 0x8c6450
+    - 0x8c6451
+- name: Duessel
+  id:
+    - 0x1d
+  location:
+    - 0x8B4795
+    - 0x8B8351
+    - 0x8BCAFD
+    - 0x8B8351
+    - 0x8C29A9
+    - 0x8C2FB1
+  kind: playable
+  item_pos:
+    - 0x8bcb08
+    - 0x8bcb09
+    - 0x8c2fbc
+    - 0x8c2fbd
+- name: Valter
+  id:
+    - 0x27
+    - 0x43
+    - 0x45
+  location:
+    - 0x8B3FB9
+    - 0x8B480D
+    - 0x8B6121
+    - 0x8B8315
+    - 0x8B9745
+    - 0x8BC715
+    - 0x8B8315
+    - 0x8C3335
+    - 0x8C3385
+    - 0x8C6F19
+    - 0x8B9FC9
+  kind: boss
+  item_pos:
+    - 0x8B3FC4
+    - 0x8BC720
+    - 0x8BC721
+    - 0x8C6F24
+    - 0x8C6F25
+    - 0x8B9FD4
+- name: Caellach
+  id:
+    - 0x29
+    - 0x53
+  location:
+    - 0x8B47F9
+    - 0x8B8329
+    - 0x8BBA59
+    - 0x8BAF39
+    - 0x8BC135
+    - 0x8BC45D
+    - 0x8BC8E1
+    - 0x8B8329
+    - 0x8C47BD
+    - 0x8C7211
+    - 0x8C75D1
+    - 0x8B7965
+    - 0x8B7A55
+  kind: boss
+  item_pos:
+    - 0x8bc8ec
+    - 0x8bc8ed
+    - 0x8c47c8
+    - 0x8c47c9
+    - 0x8c721c
+    - 0x8c721d
+    - 0x8BBA64
+    - 0x8BC468
+    - 0x8B7970
+    - 0x8B7A60
+- name: Myrrh
+  id:
+    - 0x1e
+  location:
+    - 0x8BD685
+    - 0x8BD45D
+    - 0x8BD4D5
+    - 0x8BD575
+    - 0x8BE589
+    - 0x8BE511
+    - 0x8BF421
+    - 0x8BF4AD
+    - 0x8BF36D
+    - 0x8C0C09
+    - 0x8C0921
+    - 0x8C1699
+    - 0x8C16E9
+    - 0x8C1EAD
+    - 0x8C1E21
+    - 0x8C4DFD
+    - 0x8C4D35
+    - 0x8C54E1
+    - 0x8C5379
+    - 0x8C54A5
+    - 0x8C7711
+    - 0x8C8E71
+    - 0x8C8EE9
+    - 0x8C0AC5
+    - 0x8CB679
+    - 0x8C42B1
+    - 0x8C42ED
+  kind: playable
+  item_pos:
+    - 0x8bcea0
+    - 0x8c771c
+- name: Lyon
+  id:
+    - 0x23
+    - 0x40
+    - 0x6c
+  location:
+    - 0x8B3E09
+    - 0x8B4781
+    - 0x8B82ED
+    - 0x8B9655
+    - 0x8BC149
+    - 0x8BC485
+    - 0x8BD8B1
+    - 0x8BD929
+    - 0x8BD951
+    - 0x8BD98D
+    - 0x8BE115
+    - 0x8C1635
+    - 0x8C172D
+    - 0x8C1921
+    - 0x8B82ED
+    - 0x8C2995
+    - 0x8C2A15
+    - 0x8C60D5
+    - 0x8C6A25
+    - 0x8C6C19
+    - 0x8C6C41
+    - 0x8C6C7D
+    - 0x8C7F59
+    - 0x8CB165
+    - 0x8C4531
+    # Be cautious. I found the one below with the scrape tool
+    # and I couldn't verify it with FEBuilder
+    - 0x8caead
+  kind: boss
+  item_pos:
+    - 0x8BE120
+    - 0x8BE121
+    - 0x8c7f64
+    - 0x8c7f65
+    - 0x8c192c
+    - 0x8cb170
+- name: Syrene
+  id:
+    - 0x21
+  location:
+    - 0x8BE165
+  kind: playable
+  item_pos:
+    - 0x8be170
+    - 0x8be171
+- name: Riev
+  id:
+    - 0x28
+    - 0x57
+  location:
+    - 0x8B47E5
+    - 0x8B833D
+    - 0x8BD8C5
+    - 0x8BD915
+    - 0x8BD965
+    - 0x8BD9A1
+    - 0x8C03F9
+    - 0x8C0985
+    - 0x8C0985
+    - 0x8B833D
+    - 0x8C9E19
+    - 0x8CA7B9
+    # Be cautious. I found the one below with the scrape tool
+    # and I couldn't verify it with FEBuilder
+    - 0x8c0ef0
+  kind: boss
+  item_pos:
+    - 0x8c0404
+    - 0x8c0efc
+    - 0x8c9e24
+    - 0x8ca7c4
+- name: Morva
+  id:
+    - 0x41
+  location:
+    - 0x8C129D
+    - 0x8CAB65
+  kind: boss
+  item_pos:
+    - 0x8c12a8
+    - 0x8cab70
+- name: Fomortiis
+  id:
+    - 0xbe
+  location:
+    - 0x8C2099
+  kind: boss
+  item_pos:
+    - 0x8c20a4
+    - 0x8c20a5
+    - 0x8c20a6
+- name: Gheb
+  id:
+    - 0x5a
+  location:
+    - 0x8C23B9
+  kind: boss
+  item_pos:
+    - 0x8c23c4
+    - 0x8c23c5
+- name: Beran
+  id:
+    - 0x5b
+  location:
+    - 0x8C2DF9
+  kind: boss
+  item_pos:
+    - 0x8c2e04
+    - 0x8c2e05
+    - 0x8c2e06
+- name: Selena
+  id:
+    - 0x26
+    - 0x44
+  location:
+    - 0x8B47BD
+    - 0x8B8365
+    - 0x8B8351
+    - 0x8C2A3D
+    - 0x8C31CD
+    - 0x8C2D45
+    - 0x8C4FA5
+    - 0x8B7A69
+    - 0x8C2A3D
+  kind: boss
+  item_pos:
+    - 0x8c2d50
+    - 0x8c2d51
+    - 0x8c4fb0
+    - 0x8c4fb1
+- name: Vigarde
+  id:
+    - 0x6b
+  location:
+    - 0x8B3DF5
+    - 0x8B476D
+    - 0x8B82D9
+    - 0x8B9641
+    - 0x8B82D9
+    - 0x8C2981
+    - 0x8C2A01
+    - 0x8C60C1
+    - 0x8C6689
+    - 0x8C6C05
+    - 0x8C451D
+  kind: boss
+  item_pos:
+    - 0x8c60cc
+- name: L'Arachel
+  id:
+    - 0x19
+  location:
+    - 0x8B4CD9
+    - 0x8B4D65
+    - 0x8B81AD
+    - 0x8BA621
+    - 0x8BBA01
+    - 0x8BAF75
+    - 0x8BC379
+    - 0x8BC1FD
+    - 0x8BC24D
+    - 0x8BC275
+    - 0x8BC2ED
+    - 0x8BC4FD
+    - 0x8BD699
+    - 0x8BD471
+    - 0x8BD4AF
+    - 0x8BD54D
+    - 0x8BE575
+    - 0x8BE4FD
+    - 0x8BF40D
+    - 0x8BF499
+    - 0x8BF395
+    - 0x8C0B91
+    - 0x8C0BCD
+    - 0x8C0C45
+    - 0x8C08E5
+    - 0x8C09C1
+    - 0x8C16C1
+    - 0x8C1E99
+    - 0x8C1E0D
+    - 0x8C1F81
+    - 0x8C33D5
+    - 0x8C53C9
+    - 0x8C8E5D
+    - 0x8C8EFD
+    - 0x8C0A75
+    - 0x8CB665
+    - 0x8B9F29
+    - 0x8B9CCD
+    - 0x8C4031
+  kind: playable
+  item_pos:
+    - 0x8B4CE4
+    - 0x8b9cd8
+    - 0x8b9cda
+    - 0x8c403c
+    - 0x8B4D70
+- name: Dozla
+  id:
+    - 0x1a
+  location:
+    - 0x8B4D01
+    - 0x8B4D79
+    - 0x8B81C1
+    - 0x8BBC71
+    - 0x8C33E9
+    - 0x8C401D
+  kind: playable
+  item_pos:
+    - 0x8B4D0C
+    - 0x8B4D84
+    - 0x8b9cec
+    - 0x8c4028
+    - 0x8BBC7C
+- name: Glen
+  id:
+    - 0x25
+    - 0x69
+  location:
+    - 0x8B47A9
+    - 0x8B598D
+    - 0x8B8301
+    - 0x8B96B9
+    - 0x8B96F5
+    - 0x8B971D
+    - 0x8BB971
+    - 0x8B8301
+    - 0x8B9F79
+  kind: boss
+  item_pos:
+    - 0x8B9F84
+- name: Fado
+  id:
+    - 0x2a
+    - 0xc5
+  location:
+    - 0x8B3D19
+  kind: other
+  item_pos: []
+- name: Ismaire
+  id:
+    - 0x2b
+    - 0xcb
+  location:
+    - 0x8BC10D
+    - 0x8BC471
+  kind: other
+  item_pos: []
+- name: Mansel
+  id:
+    - 0xc8
+  location:
+    - 0x8C0AED
+    - 0x8C0601
+    - 0x8CA215
+  kind: other
+  item_pos: []
+- name: Renais Citizen 1
+  id:
+    - 0xf9
+  location:
+    - 0x8B6325
+  kind: other
+  item_pos: []
+- name: Renais Citizen 2
+  id:
+    - 0x71
+  location:
+    - 0x8B6339
+  kind: other
+  item_pos: []
+- name: Renais Citizen 3
+  id:
+    - 0xfb
+  location:
+    - 0x8B634D
+  kind: other
+  item_pos: []
+- name: Orson's Wife
+  id:
+    - 0x72
+  location:
+    - 0x8BD889
+    - 0x8BDA81
+  kind: other
+  item_pos: []
+- name: River Folk 1
+  id:
+    - 0x70
+  location:
+    - 0x8BE179
+  kind: other
+  item_pos: []
+- name: River Folk 2
+  id:
+    - 0x6f
+  location:
+    - 0x8BE18D
+  kind: other
+  item_pos: []
+- name: River Folk 3
+  id:
+    - 0x6e
+  location:
+    - 0x8BE1A1
+  kind: other
+  item_pos: []
+- name: River Folk 4
+  id:
+    - 0x6d
+  location:
+    - 0x8BE1B5
+  kind: other
+  item_pos: []
+- name: Duessel's Knight 1
+  id:
+    - 0x89
+  location:
+    - 0x8C2FC5
+  kind: other
+  item_pos:
+    - 0x8C2FD0
+- name: Duessel's Knight 2
+  id:
+    - 0x8a
+  location:
+    - 0x8C2FD9
+  kind: other
+  item_pos:
+    - 0x8C2FE4
+- name: Duessel's Knight 3
+  id:
+    - 0x8b
+  location:
+    - 0x8C2FED
+  kind: other
+  item_pos:
+    - 0x8C2FF8
 
 items:
   offsets:
@@ -1348,252 +1344,387 @@ items:
     icon: 0x1d
     use: 0x1e
   master_seal:
-    name:
+    attributes:
+    - name: name
+      offset: 0x0
+      bytes:
       - 0xf4
       - 0x3
-    description:
+    - name: description
+      offset: 0x2
+      bytes:
       - 0xa5
       - 0x4
-    use_screen:
+    - name: use_screen
+      offset: 0x4
+      bytes:
       - 0xde
       - 0x4
-    icon: 0xd9
-    use: 0x2d
+    - name: icon
+      offset: 0x1d
+      bytes:
+      - 0xd9
+    - name: use
+      offset: 0x1e
+      bytes:
+      - 0x2d
 
   a_weapon_lvl: 181
   flux_weapon_lvl_pos: 0x80A4E0
+
   dragonstone: 0xaa
+  divinestone: 0xff # Unused in this game
+
   ranged_monster: [0x90, 0xa6, 0xa8, 0xa9, 0xab, 0xac, 0xb3, 0xb4]
+
   promotional:
     classes_to_add: [0x01, 0x02, 0x0f, 0x10, 0x13, 0x14, 0x3f, 0x42, 0x41, 0x05, 0x06, 0x09, 0x0a, 0x19, 0x1a, 0x48, 0x1f, 0x20, 0x45, 0x4a, 0x25, 0x26, 0x2d, 0x2e, 0x4b, 0xd, 0x7e, 0x7f, 0x37, 0x44, 0x52, 0x54, 0x55, 0x58, 0x5b, 0x5d, 0x5f, 0x63]
     items:
-      Hero Crest:
-        pointers:
-          - 0x29398
-        new_location: 0xb88000
-        item_location: 0x80A920
-      Knight Crest:
-        pointers:
-          - 0x293a0
-        new_location: 0xb88100
-        item_location: 0x80A944
-      Orion's Bolt:
-        pointers:
-          - 0x293a8
-        new_location: 0xb88200
-        item_location: 0x80A968
-      Elysian Whip:
-        pointers:
-          - 0x293b0
-        new_location: 0xb88300
-        item_location: 0x80A98C
-      Guiding Ring:
-        pointers:
-          - 0x293b8
-        new_location: 0xb88400
-        item_location: 0x80A9B0
-      Master Seal:
-        pointers:
-          - 0x293c0
-        new_location: 0xb88500
-        item_location: 0x80AE30
-      Ocean Seal:
-        pointers:
-          - 0x29408
-        new_location: 0xb88600
-        item_location: 0x80B04C
-      Lunar Brace:
-        pointers:
-          - 0x293c8
-          - 0x291d0
-        new_location: 0xb88700
-        item_location: 0x80B070
-      Solar Brace:
-        pointers:
-          - 0x293d0
-          - 0x29214
-        new_location: 0xb88800
-        item_location: 0x80B094
-  prf:
-    6: 0x1    # Rapier    -> E rank sword
-    120: 0x16 # Reginleif -> D rank lance
-    143: 0x49 # Naglfar   -> A rank dark
+    - name: Hero Crest
+      pointers:
+        - 0x29398
+      new_location: 0xb88000
+      location: 0x80A920
+    - name: Knight Crest
+      pointers:
+        - 0x293a0
+      new_location: 0xb88100
+      location: 0x80A944
+    - name: Orion's Bolt
+      pointers:
+        - 0x293a8
+      new_location: 0xb88200
+      location: 0x80A968
+    - name: Elysian Whip
+      pointers:
+        - 0x293b0
+      new_location: 0xb88300
+      location: 0x80A98C
+    - name: Guiding Ring
+      pointers:
+        - 0x293b8
+      new_location: 0xb88400
+      location: 0x80A9B0
+    - name: Master Seal
+      pointers:
+        - 0x293c0
+      new_location: 0xb88500
+      location: 0x80AE30
+    - name: Ocean Seal
+      pointers:
+        - 0x29408
+      new_location: 0xb88600
+      location: 0x80B04C
+    - name: Lunar Brace
+      pointers:
+        - 0x293c8
+        - 0x291d0
+      new_location: 0xb88700
+      location: 0x80B070
+    - name: Solar Brace
+      pointers:
+        - 0x293d0
+        - 0x29214
+      new_location: 0xb88800
+      location: 0x80B094
+
+  prfs:
+  - weapon: 0x6  # Rapier    -> E rank sword
+    equivalent: 0x1
+  - weapon: 0x78 # Reginleif -> D rank lance
+    equivalent: 0x16
+  - weapon: 0x8f # Naglfar   -> A rank dark
+    equivalent: 0x49
+
   types:
-    0x0: sword
-    0x1: lance
-    0x2: axe
-    0x3: bow
-    0x4: staff
-    0x5: anima
-    0x6: light
-    0x7: dark
-    0xb: dragonstone/monster
-  e:
-    sword:
-      - 0x1
-      - 0x2
-      - 0x81
-    lance:
-      - 0x14
-      - 0x15
-      - 0x18
-      - 0x1c
-      - 0x82
-    axe:
-      - 0x1f
-      - 0x20
-      - 0x27
-      - 0x28
-      - 0x2c
-      - 0x83
-    bow:
-      - 0x2d
-      - 0x84
-    staff:
-      - 0x4b
-    anima:
-      - 0x38
-    light:
-      - 0x3f
-    dark:
-      - 0x45 # Also make Flux able to be wielded at e
-    dragonstone/monster:
-      - 0x8b
-      - 0xad
-  d:
-    sword:
-      - 0x3
-      - 0x5
-      - 0x8
-      - 0x9
-      - 0xc
-      - 0xd
-      - 0xe
-      - 0x13
-    lance:
-      - 0x16
-      - 0x1b
-      - 0x95
-    axe:
-      - 0x22
-      - 0x25
-      - 0x26
-    bow:
-      - 0x2e
-      - 0x30
-      - 0x33
-      - 0x34
-    staff:
-      - 0x4c
-      - 0x56
-      - 0x58
-    anima:
-      - 0x39
-    light:
-      - 0x40
-    dark:
-      - 0x45
-    dragonstone/monster:
-      - 0xae
-      - 0xb1
-      - 0xb3
-  c:
-    sword:
-      - 0x6
-      - 0xf
-      - 0x10
-      - 0x12
-    lance:
-      - 0x1a
-      - 0x8d
-      - 0x96
-      - 0x1e
-    axe:
-      - 0x24
-      - 0x2a
-      - 0x2b
-      - 0x5a
-    bow:
-      - 0x31
-    staff:
-      - 0x4d
-      - 0x50
-      - 0x57
-      - 0x59
-    anima:
-      - 0x3a
-    light:
-      - 0x41
-    dark:
-      - 0x46
-      - 0x47
-    dragonstone/monster:
-      - 0xaf
-      - 0xb2
-  b:
-    sword:
-      - 0xb
-      - 0xa1
-    lance:
-      - 0x19
-      - 0x1d
-    axe:
-      - 0x23
-      - 0x86
-    bow:
-      - 0x32
-    staff:
-      - 0x4e
-      - 0x51
-      - 0x52
-      - 0x53
-      - 0x55
-      - 0xa6 # Demon King Nightmare
-    anima:
-      - 0x3b
-    light:
-      - 0x42
-    dark:
-      - 0x48
-      - 0xab
-      - 0xac
-      - 0xb4
-      - 0xb5
-    dragonstone/monster:
-      - 0xa8
-      - 0xa9
-      - 0xaa
-  a:
-    sword:
-      - 0x4
-      - 0x7
-      - 0x11
-    lance:
-      - 0x17
-    axe:
-      - 0x21
-      - 0x29
-    bow:
-      - 0x2f
-    staff:
-      - 0x4f
-      - 0x54
-    anima:
-      - 0x3c
-    light:
-      - 0x43
-    dark:
-      - 0x49
-    dragonstone/monster:
-      - 0xb0
-      - 0x90
-  s:
-    sword: []
-    lance: []
-    axe: []
-    bow: []
-    staff: []
-    anima: []
-    light: []
-    dark: []
-    dragonstone/monster: []
+  - id: 0x0
+    name: sword
+  - id: 0x1
+    name: lance
+  - id: 0x2
+    name: axe
+  - id: 0x3
+    name: bow
+  - id: 0x4
+    name: staff
+  - id: 0x5
+    name: anima
+  - id: 0x6
+    name: light
+  - id: 0x7
+    name: dark
+  - id: 0xb
+    name: dragonstone/monster
+
+  weapons:
+  - rank: e
+    type: sword
+    list_:
+    - 0x1
+    - 0x2
+    - 0x81
+  - rank: e
+    type: lance
+    list_:
+    - 0x14
+    - 0x15
+    - 0x18
+    - 0x1c
+    - 0x82
+  - rank: e
+    type: axe
+    list_:
+    - 0x1f
+    - 0x20
+    - 0x27
+    - 0x28
+    - 0x2c
+    - 0x83
+  - rank: e
+    type: bow
+    list_:
+    - 0x2d
+    - 0x84
+  - rank: e
+    type: staff
+    list_:
+    - 0x4b
+  - rank: e
+    type: anima
+    list_:
+    - 0x38
+  - rank: e
+    type: light
+    list_:
+    - 0x3f
+  - rank: e
+    type: dark
+    list_:
+    - 0x45 # Also make Flux able to be wielded at e
+  - rank: e
+    type: dragonstone/monster
+    list_:
+    - 0x8b
+    - 0xad
+  - rank: d
+    type: sword
+    list_:
+    - 0x3
+    - 0x5
+    - 0x8
+    - 0x9
+    - 0xc
+    - 0xd
+    - 0xe
+    - 0x13
+  - rank: d
+    type: lance
+    list_:
+    - 0x16
+    - 0x1b
+    - 0x95
+  - rank: d
+    type: axe
+    list_:
+    - 0x22
+    - 0x25
+    - 0x26
+  - rank: d
+    type: bow
+    list_:
+    - 0x2e
+    - 0x30
+    - 0x33
+    - 0x34
+  - rank: d
+    type: staff
+    list_:
+    - 0x4c
+    - 0x56
+    - 0x58
+  - rank: d
+    type: anima
+    list_:
+    - 0x39
+  - rank: d
+    type: light
+    list_:
+    - 0x40
+  - rank: d
+    type: dark
+    list_:
+    - 0x45
+  - rank: d
+    type: dragonstone/monster
+    list_:
+    - 0xae
+    - 0xb1
+    - 0xb3
+  - rank: c
+    type: sword
+    list_:
+    - 0x6
+    - 0xf
+    - 0x10
+    - 0x12
+  - rank: c
+    type: lance
+    list_:
+    - 0x1a
+    - 0x8d
+    - 0x96
+    - 0x1e
+  - rank: c
+    type: axe
+    list_:
+    - 0x24
+    - 0x2a
+    - 0x2b
+    - 0x5a
+  - rank: c
+    type: bow
+    list_:
+    - 0x31
+  - rank: c
+    type: staff
+    list_:
+    - 0x4d
+    - 0x50
+    - 0x57
+    - 0x59
+  - rank: c
+    type: anima
+    list_:
+    - 0x3a
+  - rank: c
+    type: light
+    list_:
+    - 0x41
+  - rank: c
+    type: dark
+    list_:
+    - 0x46
+    - 0x47
+  - rank: c
+    type: dragonstone/monster
+    list_:
+    - 0xaf
+    - 0xb2
+  - rank: b
+    type: sword
+    list_:
+    - 0xb
+    - 0xa1
+  - rank: b
+    type: lance
+    list_:
+    - 0x19
+    - 0x1d
+  - rank: b
+    type: axe
+    list_:
+    - 0x23
+    - 0x86
+  - rank: b
+    type: bow
+    list_:
+    - 0x32
+  - rank: b
+    type: staff
+    list_:
+    - 0x4e
+    - 0x51
+    - 0x52
+    - 0x53
+    - 0x55
+    - 0xa6 # Demon King Nightmare
+  - rank: b
+    type: anima
+    list_:
+    - 0x3b
+  - rank: b
+    type: light
+    list_:
+    - 0x42
+  - rank: b
+    type: dark
+    list_:
+    - 0x48
+    - 0xab
+    - 0xac
+    - 0xb4
+    - 0xb5
+  - rank: b
+    type: dragonstone/monster
+    list_:
+    - 0xa8
+    - 0xa9
+    - 0xaa
+  - rank: a
+    type: sword
+    list_:
+    - 0x4
+    - 0x7
+    - 0x11
+  - rank: a
+    type: lance
+    list_:
+    - 0x17
+  - rank: a
+    type: axe
+    list_:
+    - 0x21
+    - 0x29
+  - rank: a
+    type: bow
+    list_:
+    - 0x2f
+  - rank: a
+    type: staff
+    list_:
+    - 0x4f
+    - 0x54
+  - rank: a
+    type: anima
+    list_:
+    - 0x3c
+  - rank: a
+    type: light
+    list_:
+    - 0x43
+  - rank: a
+    type: dark
+    list_:
+    - 0x49
+  - rank: a
+    type: dragonstone/monster
+    list_:
+    - 0xb0
+    - 0x90
+  - rank: s
+    type: sword
+    list_: []
+  - rank: s
+    type: lance
+    list_: []
+  - rank: s
+    type: axe
+    list_: []
+  - rank: s
+    type: bow
+    list_: []
+  - rank: s
+    type: staff
+    list_: []
+  - rank: s
+    type: anima
+    list_: []
+  - rank: s
+    type: light
+    list_: []
+  - rank: s
+    type: dark
+    list_: []
+  - rank: s
+    type: dragonstone/monster
+    list_: []

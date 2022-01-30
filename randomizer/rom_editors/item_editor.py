@@ -34,12 +34,10 @@ class ItemEditor:
         self._new_class = None
         self._class_pos = None
         self._item_pos = None
-        self._weapon = None
-
-        self._class_stats = game_config["classes"]["class_stats"]
+        self._weapon_type = None
 
         # Set flux to E rank
-        rom_data[game_config["items"]["flux_weapon_lvl_pos"]] = 1
+        rom_data[game_config.items.flux_weapon_lvl_pos] = 1
 
     def randomize(self):
         """ Randomize all items in {item_pos} """
@@ -48,40 +46,43 @@ class ItemEditor:
 
     def randomize_item(self, item_pos):
         """ Randomize the specific item """
-        if self._new_class == self._class_stats["manakete"]:
-            self._rom_data[item_pos] = self._game_config["items"]["dragonstone"]
+        if self._new_class == self._game_config.class_stats.manakete:
+            self._rom_data[item_pos] = self._game_config.items.dragonstone
             return
 
         # For FE6 only. Check if it's Fae's class
-        if self._new_class == self._class_stats.get("manakete_f"):
-            self._rom_data[item_pos] = self._game_config["items"]["divinestone"]
+        if self._new_class == self._game_config.class_stats.manakete_f:
+            self._rom_data[item_pos] = self._game_config.items.divinestone
             return
 
         item = self._rom_data[item_pos]
 
-        # Handle case where we want to auto assign an iron weapon
+        # If the current item is 0, that means that item slot is unused.
+        # When the spec specifies an unused item location, assume equivalent
+        # item is an iron sword.
         if item == 0:
             item = 1
 
-        # It's a key value pair of addresses to addresses
-        # The spec generator makes keys into strings tho
-        # so we have to compare as strings
-        if str(item) in self._game_config["items"]["prf"]:
-            item = self._game_config["items"]["prf"][str(item)]
+        # If it's a prf item, replace it with an equivalent common item
+        for prf in self._game_config.items.prfs:
+            if item == prf.weapon:
+                item = prf.equivalent
+                break
 
-        item_type = self._get_item_type(item)
-        item_lvl = self._get_item_lvl(item, item_type)
+        # Get the current item type and use that to find its rank
+        curr_item_type = self._get_item_type(item)
+        rank = self._get_item_rank(curr_item_type)
 
-        # This list gets modified. Make sure we copy it first
-        weapon_list = list(self._game_config["items"][item_lvl][self._weapon])
+        # Use the rank and updated weapon type to create a weapon list
+        weapon_list = self._create_weapon_list(rank, self._weapon_type)
 
         # If not ranged monster, take out ranged monster items
         if (
-            self._rom_data[self._class_pos + self._class_stats["id_offset"]]
-            not in self._class_stats["ranged_monster"]
+            self._rom_data[self._class_pos + self._game_config.class_stats.offsets.id]
+            not in self._game_config.class_stats.ranged_monster
         ):
             for weapon in list(weapon_list):
-                if weapon in self._game_config["items"]["ranged_monster"]:
+                if weapon in self._game_config.items.ranged_monster:
                     weapon_list.remove(weapon)
 
         rand = randint(0, len(weapon_list) - 1)
@@ -95,34 +96,37 @@ class ItemEditor:
         """ Make rom_data read only. Should only modify things one at a time """
         return self._rom_data
 
-    def load(self, item_pos, class_, weapon):
+    def load(self, item_pos, class_, weapon_type):
         """ Load the new character's items """
-        class_stats = self._game_config["classes"]["class_stats"]
-        self._class_pos = class_stats["first"] + (class_ * class_stats["total_bytes"])
+        self._class_pos = self._game_config.class_stats.first + (
+            class_ * self._game_config.sizes.class_
+        )
         self._item_pos = item_pos
-        self._weapon = weapon
+        self._weapon_type = weapon_type
         self._new_class = class_
 
-    def _get_item_lvl(self, item, item_type):
-        """ Return the lvl this weapon is (e, d, c ... etc) """
-        for level in {"e", "d", "c", "b", "a", "s"}:
-            if item in self._game_config["items"][level][item_type]:
-                return level
+    def _get_item_rank(self, item_type):
+        """ Look up the rank for this weapon is (e, d, c ... etc) """
+        for weapon in self._game_config.items.weapons:
+            if weapon.type == item_type:
+                return weapon.rank
 
-        raise ItemException("Could not determine level of item {item}")
+        raise ItemException("Could not determine rank of item {hex(item)}")
 
     def _get_item_type(self, item):
         """ Return the item type """
-        for _type in self._game_config["items"]["types"].values():
-            if item in self._get_items(_type):
-                return _type
+        for weapon in self._game_config.items.weapons:
+            if item in weapon.list_:
+                return weapon.type
 
         raise ItemNotFoundException(f"No known item {hex(item)}")
 
-    def _get_items(self, item_type):
-        """ Return all items of that type """
-        items = []
-        for level in {"e", "d", "c", "b", "a", "s"}:
-            items += self._game_config["items"][level][item_type]
+    def _create_weapon_list(self, rank, item_type):
+        """ Return the weapon list corresponding to the rank and item_type """
+        for weapon in self._game_config.items.weapons:
+            if weapon.rank == rank and weapon.type == item_type:
+                return weapon.list_
 
-        return items
+        raise ItemException(
+            "Could not find suitable match for rank {rank} and type {item_type} weapons"
+        )

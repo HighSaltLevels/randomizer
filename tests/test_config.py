@@ -1,17 +1,17 @@
 """ Test Suite for config.py """
 
 import os
-from pathlib import Path
 from unittest import mock
 
 import pytest
 import yaml
 
 from constants import DEFAULT_CONFIG, FEVersions
-from config import Config, ConfigError, CONFIG_MAP
+from spec import Spec
+from config import Config, ConfigError
 
 
-TEST_CONFIG = os.path.join(str(Path.home()), "config.yml")
+TEST_CONFIG = "test_config_delete_me.yml"
 
 
 def setup():
@@ -61,10 +61,11 @@ def test_init():
     teardown()
 
 
-def test_get_path(config):
-    """ Test the get_path method """
-    for version in {FEVersions.FE6, FEVersions.FE7, FEVersions.FE8}:
-        assert config.get_path(version) == CONFIG_MAP[version]
+def test_get_game_config(config):
+    """ Test the get_game_config method """
+    assert config.get_game_config(FEVersions.FE6) == Spec.FE6
+    assert config.get_game_config(FEVersions.FE7) == Spec.FE7
+    assert config.get_game_config(FEVersions.FE8) == Spec.FE8
 
 
 def test_write(config):

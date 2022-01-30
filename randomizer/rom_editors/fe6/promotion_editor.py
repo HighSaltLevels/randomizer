@@ -12,16 +12,12 @@ class FE6PromotionEditor(PromotionEditor):
 
     def _handle_promotion_override(self):
         """ Set the Hero Crest name and description to Master Seal """
-        overrides = self._game_config["items"]["promotional"]["overrides"]
-        for override in {"name", "description"}:
-            new_loc = overrides[override]["new_location"]
-            loc_bytes = self._parse_pointer(new_loc)
-
+        for override in self._game_config.items.promotional.overrides:
             # Set the pointer
-            pointer = overrides[override]["pointer"]
+            loc_bytes = self._parse_pointer(override.new_location)
             for idx, byte in enumerate(loc_bytes):
-                self._rom_data[pointer + idx] = byte
+                self._rom_data[override.pointer + idx] = byte
 
             # Write the message
-            for idx, byte in enumerate(overrides[override]["bytes"]):
-                self._rom_data[new_loc + idx] = byte
+            for idx, byte in enumerate(override.bytes):
+                self._rom_data[override.new_location + idx] = byte
