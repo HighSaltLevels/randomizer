@@ -10,6 +10,7 @@ from rom_editors.stat_editor import (
     InvalidConfigError,
     get_rand,
 )
+from config import CONFIG
 
 
 # Some tests can only work by using protected attributes and methods.
@@ -104,11 +105,18 @@ def test_modify_character_stat(stat_mod):
     stat_mod._game_config.char_stats.first = 0
     stat_mod._game_config.sizes.character = 10
 
+    # Change the config value to be static. As long as we don't
+    # save the config, We're good here.
+    CONFIG["modify"]["stats"]["bases"]["boss"]["modifier"] = 20
+    CONFIG["modify"]["stats"]["growths"]["boss"]["modifier"] = 20
+
     stat_mod._modify_character_stat(m_char, "bases")
     stat_mod._modify_character_stat(m_char, "growths")
+
+    # Assert that the values were increased by 20
     expected_values = bytearray(byte for byte in range(64))
-    expected_values[3] = 8
-    expected_values[6] = 11
+    expected_values[3] = 23
+    expected_values[6] = 26
     assert stat_mod.rom_data == expected_values
 
 
