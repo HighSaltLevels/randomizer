@@ -136,18 +136,3 @@ def test_remove_hardcoded_animations(char_edit):
     expected_data[7] = 0
     expected_data[8] = 0
     assert char_edit.rom_data == expected_data
-
-
-def test_get_character_by_name(rom_data):
-    """ Test the _get_character_by_name method """
-    # Use a character editor without the mocked return value
-    char_edit = FE7CharacterEditor(mock.MagicMock(), rom_data, None, False)
-    m_char = mock.MagicMock()
-    m_char.name = "foo"
-    char_edit._game_config.characters = [m_char]
-
-    assert isinstance(char_edit._get_character_by_name("foo"), mock.MagicMock)
-    with pytest.raises(ValueError) as error:
-        char_edit._get_character_by_name("bar")
-
-    assert "No known character named: bar" in str(error)

@@ -233,3 +233,10 @@ class CharacterEditor:
         """
         for override in self._game_config.char_stats.overrides.flyers:
             self._rom_data[override.address] = override.byte
+
+    def _get_character_by_name(self, name):
+        for character in self._game_config.characters:
+            if character.name == name:
+                return character
+
+        raise ValueError(f"No known character named: {name}")

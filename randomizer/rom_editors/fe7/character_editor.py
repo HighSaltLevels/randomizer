@@ -128,10 +128,3 @@ class FE7CharacterEditor(CharacterEditor):
                     location = first + (_id * total_bytes) + offset
                     self._rom_data[location] = 0
                     self._rom_data[location + 1] = 0
-
-    def _get_character_by_name(self, name):
-        for character in self._game_config.characters:
-            if character.name == name:
-                return character
-
-        raise ValueError(f"No known character named: {name}")

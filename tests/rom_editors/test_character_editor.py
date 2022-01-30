@@ -219,3 +219,18 @@ def test_fix_flyers(char_editor):
     expected_values = bytearray(byte for byte in range(64))
     expected_values[5] = 255
     assert char_editor.rom_data == expected_values
+
+
+def test_get_character_by_name(rom_data):
+    """ Test the _get_character_by_name method """
+    # Use a character editor without the mocked return value
+    char_edit = CharacterEditor(mock.MagicMock(), rom_data, None, False)
+    m_char = mock.MagicMock()
+    m_char.name = "foo"
+    char_edit._game_config.characters = [m_char]
+
+    assert isinstance(char_edit._get_character_by_name("foo"), mock.MagicMock)
+    with pytest.raises(ValueError) as error:
+        char_edit._get_character_by_name("bar")
+
+    assert "No known character named: bar" in str(error)

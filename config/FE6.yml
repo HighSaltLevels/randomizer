@@ -552,6 +552,14 @@ characters:
       - 0x68025C
       - 0x6811C8
       - 0x68411C
+    extra_item_pos:
+      - 0x67B3D9
+      - 0x67BE45
+      - 0x67D8D1
+      - 0x67EF7D
+      - 0x68025D
+      - 0x6811C9
+      - 0x68411D
   - name: Sophia
     id:
       - 0x36
