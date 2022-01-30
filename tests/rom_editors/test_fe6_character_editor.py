@@ -21,9 +21,11 @@ def test_handle_overrides(char_edit):
     """ Test the handle_overrides method """
     with mock.patch.object(char_edit, "_handle_f_mercenary_override") as m_merc:
         with mock.patch.object(char_edit, "_handle_cath_override") as m_cath:
-            char_edit.handle_overrides()
-            m_merc.assert_called_once()
-            m_cath.assert_called_once()
+            with mock.patch.object(char_edit, "_handle_roy_override") as m_roy:
+                char_edit.handle_overrides()
+                m_merc.assert_called_once()
+                m_cath.assert_called_once()
+                m_roy.assert_called_once()
 
 
 def test_handle_f_mercenary_override(char_edit):
@@ -53,4 +55,22 @@ def test_handle_cath_override(char_edit):
     expected_data = bytearray(byte for byte in range(64))
     expected_data[0] = 50
     expected_data[2] = 60
+    assert char_edit.rom_data == expected_data
+
+
+def test_handle_roy_override(char_edit):
+    """ Test the _handle_roy_override method """
+    m_char = mock.MagicMock()
+    m_char.location = [5]
+    char_edit._game_config.class_stats.first = 0
+    char_edit._game_config.class_stats.offsets.ability2 = 30
+    char_edit._game_config.sizes.class_ = 5
+    char_edit._game_config.class_stats.bit_masks.lord = 0x1
+
+    with mock.patch.object(char_edit, "_get_character_by_name") as m_get:
+        m_get.return_value = m_char
+        char_edit._handle_roy_override()
+
+    expected_data = bytearray(byte for byte in range(64))
+    expected_data[1] = 0
     assert char_edit.rom_data == expected_data

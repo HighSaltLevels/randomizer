@@ -10,7 +10,6 @@ totals:
 class_stats:
   first: 0xBE015C
   promotion:
-    bit_mask: 1
     overrides:
     - unprom_class: 0x38
       prom_class: 0x7
@@ -31,6 +30,9 @@ class_stats:
     bases: 0xb
     id: 0x4
     promotion: 0x29
+
+  bit_masks:
+    promotion: 0x1
 
   totals:
     bases: 7

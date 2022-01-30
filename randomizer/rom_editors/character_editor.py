@@ -143,7 +143,7 @@ class CharacterEditor:
                 + class_ptr
                 + self._game_config.class_stats.offsets.promotion
             ]
-            if int(prom_pos) & self._game_config.class_stats.promotion.bit_mask == 0:
+            if int(prom_pos) & self._game_config.class_stats.bit_masks.promotion == 0:
                 unpromoted.append(_class)
 
             else:

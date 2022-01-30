@@ -10,7 +10,6 @@ totals:
 class_stats:
   first: 0x60A0E8
   promotion:
-    bit_mask: 1
     overrides:
     - unprom_class: 0x30
       prom_class: 0x2e
@@ -27,12 +26,18 @@ class_stats:
     bases: 0xb
     id: 0x4
     promotion: 0x25
+    ability2: 0x25 # Same as the promotion
+
+  bit_masks:
+    promotion: 0x1
+    lord: 0x20
 
   totals:
     bases: 7
 
   manakete: 0x38
   manakete_f: 0x39 # This is what I'm calling Fae's class
+  roy: 0x1 # Roy's class ID (Lord)
 
 char_stats:
   first: 0x6076A0

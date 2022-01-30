@@ -137,7 +137,7 @@ def test_get_class_list(char_editor):
     char_editor._game_config.class_stats.staff_only = [3]
 
     char_editor._game_config.class_stats.offsets.promotion = 1
-    char_editor._game_config.class_stats.promotion.bit_mask = 1
+    char_editor._game_config.class_stats.bit_masks.promotion = 1
 
     promoted, unpromoted = char_editor._get_class_list()
     assert promoted == [0, 4, 6, 8]
