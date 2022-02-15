@@ -123,7 +123,7 @@ def test_modify_character_stat(stat_mod):
 def test_get_rand():
     """ Test the get_rand function """
     # Test with valid configurations
-    assert get_rand(0, 50) in range(50)
+    assert get_rand(0, 50) in range(49)
 
     # Test with invalid configurations
     with pytest.raises(InvalidConfigError):
