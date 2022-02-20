@@ -1,5 +1,16 @@
 # Known Bugs
 
+## FE6
+ - Milady's weapon was not randomized
+ - Perceval's weapons should have been stronger. They were E rank
+ - Narcian's weapon should have been stronger. It was E/D rank
+    - This seems to be a recurring pattern :(
+ - The Master Seal help screen is cut off. More specifically:
+    - It shows up as:
+        Use this item to promo
+        unpromoted class Lv.
+ - Gale's starting location in chapter 21 makes it so he can't move
+
 ## FE7
  - Chapter 6, Rath's battle animation in the opening could not continue:
     - Workaround: Once starting the chapter, skip the entire opening
