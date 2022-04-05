@@ -274,6 +274,8 @@ characters:
     kind: playable
     item_pos:
       - 0x67A384
+    extra_item_pos:
+      - 0x67A386
   - name: Karel
     id:
       - 0x15

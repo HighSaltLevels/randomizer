@@ -41,6 +41,21 @@ def test_handle_f_mercenary_override(char_edit):
     assert char_edit.rom_data == expected_data
 
 
+def test_handle_chad_override(char_edit):
+    """ Test the handle_chad_override method """
+    m_char = mock.MagicMock()
+    m_char.extra_item_pos = [16]
+
+    with mock.patch.object(char_edit, "_get_character_by_name") as m_get:
+        m_get.return_value = m_char
+        char_edit._handle_chad_override()
+
+    expected_data = bytearray(byte for byte in range(64))
+    expected_data[16] = 1
+    expected_data[17] = 1
+    assert char_edit.rom_data == expected_data
+
+
 def test_handle_cath_override(char_edit):
     """ Test the _handle_cath_override method """
     m_char = mock.MagicMock()

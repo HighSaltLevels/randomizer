@@ -9,6 +9,7 @@ class FE6CharacterEditor(CharacterEditor):
     def handle_overrides(self):
         """ Perform all FE6 overrides """
         self._handle_f_mercenary_override()
+        self._handle_chad_override()
         self._handle_cath_override()
         self._handle_roy_override()
 
@@ -20,6 +21,19 @@ class FE6CharacterEditor(CharacterEditor):
         """
         for override in self._game_config.char_stats.overrides.f_mercenary:
             self._rom_data[override.address] = override.byte
+
+    def _handle_chad_override(self):
+        """
+        Chad can be any class and it's good to keep the lockpick on him
+        just in case the player still has a thief class character. But
+        the first chest key does not appear until the player gets to the
+        shop in chapter 7. So give chad 2 5-use chest key to tide the
+        player over until then.
+        """
+        chad = self._get_character_by_name("Chad")
+        for item_pos in chad.extra_item_pos:
+            self._rom_data[item_pos] = self._game_config.items.chest_key_id
+            self._rom_data[item_pos + 1] = self._game_config.items.chest_key_id
 
     def _handle_cath_override(self):
         """
