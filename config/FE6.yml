@@ -123,6 +123,9 @@ characters:
     item_pos:
       - 0x67997D
       - 0x679B4A # Give him an iron sword equivalent
+    story_prom_locations:
+      - 0x675FC4
+      - 0x6720B8
   - name: Clarine
     id:
       - 0x2

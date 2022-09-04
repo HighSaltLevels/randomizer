@@ -20,12 +20,14 @@ def create_char_editor(rom_data):
 def test_handle_overrides(char_edit):
     """ Test the handle_overrides method """
     with mock.patch.object(char_edit, "_handle_f_mercenary_override") as m_merc:
-        with mock.patch.object(char_edit, "_handle_cath_override") as m_cath:
-            with mock.patch.object(char_edit, "_handle_roy_override") as m_roy:
-                char_edit.handle_overrides()
-                m_merc.assert_called_once()
-                m_cath.assert_called_once()
-                m_roy.assert_called_once()
+        with mock.patch.object(char_edit, "_handle_chad_override") as m_chad:
+            with mock.patch.object(char_edit, "_handle_cath_override") as m_cath:
+                with mock.patch.object(char_edit, "_handle_roy_override") as m_roy:
+                    char_edit.handle_overrides()
+                    m_merc.assert_called_once()
+                    m_chad.assert_called_once()
+                    m_cath.assert_called_once()
+                    m_roy.assert_called_once()
 
 
 def test_handle_f_mercenary_override(char_edit):
@@ -73,10 +75,16 @@ def test_handle_cath_override(char_edit):
     assert char_edit.rom_data == expected_data
 
 
-def test_handle_roy_override(char_edit):
+def test_handle_roy_override():
     """ Test the _handle_roy_override method """
+    # So much data is changed with the Roy override that it's better
+    # to just create our own Editor and rom_data
+    rom_data = bytearray(byte for byte in range(64))
+    char_edit = FE6CharacterEditor(mock.MagicMock(), rom_data, None, False)
+
     m_char = mock.MagicMock()
     m_char.location = [5]
+    m_char.story_prom_locations = [10]
     char_edit._game_config.class_stats.first = 0
     char_edit._game_config.class_stats.offsets.ability2 = 30
     char_edit._game_config.sizes.class_ = 5
@@ -86,6 +94,13 @@ def test_handle_roy_override(char_edit):
         m_get.return_value = m_char
         char_edit._handle_roy_override()
 
+    # The resulting bytearray should have at 32 bytes changed due to
+    # skipping Roy's promotion subroutine. Since the method we're testing
+    # is using test data that is incrementing at every byte, we can set up
+    # the expected values the same way.
     expected_data = bytearray(byte for byte in range(64))
     expected_data[1] = 0
+    for i in range(32):
+        expected_data[10 + i] = 26 + i
+
     assert char_edit.rom_data == expected_data

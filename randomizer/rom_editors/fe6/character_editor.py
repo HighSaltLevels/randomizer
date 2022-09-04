@@ -54,6 +54,12 @@ class FE6CharacterEditor(CharacterEditor):
         The ability to let Roy sieze a chapter is based completely on
         his class and not his character. So we should zero out the bit
         on the Lord class and set the bit on Roy's new class
+
+        Additionally, Roy's story-based promotion breaks the game when
+        Roy is a different class. Adding No-Op statements in place
+        didn't run the command that concludes the chapter which froze
+        the game. To fix this, just copy the next 2 16-byte command strings:
+        the command to fade the screen and the command to end the chapter.
         """
         # Get Roy's new class and get the address of the bit we want to set
         roy = self._get_character_by_name("Roy")
@@ -70,3 +76,9 @@ class FE6CharacterEditor(CharacterEditor):
         # Set the "Lord" bit to "true" on Roy's new class
         pos = first + (size * roy_class) + offset
         self._rom_data[pos] |= self._game_config.class_stats.bit_masks.lord
+
+        # Get the position of the roy class change address, and copy the
+        # next 2 commands to overwrite the current 2.
+        for location in roy.story_prom_locations:
+            for idx in range(32):
+                self._rom_data[location + idx] = self._rom_data[location + 16 + idx]
