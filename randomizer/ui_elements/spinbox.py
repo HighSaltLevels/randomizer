@@ -7,7 +7,7 @@ from config import CONFIG
 
 
 def _set_config(spin_boxes):
-    """ Set the states of the spin boxes based on the config """
+    """Set the states of the spin boxes based on the config"""
     base_configs = CONFIG["randomize"]["stats"]["bases"]
     spin_boxes["pb_min"].setValue(base_configs["playable"]["minimum"])
     spin_boxes["pb_max"].setValue(base_configs["playable"]["maximum"])
@@ -134,7 +134,7 @@ def _set_config(spin_boxes):
 
 
 def create_spin_boxes(widget):
-    """ Init and return a dict of line edits """
+    """Init and return a dict of line edits"""
 
     min_max_spin_boxes = {
         "pb_min": QSpinBox(widget),

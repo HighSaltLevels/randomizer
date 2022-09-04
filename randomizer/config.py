@@ -14,11 +14,11 @@ os.makedirs(CONFIG_PATH, exist_ok=True)
 
 
 class ConfigError(Exception):
-    """ Raised when there is an unexpected error during config operations """
+    """Raised when there is an unexpected error during config operations"""
 
 
 class Config(dict):
-    """ Yaml configuration handler """
+    """Yaml configuration handler"""
 
     def __init__(self, path):
         super().__init__()
@@ -45,7 +45,7 @@ class Config(dict):
 
     @staticmethod
     def get_game_config(version):
-        """ Get the version path by version """
+        """Get the version path by version"""
         if version == FEVersions.FE6:
             return Spec.FE6
 
@@ -55,20 +55,20 @@ class Config(dict):
         return Spec.FE8
 
     def write(self):
-        """ Write the config back to disk """
+        """Write the config back to disk"""
         with open(self._path, "w") as stream:
             stream.write(yaml.dump(dict(self)))
 
     def set_default(self):
-        """ Load default values into the config """
+        """Load default values into the config"""
         self.update(DEFAULT_CONFIG)
 
     def update_combo_box(self, selection):
-        """ Update the config based on the combo box selection """
+        """Update the config based on the combo box selection"""
         self["randomize"]["classes"]["mode"] = selection
 
     def update_by_path(self, path, elements):
-        """ Update the config based on UI elements and the path """
+        """Update the config based on UI elements and the path"""
         if "randomize" in path:
             location = self["randomize"]["stats"]
             if "bases" in path:
@@ -108,7 +108,7 @@ class Config(dict):
 
     @staticmethod
     def _get_location(path, curr_location):
-        """ Get the location based on playable, boss, other, or class """
+        """Get the location based on playable, boss, other, or class"""
         if "playable" in path:
             return curr_location["playable"]
 
@@ -121,7 +121,7 @@ class Config(dict):
         return curr_location["class"]
 
     def _get_other_location(self, path):
-        """ Get the location of other configs that are not bases or growths """
+        """Get the location of other configs that are not bases or growths"""
         for kind in ("playable", "boss", "other"):
             if kind in path:
                 return self["randomize"]["classes"][kind]

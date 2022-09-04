@@ -6,7 +6,7 @@ from controller import browse_handler, RandomizerHandler
 
 
 def create_buttons(parent):
-    """ Create all the push buttons """
+    """Create all the push buttons"""
 
     buttons = {
         "randomize": QPushButton("Randomize!", parent),

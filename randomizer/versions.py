@@ -10,7 +10,7 @@ LOCATION_VERSION_MAP = {
 
 
 def get_fe_version(rom_data):
-    """ Attempt to determine Fire Emblem Version """
+    """Attempt to determine Fire Emblem Version"""
     try:
         return LOCATION_VERSION_MAP[rom_data[VERSION_LOCATION]]
     except KeyError:

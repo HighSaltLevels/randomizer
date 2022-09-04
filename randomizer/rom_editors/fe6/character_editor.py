@@ -4,10 +4,10 @@ from rom_editors.character_editor import CharacterEditor
 
 
 class FE6CharacterEditor(CharacterEditor):
-    """ FE6 overrides for CharacterEditor """
+    """FE6 overrides for CharacterEditor"""
 
     def handle_overrides(self):
-        """ Perform all FE6 overrides """
+        """Perform all FE6 overrides"""
         self._handle_f_mercenary_override()
         self._handle_chad_override()
         self._handle_cath_override()

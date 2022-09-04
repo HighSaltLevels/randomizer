@@ -8,7 +8,7 @@ from config import CONFIG
 
 
 def _set_configs(check_boxes, spin_boxes):
-    """ Set the check box states based on the incoming config """
+    """Set the check box states based on the incoming config"""
     base_configs = CONFIG["randomize"]["stats"]["bases"]
     check_boxes["pb_enabled"].setChecked(base_configs["playable"]["enabled"])
     spin_boxes["pb_min"].setDisabled(not base_configs["playable"]["enabled"])
@@ -65,7 +65,7 @@ def _set_configs(check_boxes, spin_boxes):
 
 
 def create_check_boxes(parent):
-    """ Init and return a dict of check boxes """
+    """Init and return a dict of check boxes"""
     boxes = [
         "pb_enabled",
         "bb_enabled",

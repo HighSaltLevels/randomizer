@@ -17,15 +17,15 @@ WEAPON_MAP = {
 
 
 class ItemException(Exception):
-    """ Raised when there is an unexpected error handling items """
+    """Raised when there is an unexpected error handling items"""
 
 
 class ItemNotFoundException(ItemException):
-    """ Raised when there is an unexpected item is not in config """
+    """Raised when there is an unexpected item is not in config"""
 
 
 class ItemEditor:
-    """ Item Editor class """
+    """Item Editor class"""
 
     def __init__(self, rom_data, game_config):
         self._rom_data = rom_data
@@ -40,12 +40,12 @@ class ItemEditor:
         rom_data[game_config.items.flux_weapon_lvl_pos] = 1
 
     def randomize(self):
-        """ Randomize all items in {item_pos} """
+        """Randomize all items in {item_pos}"""
         for item_pos in self._item_pos:
             self.randomize_item(item_pos)
 
     def randomize_item(self, item_pos):
-        """ Randomize the specific item """
+        """Randomize the specific item"""
         if self._new_class == self._game_config.class_stats.manakete:
             self._rom_data[item_pos] = self._game_config.items.dragonstone
             return
@@ -89,15 +89,15 @@ class ItemEditor:
         self._rom_data[item_pos] = weapon_list[rand]
 
     def handle_overrides(self):
-        """ Sub-classes can optionally do extra operations on items """
+        """Sub-classes can optionally do extra operations on items"""
 
     @property
     def rom_data(self):
-        """ Make rom_data read only. Should only modify things one at a time """
+        """Make rom_data read only. Should only modify things one at a time"""
         return self._rom_data
 
     def load(self, item_pos, class_, weapon_type):
-        """ Load the new character's items """
+        """Load the new character's items"""
         self._class_pos = self._game_config.class_stats.first + (
             class_ * self._game_config.sizes.class_
         )
@@ -106,7 +106,7 @@ class ItemEditor:
         self._new_class = class_
 
     def _get_item_rank(self, item_type):
-        """ Look up the rank for this weapon is (e, d, c ... etc) """
+        """Look up the rank for this weapon is (e, d, c ... etc)"""
         for weapon in self._game_config.items.weapons:
             if weapon.type == item_type:
                 return weapon.rank
@@ -114,7 +114,7 @@ class ItemEditor:
         raise ItemException("Could not determine rank of item {hex(item)}")
 
     def _get_item_type(self, item):
-        """ Return the item type """
+        """Return the item type"""
         for weapon in self._game_config.items.weapons:
             if item in weapon.list_:
                 return weapon.type
@@ -122,7 +122,7 @@ class ItemEditor:
         raise ItemNotFoundException(f"No known item {hex(item)}")
 
     def _create_weapon_list(self, rank, item_type):
-        """ Return the weapon list corresponding to the rank and item_type """
+        """Return the weapon list corresponding to the rank and item_type"""
         for weapon in self._game_config.items.weapons:
             if weapon.rank == rank and weapon.type == item_type:
                 return weapon.list_

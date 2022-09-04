@@ -6,11 +6,11 @@ from config import CONFIG
 
 
 class InvalidConfigError(Exception):
-    """ raised when configuration values are invalid """
+    """raised when configuration values are invalid"""
 
 
 class StatRandomizer:
-    """ Base Stat Randomizer """
+    """Base Stat Randomizer"""
 
     def __init__(self, game_config, rom_data):
         self._game_config = game_config
@@ -19,7 +19,7 @@ class StatRandomizer:
         self._filters = None
 
     def set_filters(self, base_filters, growth_filters):
-        """ Randomize bases and growths"""
+        """Randomize bases and growths"""
         self._filters = {
             "bases": base_filters,
             "growths": growth_filters,
@@ -27,11 +27,11 @@ class StatRandomizer:
 
     @property
     def rom_data(self):
-        """ Make rom_data read only. Should only modify things one at a time """
+        """Make rom_data read only. Should only modify things one at a time"""
         return self._rom_data
 
     def randomize(self):
-        """ Randomize the stats """
+        """Randomize the stats"""
         self.randomize_character_stats()
 
         if "class" not in self._filters["bases"]:
@@ -40,7 +40,7 @@ class StatRandomizer:
         return self._rom_data
 
     def randomize_character_stats(self):
-        """ Randomize character stats that are not filtered out """
+        """Randomize character stats that are not filtered out"""
         for character in self._game_config.characters:
             for stat_type in {"bases", "growths"}:
                 if character.kind not in self._filters[stat_type]:
@@ -71,7 +71,7 @@ class StatRandomizer:
 
     # pylint: disable=too-many-arguments
     def _randomize_character_stat(self, character, min_, max_, num_stats, offset):
-        """ Write a random number between {min_} and {max} to the character stats """
+        """Write a random number between {min_} and {max} to the character stats"""
         for _id in character.id:
             first_stat = (
                 self._game_config.char_stats.first
@@ -82,7 +82,7 @@ class StatRandomizer:
                 self._rom_data[first_stat + idx] = get_rand(min_, max_)
 
     def randomize_class_stats(self):
-        """ Use CONFIG values to randomize bases of classes """
+        """Use CONFIG values to randomize bases of classes"""
         min_ = CONFIG["randomize"]["stats"]["bases"]["class"]["minimum"]
         max_ = CONFIG["randomize"]["stats"]["bases"]["class"]["maximum"]
         for class_idx in range(self._game_config.totals.class_):
@@ -96,7 +96,7 @@ class StatRandomizer:
 
 
 class StatModifier:
-    """ Base Stat Modifier """
+    """Base Stat Modifier"""
 
     def __init__(self, game_config, rom_data):
         self._game_config = game_config
@@ -105,7 +105,7 @@ class StatModifier:
         self._filters = None
 
     def set_filters(self, base_filters, growth_filters):
-        """ Modify bases and growths"""
+        """Modify bases and growths"""
         self._filters = {
             "bases": base_filters,
             "growths": growth_filters,
@@ -113,11 +113,11 @@ class StatModifier:
 
     @property
     def rom_data(self):
-        """ Make rom_data read only. Should only modify things one at a time """
+        """Make rom_data read only. Should only modify things one at a time"""
         return self._rom_data
 
     def modify(self):
-        """ Modify bases and growths """
+        """Modify bases and growths"""
         for character in self._game_config.characters:
             for stat_type in {"bases", "growths"}:
                 if character.kind not in self._filters[stat_type]:
@@ -126,7 +126,7 @@ class StatModifier:
         return self._rom_data
 
     def _modify_character_stat(self, character, stat_type):
-        """ Use CONFIG values to modify the character """
+        """Use CONFIG values to modify the character"""
         num_stats = (
             self._game_config.char_stats.totals.bases
             if stat_type == "bases"
@@ -156,7 +156,7 @@ class StatModifier:
 
 
 def get_rand(minimum, maximum):
-    """ Generate a random number between {minimum} and {maximum} """
+    """Generate a random number between {minimum} and {maximum}"""
     try:
         return randint(minimum, maximum)
     except ValueError:

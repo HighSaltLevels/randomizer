@@ -24,7 +24,7 @@ CHARACTER_KINDS = {"playable", "boss", "other"}
 
 
 def handler(path, elements, toggle=True):
-    """ Toggle the state of the ui elements """
+    """Toggle the state of the ui elements"""
     for element in elements.get("spin_boxes", []):
         if toggle:
             element.setDisabled(element.isEnabled())
@@ -35,14 +35,14 @@ def handler(path, elements, toggle=True):
 
 
 def combo_box_handler(selection):
-    """ Set the state of the combo box in the config """
+    """Set the state of the combo box in the config"""
     CONFIG.update_combo_box(selection)
     LOGGER.info("Saving configuration")
     CONFIG.write()
 
 
 def browse_handler(app):
-    """ Allow the user to browse for a ROM path """
+    """Allow the user to browse for a ROM path"""
     if app.file_browser.exec_():
         selected_path = app.file_browser.selectedFiles()[0]
         app.line_edits["rom_edit"].setText(selected_path)
@@ -52,7 +52,7 @@ def browse_handler(app):
 
 
 class RandomizerHandler:
-    """ RandomizerHandler Class for keeping up with versioning """
+    """RandomizerHandler Class for keeping up with versioning"""
 
     def __init__(self, app):
         self._rom_data = None
@@ -62,11 +62,11 @@ class RandomizerHandler:
 
     @property
     def rom_data(self):
-        """ Only allow modifying of the ROM Data within this class """
+        """Only allow modifying of the ROM Data within this class"""
         return self._rom_data
 
     def randomize(self):
-        """ Load the rom, get the FE version, load the config based on version, edit the rom """
+        """Load the rom, get the FE version, load the config based on version, edit the rom"""
 
         # Load the rom and game config
         input_rom = self._app.line_edits["rom_edit"].text()
@@ -120,7 +120,7 @@ class RandomizerHandler:
         self._app.labels["status"].setText(f"Status: Successfully wrote {output_rom}")
 
     def _randomize_all(self):
-        """ Perform all requested randomizations """
+        """Perform all requested randomizations"""
 
         self._randomize_characters()
 
@@ -144,7 +144,7 @@ class RandomizerHandler:
         self._modify_stats()
 
     def _randomize_characters(self):
-        """ Randomize the characters based on version """
+        """Randomize the characters based on version"""
 
         filters = _get_filters(CONFIG["randomize"]["classes"], CHARACTER_KINDS)
 
@@ -163,7 +163,7 @@ class RandomizerHandler:
         self._rom_data = char_editor.rom_data
 
     def _randomize_stats(self):
-        """ Randomize bases and growths """
+        """Randomize bases and growths"""
 
         base_filters = _get_filters(CONFIG["randomize"]["stats"]["bases"], ALL_KINDS)
         growth_filters = _get_filters(
@@ -178,7 +178,7 @@ class RandomizerHandler:
         self._rom_data = stat_randomizer.rom_data
 
     def _modify_stats(self):
-        """ Modify bases and growths """
+        """Modify bases and growths"""
         base_filters = _get_filters(CONFIG["modify"]["stats"]["bases"], CHARACTER_KINDS)
         growth_filters = _get_filters(
             CONFIG["modify"]["stats"]["growths"], CHARACTER_KINDS
@@ -192,7 +192,7 @@ class RandomizerHandler:
         self._rom_data = stat_modifier.rom_data
 
     def _edit_promotions(self):
-        """ Make all promotion items master seals """
+        """Make all promotion items master seals"""
         prom_editor = create_prom_editor(
             self._game_config, self._rom_data, self._version
         )
@@ -202,5 +202,5 @@ class RandomizerHandler:
 
 
 def _get_filters(config, kinds):
-    """ Look up filters based on config path """
+    """Look up filters based on config path"""
     return [kind for kind in kinds if not config[kind]["enabled"]]
