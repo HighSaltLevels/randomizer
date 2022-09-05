@@ -1,7 +1,6 @@
 # Known Bugs
 
 ## FE6
- - Milady's weapon was not randomized
  - Perceval's weapons should have been stronger. They were E rank
  - Narcian's weapon should have been stronger. It was E/D rank
     - This seems to be a recurring pattern :(

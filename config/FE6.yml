@@ -591,6 +591,7 @@ characters:
     item_pos:
       - 0x67A054
       - 0x67A055
+      - 0x67DECC
   - name: Gonzales
     id:
       - 0x38
