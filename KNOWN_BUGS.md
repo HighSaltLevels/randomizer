@@ -1,10 +1,7 @@
 # Known Bugs
 
 ## FE6
- - The Master Seal help screen is cut off. More specifically:
-    - It shows up as:
-        Use this item to promo
-        unpromoted class Lv.
+ - None at the moment :)
 
 ## FE7
  - Chapter 6, Rath's battle animation in the opening could not continue:
