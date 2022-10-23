@@ -78,9 +78,9 @@ class FE7ItemEditor(ItemEditor):
         return s_ranks
 
     def _get_item_type(self, item):
-         """Return the item type"""
-         for weapon in self._game_config.items.weapons:
-             if item in weapon.list_:
+        """Return the item type"""
+        for weapon in self._game_config.items.weapons:
+            if item in weapon.list_:
                 return weapon.type
 
-         raise ItemNotFoundException(f"No known item {hex(item)}")
+        raise ItemNotFoundException(f"No known item {hex(item)}")

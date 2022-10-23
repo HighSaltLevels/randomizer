@@ -12,13 +12,13 @@ from rom_editors.item_editor import ItemEditor, ItemException, ItemNotFoundExcep
 
 @pytest.fixture(name="item_edit")
 def create_item_editor(rom_data):
-    """ Create an ItemEditor for testing """
+    """Create an ItemEditor for testing"""
     return ItemEditor(rom_data, mock.MagicMock())
 
 
 @pytest.fixture(name="m_weapons")
 def create_mock_weapons():
-    """ Create a list of a single MagicMock() object """
+    """Create a list of a single MagicMock() object"""
     m_weapon = mock.MagicMock()
     m_weapon.type = "sword"
     m_weapon.rank = "a"
@@ -27,7 +27,7 @@ def create_mock_weapons():
 
 
 def test_randomize(item_edit):
-    """ Test the randomize method """
+    """Test the randomize method"""
     item_edit._item_pos = [69]
 
     with mock.patch.object(item_edit, "randomize_item") as m_rand:
@@ -36,7 +36,7 @@ def test_randomize(item_edit):
 
 
 def test_randomize_item(item_edit):
-    """ Test the randomize_item method """
+    """Test the randomize_item method"""
     # Set up parameters
     m_prf = mock.MagicMock()
     m_prf.weapon = 20
@@ -82,7 +82,7 @@ def test_randomize_item(item_edit):
 
 
 def test_load(item_edit):
-    """ Test the load method """
+    """Test the load method"""
     item_edit._game_config._class_stats.first = 0
     item_edit._game_config.sizes.class_ = 6
     item_edit.load(10, 11, "sword")
@@ -92,7 +92,7 @@ def test_load(item_edit):
 
 
 def test_get_item_rank(item_edit, m_weapons):
-    """ Test the _get_item_type method """
+    """Test the _get_item_type method"""
     item_edit._game_config.items.weapons = m_weapons
 
     # Test with an item found
@@ -107,7 +107,7 @@ def test_get_item_rank(item_edit, m_weapons):
 
 
 def test_create_weapon_list(item_edit, m_weapons):
-    """ Test the _create_weapon_list method """
+    """Test the _create_weapon_list method"""
     item_edit._game_config.items.weapons = m_weapons
 
     # Test with the item found

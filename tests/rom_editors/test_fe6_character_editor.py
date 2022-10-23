@@ -13,12 +13,12 @@ from rom_editors.fe6.character_editor import FE6CharacterEditor
 
 @pytest.fixture(name="char_edit")
 def create_char_editor(rom_data):
-    """ Create an FE6CharacterEditor object """
+    """Create an FE6CharacterEditor object"""
     return FE6CharacterEditor(mock.MagicMock(), rom_data, None, False)
 
 
 def test_handle_overrides(char_edit):
-    """ Test the handle_overrides method """
+    """Test the handle_overrides method"""
     with mock.patch.object(char_edit, "_handle_f_mercenary_override") as m_merc:
         with mock.patch.object(char_edit, "_handle_chad_override") as m_chad:
             with mock.patch.object(char_edit, "_handle_cath_override") as m_cath:
@@ -31,7 +31,7 @@ def test_handle_overrides(char_edit):
 
 
 def test_handle_f_mercenary_override(char_edit):
-    """ Test the handle_f_mercenary_override method """
+    """Test the handle_f_mercenary_override method"""
     m_override = mock.MagicMock()
     m_override.address = 10
     m_override.byte = 69
@@ -44,7 +44,7 @@ def test_handle_f_mercenary_override(char_edit):
 
 
 def test_handle_chad_override(char_edit):
-    """ Test the handle_chad_override method """
+    """Test the handle_chad_override method"""
     m_char = mock.MagicMock()
     m_char.extra_item_pos = [16]
 
@@ -59,7 +59,7 @@ def test_handle_chad_override(char_edit):
 
 
 def test_handle_cath_override(char_edit):
-    """ Test the _handle_cath_override method """
+    """Test the _handle_cath_override method"""
     m_char = mock.MagicMock()
     m_char.extra_item_pos = [0]
     char_edit._game_config.items.chest_key_id = 50
@@ -76,7 +76,7 @@ def test_handle_cath_override(char_edit):
 
 
 def test_handle_roy_override():
-    """ Test the _handle_roy_override method """
+    """Test the _handle_roy_override method"""
     # So much data is changed with the Roy override that it's better
     # to just create our own Editor and rom_data
     rom_data = bytearray(byte for byte in range(64))

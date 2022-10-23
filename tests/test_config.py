@@ -15,14 +15,14 @@ TEST_CONFIG = "test_config_delete_me.yml"
 
 
 def setup():
-    """ Create a mocked config file for testing """
+    """Create a mocked config file for testing"""
     data = {"foo": "bar"}
     with open(TEST_CONFIG, "w") as config_file:
         config_file.write(yaml.dump(data))
 
 
 def teardown():
-    """ Delete the mocked config file """
+    """Delete the mocked config file"""
     try:
         os.remove(TEST_CONFIG)
     except FileNotFoundError:
@@ -31,14 +31,14 @@ def teardown():
 
 @pytest.fixture(name="config")
 def create_config():
-    """ Create a test config file and remove it after done """
+    """Create a test config file and remove it after done"""
     setup()
     yield Config(TEST_CONFIG)
     teardown()
 
 
 def test_init():
-    """ Test creation of Config object """
+    """Test creation of Config object"""
     # Test that it uses default config if config file is not present
     # Delete existing test config if already present
     if os.path.isfile(TEST_CONFIG):
@@ -62,14 +62,14 @@ def test_init():
 
 
 def test_get_game_config(config):
-    """ Test the get_game_config method """
+    """Test the get_game_config method"""
     assert config.get_game_config(FEVersions.FE6) == Spec.FE6
     assert config.get_game_config(FEVersions.FE7) == Spec.FE7
     assert config.get_game_config(FEVersions.FE8) == Spec.FE8
 
 
 def test_write(config):
-    """ Test the write method """
+    """Test the write method"""
     if os.path.isfile(TEST_CONFIG):
         teardown()
         assert not os.path.isfile(
@@ -80,7 +80,7 @@ def test_write(config):
 
 
 def test_update_combo_box(config):
-    """ Test the update_combo_box method """
+    """Test the update_combo_box method"""
     config["randomize"] = {"classes": {"mode": "foo"}}
     config.update_combo_box("bar")
     assert (
@@ -89,7 +89,7 @@ def test_update_combo_box(config):
 
 
 def test_update_by_path(config):
-    """ Test the update_by_path method """
+    """Test the update_by_path method"""
     config.set_default()
     m_elements = {
         "check_box": mock.MagicMock(),

@@ -6,7 +6,7 @@ from app import Randomizer
 
 
 def test_init(m_app):
-    """ Test the init since the other tests use a mocked version """
+    """Test the init since the other tests use a mocked version"""
     rand = Randomizer()
     with mock.patch("app.sys.exit"):
         with mock.patch.object(rand, "show") as m_show:

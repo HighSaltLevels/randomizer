@@ -25,20 +25,20 @@ from versions import VERSION_LOCATION
 
 @pytest.fixture(name="m_config")
 def create_mock_config():
-    """ Patch in a MagicMock() object for CONFIG """
+    """Patch in a MagicMock() object for CONFIG"""
     with mock.patch("controller.CONFIG") as m_config:
         yield m_config
 
 
 @pytest.fixture(name="m_get_filters")
 def create_mock_get_filters():
-    """ Patch in a MagicMock() object for controller._get_filters """
+    """Patch in a MagicMock() object for controller._get_filters"""
     with mock.patch("controller._get_filters") as m_get_filt:
         yield m_get_filt
 
 
 def test_handler(m_config):
-    """ Test the handler for saving states of UI elements """
+    """Test the handler for saving states of UI elements"""
     # Test without toggling
     elements = {"spin_boxes": [mock.MagicMock() for _ in range(5)]}
     handler("path", elements, toggle=False)
@@ -59,14 +59,14 @@ def test_handler(m_config):
 
 
 def test_combo_box_handler(m_config):
-    """ Test the combo box handler will update selection and save data """
+    """Test the combo box handler will update selection and save data"""
     combo_box_handler("foo")
     m_config.update_combo_box.assert_called_once_with("foo")
     m_config.write.assert_called_once()
 
 
 def test_browse_handler(m_config):
-    """ Test the browse handler will prompt and save rom path """
+    """Test the browse handler will prompt and save rom path"""
     m_app = mock.MagicMock()
     m_app.file_browser.exec_.return_value = True
     m_app.file_browser.selectedFiles.return_value = ["path"]
@@ -78,7 +78,7 @@ def test_browse_handler(m_config):
 
 
 def test_randomize(m_config, m_app):
-    """ Test the randomize method of controller """
+    """Test the randomize method of controller"""
     handle = RandomizerHandler(m_app)
     m_rom_data = (VERSION_LOCATION + 1) * b"0"
     m_open = mock.mock_open(read_data=m_rom_data)
@@ -127,7 +127,7 @@ def test_randomize(m_config, m_app):
 @mock.patch("controller.RandomizerHandler._edit_promotions")
 @mock.patch("controller.RandomizerHandler._randomize_stats")
 def test_randomize_all(m_rand_stats, m_edit_prom, m_rand_char, m_mod_stats, m_app):
-    """ Test the _randomize_all method in the controller """
+    """Test the _randomize_all method in the controller"""
     handle = RandomizerHandler(m_app)
     # Test not editing promotions
     with mock.patch.dict(
@@ -158,35 +158,35 @@ def test_randomize_all(m_rand_stats, m_edit_prom, m_rand_char, m_mod_stats, m_ap
 
 
 def test_randomize_characters(m_app, m_get_filters):
-    """ Test the randomize_characters method in controller """
+    """Test the randomize_characters method in controller"""
     handle = RandomizerHandler(m_app)
     with mock.patch("controller.create_character_editor"):
         handle._randomize_characters()
 
 
 def test_randomize_stats(m_app, m_get_filters):
-    """ Test the randomize_stats method in controller """
+    """Test the randomize_stats method in controller"""
     handle = RandomizerHandler(m_app)
     with mock.patch("controller.create_stat_randomizer"):
         handle._randomize_stats()
 
 
 def test_modify_stats(m_app, m_get_filters):
-    """ Test the modify_stats method in controller """
+    """Test the modify_stats method in controller"""
     handle = RandomizerHandler(m_app)
     with mock.patch("controller.create_stat_modifier"):
         handle._modify_stats()
 
 
 def test_edit_promotions(m_app):
-    """ Test the modify_stats method in controller """
+    """Test the modify_stats method in controller"""
     handle = RandomizerHandler(m_app)
     with mock.patch("controller.create_prom_editor"):
         handle._edit_promotions()
 
 
 def test_get_filters():
-    """ Test the _get_filters method """
+    """Test the _get_filters method"""
     config = {
         "foo": {"enabled": True},
         "bar": {"enabled": False},
