@@ -78,6 +78,14 @@ char_stats:
       byte: 19
     - address: 0x682423
       byte: 3
+    - address: 0x680788
+      byte: 11
+    - address: 0x680789
+      byte: 11
+    - address: 0x68078a
+      byte: 11
+    - address: 0x68078b
+      byte: 12
       # Milady
     - address: 0x67D331
       byte: 4
