@@ -7,7 +7,7 @@ from constants import Hints, NORMAL_FONT, SUBTITLE_FONT, TITLE_FONT
 
 
 def _add_hints(labels):
-    """ Add Tooltip hints to labels """
+    """Add Tooltip hints to labels"""
     labels["randomize"].setToolTip(Hints.RANDOMIZE)
     labels["playable_bases"].setToolTip(Hints.PLAYABLE_BASES)
     labels["boss_bases"].setToolTip(Hints.BOSS_BASES)
@@ -49,7 +49,7 @@ def _add_hints(labels):
 
 
 def create_labels(widget):
-    """ Init and return a dict of all labels """
+    """Init and return a dict of all labels"""
 
     # Titles
     randomize = QLabel("Randomize", widget)

@@ -6,10 +6,10 @@ from rom_editors.character_editor import CharacterEditor
 
 
 class FE8CharacterEditor(CharacterEditor):
-    """ FE8 Character Editor Override """
+    """FE8 Character Editor Override"""
 
     def randomize_palettes(self):
-        """ Randomize the character palettes based on filters """
+        """Randomize the character palettes based on filters"""
         # Need to override the method because FE8 treats palettes differently.
         # Two 7-byte sections that we have to set for each character. One
         # section represents a color palette for all 7 potential class positions

@@ -7,7 +7,7 @@ from rom_editors.fe7.item_editor import FE7ItemEditor
 
 
 class FE7CharacterEditor(CharacterEditor):
-    """ FE7 Override to override the ItemEditor """
+    """FE7 Override to override the ItemEditor"""
 
     def __init__(self, game_config, rom_data, class_mode, mix_promotes):
         super().__init__(game_config, rom_data, class_mode, mix_promotes)
@@ -15,7 +15,7 @@ class FE7CharacterEditor(CharacterEditor):
         self._item_editor = FE7ItemEditor(self._rom_data, self._game_config)
 
     def handle_overrides(self):
-        """ Do all FE7-specific overrides """
+        """Do all FE7-specific overrides"""
         self._handle_serra_override()
         self._handle_thief_override()
         self._handle_teodor_override()

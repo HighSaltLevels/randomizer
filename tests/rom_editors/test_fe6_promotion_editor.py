@@ -13,12 +13,12 @@ from rom_editors.fe6.promotion_editor import FE6PromotionEditor
 
 @pytest.fixture(name="prom_edit")
 def create_prom_editor(rom_data):
-    """ Create an FE6PromotionEditor object """
+    """Create an FE6PromotionEditor object"""
     return FE6PromotionEditor(mock.MagicMock(), rom_data)
 
 
 def test_handle_overrides(prom_edit):
-    """ Test the handle_overrides method """
+    """Test the handle_overrides method"""
     m_override = mock.MagicMock()
     m_override.new_location = 5
     m_override.pointer = 6

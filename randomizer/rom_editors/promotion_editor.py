@@ -2,7 +2,7 @@
 
 
 class PromotionEditor:
-    """ Base PromotionEditor class """
+    """Base PromotionEditor class"""
 
     def __init__(self, game_config, rom_data):
         self._game_config = game_config
@@ -10,14 +10,14 @@ class PromotionEditor:
 
     @property
     def rom_data(self):
-        """ Make rom_data read only. Should only modify things one at a time """
+        """Make rom_data read only. Should only modify things one at a time"""
         return self._rom_data
 
     def handle_overrides(self):
-        """ Sub-classes can override this method to perform game-specific overrides """
+        """Sub-classes can override this method to perform game-specific overrides"""
 
     def make_all_master_seals(self):
-        """ Change the appearance of all promotion items to master seals """
+        """Change the appearance of all promotion items to master seals"""
         for item in self._game_config.items.promotional.items:
             self._setup_prom_item(item.location)
             self._add_classes_to_promotion(item)
@@ -25,7 +25,7 @@ class PromotionEditor:
         return self._rom_data
 
     def _add_classes_to_promotion(self, item):
-        """ Override the method because we need to allocate and use a different space """
+        """Override the method because we need to allocate and use a different space"""
         # Set the pointers to the new location
         for pointer in item.pointers:
             loc_bytes = self._parse_pointer(item.new_location)
@@ -42,14 +42,14 @@ class PromotionEditor:
         self._rom_data[item.new_location + len(classes_to_add)] = 0
 
     def _setup_prom_item(self, location):
-        """ Set the attributes for this promotional item """
+        """Set the attributes for this promotional item"""
         for attr in self._game_config.items.master_seal.attributes:
             for idx, byte in enumerate(attr.bytes):
                 self._rom_data[location + attr.offset + idx] = byte
 
     @staticmethod
     def _parse_pointer(pointer):
-        """ Return the 3 bytes that make up the pointer in reversed order (little endian) """
+        """Return the 3 bytes that make up the pointer in reversed order (little endian)"""
         str_repr = str(hex(pointer)).split("x")[1]
         assert (
             len(str_repr) == 6

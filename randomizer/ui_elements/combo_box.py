@@ -8,7 +8,7 @@ from config import CONFIG
 
 
 def create_combo_boxes():
-    """ Init and return a dict of combo boxes """
+    """Init and return a dict of combo boxes"""
 
     class_mode = QComboBox()
     for option in CLASS_MODE_OPTIONS:

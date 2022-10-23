@@ -13,7 +13,7 @@ APP = QApplication([])
 
 
 class Randomizer(QWidget):
-    """ Randomizer GUI """
+    """Randomizer GUI"""
 
     def __init__(self, parent=None, title="Randomizer"):
         super().__init__(parent)
@@ -51,7 +51,7 @@ class Randomizer(QWidget):
         main_grid.addWidget(self.labels["status"], 6, 0, 1, 5)
 
     def create_left_column(self):
-        """ Create the left column of the main grid """
+        """Create the left column of the main grid"""
         grid = QGridLayout()
         grid.addWidget(self.labels["bases"], 0, 0, 1, 0)
         grid.addWidget(create_h_sep(self), 1, 0, 1, 0)
@@ -90,7 +90,7 @@ class Randomizer(QWidget):
         return grid
 
     def create_middle_column(self):
-        """ Create the middle column of the main grid """
+        """Create the middle column of the main grid"""
         grid = QGridLayout()
         grid.addWidget(self.labels["growths"], 0, 0, 1, 0)
         grid.addWidget(create_h_sep(self), 1, 0, 1, 0)
@@ -123,7 +123,7 @@ class Randomizer(QWidget):
         return grid
 
     def create_right_column(self):
-        """ Create the right part of the main grid """
+        """Create the right part of the main grid"""
         grid = QGridLayout()
         grid.addWidget(self.labels["mod_bases"], 0, 0, 1, 0)
         grid.addWidget(create_h_sep(self), 1, 0, 1, 0)
@@ -156,6 +156,6 @@ class Randomizer(QWidget):
         return grid
 
     def start(self):
-        """ Start the app """
+        """Start the app"""
         self.show()
         sys.exit(APP.exec_())

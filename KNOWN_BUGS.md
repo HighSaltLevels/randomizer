@@ -1,5 +1,8 @@
 # Known Bugs
 
+## FE6
+ - None at the moment :)
+
 ## FE7
  - Chapter 6, Rath's battle animation in the opening could not continue:
     - Workaround: Once starting the chapter, skip the entire opening

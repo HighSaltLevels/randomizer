@@ -7,7 +7,7 @@ from rom_editors.item_editor import ItemEditor, WEAPON_MAP
 
 
 class CharacterEditor:
-    """ CharacterEditor base class """
+    """CharacterEditor base class"""
 
     def __init__(self, game_config, rom_data, class_mode, mix_promotes):
         self._game_config = game_config
@@ -20,19 +20,19 @@ class CharacterEditor:
         self._item_editor = ItemEditor(self._rom_data, self._game_config)
 
     def set_filters(self, filters):
-        """ Set the filters for randomization """
+        """Set the filters for randomization"""
         self._filters = filters
 
     @property
     def rom_data(self):
-        """ Make rom_data read only. Should only modify things one at a time """
+        """Make rom_data read only. Should only modify things one at a time"""
         return self._rom_data
 
     def handle_overrides(self):
-        """ Sub-classes can perform overrides after randomization """
+        """Sub-classes can perform overrides after randomization"""
 
     def randomize(self):
-        """ Randomize based on the current status of the CONFIG """
+        """Randomize based on the current status of the CONFIG"""
         promoted, unpromoted = self._get_class_list()
 
         for character in self._game_config.characters:
@@ -56,7 +56,7 @@ class CharacterEditor:
         return self._rom_data
 
     def get_new_class(self, promoted, unpromoted, character):
-        """ Get a randomized class based on specs """
+        """Get a randomized class based on specs"""
         if self._mix_promotes:
             class_list = promoted + unpromoted
         elif any(
@@ -103,7 +103,7 @@ class CharacterEditor:
         return type_
 
     def _get_current_class(self, char_id):
-        """ Get the current class of {char_id} """
+        """Get the current class of {char_id}"""
         first = self._game_config.char_stats.first
         offset = self._game_config.char_stats.offsets.class_
         location = first + (self._game_config.sizes.character * char_id) + offset
@@ -143,7 +143,7 @@ class CharacterEditor:
                 + class_ptr
                 + self._game_config.class_stats.offsets.promotion
             ]
-            if int(prom_pos) & self._game_config.class_stats.promotion.bit_mask == 0:
+            if int(prom_pos) & self._game_config.class_stats.bit_masks.promotion == 0:
                 unpromoted.append(_class)
 
             else:
@@ -152,7 +152,7 @@ class CharacterEditor:
         return promoted, unpromoted
 
     def update_weapon_type(self, new_class, ids):
-        """ Get the character by their IDs. Use that to get their current weapon lvl """
+        """Get the character by their IDs. Use that to get their current weapon lvl"""
         for id_ in ids:
             highest = 0
             character_pos = self._game_config.char_stats.first + (
@@ -200,7 +200,7 @@ class CharacterEditor:
             ] = weapon_lvl
 
     def randomize_palettes(self):
-        """ Randomize the character palettes based on filters """
+        """Randomize the character palettes based on filters"""
         for character in self._game_config.characters:
             if character.kind not in self._filters:
                 for _id in character.id:
@@ -216,7 +216,7 @@ class CharacterEditor:
                         ] = rand
 
     def add_promotions(self):
-        """ Add promotion classes to classes that don't have promotions """
+        """Add promotion classes to classes that don't have promotions"""
         for override in self._game_config.class_stats.promotion.overrides:
             self._rom_data[
                 self._game_config.class_stats.first

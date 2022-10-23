@@ -12,7 +12,7 @@ from rom_editors.fe7.character_editor import FE7CharacterEditor
 
 @pytest.fixture(name="char_edit")
 def create_char_editor(rom_data):
-    """ Create a character editor """
+    """Create a character editor"""
     char_edit = FE7CharacterEditor(mock.MagicMock(), rom_data, None, False)
     with mock.patch.object(char_edit, "_get_character_by_name") as m_get:
         m_char = mock.MagicMock()
@@ -23,7 +23,7 @@ def create_char_editor(rom_data):
 
 
 def test_handle_overrides(char_edit):
-    """ Test the handle_overrides method """
+    """Test the handle_overrides method"""
 
     def patch_method(obj, method):
         with mock.patch.object(obj, method):
@@ -47,7 +47,7 @@ def test_handle_overrides(char_edit):
 
 
 def test_handle_serra_override(char_edit):
-    """ Test the _handle_serra_override method """
+    """Test the _handle_serra_override method"""
     char_edit._game_config.char_stats.first = 0
     char_edit._game_config.sizes.character = 5
     char_edit._handle_serra_override()
@@ -58,7 +58,7 @@ def test_handle_serra_override(char_edit):
 
 
 def test_handle_thief_override(char_edit):
-    """ Test the _handle_thief_override method """
+    """Test the _handle_thief_override method"""
     char_edit._game_config.items.chest_key_id = 50
     char_edit._game_config.items.door_key_id = 51
     char_edit._handle_thief_override()
@@ -70,7 +70,7 @@ def test_handle_thief_override(char_edit):
 
 
 def test_handle_teodor_override(char_edit):
-    """ Test the _handle_teodor_override method """
+    """Test the _handle_teodor_override method"""
     char_edit._game_config.char_stats.overrides.generic_druid_pos = 3
     char_edit._handle_teodor_override()
 
@@ -80,7 +80,7 @@ def test_handle_teodor_override(char_edit):
 
 
 def test_handle_karla_override(char_edit):
-    """ Test the _handle_karla_override method """
+    """Test the _handle_karla_override method"""
     char_edit._game_config.char_stats.overrides.noops = [4]
     char_edit._handle_karla_override()
 
@@ -90,7 +90,7 @@ def test_handle_karla_override(char_edit):
 
 
 def test_give_final_bosses_s_ranks(char_edit):
-    """ Test the _give_final_bosses_s_ranks method """
+    """Test the _give_final_bosses_s_ranks method"""
     m_char = mock.MagicMock()
     m_char.s_rank_locations = [5]
     char_edit._game_config.char_stats.final_bosses = [m_char]
@@ -109,7 +109,7 @@ def test_give_final_bosses_s_ranks(char_edit):
 
 
 def test_make_weapons_dropable(char_edit):
-    """ Test the _make_weapons_dropable method """
+    """Test the _make_weapons_dropable method"""
     char_edit._game_config.char_stats.dropable_weapon_characters = [0]
     char_edit._game_config.char_stats.first = 0
     char_edit._game_config.sizes.character = 5
@@ -123,7 +123,7 @@ def test_make_weapons_dropable(char_edit):
 
 
 def test_remove_hardcoded_animations(char_edit):
-    """ Test the remove_hardcoded_animations method """
+    """Test the remove_hardcoded_animations method"""
     m_char = mock.MagicMock()
     m_char.id = [0]
     char_edit._game_config.characters = [m_char]

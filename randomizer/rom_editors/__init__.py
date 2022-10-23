@@ -39,22 +39,22 @@ VERSION_MAP = {
 def create_character_editor(
     game_config, rom_data, class_mode, mix_promotes, fe_version
 ):
-    """ Return a CharacterEditor based on FE version """
+    """Return a CharacterEditor based on FE version"""
     return VERSION_MAP["character"][fe_version](
         game_config, rom_data, class_mode, mix_promotes
     )
 
 
 def create_stat_randomizer(game_config, rom_data, fe_version):
-    """ Return a StatRandomizer based on FE version """
+    """Return a StatRandomizer based on FE version"""
     return VERSION_MAP["stat_rand"][fe_version](game_config, rom_data)
 
 
 def create_stat_modifier(game_config, rom_data, fe_version):
-    """ Return a StatModifier based on FE version """
+    """Return a StatModifier based on FE version"""
     return VERSION_MAP["stat_mod"][fe_version](game_config, rom_data)
 
 
 def create_prom_editor(game_config, rom_data, fe_version):
-    """ Return a PromotionEditor base on FE version """
+    """Return a PromotionEditor base on FE version"""
     return VERSION_MAP["prom_edit"][fe_version](game_config, rom_data)

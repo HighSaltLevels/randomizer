@@ -12,12 +12,12 @@ from rom_editors.promotion_editor import PromotionEditor
 
 @pytest.fixture(name="prom_edit")
 def create_prom_edit(rom_data):
-    """ Create a PromotionEditor for testing """
+    """Create a PromotionEditor for testing"""
     return PromotionEditor(mock.MagicMock(), rom_data)
 
 
 def test_make_all_master_seals(prom_edit):
-    """ Test the make_all_master_seals method """
+    """Test the make_all_master_seals method"""
     prom_edit._game_config.items.promotional.items = [mock.MagicMock()]
     with mock.patch.object(prom_edit, "_setup_prom_item") as m_setup:
         with mock.patch.object(prom_edit, "_add_classes_to_promotion") as m_add:
@@ -27,7 +27,7 @@ def test_make_all_master_seals(prom_edit):
 
 
 def test_add_classes_to_promotion(prom_edit):
-    """ Test the _add_classes_to_promotion method """
+    """Test the _add_classes_to_promotion method"""
     m_item = mock.MagicMock()
     m_item.pointers = [10]
     m_item.new_location = 20
@@ -47,7 +47,7 @@ def test_add_classes_to_promotion(prom_edit):
 
 
 def test_setup_prom_item(prom_edit):
-    """ Test the _setup_prom_item method """
+    """Test the _setup_prom_item method"""
     m_attr = mock.MagicMock()
     m_attr.bytes = [200, 201]
     m_attr.offset = 0
@@ -61,5 +61,5 @@ def test_setup_prom_item(prom_edit):
 
 
 def test_parse_pointer(prom_edit):
-    """ Test the parse_pointer method """
+    """Test the parse_pointer method"""
     assert prom_edit._parse_pointer(0x123456) == (0x56, 0x34, 0x12)

@@ -8,7 +8,7 @@ from config import CONFIG_PATH, CONFIG
 
 
 class VersionPrompt(QDialog):
-    """ Version prompt dialog """
+    """Version prompt dialog"""
 
     PROMPT = (
         "Warning: Unknown Fire Emblem Version detected!\nYou can try to randomize using the "
@@ -25,7 +25,7 @@ class VersionPrompt(QDialog):
         self.build_ui()
 
     def build_ui(self):
-        """ Build the GUI """
+        """Build the GUI"""
         label = QLabel(self.PROMPT, self)
 
         self.combo_box = QComboBox(self)
@@ -45,6 +45,6 @@ class VersionPrompt(QDialog):
         self.show()
 
     def set_version(self):
-        """ Set the version in the config to use for later """
+        """Set the version in the config to use for later"""
         CONFIG["fe_version"] = self.combo_box.currentText()
         self.close()

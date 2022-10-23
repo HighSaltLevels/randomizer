@@ -12,7 +12,7 @@ from rom_editors.character_editor import CharacterEditor
 
 @pytest.fixture(name="char_editor")
 def create_char_editor(rom_data):
-    """ Create a character editor """
+    """Create a character editor"""
     # Always force randint to pick the first entry
     with mock.patch("rom_editors.character_editor.randint") as m_rand:
         m_rand.return_value = 0
@@ -21,7 +21,7 @@ def create_char_editor(rom_data):
 
 @pytest.fixture(name="m_char_editor")
 def create_mock_char_editor(rom_data, game_config):
-    """ Create a mock character editor with mocked __init__ """
+    """Create a mock character editor with mocked __init__"""
     with mock.patch.object(CharacterEditor, "__init__", lambda a, b, c, d, e: None):
         char_editor = CharacterEditor(None, None, None, False)
         char_editor._game_config = game_config
@@ -50,14 +50,14 @@ def create_mock_char_editor(rom_data, game_config):
 
 
 def test_set_filters(char_editor):
-    """ Test the set_filters method """
+    """Test the set_filters method"""
     test_filter = ["1", "2", "3"]
     char_editor.set_filters(test_filter)
     assert char_editor._filters == test_filter
 
 
 def test_randomize(char_editor):
-    """ Test the randomize method """
+    """Test the randomize method"""
     m_char = mock.MagicMock()
     m_char.kind = "foo"
     m_char.location = [8]
@@ -75,7 +75,7 @@ def test_randomize(char_editor):
 
 
 def test_get_new_class(char_editor):
-    """ Test the get_new_class method """
+    """Test the get_new_class method"""
     promoted = [1]
     unpromoted = [2]
     both = promoted + unpromoted
@@ -108,7 +108,7 @@ def test_get_new_class(char_editor):
 
 
 def test_get_weapon_type_for_class(char_editor):
-    """ Test the get_weapon_type_for_class method """
+    """Test the get_weapon_type_for_class method"""
     char_editor._game_config.class_stats.staff_only = [3]
 
     char_editor._game_config.class_stats.first = 0
@@ -118,7 +118,7 @@ def test_get_weapon_type_for_class(char_editor):
 
 
 def test_get_current_class(char_editor):
-    """ Test the _get_current_class method """
+    """Test the _get_current_class method"""
     char_editor._game_config.char_stats.first = 0
     char_editor._game_config.char_stats.offsets.class_ = 1
     char_editor._game_config.sizes.character = 1
@@ -127,7 +127,7 @@ def test_get_current_class(char_editor):
 
 
 def test_get_class_list(char_editor):
-    """ Test the _get_class_list method """
+    """Test the _get_class_list method"""
     char_editor._game_config.class_stats.first = 0
     char_editor._game_config.sizes.class_ = 3
     char_editor._game_config.totals.class_ = 10
@@ -137,7 +137,7 @@ def test_get_class_list(char_editor):
     char_editor._game_config.class_stats.staff_only = [3]
 
     char_editor._game_config.class_stats.offsets.promotion = 1
-    char_editor._game_config.class_stats.promotion.bit_mask = 1
+    char_editor._game_config.class_stats.bit_masks.promotion = 1
 
     promoted, unpromoted = char_editor._get_class_list()
     assert promoted == [0, 4, 6, 8]
@@ -145,7 +145,7 @@ def test_get_class_list(char_editor):
 
 
 def test_update_weapon_type(char_editor):
-    """ Test the update_weapon_type method """
+    """Test the update_weapon_type method"""
     char_editor._game_config.char_stats.first = 0
     char_editor._game_config.sizes.character = 3
     char_editor._game_config._char_stats.offsets.weapon = 1
@@ -157,7 +157,7 @@ def test_update_weapon_type(char_editor):
 
 
 def test_set_weapon_levels_for_class(char_editor):
-    """ Test the _set_weapon_levels_for_class method """
+    """Test the _set_weapon_levels_for_class method"""
     char_editor._game_config.class_stats.first = 0
     char_editor._game_config.sizes.class_ = 3
     char_editor._game_config.class_stats.offsets.weapon = 1
@@ -170,7 +170,7 @@ def test_set_weapon_levels_for_class(char_editor):
 
 
 def test_randomize_palettes(char_editor):
-    """ Test the randomize_palettes method """
+    """Test the randomize_palettes method"""
     m_char = mock.MagicMock()
     m_char.id = [1, 2]
     char_editor._game_config.characters = [m_char]
@@ -192,7 +192,7 @@ def test_randomize_palettes(char_editor):
 
 
 def test_add_promotions(char_editor):
-    """ Test the add_promotions_method """
+    """Test the add_promotions_method"""
     m_override = mock.MagicMock()
     m_override.unprom_class = 3
     m_override.prom_class = 6
@@ -209,7 +209,7 @@ def test_add_promotions(char_editor):
 
 
 def test_fix_flyers(char_editor):
-    """ Test the fix_flyers method """
+    """Test the fix_flyers method"""
     m_override = mock.MagicMock()
     m_override.address = 5
     m_override.byte = 255
@@ -222,7 +222,7 @@ def test_fix_flyers(char_editor):
 
 
 def test_get_character_by_name(rom_data):
-    """ Test the _get_character_by_name method """
+    """Test the _get_character_by_name method"""
     # Use a character editor without the mocked return value
     char_edit = CharacterEditor(mock.MagicMock(), rom_data, None, False)
     m_char = mock.MagicMock()

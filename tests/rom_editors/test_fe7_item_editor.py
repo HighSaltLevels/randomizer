@@ -4,6 +4,7 @@ from unittest import mock
 
 import pytest
 
+from rom_editors.item_editor import ItemNotFoundException
 from rom_editors.fe7.item_editor import FE7ItemEditor
 
 
@@ -13,13 +14,13 @@ from rom_editors.fe7.item_editor import FE7ItemEditor
 
 @pytest.fixture(name="item_edit")
 def create_item_editor(rom_data):
-    """ Create an item editor object with FE7 specific items for testing """
+    """Create an item editor object with FE7 specific items for testing"""
     char_edit = FE7ItemEditor(rom_data, mock.MagicMock())
     return char_edit
 
 
 def test_handle_overrides(item_edit):
-    """ Test the handle_overrides method """
+    """Test the handle_overrides method"""
     with mock.patch.object(item_edit, "_handle_prf") as m_prf:
         with mock.patch.object(item_edit, "_handle_s_rank") as m_rank:
             item_edit.handle_overrides()
@@ -28,7 +29,7 @@ def test_handle_overrides(item_edit):
 
 
 def test_handle_prf(item_edit):
-    """ Test the handle_prf method """
+    """Test the handle_prf method"""
     m_item = mock.MagicMock()
     m_item.weapon = 1
     m_item.equivalent = 2
@@ -44,7 +45,7 @@ def test_handle_prf(item_edit):
 
 
 def test_handle_s_rank(item_edit):
-    """ Test the _handle_s_rank method """
+    """Test the _handle_s_rank method"""
     m_weapon = mock.MagicMock()
     m_weapon.rank = "s"
     m_weapon.type = "sword"
@@ -68,7 +69,7 @@ def test_handle_s_rank(item_edit):
 
 
 def test_get_char_by_name(item_edit):
-    """ Test the _get_char_by_name method """
+    """Test the _get_char_by_name method"""
     m_char = mock.MagicMock()
     m_char.name = "foo"
     item_edit._game_config.characters = [m_char]
@@ -79,3 +80,18 @@ def test_get_char_by_name(item_edit):
     with pytest.raises(ValueError) as error:
         item_edit._get_char_by_name("bar")
     assert "No known character bar" in str(error)
+
+
+def test_get_item_type(item_edit):
+    """Test the _get_item_type method"""
+    m_weapons = [mock.MagicMock()]
+    m_weapons[0].list_ = [69]
+    m_weapons[0].type = "foo"
+    item_edit._game_config.items.weapons = m_weapons
+
+    assert item_edit._get_item_type(69) == "foo"
+
+    # Test with an item not found
+    with pytest.raises(ItemNotFoundException) as error:
+        item_edit._get_item_type(420)
+    assert "No known item" in str(error)

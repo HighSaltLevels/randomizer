@@ -93,7 +93,7 @@ CLASS_MODE_OPTIONS = [CLASS_MODE_COMBAT, CLASS_MODE_STAFF, CLASS_MODE_ALL]
 
 
 class FEVersions(str, Enum):
-    """ Fire Emblem Versions """
+    """Fire Emblem Versions"""
 
     FE6 = "Fire Emblem Binding Blade"
     FE7 = "Fire Emblem Blazing Blade"
@@ -102,7 +102,7 @@ class FEVersions(str, Enum):
 
 
 class Hints(str, Enum):
-    """ ToolTip enumeration class """
+    """ToolTip enumeration class"""
 
     RANDOMIZE = "Configurations for Randomizing character stats and growths"
     PLAYABLE_BASES = "Enable randomizing of playable character base stats"

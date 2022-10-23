@@ -13,12 +13,12 @@ from rom_editors.fe8.character_editor import FE8CharacterEditor
 
 @pytest.fixture(name="char_edit")
 def create_char_editor(rom_data):
-    """ Create a character editor with FE8 specific stuff """
+    """Create a character editor with FE8 specific stuff"""
     return FE8CharacterEditor(mock.MagicMock(), rom_data, None, False)
 
 
 def test_randomize_palettes(char_edit):
-    """ Test the randomize_palettes method """
+    """Test the randomize_palettes method"""
     m_char = mock.MagicMock()
     m_char.id = [10]
     m_char.location = [20]
