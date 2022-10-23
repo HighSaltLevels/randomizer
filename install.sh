@@ -15,13 +15,6 @@ if [[ $? -ne 0 ]] ; then
 fi
 chmod +x ~/.local/bin/randomizer
 
-echo "Setting configuration files"
-mkdir -p ~/.config/randomizer 1>/dev/null
-cp config/* ~/.config/randomizer/
-cp ico/randomizer.ico ~/.config/randomizer/
-
-echo "done."
-
 echo $PATH | grep -q "\.local/bin"
 if [[ $? -ne 0 ]] ; then
     echo

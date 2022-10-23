@@ -3,11 +3,12 @@
 import sys
 
 from PyQt5.QtWidgets import QWidget, QApplication, QGridLayout
-from PyQt5.QtGui import QIcon
+from PyQt5.QtGui import QIcon, QPixmap
 
 from ui_elements import label, spinbox, check_box, combo_box, button, line_edit, browse
 from ui_elements.separator import create_v_sep, create_h_sep
 from config import CONFIG_PATH
+from icon import ICON
 
 APP = QApplication([])
 
@@ -20,7 +21,11 @@ class Randomizer(QWidget):
 
         self.setWindowTitle(title)
 
-        self.setWindowIcon(QIcon(f"{CONFIG_PATH}/randomizer.ico"))
+        pixmap = QPixmap()
+        res = pixmap.loadFromData(ICON, "png")
+        icon = QIcon()
+        icon.addPixmap(pixmap)
+        self.setWindowIcon(icon)
 
         self.labels = label.create_labels(self)
         self.file_browser = browse.create_file_browser(self)
