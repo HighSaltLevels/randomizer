@@ -293,7 +293,8 @@ characters:
     location:
       - 0x681881
     kind: playable
-    item_pos: []
+    item_pos: 
+      - 0x681888
   - name: Fir
     id:
       - 0x16
