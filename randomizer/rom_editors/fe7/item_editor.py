@@ -2,7 +2,7 @@
 
 from random import randint
 
-from rom_editors.item_editor import ItemEditor, WEAPON_MAP
+from rom_editors.item_editor import ItemEditor, ItemNotFoundException, WEAPON_MAP
 
 
 class FE7ItemEditor(ItemEditor):
@@ -76,3 +76,11 @@ class FE7ItemEditor(ItemEditor):
                 s_ranks[weapon.type] += weapon.list_
 
         return s_ranks
+
+    def _get_item_type(self, item):
+         """Return the item type"""
+         for weapon in self._game_config.items.weapons:
+             if item in weapon.list_:
+                return weapon.type
+
+         raise ItemNotFoundException(f"No known item {hex(item)}")

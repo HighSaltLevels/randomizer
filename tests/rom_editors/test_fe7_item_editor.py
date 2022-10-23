@@ -4,6 +4,7 @@ from unittest import mock
 
 import pytest
 
+from rom_editors.item_editor import ItemNotFoundException
 from rom_editors.fe7.item_editor import FE7ItemEditor
 
 
@@ -79,3 +80,17 @@ def test_get_char_by_name(item_edit):
     with pytest.raises(ValueError) as error:
         item_edit._get_char_by_name("bar")
     assert "No known character bar" in str(error)
+
+def test_get_item_type(item_edit):
+    """ Test the _get_item_type method """
+    m_weapons = [mock.MagicMock()]
+    m_weapons[0].list_ = [69]
+    m_weapons[0].type = "foo"
+    item_edit._game_config.items.weapons = m_weapons
+
+    assert item_edit._get_item_type(69) == "foo"
+
+    # Test with an item not found
+    with pytest.raises(ItemNotFoundException) as error:
+        item_edit._get_item_type(420)
+    assert "No known item" in str(error)

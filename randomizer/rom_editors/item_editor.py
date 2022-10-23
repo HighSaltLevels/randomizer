@@ -69,11 +69,8 @@ class ItemEditor:
                 item = prf.equivalent
                 break
 
-        # Get the current item type and use that to find its rank
-        curr_item_type = self._get_item_type(item)
-        rank = self._get_item_rank(curr_item_type)
-
-        # Use the rank and updated weapon type to create a weapon list
+        # Use the rank weapon type to create a list of available weapons.
+        rank = self._get_item_rank(item)
         weapon_list = self._create_weapon_list(rank, self._weapon_type)
 
         # If not ranged monster, take out ranged monster items
@@ -105,19 +102,11 @@ class ItemEditor:
         self._weapon_type = weapon_type
         self._new_class = class_
 
-    def _get_item_rank(self, item_type):
-        """Look up the rank for this weapon is (e, d, c ... etc)"""
-        for weapon in self._game_config.items.weapons:
-            if weapon.type == item_type:
-                return weapon.rank
-
-        raise ItemException("Could not determine rank of item {hex(item)}")
-
-    def _get_item_type(self, item):
+    def _get_item_rank(self, item):
         """Return the item type"""
         for weapon in self._game_config.items.weapons:
             if item in weapon.list_:
-                return weapon.type
+                return weapon.rank
 
         raise ItemNotFoundException(f"No known item {hex(item)}")
 

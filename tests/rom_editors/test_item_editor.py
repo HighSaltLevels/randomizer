@@ -57,29 +57,28 @@ def test_randomize_item(item_edit):
     assert item_edit.rom_data[2] == 51
     item_edit._game_config.class_stats.manakete_f = 255
 
-    with mock.patch.object(item_edit, "_get_item_type"):
-        with mock.patch.object(item_edit, "_get_item_rank"):
-            with mock.patch.object(item_edit, "_create_weapon_list") as m_weapon:
-                m_weapon.return_value = [70]
+    with mock.patch.object(item_edit, "_get_item_rank"):
+        with mock.patch.object(item_edit, "_create_weapon_list") as m_weapon:
+            m_weapon.return_value = [70]
 
-                # Test iron sowrd. We can use the 0th position as it will
-                # indicate an iron sword that way
-                item_edit.randomize_item(0)
-                assert item_edit.rom_data[0] == 70
+            # Test iron sowrd. We can use the 0th position as it will
+            # indicate an iron sword that way
+            item_edit.randomize_item(0)
+            assert item_edit.rom_data[0] == 70
 
-                # Test prf item replacement
-                item_edit.randomize_item(20)
-                assert item_edit.rom_data[20] == 70
+            # Test prf item replacement
+            item_edit.randomize_item(20)
+            assert item_edit.rom_data[20] == 70
 
-                # Test removal of ranged_monster_items
-                item_edit._class_pos = 30
-                item_edit._game_config.class_stats.offsets.id = 0
-                item_edit._game_config.items.ranged_monster = [60]
-                m_weapon.return_value = [60, 70]
-                # 60 should get filtered out and just leave 70 so there
-                # should be no randomization issues here
-                item_edit.randomize_item(40)
-                assert item_edit.rom_data[40] == 70
+            # Test removal of ranged_monster_items
+            item_edit._class_pos = 30
+            item_edit._game_config.class_stats.offsets.id = 0
+            item_edit._game_config.items.ranged_monster = [60]
+            m_weapon.return_value = [60, 70]
+            # 60 should get filtered out and just leave 70 so there
+            # should be no randomization issues here
+            item_edit.randomize_item(40)
+            assert item_edit.rom_data[40] == 70
 
 
 def test_load(item_edit):
@@ -93,29 +92,16 @@ def test_load(item_edit):
 
 
 def test_get_item_rank(item_edit, m_weapons):
-    """ Test the _get_item_rank method """
-    item_edit._game_config.items.weapons = m_weapons
-
-    # Test with the item found
-    assert item_edit._get_item_rank("sword") == m_weapons[0].rank
-
-    # Test with an item not found
-    with pytest.raises(ItemException) as error:
-        item_edit._get_item_rank(69)
-
-    assert "Could not determine rank of item" in str(error)
-
-
-def test_get_item_type(item_edit, m_weapons):
     """ Test the _get_item_type method """
     item_edit._game_config.items.weapons = m_weapons
 
     # Test with an item found
-    assert item_edit._get_item_type(100) == m_weapons[0].type
+    rank = item_edit._get_item_rank(100)
+    assert rank == m_weapons[0].rank
 
     # Test with an item not found
     with pytest.raises(ItemNotFoundException) as error:
-        item_edit._get_item_type(69)
+        item_edit._get_item_rank(69)
 
     assert "No known item" in str(error)
 

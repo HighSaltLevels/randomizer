@@ -1269,6 +1269,8 @@ items:
     equivalent: 0x4
   - weapon: 0x71 # Eckesachs   -> A rank sword
     equivalent: 0x4
+  - weapon: 0x53 # Firestone   -> A rank sword
+    equivalent: 0x4
 
   types:
   - id: 0x0
