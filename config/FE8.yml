@@ -1431,12 +1431,20 @@ items:
       location: 0x80B094
 
   prfs:
-  - weapon: 0x6  # Rapier    -> E rank sword
+  - weapon: 0x6  # Rapier       -> E rank sword
     equivalent: 0x1
-  - weapon: 0x78 # Reginleif -> D rank lance
+  - weapon: 0x78 # Reginleif    -> D rank lance
     equivalent: 0x16
-  - weapon: 0x8f # Naglfar   -> A rank dark
+  - weapon: 0x8f # Naglfar      -> A rank dark
     equivalent: 0x49
+  - weapon: 0x90 # Wretched Air -> A rank sword
+    equivalent: 0x4
+  - weapon: 0xa6 # Nightmare    -> A rank sword
+    equivalent: 0x4
+  - weapon: 0xa8 # Demon Light  -> A rank sword
+    equivalent: 0x4
+  - weapon: 0xa9 # Ravager      -> A rank sword
+    equivalent: 0x4
 
   types:
   - id: 0x0
