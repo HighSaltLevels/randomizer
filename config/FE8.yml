@@ -1060,9 +1060,7 @@ characters:
     - 0x8B833D
     - 0x8C9E19
     - 0x8CA7B9
-    # Be cautious. I found the one below with the scrape tool
-    # and I couldn't verify it with FEBuilder
-    - 0x8c0ef0
+    - 0x8C0EF1
   kind: boss
   item_pos:
     - 0x8c0404
