@@ -959,6 +959,7 @@ characters:
     - 0x8B9745
     - 0x8BC715
     - 0x8B8315
+    - 0x8B8C5D
     - 0x8C3335
     - 0x8C3385
     - 0x8C6F19
@@ -1025,6 +1026,7 @@ characters:
     - 0x8C54E1
     - 0x8C5379
     - 0x8C54A5
+    - 0x8C68E1
     - 0x8C7711
     - 0x8C8E71
     - 0x8C8EE9
@@ -1244,6 +1246,7 @@ characters:
   location:
     - 0x8B4D01
     - 0x8B4D79
+    - 0x8B9CE1
     - 0x8B81C1
     - 0x8BBC71
     - 0x8C33E9
