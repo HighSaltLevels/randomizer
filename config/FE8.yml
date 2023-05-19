@@ -53,7 +53,51 @@ char_stats:
   promotion_overrides: [0xbe, 0x41]
 
   overrides:
-    flyers: []
+    flyers:
+    # Valter
+    - address: 0x8c2bf4
+      byte: 0x92
+    - address: 0x8c2bf5
+      byte: 0x3
+    - address: 0x8c3338
+      byte: 0x93
+    - address: 0x8c3339
+      byte: 0x3
+    - address: 0x8b8529
+      byte: 0x5
+    - address: 0x8b8c60
+      byte: 0xc3
+    - address: 0x8b8c61
+      byte: 0x5
+    - address: 0x8b9fcc
+      byte: 0xc9
+    - address: 0x8b9fcd
+      byte: 0x1
+    # Cormag
+    - address: 0x8c3054
+      byte: 0xd2
+    - address: 0x8c3055
+      byte: 0x23
+    - address: 0x8ba898
+      byte: 0x80
+    - address: 0x8ba899
+      byte: 0x2
+    - address: 0x8baed9
+      byte: 0x22
+    - address: 0x8c2b7c
+      byte: 0xd2
+    - address: 0x8c31f8
+      byte: 0xcd
+    # Tana
+    - address: 0x8b844c
+      byte: 0x83
+    # Glen
+    - address: 0x9b9ecc
+      byte: 0x88
+    - address: 0x8b9f7c
+      byte: 0xc8
+    - address: 0x8b9f7d
+      byte: 0x1
 
 palette_stats:
   first_palette: 0x95ee9d
