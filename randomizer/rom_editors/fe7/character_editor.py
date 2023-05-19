@@ -1,7 +1,5 @@
 """ FE7 Override Class for editing characters """
 
-from random import randint
-
 from rom_editors.character_editor import CharacterEditor
 from rom_editors.fe7.item_editor import FE7ItemEditor
 

@@ -66,7 +66,10 @@ class RandomizerHandler:
         return self._rom_data
 
     def randomize(self):
-        """Load the rom, get the FE version, load the config based on version, edit the rom"""
+        """
+        Load the rom, get the FE version,
+        load the config based on version, edit the rom
+        """
 
         # Load the rom and game config
         input_rom = self._app.line_edits["rom_edit"].text()
@@ -91,8 +94,8 @@ class RandomizerHandler:
         try:
             # Perform all requested randomization
             self._randomize_all()
-        # Disable broad except because the last thing I want is for the GUI to crash with
-        # no helpful error message (especially for windows users
+        # Disable broad except because the last thing I want is for the GUI to crash
+        # with no helpful error message (especially for windows users
         # pylint: disable=broad-except
         except Exception as error:
             self._app.labels["status"].setText(f"Status: Error! {error}")
@@ -131,9 +134,7 @@ class RandomizerHandler:
             self._randomize_stats()
         except InvalidConfigError:
             msg_box = QMessageBox()
-            msg_box.setText(
-                "You cannot have a randomize range where the maximum is greater than minimum"
-            )
+            msg_box.setText("maximum range must not be greater than minimum")
             msg_box.setWindowTitle("Error: Invalid Configuration")
             msg_box.setIcon(QMessageBox.Warning)
             self._app.labels["status"].setText("Error: Invalid Configuration")

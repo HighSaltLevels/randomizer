@@ -11,8 +11,8 @@ class VersionPrompt(QDialog):
     """Version prompt dialog"""
 
     PROMPT = (
-        "Warning: Unknown Fire Emblem Version detected!\nYou can try to randomize using the "
-        "settings from\nthe games listed below instead:"
+        "Warning: Unknown Fire Emblem Version detected!\nYou can try to randomize "
+        "using the settings from\nthe games listed below instead:"
     )
 
     def __init__(self, parent=None, title="Unsupported Version"):

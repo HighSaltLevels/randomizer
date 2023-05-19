@@ -76,8 +76,8 @@ class CharacterEditor:
 
     def get_weapon_type_for_class(self, new_class):
         """
-        Get weapon type for that class. This should be the highest weapon lvl on all weapons
-        in the base class
+        Get weapon type for that class. This should be the highest weapon lvl on all
+        weapons in the base class
         """
         type_ = "dragonstone/monster"
         highest = 0

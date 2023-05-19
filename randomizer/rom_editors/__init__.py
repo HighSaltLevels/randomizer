@@ -1,12 +1,11 @@
-""" Import everything from this directory """
+""" Return the version appropriate editor """
 
 from versions import FEVersions
-from .fe6.promotion_editor import *
-from .fe6.character_editor import *
-from .fe7.character_editor import *
-from .fe8.character_editor import *
+from .fe6.promotion_editor import FE6PromotionEditor
+from .fe6.character_editor import FE6CharacterEditor
+from .fe7.character_editor import FE7CharacterEditor
+from .fe8.character_editor import FE8CharacterEditor
 
-from .character_editor import CharacterEditor
 from .stat_editor import StatRandomizer, StatModifier
 from .promotion_editor import PromotionEditor
 
