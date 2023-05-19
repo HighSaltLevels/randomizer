@@ -54,7 +54,7 @@ char_stats:
 
   # Character IDs whose classes are in the ban list but need reclassing to a
   # promoted class
-  promotion_overrides: [0x3c]
+  promotion_overrides: [0x3, 0x58, 0x65, 0x66, 0x67]
 
   overrides:
     # Change starting locations for flying characters to avoid traversing
