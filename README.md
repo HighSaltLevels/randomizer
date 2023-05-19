@@ -37,3 +37,5 @@ python3 randomizer
 ```
 
 If you would like to build your own binary, you can use `./build.sh` for Linux and `./build.bat` for Windows.
+
+It's also worth noting that I use [qt-material](https://github.com/UN-GCPDS/qt-material) to build the stylesheets in the final binary, and I purposefully remove the `font-size` from `material.css.template` so that I can set my own variable font sizes. If you don't do this manually, then all of the labels will be a set size and they won't look like headers.
