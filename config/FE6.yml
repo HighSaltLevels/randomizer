@@ -54,7 +54,7 @@ char_stats:
 
   # Character IDs whose classes are in the ban list but need reclassing to a
   # promoted class
-  promotion_overrides: [0x3c]
+  promotion_overrides: [0x3, 0x58, 0x65, 0x66, 0x67]
 
   overrides:
     # Change starting locations for flying characters to avoid traversing
@@ -208,10 +208,13 @@ characters:
       - 0xb
       - 0xc
     location:
+      - 0x67EA01
       - 0x67EE75
       - 0x685075
     kind: playable
     item_pos:
+      - 0x67EA08
+      - 0x67EA09
       - 0x67EE7C
       - 0x68507C
       - 0x68507D
@@ -536,7 +539,9 @@ characters:
       - 0x67EFC5
       - 0x67F505
       - 0x680785
-      - 0x68241D
+      # I can't seem to control Gale's escape square here and it freezes the game
+      # freezes every time he tries to leave this map due to impassable mountains.
+      #- 0x68241D
     kind: boss
     item_pos:
       - 0x67F50C
@@ -661,6 +666,7 @@ characters:
     kind: playable
     item_pos:
       - 0x67DB0C
+      - 0x67DB0D
       - 0x67E204
   - name: Geese
     id:

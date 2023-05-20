@@ -77,6 +77,13 @@ class FE6CharacterEditor(CharacterEditor):
         pos = first + (size * roy_class) + offset
         self._rom_data[pos] |= self._game_config.class_stats.bit_masks.lord
 
+        # Set the "Lord" bit to "true" on Roy's promotion class
+        prom_class = self._rom_data[
+            first + self._game_config.char_stats.offsets.class_ + (size * roy_class)
+        ]
+        pos = first + (size * prom_class) + offset
+        self._rom_data[pos] |= self._game_config.class_stats.bit_masks.lord
+
         # Get the position of the roy class change address, and copy the
         # next 2 commands to overwrite the current 2.
         for location in roy.story_prom_locations:

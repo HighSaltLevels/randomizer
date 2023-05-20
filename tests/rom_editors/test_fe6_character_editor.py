@@ -103,4 +103,7 @@ def test_handle_roy_override():
     for i in range(32):
         expected_data[10 + i] = 26 + i
 
+    # Roy's promotion class should also have the toggled "lord" bit
+    expected_data[14] |= char_edit._game_config.class_stats.bit_masks.lord
+
     assert char_edit.rom_data == expected_data

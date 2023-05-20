@@ -1,16 +1,19 @@
 """ Module for loading the app UI """
 
+import logging
 import sys
 
 from PyQt5.QtWidgets import QWidget, QApplication, QGridLayout
 from PyQt5.QtGui import QIcon, QPixmap
+from qt_material import apply_stylesheet
 
 from ui_elements import label, spinbox, check_box, combo_box, button, line_edit, browse
 from ui_elements.separator import create_v_sep, create_h_sep
-from config import CONFIG_PATH
 from icon import ICON
 
 APP = QApplication([])
+apply_stylesheet(APP, theme="dark_medical.xml")
+LOGGER = logging.getLogger(__name__)
 
 
 class Randomizer(QWidget):
@@ -22,10 +25,12 @@ class Randomizer(QWidget):
         self.setWindowTitle(title)
 
         pixmap = QPixmap()
-        res = pixmap.loadFromData(ICON, "png")
-        icon = QIcon()
-        icon.addPixmap(pixmap)
-        self.setWindowIcon(icon)
+        if pixmap.loadFromData(ICON, "png"):
+            icon = QIcon()
+            icon.addPixmap(pixmap)
+            self.setWindowIcon(icon)
+        else:
+            LOGGER.warn("Failed to load application icon")
 
         self.labels = label.create_labels(self)
         self.file_browser = browse.create_file_browser(self)

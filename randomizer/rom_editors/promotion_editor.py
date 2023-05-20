@@ -49,7 +49,10 @@ class PromotionEditor:
 
     @staticmethod
     def _parse_pointer(pointer):
-        """Return the 3 bytes that make up the pointer in reversed order (little endian)"""
+        """
+        Return the 3 bytes that make up the pointer in reversed order
+        (little endian)
+        """
         str_repr = str(hex(pointer)).split("x")[1]
         assert (
             len(str_repr) == 6
