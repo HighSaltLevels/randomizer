@@ -92,7 +92,7 @@ def create_check_boxes(parent):
         )
     )
 
-    mapping["playable_class"] = QCheckBox("Playable Classes")
+    mapping["playable_class"] = QCheckBox("Randomize Playable Classes")
     mapping["playable_class"].setToolTip(Hints.PLAYABLE_CLASSES)
     mapping["playable_class"].stateChanged.connect(
         lambda: handler(
@@ -100,13 +100,13 @@ def create_check_boxes(parent):
         )
     )
 
-    mapping["boss_class"] = QCheckBox("Boss Classes")
+    mapping["boss_class"] = QCheckBox("Randomize Boss Classes")
     mapping["boss_class"].setToolTip(Hints.BOSS_CLASSES)
     mapping["boss_class"].stateChanged.connect(
         lambda: handler("randomizer/classes/boss", {"check_box": mapping["boss_class"]})
     )
 
-    mapping["other_class"] = QCheckBox("Other Classes")
+    mapping["other_class"] = QCheckBox("Randomize Other Classes")
     mapping["other_class"].setToolTip(Hints.OTHER_CLASSES)
     mapping["other_class"].stateChanged.connect(
         lambda: handler(
