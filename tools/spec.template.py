@@ -13,14 +13,14 @@ import json
 
 
 class AbstractSpecObj:
-    """ Object representation of each dict """
+    """Object representation of each dict"""
 
     def __init__(self, _dict):
         self.__dict__.update(_dict)
 
 
 class Spec:
-    """ Spec enumeration """
+    """Spec enumeration"""
 
     FE6 = json.loads(json.dumps(FE6PLACEHOLDER), object_hook=AbstractSpecObj)
     FE7 = json.loads(json.dumps(FE7PLACEHOLDER), object_hook=AbstractSpecObj)
