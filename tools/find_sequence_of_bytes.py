@@ -2,6 +2,7 @@
 
 """ Tool to find the location(s) of a sequence of bytes """
 
+import json
 import sys
 
 USAGE = """
@@ -37,7 +38,7 @@ def _find(rom, search_bytes):
             positions.append(hex(position))
 
     if positions:
-        print(f"Found that array at {positions}")
+        print(f"Found that array at {json.dumps(positions)}")
     else:
         print("Could not find that array anywhere :(")
 
