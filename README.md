@@ -1,5 +1,12 @@
 # Randomizer
-Randomizer for specific Roms I want to hack
+Randomizer for specific Roms I want to hack. Currently supports
+ - Fire Emblem 6
+ - Fire Emblem 7
+ - Fire Emblem 8
+
+## Please Help Report Bugs
+
+Check out out the [list of known issues](KNOWN_BUGS.md) to see if your issue is listed there. Also, have a look at this [list of strange behavior](STRANGE_BEHAVIOR.md) in case your issue is something caused by a known difference in behavior due to things changed by this randomizer. If you find any potential bugs, please raise an issue on this project and document it.
 
 ## How to Run
 This randomizer supports both 64 bit Windows and Linux distrobutions. Unfortunately, I'm too poor and stubborn to afford a Mac, so I cannot compile for OS X. If you do want to build for MAC, you can try runnign the steps from the `DEVELOPING` section below. Since I use `pyinstaller` and `python`, it should be platform independent for the most part.
