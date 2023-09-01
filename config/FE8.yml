@@ -1506,6 +1506,9 @@ items:
   - weapon: 0xa9     # Ravager
     level: 0xb5      # A rank
     equivalent: 0x4  # A rank sword
+  - weapon: 0xaa     # Dragonstone
+    level: 0x0       # prf (it's ok to keep the dragonstone as prf)
+    equivalent: 0x4  # A rank sword
 
   types:
   - id: 0x0
@@ -1680,7 +1683,6 @@ items:
     type: dragonstone/monster
     list_:
     - 0xaf
-    - 0xb2
   - rank: b
     type: sword
     list_:
@@ -1730,7 +1732,7 @@ items:
     list_:
     - 0xa8
     - 0xa9
-    - 0xaa
+    - 0xb0
   - rank: a
     type: sword
     list_:
@@ -1770,32 +1772,45 @@ items:
   - rank: a
     type: dragonstone/monster
     list_:
-    - 0xb0
+    - 0xb2
     - 0x90
   - rank: s
     type: sword
-    list_: []
+    list_:
+    - 0x85
+    - 0x91
   - rank: s
     type: lance
-    list_: []
+    list_:
+    - 0x8e
+    - 0x92
   - rank: s
     type: axe
-    list_: []
+    list_:
+    - 0x93
   - rank: s
     type: bow
-    list_: []
+    list_:
+    - 0x94
   - rank: s
     type: staff
-    list_: []
+    list_:
+    - 0x8c
   - rank: s
     type: anima
-    list_: []
+    list_:
+    - 0x3e
   - rank: s
     type: light
-    list_: []
+    list_:
+    - 0x87
   - rank: s
     type: dark
-    list_: []
+    list_:
+    - 0x4a
+    - 0x8f
   - rank: s
     type: dragonstone/monster
-    list_: []
+    list_:
+    - 0xb2
+    - 0x90
