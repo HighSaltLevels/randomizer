@@ -1006,6 +1006,7 @@ characters:
   id:
     - 0x1e
   location:
+    - 0x8BCE95
     - 0x8BD685
     - 0x8BD45D
     - 0x8BD4D5
