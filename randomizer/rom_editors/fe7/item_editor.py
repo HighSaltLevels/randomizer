@@ -37,12 +37,6 @@ class FE7ItemEditor(ItemEditor):
                 rand = randint(0, len(s_ranks[item_type]) - 1)
                 self._rom_data[item_loc] = s_ranks[item_type][rand]
 
-    def _zero_out_locks(self, item_loc):
-        """Remove all item locks on the item"""
-        # Remove the character locks on items
-        offset = self._game_config.items.offsets.ability3
-        self._rom_data[item_loc + offset] = 0
-
     def _get_rank(self, item_loc):
         """Get the rank of the item"""
         offset = self._game_config.items.offsets.rank
@@ -52,13 +46,6 @@ class FE7ItemEditor(ItemEditor):
         """Set rank of the item"""
         offset = self._game_config.items.offsets.rank
         self._rom_data[item_loc + offset] = rank_value
-
-    def _get_item_loc(self, item):
-        """Get the address of the requested {item}"""
-        first_item = self._game_config.items.first
-        total_bytes = self._game_config.sizes.item
-
-        return (item * total_bytes) + first_item
 
     def _get_char_by_name(self, name):
         """Fetch the character object by name"""

@@ -3,10 +3,16 @@
 from random import randint
 
 from rom_editors.character_editor import CharacterEditor
+from rom_editors.fe8.item_editor import FE8ItemEditor
 
 
 class FE8CharacterEditor(CharacterEditor):
     """FE8 Character Editor Override"""
+
+    def __init__(self, game_config, rom_data, class_mode, mix_promotes):
+        super().__init__(game_config, rom_data, class_mode, mix_promotes)
+        # Override the item editor
+        self._item_editor = FE8ItemEditor(self._rom_data, self._game_config)
 
     def randomize_palettes(self):
         """Randomize the character palettes based on filters"""

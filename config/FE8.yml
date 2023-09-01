@@ -1384,10 +1384,13 @@ characters:
     - 0x8C2FF8
 
 items:
+  first: 0x809b10
   offsets:
     name: 0x0
     description: 0x2
     use_screen: 0x4
+    ability3: 0xa
+    level: 0x1c
     icon: 0x1d
     use: 0x1e
   master_seal:
@@ -1476,20 +1479,33 @@ items:
       location: 0x80B094
 
   prfs:
-  - weapon: 0x6  # Rapier       -> E rank sword
-    equivalent: 0x1
-  - weapon: 0x78 # Reginleif    -> D rank lance
-    equivalent: 0x16
-  - weapon: 0x8f # Naglfar      -> A rank dark
-    equivalent: 0x49
-  - weapon: 0x90 # Wretched Air -> A rank sword
-    equivalent: 0x4
-  - weapon: 0xa6 # Nightmare    -> A rank sword
-    equivalent: 0x4
-  - weapon: 0xa8 # Demon Light  -> A rank sword
-    equivalent: 0x4
-  - weapon: 0xa9 # Ravager      -> A rank sword
-    equivalent: 0x4
+  - weapon: 0x9      # Rapier
+    level: 0x1       # E rank
+    equivalent: 0x1  # E rank sword
+  - weapon: 0x78     # Reginleif
+    level: 0x31      # D rank
+    equivalent: 0x16 # D rank lance
+  - weapon: 0x85     # Seiglinde
+    level: 0xfb      # S rank
+    equivalent: 0x4  # A rank sword
+  - weapon: 0x8f     # Naglfar
+    level: 0xfb      # S rank
+    equivalent: 0x49 # A rank dark
+  - weapon: 0x90     # Wretched Air
+    level: 0xb5      # A rank
+    equivalent: 0x4  # A rank sword
+  - weapon: 0x90     # Seigmund
+    level: 0xfb      # S rank
+    equivalent: 0x17 # A rank lance
+  - weapon: 0xa6     # Nightmare
+    level: 0xb5      # A rank
+    equivalent: 0x4  # A rank sword
+  - weapon: 0xa8     # Demon Light
+    level: 0xb5      # A rank
+    equivalent: 0x4  # A rank sword
+  - weapon: 0xa9     # Ravager
+    level: 0xb5      # A rank
+    equivalent: 0x4  # A rank sword
 
   types:
   - id: 0x0
