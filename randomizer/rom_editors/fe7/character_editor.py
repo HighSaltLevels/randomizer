@@ -21,6 +21,7 @@ class FE7CharacterEditor(CharacterEditor):
         self._give_final_bosses_s_ranks()
         self._make_weapons_dropable()
         self._remove_hardcoded_animations()
+        self._handle_low_base_stat_override({"Nergal", "Dragon", "Kishuna"})
 
     def _handle_serra_override(self):
         """

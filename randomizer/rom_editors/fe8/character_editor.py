@@ -59,3 +59,8 @@ class FE8CharacterEditor(CharacterEditor):
                     )
                     for idx in range(self._game_config.totals.promotion_classes):
                         self._rom_data[pos + idx] = self._rom_data[new_prom_class + idx]
+
+    def handle_overrides(self):
+        """Perform the FE8 specific character overrides"""
+
+        self._handle_low_base_stat_override({"Fomortiis", "Morva"})
