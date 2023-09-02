@@ -3,10 +3,16 @@
 from random import randint
 
 from rom_editors.character_editor import CharacterEditor
+from rom_editors.fe8.item_editor import FE8ItemEditor
 
 
 class FE8CharacterEditor(CharacterEditor):
     """FE8 Character Editor Override"""
+
+    def __init__(self, game_config, rom_data, class_mode, mix_promotes):
+        super().__init__(game_config, rom_data, class_mode, mix_promotes)
+        # Override the item editor
+        self._item_editor = FE8ItemEditor(self._rom_data, self._game_config)
 
     def randomize_palettes(self):
         """Randomize the character palettes based on filters"""
@@ -53,3 +59,8 @@ class FE8CharacterEditor(CharacterEditor):
                     )
                     for idx in range(self._game_config.totals.promotion_classes):
                         self._rom_data[pos + idx] = self._rom_data[new_prom_class + idx]
+
+    def handle_overrides(self):
+        """Perform the FE8 specific character overrides"""
+
+        self._handle_low_base_stat_override({"Fomortiis", "Morva"})

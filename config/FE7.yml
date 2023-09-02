@@ -63,8 +63,9 @@ char_stats:
   dropable_weapon_characters: [0x44, 0x56, 0x5c, 0xf5]
 
   # Character IDs whose classes are in the ban list but need reclassing to a
-  # promoted class
-  promotion_overrides: [0x27, 0x3a, 0x3b, 0x86, 0x44]
+  # promoted class.
+  # I explicitly added Sonia and Limstella because their class is a strange duplicate of Female mage.
+  promotion_overrides: [0x27, 0x3a, 0x3b, 0x44, 0x5b, 0x85, 0x86]
 
   overrides:
     # Change starting locations for flying characters to avoid traversing
@@ -1737,6 +1738,7 @@ characters:
     kind: other
     item_pos:
       - 0xCD0FDC
+  # The same character ID is used for generic child character in Chapter 19xpt2
   - name: Jan
     id:
       - 0xda
@@ -1744,23 +1746,16 @@ characters:
       - 0xCDA421 
     kind: other
     item_pos: []
-  - name: Child1
-    id:
-      - 0x57
-    location:
-      - 0xCCEAB1
-    kind: other
-    item_pos: []
   - name: Child2
     id:
-      - 0x58
+      - 0xdb
     location:
       - 0xCCEAC1
     kind: other
     item_pos: []
   - name: Mark
     id:
-      - 0x51
+      - 0xcd
     location:
       - 0xCC5D29
       - 0xCC5EC9
@@ -1871,21 +1866,23 @@ items:
       location: 0xBE3570
 
   prfs:
-  - weapon: 0x9      # Rapier     -> E rank sword
+  - weapon: 0x9      # Rapier        -> E rank sword
     equivalent: 0x1
-  - weapon: 0xa      # Rapier     -> E rank sword
+  - weapon: 0xa      # Rapier        -> E rank sword
     equivalent: 0x1
-  - weapon: 0x8d     # Wolf Beil  -> E rank axe
-    equivalent: 0x1f
-  - weapon: 0x3c     # Forblaze   -> A rank anima
+  - weapon: 0x77     # Vaida's Spear -> B rank lance
+    equivalent: 0x19 
+  - weapon: 0x3c     # Forblaze      -> A rank anima
     equivalent: 0x3b
-  - weapon: 0x84     # Durandal   -> A rank sword
+  - weapon: 0x84     # Durandal      -> A rank sword
     equivalent: 0x4
-  - weapon: 0x85     # Armads     -> A rank axe
+  - weapon: 0x85     # Armads        -> A rank axe
     equivalent: 0x21
-  - weapon: 0x8c     # Sol Katti  -> A rank sword
+  - weapon: 0x8c     # Sol Katti     -> A rank sword
     equivalent: 0x4
-  - weapon: 0x8e     # Ereshkigal -> A rank dark
+  - weapon: 0x8d     # Wolf Beil     -> E rank axe
+    equivalent: 0x1f
+  - weapon: 0x8e     # Ereshkigal    -> A rank dark
     equivalent: 0x48
 
   types:
@@ -2067,7 +2064,6 @@ items:
     list_:
     - 0x19
     - 0x1d
-    - 0x77
   - rank: b
     type: axe
     list_:

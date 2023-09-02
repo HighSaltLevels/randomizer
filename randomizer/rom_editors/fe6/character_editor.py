@@ -12,6 +12,7 @@ class FE6CharacterEditor(CharacterEditor):
         self._handle_chad_override()
         self._handle_cath_override()
         self._handle_roy_override()
+        self._handle_low_base_stat_override({"Ein", "Idun", "Zephiel"})
 
     def _handle_f_mercenary_override(self):
         """

@@ -119,3 +119,16 @@ class ItemEditor:
         raise ItemException(
             "Could not find suitable match for rank {rank} and type {item_type} weapons"
         )
+
+    def _get_item_loc(self, item):
+        """Get the memory location of an item by its id"""
+        first_item = self._game_config.items.first
+        total_bytes = self._game_config.sizes.item
+
+        return (item * total_bytes) + first_item
+
+    def _zero_out_locks(self, item_loc):
+        """Remove all item locks on the item"""
+        # Remove the character locks on items
+        offset = self._game_config.items.offsets.ability3
+        self._rom_data[item_loc + offset] = 0

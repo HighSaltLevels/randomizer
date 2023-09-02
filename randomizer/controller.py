@@ -114,7 +114,7 @@ class RandomizerHandler:
             # with it.
             if self._version == FEVersions.FE7:
                 output_sav = f"{path}-{rand}.sav"
-                shutil.copy(f"{CONFIG_PATH}/FE7.sav", output_sav)
+                shutil.copy("config/FE7.sav", output_sav)
 
         except IOError as error:
             self._app.labels["status"].setText(f"Status: Error! {error}")

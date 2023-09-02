@@ -45,13 +45,13 @@ class CharacterEditor:
                 weapon_type = self.get_weapon_type_for_class(new_class)
                 self._item_editor.load(character.item_pos, new_class, weapon_type)
                 self._item_editor.randomize()
-                self._item_editor.handle_overrides()
 
         self.randomize_palettes()
         self.add_promotions()
         self.fix_flyers()
 
         self.handle_overrides()
+        self._item_editor.handle_overrides()
 
         return self._rom_data
 
@@ -240,3 +240,23 @@ class CharacterEditor:
                 return character
 
         raise ValueError(f"No known character named: {name}")
+
+    def _handle_low_base_stat_override(self, characters):
+        """Boost the base stats of classes whose bass stats typically come from items"""
+        for c in characters:
+            character = self._get_character_by_name(c)
+            for _id in character.id:
+                location = self._game_config.char_stats.first + (
+                    _id * self._game_config.sizes.character
+                )
+
+                # Set HP to 40
+                self._rom_data[
+                    location + self._game_config.char_stats.offsets.bases
+                ] = 40
+
+                # Set all other stats to 20
+                for idx in range(1, self._game_config.char_stats.totals.bases):
+                    self._rom_data[
+                        location + self._game_config.char_stats.offsets.bases + idx
+                    ] = 20
