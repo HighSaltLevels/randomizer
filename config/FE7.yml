@@ -1872,21 +1872,23 @@ items:
       location: 0xBE3570
 
   prfs:
-  - weapon: 0x9      # Rapier     -> E rank sword
+  - weapon: 0x9      # Rapier        -> E rank sword
     equivalent: 0x1
-  - weapon: 0xa      # Rapier     -> E rank sword
+  - weapon: 0xa      # Rapier        -> E rank sword
     equivalent: 0x1
-  - weapon: 0x8d     # Wolf Beil  -> E rank axe
-    equivalent: 0x1f
-  - weapon: 0x3c     # Forblaze   -> A rank anima
+  - weapon: 0x77     # Vaida's Spear -> B rank lance
+    equivalent: 0x19 
+  - weapon: 0x3c     # Forblaze      -> A rank anima
     equivalent: 0x3b
-  - weapon: 0x84     # Durandal   -> A rank sword
+  - weapon: 0x84     # Durandal      -> A rank sword
     equivalent: 0x4
-  - weapon: 0x85     # Armads     -> A rank axe
+  - weapon: 0x85     # Armads        -> A rank axe
     equivalent: 0x21
-  - weapon: 0x8c     # Sol Katti  -> A rank sword
+  - weapon: 0x8c     # Sol Katti     -> A rank sword
     equivalent: 0x4
-  - weapon: 0x8e     # Ereshkigal -> A rank dark
+  - weapon: 0x8d     # Wolf Beil     -> E rank axe
+    equivalent: 0x1f
+  - weapon: 0x8e     # Ereshkigal    -> A rank dark
     equivalent: 0x48
 
   types:
@@ -2068,7 +2070,6 @@ items:
     list_:
     - 0x19
     - 0x1d
-    - 0x77
   - rank: b
     type: axe
     list_:
