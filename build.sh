@@ -10,4 +10,5 @@ pyinstaller -w -F \
     -n randomizer \
     -i ico/randomizer.ico \
     --add-data "${SITE_PACKAGES}/qt_material/:qt_material/" \
+    --add-data "config/FE7.sav:config/FE7.sav" \
     randomizer/__main__.py
