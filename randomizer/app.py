@@ -5,14 +5,12 @@ import sys
 
 from PyQt5.QtWidgets import QWidget, QApplication, QGridLayout
 from PyQt5.QtGui import QIcon, QPixmap
-from qt_material import apply_stylesheet
 
 from ui_elements import label, spinbox, check_box, combo_box, button, line_edit, browse
 from ui_elements.separator import create_v_sep, create_h_sep
 from icon import ICON
 
 APP = QApplication([])
-apply_stylesheet(APP, theme="dark_medical.xml")
 LOGGER = logging.getLogger(__name__)
 
 

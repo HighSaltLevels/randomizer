@@ -7,13 +7,13 @@ from PyQt5.QtGui import QFont
 VERSION = "1.0.0"
 
 NORMAL_FONT = QFont()
-NORMAL_FONT.setPointSize(12)
+NORMAL_FONT.setPointSize(10)
 
 SUBTITLE_FONT = QFont()
-SUBTITLE_FONT.setPointSize(18)
+SUBTITLE_FONT.setPointSize(12)
 
 TITLE_FONT = QFont()
-TITLE_FONT.setPointSize(24)
+TITLE_FONT.setPointSize(16)
 
 DEFAULT_CONFIG = {
     "randomize": {
