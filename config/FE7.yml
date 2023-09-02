@@ -63,8 +63,9 @@ char_stats:
   dropable_weapon_characters: [0x44, 0x56, 0x5c, 0xf5]
 
   # Character IDs whose classes are in the ban list but need reclassing to a
-  # promoted class
-  promotion_overrides: [0x27, 0x3a, 0x3b, 0x86, 0x44]
+  # promoted class.
+  # I explicitly added Sonia and Limstella because their class is a strange duplicate of Female mage.
+  promotion_overrides: [0x27, 0x3a, 0x3b, 0x44, 0x5b, 0x85, 0x86]
 
   overrides:
     # Change starting locations for flying characters to avoid traversing
