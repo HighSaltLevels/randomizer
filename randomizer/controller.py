@@ -2,7 +2,6 @@
 
 import logging
 import os
-import shutil
 import uuid
 
 from PyQt5.QtWidgets import QMessageBox
@@ -16,7 +15,8 @@ from rom_editors import (
 )
 from rom_editors.stat_editor import InvalidConfigError
 from versions import FEVersions, get_fe_version
-from config import CONFIG, CONFIG_PATH
+from config import CONFIG
+from save import FE7SaveData
 
 LOGGER = logging.getLogger(__name__)
 ALL_KINDS = {"playable", "boss", "other", "class"}
@@ -113,8 +113,9 @@ class RandomizerHandler:
             # and the several soft locking opportunities that come
             # with it.
             if self._version == FEVersions.FE7:
-                output_sav = f"{path}-{rand}.sav"
-                shutil.copy("config/FE7.sav", output_sav)
+                output_save = f"{path}-{rand}.sav"
+                with open(output_save, "wb") as stream:
+                    stream.write(FE7SaveData().get_data())
 
         except IOError as error:
             self._app.labels["status"].setText(f"Status: Error! {error}")

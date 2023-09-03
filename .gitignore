@@ -12,3 +12,4 @@ randomizer.spec
 # should not be checked into git
 randomizer/spec.py
 randomizer/icon.py
+randomizer/save.py
